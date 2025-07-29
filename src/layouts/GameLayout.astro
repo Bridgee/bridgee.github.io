@@ -1,0 +1,23 @@
+---
+import "../css/palette.css";
+import "../css/layout.css";
+import "../css/sprites.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>8-Bit Personal Website</title>
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+
+  <body>
+    <slot />
+    <!-- inline module runs in the browser -->
+    <script>
+      import { initGame } from "../js/engine.js";
+      initGame();
+    </script>
+  </body>
+</html>

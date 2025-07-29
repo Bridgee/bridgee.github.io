@@ -1,0 +1,280 @@
+/* Player Character */
+#player {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 100;
+    transition: none;
+}
+
+.player-sprite {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 4px);
+    grid-template-rows: repeat(8, 4px);
+}
+
+.pixel {
+    width: 4px;
+    height: 4px;
+}
+
+/* ---------- PLAYER ORIENTATIONS (from v3.html) ---------- */
+/* Character facing down (front view) */
+.player-sprite.facing-down .pixel:nth-child(10),
+.player-sprite.facing-down .pixel:nth-child(11),
+.player-sprite.facing-down .pixel:nth-child(14),
+.player-sprite.facing-down .pixel:nth-child(15),
+.player-sprite.facing-down .pixel:nth-child(18),
+.player-sprite.facing-down .pixel:nth-child(19),
+.player-sprite.facing-down .pixel:nth-child(20),
+.player-sprite.facing-down .pixel:nth-child(21),
+.player-sprite.facing-down .pixel:nth-child(22),
+.player-sprite.facing-down .pixel:nth-child(23),
+.player-sprite.facing-down .pixel:nth-child(26),
+.player-sprite.facing-down .pixel:nth-child(27),
+.player-sprite.facing-down .pixel:nth-child(28),
+.player-sprite.facing-down .pixel:nth-child(29),
+.player-sprite.facing-down .pixel:nth-child(30),
+.player-sprite.facing-down .pixel:nth-child(31),
+.player-sprite.facing-down .pixel:nth-child(35),
+.player-sprite.facing-down .pixel:nth-child(36),
+.player-sprite.facing-down .pixel:nth-child(37),
+.player-sprite.facing-down .pixel:nth-child(38),
+.player-sprite.facing-down .pixel:nth-child(42),
+.player-sprite.facing-down .pixel:nth-child(43),
+.player-sprite.facing-down .pixel:nth-child(44),
+.player-sprite.facing-down .pixel:nth-child(45),
+.player-sprite.facing-down .pixel:nth-child(46),
+.player-sprite.facing-down .pixel:nth-child(47),
+.player-sprite.facing-down .pixel:nth-child(51),
+.player-sprite.facing-down .pixel:nth-child(54) {
+    background-color: var(--primary);
+}
+
+.player-sprite.facing-down .pixel:nth-child(2),
+.player-sprite.facing-down .pixel:nth-child(3),
+.player-sprite.facing-down .pixel:nth-child(4),
+.player-sprite.facing-down .pixel:nth-child(5),
+.player-sprite.facing-down .pixel:nth-child(6),
+.player-sprite.facing-down .pixel:nth-child(7),
+.player-sprite.facing-down .pixel:nth-child(9),
+.player-sprite.facing-down .pixel:nth-child(10),
+.player-sprite.facing-down .pixel:nth-child(11),
+.player-sprite.facing-down .pixel:nth-child(14),
+.player-sprite.facing-down .pixel:nth-child(15),
+.player-sprite.facing-down .pixel:nth-child(16) {
+    background-color: #4a3c28;
+}
+
+.player-sprite.facing-down .pixel:nth-child(19),
+.player-sprite.facing-down .pixel:nth-child(22) {
+    background-color: #fff;
+}
+
+/* Back view */
+.player-sprite.facing-up .pixel:nth-child(10),
+.player-sprite.facing-up .pixel:nth-child(11),
+.player-sprite.facing-up .pixel:nth-child(14),
+.player-sprite.facing-up .pixel:nth-child(15),
+.player-sprite.facing-up .pixel:nth-child(18),
+.player-sprite.facing-up .pixel:nth-child(19),
+.player-sprite.facing-up .pixel:nth-child(20),
+.player-sprite.facing-up .pixel:nth-child(21),
+.player-sprite.facing-up .pixel:nth-child(22),
+.player-sprite.facing-up .pixel:nth-child(23),
+.player-sprite.facing-up .pixel:nth-child(26),
+.player-sprite.facing-up .pixel:nth-child(27),
+.player-sprite.facing-up .pixel:nth-child(28),
+.player-sprite.facing-up .pixel:nth-child(29),
+.player-sprite.facing-up .pixel:nth-child(30),
+.player-sprite.facing-up .pixel:nth-child(31),
+.player-sprite.facing-up .pixel:nth-child(35),
+.player-sprite.facing-up .pixel:nth-child(36),
+.player-sprite.facing-up .pixel:nth-child(37),
+.player-sprite.facing-up .pixel:nth-child(38),
+.player-sprite.facing-up .pixel:nth-child(42),
+.player-sprite.facing-up .pixel:nth-child(43),
+.player-sprite.facing-up .pixel:nth-child(44),
+.player-sprite.facing-up .pixel:nth-child(45),
+.player-sprite.facing-up .pixel:nth-child(46),
+.player-sprite.facing-up .pixel:nth-child(47),
+.player-sprite.facing-up .pixel:nth-child(51),
+.player-sprite.facing-up .pixel:nth-child(54) {
+    background-color: var(--primary);
+}
+
+.player-sprite.facing-up .pixel:nth-child(2),
+.player-sprite.facing-up .pixel:nth-child(3),
+.player-sprite.facing-up .pixel:nth-child(4),
+.player-sprite.facing-up .pixel:nth-child(5),
+.player-sprite.facing-up .pixel:nth-child(6),
+.player-sprite.facing-up .pixel:nth-child(7),
+.player-sprite.facing-up .pixel:nth-child(9),
+.player-sprite.facing-up .pixel:nth-child(10),
+.player-sprite.facing-up .pixel:nth-child(11),
+.player-sprite.facing-up .pixel:nth-child(12),
+.player-sprite.facing-up .pixel:nth-child(13),
+.player-sprite.facing-up .pixel:nth-child(14),
+.player-sprite.facing-up .pixel:nth-child(15),
+.player-sprite.facing-up .pixel:nth-child(16),
+.player-sprite.facing-up .pixel:nth-child(17),
+.player-sprite.facing-up .pixel:nth-child(18),
+.player-sprite.facing-up .pixel:nth-child(23),
+.player-sprite.facing-up .pixel:nth-child(24) {
+    background-color: #4a3c28;
+}
+
+/* Left view */
+.player-sprite.facing-left .pixel:nth-child(11),
+.player-sprite.facing-left .pixel:nth-child(12),
+.player-sprite.facing-left .pixel:nth-child(18),
+.player-sprite.facing-left .pixel:nth-child(19),
+.player-sprite.facing-left .pixel:nth-child(20),
+.player-sprite.facing-left .pixel:nth-child(26),
+.player-sprite.facing-left .pixel:nth-child(27),
+.player-sprite.facing-left .pixel:nth-child(28),
+.player-sprite.facing-left .pixel:nth-child(34),
+.player-sprite.facing-left .pixel:nth-child(35),
+.player-sprite.facing-left .pixel:nth-child(36),
+.player-sprite.facing-left .pixel:nth-child(42),
+.player-sprite.facing-left .pixel:nth-child(43),
+.player-sprite.facing-left .pixel:nth-child(44),
+.player-sprite.facing-left .pixel:nth-child(50),
+.player-sprite.facing-left .pixel:nth-child(52) {
+    background-color: var(--primary);
+}
+
+.player-sprite.facing-left .pixel:nth-child(2),
+.player-sprite.facing-left .pixel:nth-child(3),
+.player-sprite.facing-left .pixel:nth-child(4),
+.player-sprite.facing-left .pixel:nth-child(5),
+.player-sprite.facing-left .pixel:nth-child(9),
+.player-sprite.facing-left .pixel:nth-child(10),
+.player-sprite.facing-left .pixel:nth-child(11),
+.player-sprite.facing-left .pixel:nth-child(12),
+.player-sprite.facing-left .pixel:nth-child(13),
+.player-sprite.facing-left .pixel:nth-child(17),
+.player-sprite.facing-left .pixel:nth-child(18),
+.player-sprite.facing-left .pixel:nth-child(19),
+.player-sprite.facing-left .pixel:nth-child(20),
+.player-sprite.facing-left .pixel:nth-child(21),
+.player-sprite.facing-left .pixel:nth-child(25),
+.player-sprite.facing-left .pixel:nth-child(26) {
+    background-color: #4a3c28;
+}
+
+.player-sprite.facing-left .pixel:nth-child(19) {
+    background-color: #fff;
+}
+
+/* Right view */
+.player-sprite.facing-right .pixel:nth-child(12),
+.player-sprite.facing-right .pixel:nth-child(13),
+.player-sprite.facing-right .pixel:nth-child(19),
+.player-sprite.facing-right .pixel:nth-child(20),
+.player-sprite.facing-right .pixel:nth-child(21),
+.player-sprite.facing-right .pixel:nth-child(27),
+.player-sprite.facing-right .pixel:nth-child(28),
+.player-sprite.facing-right .pixel:nth-child(29),
+.player-sprite.facing-right .pixel:nth-child(35),
+.player-sprite.facing-right .pixel:nth-child(36),
+.player-sprite.facing-right .pixel:nth-child(37),
+.player-sprite.facing-right .pixel:nth-child(43),
+.player-sprite.facing-right .pixel:nth-child(44),
+.player-sprite.facing-right .pixel:nth-child(45),
+.player-sprite.facing-right .pixel:nth-child(51),
+.player-sprite.facing-right .pixel:nth-child(53) {
+    background-color: var(--primary);
+}
+
+.player-sprite.facing-right .pixel:nth-child(4),
+.player-sprite.facing-right .pixel:nth-child(5),
+.player-sprite.facing-right .pixel:nth-child(6),
+.player-sprite.facing-right .pixel:nth-child(7),
+.player-sprite.facing-right .pixel:nth-child(11),
+.player-sprite.facing-right .pixel:nth-child(12),
+.player-sprite.facing-right .pixel:nth-child(13),
+.player-sprite.facing-right .pixel:nth-child(14),
+.player-sprite.facing-right .pixel:nth-child(15),
+.player-sprite.facing-right .pixel:nth-child(19),
+.player-sprite.facing-right .pixel:nth-child(20),
+.player-sprite.facing-right .pixel:nth-child(21),
+.player-sprite.facing-right .pixel:nth-child(22),
+.player-sprite.facing-right .pixel:nth-child(23),
+.player-sprite.facing-right .pixel:nth-child(28),
+.player-sprite.facing-right .pixel:nth-child(29) {
+    background-color: #4a3c28;
+}
+
+.player-sprite.facing-right .pixel:nth-child(21) {
+    background-color: #fff;
+}
+
+.player-sprite.moving {
+    animation: walk 0.4s infinite;
+}
+
+/* NPCs */
+.npc {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.npc-sprite {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 4px);
+    grid-template-rows: repeat(8, 4px);
+    animation: npcFloat 3s ease-in-out infinite;
+}
+
+/* Scientist NPC (from v3.html) */
+.scientist .pixel:nth-child(10), .scientist .pixel:nth-child(11), .scientist .pixel:nth-child(14), .scientist .pixel:nth-child(15),
+.scientist .pixel:nth-child(18), .scientist .pixel:nth-child(19), .scientist .pixel:nth-child(20), .scientist .pixel:nth-child(21),
+.scientist .pixel:nth-child(22), .scientist .pixel:nth-child(23), .scientist .pixel:nth-child(26), .scientist .pixel:nth-child(27),
+.scientist .pixel:nth-child(28), .scientist .pixel:nth-child(29), .scientist .pixel:nth-child(30), .scientist .pixel:nth-child(31),
+.scientist .pixel:nth-child(34), .scientist .pixel:nth-child(35), .scientist .pixel:nth-child(36), .scientist .pixel:nth-child(37),
+.scientist .pixel:nth-child(38), .scientist .pixel:nth-child(39), .scientist .pixel:nth-child(42), .scientist .pixel:nth-child(43),
+.scientist .pixel:nth-child(44), .scientist .pixel:nth-child(45), .scientist .pixel:nth-child(46), .scientist .pixel:nth-child(47),
+.scientist .pixel:nth-child(51), .scientist .pixel:nth-child(54) {
+    background-color: white;
+}
+.scientist .pixel:nth-child(2), .scientist .pixel:nth-child(3), .scientist .pixel:nth-child(4), .scientist .pixel:nth-child(5),
+.scientist .pixel:nth-child(6), .scientist .pixel:nth-child(7) {
+    background-color: #808080;
+}
+
+/* Photographer NPC (from v3.html) */
+.photographer .pixel:nth-child(10), .photographer .pixel:nth-child(11), .photographer .pixel:nth-child(14), .photographer .pixel:nth-child(15),
+.photographer .pixel:nth-child(18), .photographer .pixel:nth-child(19), .photographer .pixel:nth-child(20), .photographer .pixel:nth-child(21),
+.photographer .pixel:nth-child(22), .photographer .pixel:nth-child(23), .photographer .pixel:nth-child(26), .photographer .pixel:nth-child(27),
+.photographer .pixel:nth-child(28), .photographer .pixel:nth-child(29), .photographer .pixel:nth-child(30), .photographer .pixel:nth-child(31),
+.photographer .pixel:nth-child(35), .photographer .pixel:nth-child(36), .photographer .pixel:nth-child(37), .photographer .pixel:nth-child(38),
+.photographer .pixel:nth-child(42), .photographer .pixel:nth-child(43), .photographer .pixel:nth-child(44), .photographer .pixel:nth-child(45),
+.photographer .pixel:nth-child(46), .photographer .pixel:nth-child(47), .photographer .pixel:nth-child(51), .photographer .pixel:nth-child(54) {
+    background-color: #ff6b6b;
+}
+.photographer .pixel:nth-child(34), .photographer .pixel:nth-child(35) {
+    background-color: #000;
+}
+
+/* Musician NPC (from v3.html) */
+.musician .pixel:nth-child(3), .musician .pixel:nth-child(4), .musician .pixel:nth-child(5), .musician .pixel:nth-child(6) {
+    background-color: #9b59b6;
+}
+.musician .pixel:nth-child(10), .musician .pixel:nth-child(11), .musician .pixel:nth-child(14), .musician .pixel:nth-child(15),
+.musician .pixel:nth-child(18), .musician .pixel:nth-child(19), .musician .pixel:nth-child(20), .musician .pixel:nth-child(21),
+.musician .pixel:nth-child(22), .musician .pixel:nth-child(23), .musician .pixel:nth-child(26), .musician .pixel:nth-child(27),
+.musician .pixel:nth-child(28), .musician .pixel:nth-child(29), .musician .pixel:nth-child(30), .musician .pixel:nth-child(31),
+.musician .pixel:nth-child(35), .musician .pixel:nth-child(36), .musician .pixel:nth-child(37), .musician .pixel:nth-child(38),
+.musician .pixel:nth-child(42), .musician .pixel:nth-child(43), .musician .pixel:nth-child(44), .musician .pixel:nth-child(45),
+.musician .pixel:nth-child(46), .musician .pixel:nth-child(47), .musician .pixel:nth-child(51), .musician .pixel:nth-child(54) {
+    background-color: #3498db;
+}

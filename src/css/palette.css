@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --primary: #0f380f;
+    --secondary: #9bbc0f;
+    --accent: #8bac0f;
+    --highlight: #306230;
+    --bg: #9bbc0f;
+    --text: #0f380f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAATklEQVQoU2NkYGD4z0ABYBw1gPH/fwYGBgYGBkZGRgYWFhYGZmZmBlZWVgZ2dnYGDg4OBi4uLgZubm4GHh4eBl5eXgY+Pj4Gfn5+BgYGBgBLjwgJH8qm8wAAAABJRU5ErkJggg==') 4 4, crosshair;
+}
+
+.game-area, .npc, .collectible, .menu-button, .control-btn, .popup-close {
+    cursor: pointer !important;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes walk {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+@keyframes npcFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes collectibleFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(180deg); }
+}
+

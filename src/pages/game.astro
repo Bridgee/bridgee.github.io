@@ -1,0 +1,197 @@
+---
+import GameLayout from "../layouts/GameLayout.astro";
+---
+<GameLayout>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-text">LOADING WORLD...</div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container">
+        <!-- Game World -->
+        <div id="game-world">
+            <!-- Home Area (Starting Point) -->
+            <div id="home-area" class="game-area">
+                <div class="area-label">HOME BASE</div>
+                <div class="area-icon" role="img" aria-label="Home base">🏠</div>
+            </div>
+            
+            <!-- Research Area -->
+            <div id="research-area" class="game-area">
+                <div class="area-label">RESEARCH LAB</div>
+                <div class="area-icon" role="img" aria-label="Research lab">🔬</div>
+            </div>
+            
+            <!-- Gallery Area -->
+            <div id="gallery-area" class="game-area">
+                <div class="area-label">PHOTO GALLERY</div>
+                <div class="area-icon" role="img" aria-label="Photo gallery">📸</div>
+            </div>
+            
+            <!-- Music Area -->
+            <div id="music-area" class="game-area">
+                <div class="area-label">MUSIC STUDIO</div>
+                <div class="area-icon" role="img" aria-label="Music studio">🎵</div>
+            </div>
+            
+            <!-- About Area -->
+            <div id="about-area" class="game-area">
+                <div class="area-label">ABOUT ME</div>
+                <div class="area-icon" role="img" aria-label="About me">👤</div>
+            </div>
+            
+            <!-- Contact Area -->
+            <div id="contact-area" class="game-area">
+                <div class="area-label">CONTACT PORTAL</div>
+                <div class="area-icon" role="img" aria-label="Contact portal">✉️</div>
+            </div>
+            
+            <!-- Decorative Elements -->
+            <div class="tree" style="top: 300px; left: 200px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 500px; left: 1600px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 800px; left: 900px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 1000px; left: 300px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            
+            <!-- NPCs with better sprites -->
+            <div class="npc" style="top: 600px; left: 500px;" data-name="Dr. Smith" data-dialogue='["Welcome to the digital realm!", "I study quantum mechanics here.", "The Research Lab has fascinating experiments!", "Press SPACE or click when you see a prompt to interact."]'>
+                <div class="npc-sprite scientist">
+                    <!-- 8x8 pixel grid for NPC -->
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                </div>
+            </div>
+            
+            <div class="npc" style="top: 450px; left: 1500px;" data-name="Maya" data-dialogue='["Hey there! I love photography!", "Have you checked out the Gallery?", "I captured some amazing shots at MIT.", "Each photo tells a story of discovery."]'>
+                <div class="npc-sprite photographer">
+                    <!-- 8x8 pixel grid for NPC -->
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                </div>
+            </div>
+            
+            <div class="npc" style="top: 1050px; left: 400px;" data-name="DJ Byte" data-dialogue='["Yo! Welcome to the beat zone!", "I spin electronic tracks all day.", "Check out the Music Studio for some tunes!", "Music and science go hand in hand."]'>
+                <div class="npc-sprite musician">
+                    <!-- 8x8 pixel grid for NPC -->
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                </div>
+            </div>
+            
+            <!-- Collectibles -->
+            <div class="collectible" style="top: 700px; left: 1000px;" data-type="xp">⭐</div>
+            <div class="collectible" style="top: 500px; left: 1200px;" data-type="achievement">🏆</div>
+            <div class="collectible" style="top: 1100px; left: 800px;" data-type="powerup">💎</div>
+            
+            <!-- Player -->
+            <div id="player">
+                <div class="player-sprite facing-down">
+                    <!-- 8x8 pixel grid for character -->
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HUD -->
+    <div id="hud">
+        <div id="coordinates">X: 0 | Y: 0</div>
+        <div id="score">XP: 0</div>
+        <div id="level">LEVEL: 1</div>
+        <div id="achievements">🏆 0/10</div>
+    </div>
+    
+    <!-- Instructions -->
+    <div id="instructions">
+        <strong>Instructions:</strong><br><br>
+        🎮 Move: WASD/Arrows/Pad<br>
+        💬 Interact: SPACE/Click/◎<br>
+        🚪 Close popup: ESC/Click X<br><br>
+
+        🎯 Get close to interact<br>
+        ⭐ Gain XP by exploring<br>
+        🏆 Unlock achievements<br>
+    </div>
+    
+    <!-- Interaction Prompt -->
+    <div id="interaction-prompt" class="interaction-prompt">
+        Press SPACE or ◎ to interact
+    </div>
+    
+    <!-- Dialogue Box -->
+    <div id="dialogue-box" class="dialogue-box">
+        <div class="dialogue-speaker" id="dialogue-speaker">Speaker</div>
+        <div class="dialogue-text" id="dialogue-text">Dialogue text here...</div>
+        <div class="dialogue-continue">Press SPACE or ◎ to continue...</div>
+    </div>
+    
+    <!-- Minimap -->
+    <div id="minimap">
+        <div class="minimap-area" style="top: 25px; left: 18px; width: 18px; height: 15px;"></div>
+        <div class="minimap-area" style="top: 25px; left: 110px; width: 18px; height: 15px;"></div>
+        <div class="minimap-area" style="top: 55px; left: 35px; width: 15px; height: 12px;"></div>
+        <div class="minimap-area" style="top: 55px; left: 95px; width: 15px; height: 12px;"></div>
+        <div class="minimap-area" style="top: 75px; left: 65px; width: 18px; height: 10px;"></div>
+        <div class="minimap-area" style="top: 45px; left: 65px; width: 12px; height: 12px; background-color: var(--secondary);"></div>
+        <div id="minimap-player"></div>
+    </div>
+    
+    <!-- Mobile Controls -->
+    <div id="mobile-controls">
+        <div class="control-pad">
+            <div class="control-btn" id="btn-up" data-dir="up" role="button" aria-label="Move up" tabindex="0"></div>
+            <div class="control-btn" id="btn-down" data-dir="down" role="button" aria-label="Move down" tabindex="0"></div>
+            <div class="control-btn" id="btn-left" data-dir="left" role="button" aria-label="Move left" tabindex="0"></div>
+            <div class="control-btn" id="btn-right" data-dir="right" role="button" aria-label="Move right" tabindex="0"></div>
+        </div>
+        <div class="control-btn" id="btn-action" role="button" aria-label="Interact / Action" tabindex="0">◎</div>
+    </div>
+    
+    <!-- Achievement Notification -->
+    <div id="achievement" class="achievement">
+        <div id="achievement-text">ACHIEVEMENT UNLOCKED!</div>
+    </div>
+    
+    <!-- Popups for different areas -->
+    <div id="popup" class="popup">
+        <span class="popup-close" role="button" aria-label="Close popup" tabindex="0">&times;</span>
+        <div id="popup-content" class="popup-content"></div>
+    </div>
+</GameLayout>
