@@ -435,6 +435,7 @@
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
+    transition: all 0.2s;
 }
 
 .control-btn[data-dir]::before {
@@ -448,8 +449,13 @@
 .control-btn[data-dir="up"] { transform: rotate(0deg); }
 .control-btn[data-dir="down"] { transform: rotate(180deg); }
 
+.control-btn:hover {
+    transform: translateY(-2px);
+}
+
 .control-btn:active {
     background-color: var(--highlight);
+    transform: translateY(1px);
 }
 
 .control-btn:focus {
@@ -469,6 +475,28 @@
     font-size: 28px;
     margin-left: 16px;
     flex-shrink: 0;
+}
+
+/* Switch Mode Button */
+#switch-mode-btn {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: 3px solid var(--highlight);
+    padding: 10px 15px;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#switch-mode-btn:hover {
+    background-color: var(--highlight);
+    transform: translateX(-50%) translateY(-2px);
 }
 
 /* Media Queries - Corrected */

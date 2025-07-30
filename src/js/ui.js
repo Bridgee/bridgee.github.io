@@ -58,6 +58,7 @@ function showAreaContent(areaId) {
             <p>Greetings, traveler! I'm YOUR NAME, a postdoc researcher at MIT.</p>
             <p>This interactive portfolio is my digital playground where science meets creativity.</p>
             <div style="margin-top: 20px;">
+                <button class="menu-button" onclick="window.location.href='/blog'">📝 BLOG MODE</button>
                 <button class="menu-button" onclick="showStats()">VIEW STATS</button>
                 <button class="menu-button" onclick="showControls()">CONTROLS</button>
             </div>

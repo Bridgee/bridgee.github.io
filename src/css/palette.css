@@ -23,7 +23,6 @@ body {
     background-color: var(--bg);
     color: var(--text);
     overflow: hidden;
-    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAATklEQVQoU2NkYGD4z0ABYBw1gPH/fwYGBgYGBkZGRgYWFhYGZmZmBlZWVgZ2dnYGDg4OBi4uLgZubm4GHh4eBl5eXgY+Pj4Gfn5+BgYGBgBLjwgJH8qm8wAAAABJRU5ErkJggg==') 4 4, crosshair;
 }
 
 .game-area, .npc, .collectible, .menu-button, .control-btn, .popup-close {
