@@ -446,8 +446,7 @@
 
 .control-btn[data-dir="left"]::before { transform: rotate(-90deg); }
 .control-btn[data-dir="right"]::before { transform: rotate(90deg); }
-.control-btn[data-dir="up"] { transform: rotate(0deg); }
-.control-btn[data-dir="down"] { transform: rotate(180deg); }
+.control-btn[data-dir="down"]::before { transform: rotate(180deg); }
 
 .control-btn:hover {
     transform: translateY(-2px);
@@ -501,6 +500,11 @@
 
 /* Media Queries - Corrected */
 @media (max-width: 640px) {
+    #switch-mode-btn {
+        font-size: 8px;
+        padding: 8px 12px;
+    }
+
     #hud {
         top: 10px;
         left: auto;
@@ -552,7 +556,13 @@
     }
 
     #mobile-controls {
+        display: flex;
+    }
+}
 
+@media (max-width: 488px) {
+    #hud, #minimap {
+        top: 70px;
     }
 }
 
