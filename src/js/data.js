@@ -14,7 +14,7 @@ export const gameData = {
     {
       name: "Dr. Smith",
       dialogue: [
-        "Welcome to the digital realm!",
+        "Welcome to Bridge's Digital Twin!",
         "I study quantum mechanics here.",
         "The Research Lab has fascinating experiments!",
         "Press SPACE or click when you see a prompt to interact.",
@@ -81,8 +81,8 @@ export const gameData = {
                 <li>"Protein Folding Dynamics at Scale" - Cell, 2025</li>
             </ul>
             <div style="margin-top: 20px;">
-                <button class="menu-button" onclick="window.open('https://scholar.google.com/citations?user=YOURID', '_blank')">📚 GOOGLE SCHOLAR</button>
-                <button class="menu-button" onclick="window.open('https://github.com/yourusername', '_blank')">💻 GITHUB</button>
+                <button class="menu-button" onclick="window.open('https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl', '_blank')">📚 GOOGLE SCHOLAR</button>
+                <button class="menu-button" onclick="window.open('https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao', '_blank')">💻 Lab Website</button>
             </div>
         `,
     },
@@ -94,16 +94,15 @@ export const gameData = {
             <h2>PHOTOGRAPHY GALLERY</h2>
             <p>Capturing moments between experiments...</p>
             <div class="gallery-grid">
-                <div class="gallery-thumb" onclick="showPhoto(1)"><div style="padding: 20px; color: var(--secondary);">📸<br>MIT Sunset</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(2)"><div style="padding: 20px; color: var(--secondary);">🌃<br>Urban Night</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(3)"><div style="padding: 20px; color: var(--secondary);">🌿<br>Nature Macro</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(4)"><div style="padding: 20px; color: var(--secondary);">🎨<br>Abstract</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(5)"><div style="padding: 20px; color: var(--secondary);">🔬<br>Lab Life</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(6)"><div style="padding: 20px; color: var(--secondary);">🌌<br>Astrophoto</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(1)"><div style="padding: 20px; color: var(--secondary);">📸<br>Star Track</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(2)"><div style="padding: 20px; color: var(--secondary);">🟣<br>Purple Island</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(3)"><div style="padding: 20px; color: var(--secondary);">🎮<br>The Game</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(4)"><div style="padding: 20px; color: var(--secondary);">🔴<br>Red People</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(5)"><div style="padding: 20px; color: var(--secondary);">🏔️<br>Grand Teton</div></div>
+                <div class="gallery-thumb" onclick="showPhoto(6)"><div style="padding: 20px; color: var(--secondary);">🌌<br>Joshua Tree</div></div>
             </div>
             <div style="margin-top: 20px; text-align: center;">
-                <button class="menu-button" onclick="window.open('https://instagram.com/yourusername', '_blank')">📷 INSTAGRAM</button>
-                <button class="menu-button" onclick="window.open('https://flickr.com/yourusername', '_blank')">🖼️ FLICKR</button>
+                <button class="menu-button" onclick="window.open('https://www.flickr.com/photos/bridgezhao/', '_blank')">🖼️ FLICKR</button>
             </div>
         `,
     },
@@ -119,14 +118,13 @@ export const gameData = {
                 <button class="music-btn" id="play-btn" onclick="playTrack('toggle')">▶</button>
                 <button class="music-btn" onclick="playTrack('next')">⏭</button>
             </div>
-            <div style="margin: 20px 0;">
-                <div class="menu-button" style="display: block; margin: 10px auto; text-align: center;">🎵 Digital Dreams - 3:24</div>
-                <div class="menu-button" style="display: block; margin: 10px auto; text-align: center;">🎹 Quantum Beats - 4:12</div>
-                <div class="menu-button" style="display: block; margin: 10px auto; text-align: center;">🎼 Binary Sunset - 5:03</div>
+            <div style="margin: 20px 0;" id="track-list">
+                <div class="menu-button track-btn" data-track="0" onclick="selectTrack(0)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer; background: var(--highlight);">🎵 Spring kids</div>
+                <div class="menu-button track-btn" data-track="1" onclick="selectTrack(1)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer;">🎹 Island grass </div>
+                <div class="menu-button track-btn" data-track="2" onclick="selectTrack(2)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer;">🎼 A glass of ice </div>
             </div>
             <div style="text-align: center;">
                 <button class="menu-button" onclick="window.open('https://soundcloud.com/zhouqiao-zhao', '_blank')">☁️ SOUNDCLOUD</button>
-                // <button class="menu-button" onclick="window.open('https://spotify.com/yourusername', '_blank')">🎧 SPOTIFY</button>
             </div>
         `,
     },
@@ -149,10 +147,10 @@ export const gameData = {
                 <div style="flex: 1;">
                     <h3>SKILLS:</h3>
                     <ul style="line-height: 2;">
-                        <li>Quantum Physics [████████░░] 80%</li>
-                        <li>Machine Learning [█████████░] 90%</li>
-                        <li>Photography [███████░░░] 70%</li>
-                        <li>Music Production [██████░░░░] 60%</li>
+                        <li>Connected and Automated Vehicle [████████░░] 80%</li>
+                        <li>Human-Centered AI [█████████░] 88%</li>
+                        <li>Sound and Synthesizer Design [███████░░░] 70%</li>
+                        <li>Photography [██████░░░░] 60%</li>
                     </ul>
                 </div>
             </div>
@@ -164,8 +162,8 @@ export const gameData = {
                 while capturing its beauty through lens and sound.
             </p>
             <div style="margin-top: 20px; text-align: center;">
-                <button class="menu-button" onclick="window.open('/cv.pdf', '_blank')">📄 DOWNLOAD CV</button>
-                <button class="menu-button" onclick="window.open('https://linkedin.com/in/yourusername', '_blank')">💼 LINKEDIN</button>
+                <button class="menu-button" onclick="window.open('/Zhouqiao_Zhao_Resume_2025_Jul.pdf', '_blank')">📄 DOWNLOAD CV</button>
+                <button class="menu-button" onclick="window.open('https://www.linkedin.com/in/zhouqiao-zhao-60560a56/', '_blank')">💼 LINKEDIN</button>
             </div>
         `,
     },
@@ -193,16 +191,38 @@ export const gameData = {
             </div>
             <h3>DIRECT CHANNELS:</h3>
             <div style="text-align: center; margin-top: 20px;">
-                <button class="menu-button" onclick="window.open('mailto:your.email@mit.edu', '_blank')">📧 EMAIL</button>
-                <button class="menu-button" onclick="window.open('https://twitter.com/yourusername', '_blank')">🐦 TWITTER</button>
-                <button class="menu-button" onclick="navigator.clipboard.writeText('your.email@mit.edu').then(() => alert('Email copied!'))">📋 COPY EMAIL</button>
+                <button class="menu-button" onclick="window.open('mailto:zhouqiao@mit.edu', '_blank')">📧 EMAIL</button>
+                <button class="menu-button" onclick="navigator.clipboard.writeText('zhouqiao@mit.edu').then(() => alert('Email copied!'))">📋 COPY EMAIL</button>
             </div>
         `,
     },
   },
+  // Media assets configuration
+  media: {
+    photos: [
+      // Real Flickr photos from bridgezhao account
+      { id: "54680329597", title: "Star Track", description: "Celestial night photography capturing star movements", emoji: "⭐" },
+      { id: "54681311838", title: "Purple Island", description: "Mystical landscape with purple hues", emoji: "🟣" },
+      { id: "54680184412", title: "The Game", description: "Creative composition exploring visual storytelling", emoji: "🎮" },
+      { id: "54681001891", title: "Red People", description: "Vibrant street photography with bold colors", emoji: "🔴" },
+      { id: "54680302237", title: "The Grand Teton", description: "Majestic mountain landscape photography", emoji: "🏔️" },
+      { id: "54680359637", title: "Night in Joshua Tree", description: "Desert night scene under starlit sky", emoji: "🌌" }
+    ],
+    music: {
+      // Real SoundCloud tracks from zhouqiao-zhao account
+      tracks: [
+        { id: "2137403307", title: "Spring kids", duration: "1:19" },
+        { id: "2137347381", title: "Island grass", duration: "3:12" },  
+        { id: "2137347393", title: "A glass of ice", duration: "1:04" }
+      ],
+      currentTrack: 0
+    }
+  },
   collectibles: [
     { type: "xp", position: { top: "700px", left: "1000px" }, icon: "⭐" },
+    { type: "xp", position: { top: "300px", left: "1400px" }, icon: "⭐" },
     { type: "achievement", position: { top: "500px", left: "1200px" }, icon: "🏆" },
     { type: "powerup", position: { top: "1100px", left: "800px" }, icon: "💎" },
+    { type: "powerup", position: { top: "1000px", left: "1500px" }, icon: "💍" },
   ],
 };

@@ -99,15 +99,182 @@ window.showResearchDetail = function(type) {
 };
 
 window.showPhoto = function(id) {
-    alert(`Photo ${id}: High-resolution image would be displayed here.\n\nIn production, this would show the full image with EXIF data and description.`);
+    const photoIndex = id - 1;
+    const photo = gameData.media.photos[photoIndex];
+    
+    if (!photo) {
+        alert('Photo not found!');
+        return;
+    }
+    
+    // Create photo viewer modal
+    const photoModal = document.createElement('div');
+    photoModal.id = 'photo-modal';
+    photoModal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.9); z-index: 10000; display: flex; 
+        align-items: center; justify-content: center; cursor: pointer;
+    `;
+    
+    // Try multiple Flickr image URL formats for better compatibility
+    const flickrPageUrl = `https://www.flickr.com/photos/bridgezhao/${photo.id}/`;
+    
+    photoModal.innerHTML = `
+        <div style="max-width: 90%; max-height: 90%; text-align: center;">
+            <div id="photo-container-${photo.id}" style="min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                <div style="color: white; font-size: 14px;">Loading photo...</div>
+            </div>
+            <div style="color: white; margin-top: 10px; font-family: inherit;">
+                <h3>${photo.title}</h3>
+                <p style="font-size: 12px; line-height: 1.4;">${photo.description}</p>
+                <a href="${flickrPageUrl}" target="_blank" 
+                   style="color: var(--secondary); text-decoration: none; font-size: 10px;">
+                   View on Flickr ↗
+                </a>
+                <p style="font-size: 10px; margin-top: 10px; opacity: 0.7;">Click anywhere to close</p>
+            </div>
+        </div>
+    `;
+    
+    // Since Flickr direct image URLs are restricted, provide a nice preview interface
+    const container = photoModal.querySelector(`#photo-container-${photo.id}`);
+    
+    container.innerHTML = `
+        <div style="color: white; text-align: center; padding: 40px;">
+            <div style="font-size: 64px; margin-bottom: 20px;">${photo.emoji || '📸'}</div>
+            <h3 style="margin-bottom: 15px; color: var(--secondary); font-size: 18px;">${photo.title}</h3>
+            <p style="font-size: 14px; margin-bottom: 30px; line-height: 1.4; opacity: 0.9; max-width: 400px; margin-left: auto; margin-right: auto;">${photo.description}</p>
+            <div style="margin-bottom: 25px;">
+                <a href="${flickrPageUrl}" target="_blank" 
+                   style="color: var(--secondary); text-decoration: none; 
+                          padding: 14px 28px; border: 2px solid var(--secondary);
+                          display: inline-block; background: var(--highlight);
+                          font-weight: bold; margin-bottom: 10px; font-size: 12px;
+                          transition: all 0.2s ease;">
+                   📷 VIEW FULL PHOTO ON FLICKR
+                </a>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <a href="https://www.flickr.com/photos/bridgezhao/" target="_blank" 
+                   style="color: var(--text); text-decoration: none; font-size: 11px;
+                          opacity: 0.8; border-bottom: 1px solid transparent;">
+                   🖼️ Browse All Photos
+                </a>
+            </div>
+            <p style="font-size: 10px; opacity: 0.6; line-height: 1.3; font-style: italic;">
+                High-resolution photos available on Flickr
+            </p>
+        </div>
+    `;
+    
+    photoModal.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'A') {
+            document.body.removeChild(photoModal);
+        }
+    });
+    
+    document.body.appendChild(photoModal);
 };
 
 window.playTrack = function(action) {
+    const musicData = gameData.media.music;
     const playBtn = document.getElementById('play-btn');
-    if (action === 'toggle' && playBtn) {
-        playBtn.textContent = playBtn.textContent === '▶' ? '⏸' : '▶';
+    
+    if (action === 'prev') {
+        musicData.currentTrack = (musicData.currentTrack - 1 + musicData.tracks.length) % musicData.tracks.length;
+        updateCurrentTrack();
+    } else if (action === 'next') {
+        musicData.currentTrack = (musicData.currentTrack + 1) % musicData.tracks.length;
+        updateCurrentTrack();
+    } else if (action === 'toggle') {
+        const currentTrack = musicData.tracks[musicData.currentTrack];
+        
+        // Check if music modal already exists
+        const existingModal = document.getElementById('music-modal');
+        if (existingModal) {
+            document.body.removeChild(existingModal);
+            if (playBtn) playBtn.textContent = '▶';
+            return;
+        }
+        
+        // Create SoundCloud embed modal
+        const musicModal = document.createElement('div');
+        musicModal.id = 'music-modal';
+        musicModal.style.cssText = `
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--primary); border: 3px solid var(--secondary);
+            padding: 20px; z-index: 10000; max-width: 450px; width: 95%;
+            font-family: inherit; color: var(--secondary); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        `;
+        
+        const soundcloudEmbed = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${currentTrack.id}&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+        
+        musicModal.innerHTML = `
+            <div style="text-align: center;">
+                <h3>🎵 NOW PLAYING</h3>
+                <p style="margin: 10px 0; font-size: 14px;">${currentTrack.title} (${currentTrack.duration})</p>
+                <iframe id="soundcloud-player" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
+                        src="${soundcloudEmbed}"></iframe>
+                <div style="margin-top: 15px;">
+                    <button onclick="closeMusicPlayer()" 
+                            style="padding: 8px 16px; background: var(--highlight); 
+                                   border: 2px solid var(--secondary); color: var(--secondary); 
+                                   font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
+                    <button onclick="openSoundCloudPage()" 
+                            style="padding: 8px 16px; background: transparent; 
+                                   border: 2px solid var(--secondary); color: var(--secondary); 
+                                   font-family: inherit; cursor: pointer;">OPEN IN SOUNDCLOUD</button>
+                </div>
+                <p style="font-size: 10px; margin-top: 10px; opacity: 0.8;">
+                    Music continues playing even when closed. Visit SoundCloud to control playback.
+                </p>
+            </div>
+        `;
+        
+        document.body.appendChild(musicModal);
+        
+        if (playBtn) {
+            playBtn.textContent = '⏸';
+        }
     }
-    console.log('Music player action:', action);
+};
+
+// Global function for track selection
+window.selectTrack = function(trackIndex) {
+    gameData.media.music.currentTrack = trackIndex;
+    updateCurrentTrack();
+};
+
+function updateCurrentTrack() {
+    const currentTrack = gameData.media.music.tracks[gameData.media.music.currentTrack];
+    
+    // Update visual selection in track list
+    document.querySelectorAll('.track-btn').forEach((btn, index) => {
+        if (index === gameData.media.music.currentTrack) {
+            btn.style.background = 'var(--highlight)';
+            btn.style.color = 'var(--secondary)';
+        } else {
+            btn.style.background = 'transparent';
+            btn.style.color = 'var(--text)';
+        }
+    });
+    
+    console.log(`Now selected: ${currentTrack.title}`);
+}
+
+// Global functions for music player
+window.closeMusicPlayer = function() {
+    const modal = document.getElementById('music-modal');
+    if (modal) {
+        document.body.removeChild(modal);
+        const playBtn = document.getElementById('play-btn');
+        if (playBtn) playBtn.textContent = '▶';
+    }
+};
+
+window.openSoundCloudPage = function() {
+    const currentTrack = gameData.media.music.tracks[gameData.media.music.currentTrack];
+    window.open(`https://soundcloud.com/zhouqiao-zhao/${currentTrack.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
 };
 
 window.sendMessage = function() {
