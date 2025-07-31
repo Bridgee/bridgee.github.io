@@ -1,5 +1,6 @@
 ---
 import GameLayout from "../layouts/GameLayout.astro";
+import { gameData } from "../js/data.js";
 ---
 <GameLayout>
     <!-- Loading Screen -->
@@ -11,42 +12,14 @@ import GameLayout from "../layouts/GameLayout.astro";
     <div id="game-container">
         <!-- Game World -->
         <div id="game-world">
-            <!-- Home Area (Starting Point) -->
-            <div id="home-area" class="game-area">
-                <div class="area-label">HOME BASE</div>
-                <div class="area-icon" role="img" aria-label="Home base">🏠</div>
-            </div>
-            
-            <!-- Research Area -->
-            <div id="research-area" class="game-area">
-                <div class="area-label">RESEARCH LAB</div>
-                <div class="area-icon" role="img" aria-label="Research lab">🔬</div>
-            </div>
-            
-            <!-- Gallery Area -->
-            <div id="gallery-area" class="game-area">
-                <div class="area-label">PHOTO GALLERY</div>
-                <div class="area-icon" role="img" aria-label="Photo gallery">📸</div>
-            </div>
-            
-            <!-- Music Area -->
-            <div id="music-area" class="game-area">
-                <div class="area-label">MUSIC STUDIO</div>
-                <div class="area-icon" role="img" aria-label="Music studio">🎵</div>
-            </div>
-            
-            <!-- About Area -->
-            <div id="about-area" class="game-area">
-                <div class="area-label">ABOUT ME</div>
-                <div class="area-icon" role="img" aria-label="About me">👤</div>
-            </div>
-            
-            <!-- Contact Area -->
-            <div id="contact-area" class="game-area">
-                <div class="area-label">CONTACT PORTAL</div>
-                <div class="area-icon" role="img" aria-label="Contact portal">✉️</div>
-            </div>
-            
+            <!-- Dynamic Areas -->
+            {Object.entries(gameData.areas).map(([id, area]) => (
+              <div id={id} class="game-area" style={`top: ${area.position.top}; left: ${area.position.left}; width: ${area.position.width}; height: ${area.position.height};`}>
+                <div class="area-label">{area.label}</div>
+                <div class="area-icon" role="img" aria-label={area.label} set:html={area.icon} />
+              </div>
+            ))}
+
             <!-- Decorative Elements -->
             <div class="tree" style="top: 300px; left: 200px;">
                 <div class="tree-top"></div>
@@ -64,67 +37,26 @@ import GameLayout from "../layouts/GameLayout.astro";
                 <div class="tree-top"></div>
                 <div class="tree-trunk"></div>
             </div>
-            
-            <!-- NPCs with better sprites -->
-            <div class="npc" style="top: 600px; left: 500px;" data-name="Dr. Smith" data-dialogue='["Welcome to the digital realm!", "I study quantum mechanics here.", "The Research Lab has fascinating experiments!", "Press SPACE or click when you see a prompt to interact."]'>
-                <div class="npc-sprite scientist">
-                    <!-- 8x8 pixel grid for NPC -->
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+
+            <!-- Dynamic NPCs -->
+            {gameData.npcs.map(npc => (
+              <div class="npc" style={`top: ${npc.position.top}; left: ${npc.position.left};`} data-name={npc.name} data-dialogue={JSON.stringify(npc.dialogue)}>
+                <div class={`npc-sprite ${npc.sprite}`}>
+                  {Array.from({ length: 64 }).map(() => <div class="pixel"></div>)}
                 </div>
-            </div>
-            
-            <div class="npc" style="top: 450px; left: 1500px;" data-name="Maya" data-dialogue='["Hey there! I love photography!", "Have you checked out the Gallery?", "I captured some amazing shots at MIT.", "Each photo tells a story of discovery."]'>
-                <div class="npc-sprite photographer">
-                    <!-- 8x8 pixel grid for NPC -->
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                </div>
-            </div>
-            
-            <div class="npc" style="top: 1050px; left: 400px;" data-name="DJ Byte" data-dialogue='["Yo! Welcome to the beat zone!", "I spin electronic tracks all day.", "Check out the Music Studio for some tunes!", "Music and science go hand in hand."]'>
-                <div class="npc-sprite musician">
-                    <!-- 8x8 pixel grid for NPC -->
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                </div>
-            </div>
-            
-            <!-- Collectibles -->
-            <div class="collectible" style="top: 700px; left: 1000px;" data-type="xp">⭐</div>
-            <div class="collectible" style="top: 500px; left: 1200px;" data-type="achievement">🏆</div>
-            <div class="collectible" style="top: 1100px; left: 800px;" data-type="powerup">💎</div>
+              </div>
+            ))}
+
+            <!-- Dynamic Collectibles -->
+            {gameData.collectibles.map(item => (
+              <div class="collectible" style={`top: ${item.position.top}; left: ${item.position.left};`} data-type={item.type} set:html={item.icon} />
+            ))}
             
             <!-- Player -->
             <div id="player">
                 <div class="player-sprite facing-down">
                     <!-- 8x8 pixel grid for character -->
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    {Array.from({ length: 64 }).map(() => <div class="pixel"></div>)}
                 </div>
             </div>
         </div>
