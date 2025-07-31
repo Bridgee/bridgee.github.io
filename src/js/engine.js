@@ -1,14 +1,15 @@
 // Import functions from other modules
 import { collectItem, createParticle } from './entities.js';
 import { startDialogue, continueDialogue, enterArea, closePopup } from './ui.js';
+import { gameData } from './data.js';
 
-// Game Variables
+// Game Variables - Initialize from gameData
 export let player = {
-    x: 1250,
-    y: 850,
-    speed: 5,
-    width: 32,
-    height: 32,
+    x: gameData.player.x,
+    y: gameData.player.y,
+    speed: gameData.player.speed,
+    width: gameData.player.width,
+    height: gameData.player.height,
     isMoving: false,
     direction: 'down',
     level: 1,
@@ -17,7 +18,7 @@ export let player = {
 };
 
 export let camera = { x: 0, y: 0 };
-export let world = { width: 2400, height: 1600 };
+export let world = { width: gameData.world.width, height: gameData.world.height };
 
 // Game state variables
 export let keys = {};
