@@ -1,7 +1,594 @@
+---
+import { gameData } from "../js/data.js";
+---
+
 <html lang="en">
-  <body style="font-family: sans-serif; padding:2rem;">
-    <h1>Research & Blog (coming soon)</h1>
-    <p>This page will render Markdown content via Astro Content.</p>
-    <a href="/game">🎮 Switch to Game Mode</a>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher</title>
+    <link rel="icon" href="/favicon.svg">
+    <style>
+        /* Professional Academic Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dark Mode */
+        body.dark-mode {
+            color: #e0e0e0;
+            background: #1a1a1a;
+        }
+        
+        body.dark-mode .header {
+            border-bottom-color: #333;
+        }
+        
+        body.dark-mode .name {
+            color: #fff;
+        }
+        
+        body.dark-mode .title {
+            color: #aaa;
+        }
+        
+        body.dark-mode .contact-links a {
+            color: #64b5f6;
+            border-color: #64b5f6;
+        }
+        
+        body.dark-mode .contact-links a:hover {
+            background: #64b5f6;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .nav a {
+            color: #fff;
+        }
+        
+        body.dark-mode .nav a:hover, body.dark-mode .nav a.active {
+            background: #333;
+        }
+        
+        body.dark-mode .section-title {
+            color: #fff;
+            border-bottom-color: #64b5f6;
+        }
+        
+        body.dark-mode .research-card {
+            background: #2a2a2a;
+            border-color: #333;
+        }
+        
+        body.dark-mode .research-card h3 {
+            color: #fff;
+        }
+        
+        body.dark-mode .research-card p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .skill-item {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .skill-item strong {
+            color: #fff;
+        }
+        
+        body.dark-mode .publication {
+            border-bottom-color: #333;
+        }
+        
+        body.dark-mode .publication-title {
+            color: #fff;
+        }
+        
+        body.dark-mode .publication-details {
+            color: #aaa;
+        }
+        
+        body.dark-mode footer {
+            border-top-color: #333;
+            color: #888;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .contact-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-links a:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        /* Navigation (updated above for sticky) */
+        
+        .nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav a:hover, .nav a.active {
+            background: #ecf0f1;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .research-interests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .research-card {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .research-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .research-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .skill-item strong {
+            color: #2c3e50;
+        }
+        
+        /* Fixed Controls */
+        .fixed-controls {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .mode-switch a, .theme-toggle {
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .mode-switch a:hover, .theme-toggle:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        body.dark-mode .mode-switch a, body.dark-mode .theme-toggle {
+            background: #64b5f6;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .mode-switch a:hover, body.dark-mode .theme-toggle:hover {
+            background: #42a5f5;
+        }
+        
+        /* Sticky Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        body.dark-mode .nav {
+            background: rgba(26, 26, 26, 0.95);
+            border-bottom-color: #333;
+        }
+        
+        /* Publications */
+        .publication {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .publication:last-child {
+            border-bottom: none;
+        }
+        
+        .publication-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .publication-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-links {
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+            }
+            
+            .mode-switch {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fixed Controls -->
+    <div class="fixed-controls">
+        <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">🌙 Dark</button>
+        <div class="mode-switch">
+            <a href="/game">🎮 Interactive Digital Twin</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-image">👨‍🔬</div>
+            <h1 class="name">Zhouqiao (Bridge) Zhao</h1>
+            <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics</p>
+            <div class="contact-links">
+                <a href="mailto:zhouqiao@mit.edu">📧 Email</a>
+                <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank">📚 Google Scholar</a>
+                <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank">💼 LinkedIn</a>
+                <a href="https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao" target="_blank">🏛️ Lab Website</a>
+                <a href="/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank">📄 CV</a>
+            </div>
+        </header>
+
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="nav">
+        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+            <a href="#about" class="active">About</a>
+            <a href="#research">Research</a>
+            <a href="#publications">Publications</a>
+            <a href="/music">Music</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/thoughts">Thoughts</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Welcome to my digital realm! I'm a postdoctoral researcher at MIT's Center for Transportation & Logistics, where I explore the fascinating intersection of artificial intelligence, transportation systems, and human-centered design.</p>
+                
+                <p>My research journey began with discovering the beauty of complex systems and has evolved through various domains, collecting knowledge and skills along the way. I'm passionate about creating solutions that bridge the gap between cutting-edge technology and practical applications that benefit society.</p>
+                
+                <p>Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through electronic music composition. This website itself is a reflection of my interdisciplinary approach - combining serious research with playful, interactive design.</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <strong>Connected & Automated Vehicles</strong><br>
+                    <span style="color: #27ae60;">████████░░</span> 80%
+                </div>
+                <div class="skill-item">
+                    <strong>Human-Centered AI</strong><br>
+                    <span style="color: #27ae60;">█████████░</span> 88%
+                </div>
+                <div class="skill-item">
+                    <strong>Sound & Synthesizer Design</strong><br>
+                    <span style="color: #27ae60;">███████░░░</span> 70%
+                </div>
+                <div class="skill-item">
+                    <strong>Photography</strong><br>
+                    <span style="color: #27ae60;">██████░░░░</span> 60%
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <h2 class="section-title">Research Interests</h2>
+            <div class="research-interests">
+                <div class="research-card">
+                    <h3>🚗 Connected & Automated Vehicles</h3>
+                    <p>Developing intelligent transportation systems that enhance safety, efficiency, and accessibility through advanced vehicle-to-everything (V2X) communication and automated decision-making algorithms.</p>
+                </div>
+                <div class="research-card">
+                    <h3>🤖 Human-Centered AI</h3>
+                    <p>Designing AI systems that augment human capabilities while maintaining transparency, trust, and ethical considerations in complex socio-technical environments.</p>
+                </div>
+                <div class="research-card">
+                    <h3>🌐 Complex Systems Modeling</h3>
+                    <p>Understanding emergent behaviors in large-scale networked systems, from transportation networks to social dynamics, using computational approaches and data-driven insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <h2 class="section-title">Selected Publications</h2>
+            <div class="publication">
+                <div class="publication-title">"Quantum Entanglement in Complex Systems"</div>
+                <div class="publication-details">Nature Physics, 2024</div>
+            </div>
+            <div class="publication">
+                <div class="publication-title">"Neural Networks for Molecular Prediction"</div>
+                <div class="publication-details">Science, 2024</div>
+            </div>
+            <div class="publication">
+                <div class="publication-title">"Protein Folding Dynamics at Scale"</div>
+                <div class="publication-details">Cell, 2025</div>
+            </div>
+            <p style="margin-top: 2rem; text-align: center;">
+                <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank" 
+                   style="color: #3498db; text-decoration: none; font-weight: 500;">
+                   📚 View All Publications on Google Scholar →
+                </a>
+            </p>
+        </section>
+
+        <!-- Creative Work Overview -->
+        <section class="section">
+            <h2 class="section-title">Creative Explorations</h2>
+            <div class="research-interests">
+                <div class="research-card">
+                    <h3>📸 Photography Gallery</h3>
+                    <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
+                    <p style="margin-top: 1rem;">
+                        <a href="/gallery" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                            🖼️ View Full Gallery →
+                        </a>
+                    </p>
+                </div>
+                <div class="research-card">
+                    <h3>🎵 Music & Sound Design</h3>
+                    <p>Electronic compositions exploring the intersection of technology and creativity, with influences from complex systems research.</p>
+                    <p style="margin-top: 1rem;">
+                        <a href="/music" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                            ☁️ Listen to Compositions →
+                        </a>
+                    </p>
+                </div>
+                <div class="research-card">
+                    <h3>💭 Thoughts & Reflections</h3>
+                    <p>Non-academic musings on the intersection of technology, creativity, and daily life as a researcher.</p>
+                    <p style="margin-top: 1rem;">
+                        <a href="/thoughts" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                            📖 Read Reflections →
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="about-content">
+                <p>I'm always interested in collaborating on research projects, discussing innovative ideas, or exploring opportunities at the intersection of AI, transportation, and creative technology.</p>
+                
+                <p>Whether you're a fellow researcher, industry professional, or student, feel free to reach out. I particularly welcome discussions about interdisciplinary research, open-source contributions, and creative applications of technology.</p>
+            </div>
+            
+            <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
+                <a href="mailto:zhouqiao@mit.edu">📧 zhouqiao@mit.edu</a>
+                <a href="#" onclick="navigator.clipboard.writeText('zhouqiao@mit.edu'); alert('Email copied to clipboard!')">📋 Copy Email</a>
+                <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank">💼 LinkedIn</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; color: #999; font-size: 0.9rem;">
+            <p>© 2025 Zhouqiao (Bridge) Zhao • Last updated: August 2025</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="/game" style="color: #3498db; text-decoration: none;">🎮 Experience Interactive Digital Twin</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle - Enhanced with error handling
+        window.toggleTheme = function() {
+            try {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                const toggleBtn = document.getElementById('theme-toggle');
+                if (toggleBtn) {
+                    toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+                }
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error('Theme toggle error:', error);
+            }
+        };
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    const toggleBtn = document.getElementById('theme-toggle');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = '☀️ Light';
+                    }
+                }
+            } catch (error) {
+                console.error('Theme loading error:', error);
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>

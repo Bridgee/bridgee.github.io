@@ -2,37 +2,45 @@
 
 This project is a unique, semi-professional personal website designed to showcase research, personal projects, and contact information in an engaging, 8-bit retro game format. The goal is to create a memorable and interactive user experience that stands out from traditional portfolio websites.
 
-**Current Status**: ✅ **Deployed and Functional** - The game mode is fully operational on GitHub Pages with all core features working correctly.
+**Current Status**: ✅ **Complete Dual-Mode Website** - Both Interactive Digital Twin and Academic Portfolio modes are fully operational with comprehensive theme support.
 
 The project is built with [Astro](https://astro.build/) and vanilla JavaScript, and its development has been a collaborative effort with multiple AI assistants, including Google's Gemini, OpenAI's ChatGPT, and Anthropic's Claude.
 
 ## Core Functionality
 
 *   **Interactive Game World:** A 2400×1600px explorable world where users can navigate a player character
-*   **Dual-Mode Concept:** ⚠️ Game mode complete, blog mode in development
+*   **Dual-Mode Concept:** ✅ Interactive Digital Twin + Academic Portfolio modes both complete
 *   **Interactive NPCs:** Non-player characters with multi-line dialogue that provide context and grant XP
 *   **Explorable Areas:** Six themed zones (Home Base, Research Lab, Photo Gallery, Music Studio, About Me, Contact Portal) with detailed popup content
 *   **Gamification:** Complete XP and leveling system with 10 unlockable achievements
 *   **Responsive Controls:** Full support for keyboard (WASD/Arrows), mobile touch controls, and accessibility features
-*   **Data-Driven Architecture:** ⚠️ Partially implemented centralized content management system
+*   **Data-Driven Architecture:** ✅ Complete centralized content management system
 
 ## Development Progress
 
 ### ✅ Completed Features
-- **Game Engine**: Full 2D movement, camera system, collision detection
-- **Interactive Systems**: NPC dialogue, area exploration, collectible items
-- **UI/UX**: HUD, minimap, mobile controls, achievement notifications
-- **Content Areas**: All six areas with rich popup content and external links
-- **Deployment**: Successfully deployed to GitHub Pages with proper asset handling
+- **Interactive Digital Twin Mode**: Full 2D movement, camera system, collision detection, NPC dialogue
+- **Academic Portfolio Mode**: Professional design with About, Research, Publications sections
+- **Multi-Page Architecture**: Separate pages for music, gallery, and personal thoughts
+- **Dark/Light Theme System**: Comprehensive theme toggle across all pages with localStorage persistence
+- **Enhanced Home Page**: Professional landing with personal introduction and detailed mode descriptions
+- **UI/UX Systems**: HUD, minimap, mobile controls, achievement notifications, sticky navigation
+- **Content Areas**: All six game areas plus dedicated portfolio pages with rich content
+- **Real Media Integration**: CV download, SoundCloud music player, Flickr photo gallery
+- **Data Architecture**: Centralized content management with `gameData` system
+- **Deployment**: Successfully deployed to GitHub Pages with professional UX
 
-### 🔄 In Progress
-- **Data Externalization**: Migrating from hardcoded content to centralized data management
-- **Content Management**: Preparing for easy content updates across both modes
+### ✅ Recent Major Updates (August 2025)
+- **Complete Blog Mode Implementation**: Professional academic portfolio design
+- **Cross-Page Navigation**: Consistent navigation with backdrop blur effects
+- **Theme Persistence**: Dark/light mode settings saved across sessions
+- **Technical Fixes**: GameLayout.astro imports resolved, game engine initialization improved
+- **Terminology Enhancement**: "Game Mode" → "Interactive Digital Twin" throughout
 
-### ⏳ Planned Features
-- **Blog Mode**: Traditional researcher interface sharing content with game mode
-- **Content Integration**: Unified data source for publications, photos, music, and blog posts
-- **Enhanced Interactions**: Expanded NPC dialogues and area content
+### ⏳ Future Enhancements
+- **Dynamic Markdown Content**: Automatic rendering from markdown files for thoughts/projects
+- **Enhanced Interactivity**: Additional NPCs, areas, and game mechanics
+- **Content Expansion**: More research publications, photos, and music tracks
 
 ## AI-Assisted Development
 

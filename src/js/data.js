@@ -55,7 +55,7 @@ export const gameData = {
         <p>Greetings, traveler! I'm YOUR NAME, a postdoc researcher at MIT.</p>
         <p>This interactive portfolio is my digital playground where science meets creativity.</p>
         <div style="margin-top: 20px;">
-            <button class="menu-button" onclick="window.location.href='/blog'">📝 BLOG MODE</button>
+            <button class="menu-button" onclick="window.location.href='/blog'">📝 ACADEMIC PORTFOLIO</button>
             <button class="menu-button" onclick="showStats()">VIEW STATS</button>
             <button class="menu-button" onclick="showControls()">CONTROLS</button>
         </div>
@@ -112,7 +112,6 @@ export const gameData = {
         position: { top: "900px", left: "600px", width: "250px", height: "200px" },
         content: `
             <h2>MUSIC STUDIO</h2>
-            <p>Electronic compositions and chiptune experiments</p>
             <div class="music-controls">
                 <button class="music-btn" onclick="playTrack('prev')">⏮</button>
                 <button class="music-btn" id="play-btn" onclick="playTrack('toggle')">▶</button>

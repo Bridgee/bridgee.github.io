@@ -1,0 +1,368 @@
+---
+// Future: This will be enhanced with dynamic markdown content loading
+---
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts & Reflections - Zhouqiao (Bridge) Zhao</title>
+    <link rel="icon" href="/favicon.svg">
+    <style>
+        /* Professional Academic Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dark Mode */
+        body.dark-mode {
+            color: #e0e0e0;
+            background: #1a1a1a;
+        }
+        
+        body.dark-mode .header {
+            border-bottom-color: #333;
+        }
+        
+        body.dark-mode .name {
+            color: #fff;
+        }
+        
+        body.dark-mode .title {
+            color: #aaa;
+        }
+        
+        body.dark-mode .nav a {
+            color: #fff;
+        }
+        
+        body.dark-mode .nav a:hover, body.dark-mode .nav a.active {
+            background: #333;
+        }
+        
+        body.dark-mode .section-title {
+            color: #fff;
+            border-bottom-color: #64b5f6;
+        }
+        
+        body.dark-mode .thought-card {
+            background: #2a2a2a;
+            border-color: #333;
+        }
+        
+        body.dark-mode .thought-card h3 {
+            color: #fff;
+        }
+        
+        body.dark-mode .thought-card p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .coming-soon {
+            background: #2a2a2a;
+            border-color: #333;
+        }
+        
+        body.dark-mode footer {
+            border-top-color: #333;
+            color: #888;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .name {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .title {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        /* Fixed Controls */
+        .fixed-controls {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-link, .theme-toggle {
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .nav-link:hover, .theme-toggle:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        body.dark-mode .nav-link, body.dark-mode .theme-toggle {
+            background: #64b5f6;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .nav-link:hover, body.dark-mode .theme-toggle:hover {
+            background: #42a5f5;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        body.dark-mode .nav {
+            background: rgba(26, 26, 26, 0.95);
+            border-bottom-color: #333;
+        }
+        
+        .nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav a:hover, .nav a.active {
+            background: #ecf0f1;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        .thought-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .thought-card {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .thought-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .thought-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .thought-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .thought-date {
+            color: #999;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        .coming-soon {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .coming-soon h3 {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .coming-soon p {
+            color: #999;
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .fixed-controls {
+                top: 1rem;
+                right: 1rem;
+                flex-direction: column;
+            }
+            
+            .name {
+                font-size: 1.5rem;
+            }
+            
+            .thought-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fixed Controls -->
+    <div class="fixed-controls">
+        <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">🌙 Dark</button>
+        <a href="/blog" class="nav-link">📝 Back to Portfolio</a>
+        <a href="/game" class="nav-link">🎮 Interactive Digital Twin</a>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="name">Thoughts & Reflections</h1>
+            <p class="title">Non-academic musings on technology, creativity, and life</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="/blog">Portfolio Home</a>
+                <a href="/music">Music</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/thoughts" class="active">Thoughts</a>
+            </div>
+        </nav>
+
+        <!-- Thoughts Content -->
+        <section class="section">
+            <h2 class="section-title">Recent Reflections</h2>
+            
+            <!-- Sample thought posts - these will be replaced with dynamic markdown content -->
+            <div class="thought-grid">
+                <div class="thought-card">
+                    <h3>🤖 The Creativity of Constraints</h3>
+                    <p>In both music composition and research, I've found that constraints often spark the most creative solutions. Whether it's the limitations of an 8-bit sound chip or the boundaries of a research hypothesis, working within defined parameters forces innovative thinking...</p>
+                    <p class="thought-date">August 2025</p>
+                </div>
+                
+                <div class="thought-card">
+                    <h3>🌉 Building Bridges Between Worlds</h3>
+                    <p>My nickname "Bridge" isn't just a translation of my name - it represents my approach to connecting seemingly disparate fields. Every project becomes an opportunity to find unexpected connections between AI, transportation, music, and visual art...</p>
+                    <p class="thought-date">July 2025</p>
+                </div>
+                
+                <div class="thought-card">
+                    <h3>📸 The Science of Seeing</h3>
+                    <p>Photography and research share more than I initially realized. Both require careful observation, patience, and the ability to notice patterns that others might miss. Each captured moment is like a successful experiment - a hypothesis about beauty confirmed...</p>
+                    <p class="thought-date">June 2025</p>
+                </div>
+            </div>
+            
+            <!-- Coming Soon Section -->
+            <div class="coming-soon">
+                <h3>🚧 Dynamic Content Coming Soon</h3>
+                <p>This section will be enhanced with a markdown-based content management system, allowing for easy addition of new thoughts and reflections. The system will automatically render markdown files from a content directory, complete with metadata support for dates, tags, and categories.</p>
+                <p style="margin-top: 1rem;">Stay tuned for more frequent updates and deeper reflections on the intersection of technology, creativity, and academic life!</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; color: #999; font-size: 0.9rem;">
+            <p>© 2025 Zhouqiao (Bridge) Zhao • <a href="/blog" style="color: #3498db; text-decoration: none;">Portfolio Home</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle - Enhanced with error handling
+        window.toggleTheme = function() {
+            try {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                const toggleBtn = document.getElementById('theme-toggle');
+                if (toggleBtn) {
+                    toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+                }
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            } catch (error) {
+                console.error('Theme toggle error:', error);
+            }
+        };
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    const toggleBtn = document.getElementById('theme-toggle');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = '☀️ Light';
+                    }
+                }
+            } catch (error) {
+                console.error('Theme loading error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

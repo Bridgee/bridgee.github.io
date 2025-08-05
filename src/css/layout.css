@@ -409,7 +409,7 @@
     bottom: 20px;
     left: 20px;
     right: 20px;
-    display: flex;
+    display: none; /* Hidden by default, shown in media query */
     justify-content: space-between;
     align-items: flex-end;
     z-index: 1000;
@@ -435,7 +435,6 @@
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-    transition: all 0.2s;
 }
 
 .control-btn[data-dir]::before {
@@ -446,15 +445,11 @@
 
 .control-btn[data-dir="left"]::before { transform: rotate(-90deg); }
 .control-btn[data-dir="right"]::before { transform: rotate(90deg); }
-.control-btn[data-dir="down"]::before { transform: rotate(180deg); }
-
-.control-btn:hover {
-    transform: translateY(-2px);
-}
+.control-btn[data-dir="up"] { transform: rotate(0deg); }
+.control-btn[data-dir="down"] { transform: rotate(180deg); }
 
 .control-btn:active {
     background-color: var(--highlight);
-    transform: translateY(1px);
 }
 
 .control-btn:focus {
@@ -476,35 +471,8 @@
     flex-shrink: 0;
 }
 
-/* Switch Mode Button */
-#switch-mode-btn {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1001;
-    background-color: var(--primary);
-    color: var(--secondary);
-    border: 3px solid var(--highlight);
-    padding: 10px 15px;
-    font-family: inherit;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-#switch-mode-btn:hover {
-    background-color: var(--highlight);
-    transform: translateX(-50%) translateY(-2px);
-}
-
 /* Media Queries - Corrected */
 @media (max-width: 640px) {
-    #switch-mode-btn {
-        font-size: 8px;
-        padding: 8px 12px;
-    }
-
     #hud {
         top: 10px;
         left: auto;
@@ -553,16 +521,6 @@
     .menu-button {
         font-size: 8px;
         padding: 8px 16px;
-    }
-
-    #mobile-controls {
-        display: flex;
-    }
-}
-
-@media (max-width: 488px) {
-    #hud, #minimap {
-        top: 70px;
     }
 }
 
