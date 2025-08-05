@@ -15,9 +15,9 @@ export const gameData = {
       name: "Dr. Smith",
       dialogue: [
         "Welcome to Bridge's Digital Twin!",
-        "I study quantum mechanics here.",
-        "The Research Lab has fascinating experiments!",
-        "Press SPACE or click when you see a prompt to interact.",
+        "I research human-centered autonomous driving here.",
+        "The Research Lab has details on our latest publications!",
+        "We're creating digital twins of drivers to improve vehicle safety.",
       ],
       position: { top: "600px", left: "500px" },
       sprite: "scientist",
@@ -68,20 +68,20 @@ export const gameData = {
         position: { top: "400px", left: "300px", width: "300px", height: "250px" },
         content: `
             <h2>RESEARCH LABORATORY</h2>
-            <h3>Current Projects:</h3>
+            <h3>Research Focus:</h3>
             <div style="margin: 20px 0;">
-                <button class="menu-button" onclick="showResearchDetail('quantum')">🔬 QUANTUM MECHANICS</button>
-                <button class="menu-button" onclick="showResearchDetail('ml')">🤖 MACHINE LEARNING</button>
-                <button class="menu-button" onclick="showResearchDetail('bio')">🧬 BIOPHYSICS</button>
+                <button class="menu-button">🤖 Human-Centered Autonomy</button>
+                <button class="menu-button">🚗 Driver Behavior Modeling</button>
+                <button class="menu-button"> twinning of intelligent vehicles</button>
             </div>
             <h3>Recent Publications:</h3>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>"Quantum Entanglement in Complex Systems" - Nature Physics, 2024</li>
-                <li>"Neural Networks for Molecular Prediction" - Science, 2024</li>
-                <li>"Protein Folding Dynamics at Scale" - Cell, 2025</li>
+            <ul style="margin-left: 20px; line-height: 2; font-size: 8px;">
+                <li>Liao, X., Zhao, X., Wang, Z., Zhao, Z., Han, K., Gupta, R., Barth, M. J., & Wu, G. (2023). Driver digital twin for online prediction of personalized lane-change behavior. IEEE Internet of Things Journal.</li>
+                <li>Zhao, Z., Wang, Z., Han, K., Gupta, R., Tiwari, P., Wu, G., & Barth, M. J. (2022). Personalized car following for autonomous driving with inverse reinforcement learning. In 2022 International Conference on Robotics and Automation (ICRA).</li>
+                <li>Liao, X., Wang, Z., Zhao, X., Zhao, Z., Han, K., Tiwari, P., Barth, M. J., & Wu, G. (2022). Online prediction of lane change with a hierarchical learning-based approach. In 2022 International Conference on Robotics and Automation (ICRA).</li>
             </ul>
             <div style="margin-top: 20px;">
-                <button class="menu-button" onclick="window.open('https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl', '_blank')">📚 GOOGLE SCHOLAR</button>
+                <button class="menu-button" onclick="window.open('https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl=en', '_blank')">📚 GOOGLE SCHOLAR</button>
                 <button class="menu-button" onclick="window.open('https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao', '_blank')">💻 Lab Website</button>
             </div>
         `,
