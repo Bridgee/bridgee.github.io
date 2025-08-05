@@ -91,9 +91,9 @@ window.showControls = function() {
 
 window.showResearchDetail = function(type) {
     const details = {
-        'quantum': 'Quantum Mechanics Research:\n\nFocusing on quantum entanglement and its applications in computing...',
-        'ml': 'Machine Learning:\n\nCreating neural networks for scientific data analysis...',
-        'bio': 'Biophysics:\n\nDeveloping algorithms for protein folding prediction...'
+        'autonomy': 'Human-Centered Autonomy Research:\n\nDeveloping AI systems that augment human capabilities in autonomous vehicles while maintaining transparency, trust, and ethical considerations. Focus on creating seamless human-machine interfaces for intelligent transportation systems that enhance safety and accessibility.\n\nKey areas: Human-AI interaction, trust in automation, ethical AI design.',
+        'modeling': 'Driver Behavior Modeling:\n\nUtilizing advanced machine learning techniques to model and predict individual driver behaviors for personalized autonomous driving systems. Research includes inverse reinforcement learning and hierarchical learning approaches for lane-change prediction and car-following behaviors.\n\nKey methods: Inverse reinforcement learning, personalized prediction models, real-time behavior analysis.',
+        'twinning': 'Digital Twinning of Intelligent Vehicles:\n\nCreating comprehensive digital twins of drivers and vehicles to improve autonomous driving safety and performance. These digital replicas enable real-time simulation and prediction of driving scenarios, enhancing decision-making in complex traffic environments.\n\nApplications: Safety enhancement, personalized driving assistance, predictive maintenance.'
     };
     alert(details[type] || 'Research details coming soon!');
 };

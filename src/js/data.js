@@ -70,9 +70,9 @@ export const gameData = {
             <h2>RESEARCH LABORATORY</h2>
             <h3>Research Focus:</h3>
             <div style="margin: 20px 0;">
-                <button class="menu-button">🤖 Human-Centered Autonomy</button>
-                <button class="menu-button">🚗 Driver Behavior Modeling</button>
-                <button class="menu-button"> twinning of intelligent vehicles</button>
+                <button class="menu-button" onclick="showResearchDetail('autonomy')">🤖 Human-Centered Autonomy</button>
+                <button class="menu-button" onclick="showResearchDetail('modeling')">🚗 Driver Behavior Modeling</button>
+                <button class="menu-button" onclick="showResearchDetail('twinning')">🚁 Digital Twinning of Intelligent Vehicles</button>
             </div>
             <h3>Recent Publications:</h3>
             <ul style="margin-left: 20px; line-height: 2; font-size: 8px;">

@@ -261,39 +261,46 @@
     display: none;
     max-width: 80%;
     max-height: 80%;
-    overflow-y: auto;
+    overflow: hidden;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
 .popup-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     z-index: 10;
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
-    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    line-height: 24px;
+    font-size: 16px;
     font-weight: bold;
     color: var(--primary);
     background: var(--secondary);
-    border: 3px solid var(--highlight);
-    border-radius: 6px;
+    border: 2px solid var(--highlight);
+    border-radius: 4px;
     cursor: pointer;
     text-align: center;
     transition: transform .15s;
+    opacity: 0.9;
 }
 
 .popup-close:hover {
-    transform: scale(1.1) rotate(90deg);
+    transform: scale(1.1);
+    opacity: 1;
+    background: var(--highlight);
+    color: var(--secondary);
 }
 
 .popup-content {
     color: var(--secondary);
     font-size: 10px;
     line-height: 2;
-    max-height: calc(100vh - 120px);
+    max-height: calc(80vh - 100px);
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 10px;
 }
 
 .popup-content h2 {
@@ -530,16 +537,35 @@
     }
 
     .popup {
-        top: 50px;
-        transform: translateX(-50%);
-        max-height: calc(100% - 100px);
+        top: 5%;
+        left: 4%;
+        transform: none;
         width: 92%;
+        max-width: none;
+        max-height: 85vh;
         padding: 20px;
+        overflow: hidden;
     }
 
     .popup-content {
         font-size: 8px;
         line-height: 1.6;
+        max-height: calc(85vh - 80px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-right: 5px;
+        padding-top: 5px;
+    }
+    
+    .popup-close {
+        width: 32px;
+        height: 32px;
+        line-height: 28px;
+        font-size: 18px;
+        top: 5px;
+        right: 5px;
+        touch-action: manipulation;
     }
 
     .popup-content h2 { font-size: 14px; }
@@ -547,7 +573,12 @@
 
     .menu-button {
         font-size: 8px;
-        padding: 8px 16px;
+        padding: 12px 16px;
+        margin: 8px 4px;
+        display: block;
+        width: calc(100% - 8px);
+        min-height: 44px;
+        touch-action: manipulation;
     }
 
     #mobile-controls {
@@ -607,5 +638,46 @@
 @media (max-width: 520px) {
     #hud, #minimap {
         top: 70px;
+    }
+    
+    .popup {
+        top: 2%;
+        left: 2%;
+        width: 96%;
+        max-height: 90vh;
+        padding: 15px;
+    }
+    
+    .popup-content {
+        max-height: calc(90vh - 60px);
+        font-size: 7px;
+        line-height: 1.5;
+        padding-top: 8px;
+    }
+    
+    .popup-close {
+        width: 30px;
+        height: 30px;
+        line-height: 26px;
+        font-size: 16px;
+        top: 3px;
+        right: 3px;
+    }
+    
+    .popup-content h2 { 
+        font-size: 12px; 
+        margin-bottom: 15px;
+    }
+    
+    .popup-content h3 { 
+        font-size: 9px;
+        margin: 15px 0 8px 0;
+    }
+    
+    .menu-button {
+        font-size: 7px;
+        padding: 10px 12px;
+        margin: 6px 2px;
+        min-height: 40px;
     }
 }
