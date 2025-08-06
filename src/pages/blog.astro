@@ -98,6 +98,79 @@ import { gameData } from "../js/data.js";
             color: #aaa;
         }
         
+        /* Project Cards */
+        .project-card {
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-left-color: #2980b9;
+        }
+        
+        .project-meta {
+            margin: 1rem 0;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .project-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        body.dark-mode .project-tag {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+        
+        .project-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .project-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        body.dark-mode .project-btn {
+            background: #64b5f6;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .project-btn:hover {
+            background: #42a5f5;
+        }
+        
+        /* Dark mode for research philosophy and roadmap boxes */
+        body.dark-mode div[style*="background: #f8f9fa"] {
+            background: #2a2a2a !important;
+        }
+        
+        body.dark-mode h3[style*="color: #2c3e50"],
+        body.dark-mode h4[style*="color: #3498db"] {
+            color: #fff !important;
+        }
+        
+        body.dark-mode p[style*="color: #666"],
+        body.dark-mode ul[style*="color: #666"] {
+            color: #ccc !important;
+        }
+        
         body.dark-mode footer {
             border-top-color: #333;
             color: #888;
@@ -446,9 +519,9 @@ import { gameData } from "../js/data.js";
             <a href="#about" class="active">About</a>
             <a href="#research">Research</a>
             <a href="#publications">Publications</a>
+            <a href="#projects">Projects</a>
             <a href="/music">Music</a>
             <a href="/gallery">Gallery</a>
-            <a href="/thoughts">Thoughts</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -488,19 +561,72 @@ import { gameData } from "../js/data.js";
 
         <!-- Research Section -->
         <section id="research" class="section">
-            <h2 class="section-title">Research Interests</h2>
+            <h2 class="section-title">Research Interests & Roadmap</h2>
+            
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db;">
+                <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Philosophy</h3>
+                <p style="line-height: 1.7; color: #666;">
+                    My research sits at the intersection of artificial intelligence, transportation systems, and human-centered design. I believe in creating technology that not only advances scientific understanding but also meaningfully improves human experiences and societal outcomes.
+                </p>
+            </div>
+            
             <div class="research-interests">
                 <div class="research-card">
                     <h3>🚗 Connected & Automated Vehicles</h3>
-                    <p>Developing intelligent transportation systems that enhance safety, efficiency, and accessibility through advanced vehicle-to-everything (V2X) communication and automated decision-making algorithms.</p>
+                    <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
+                    <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Active Research</span>
+                        <span class="project-tag">Industry Collaboration</span>
+                    </div>
                 </div>
                 <div class="research-card">
                     <h3>🤖 Human-Centered AI</h3>
-                    <p>Designing AI systems that augment human capabilities while maintaining transparency, trust, and ethical considerations in complex socio-technical environments.</p>
+                    <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
+                    <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Interdisciplinary</span>
+                        <span class="project-tag">Ethics Focus</span>
+                    </div>
                 </div>
                 <div class="research-card">
-                    <h3>🌐 Complex Systems Modeling</h3>
-                    <p>Understanding emergent behaviors in large-scale networked systems, from transportation networks to social dynamics, using computational approaches and data-driven insights.</p>
+                    <h3>🌐 Digital Twin Technologies</h3>
+                    <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
+                    <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Emerging Tech</span>
+                        <span class="project-tag">Scalability</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Roadmap (2025-2027)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div>
+                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Short-term (2025)</h4>
+                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+                            <li>Complete driver digital twin framework</li>
+                            <li>Publish multi-agent learning findings</li>
+                            <li>Launch industry pilot programs</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Medium-term (2026)</h4>
+                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+                            <li>Scale to city-wide implementations</li>
+                            <li>Develop cross-domain applications</li>
+                            <li>Establish international collaborations</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Long-term (2027+)</h4>
+                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+                            <li>Pioneer next-gen transportation systems</li>
+                            <li>Lead interdisciplinary research initiatives</li>
+                            <li>Mentor emerging researchers in the field</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -528,6 +654,29 @@ import { gameData } from "../js/data.js";
             </p>
         </section>
 
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="research-interests">
+                {gameData.projects.filter(project => project.featured).map(project => (
+                    <div class="research-card project-card">
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                        <div class="project-meta">
+                            {project.tags.map(tag => (
+                                <span class="project-tag">{tag}</span>
+                            ))}
+                        </div>
+                        <p style="margin-top: 1rem;">
+                            <button class="project-btn" onclick={`window.open('${project.link}', '_blank')`}>
+                                📖 Learn More →
+                            </button>
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
         <!-- Creative Work Overview -->
         <section class="section">
             <h2 class="section-title">Creative Explorations</h2>
@@ -547,15 +696,6 @@ import { gameData } from "../js/data.js";
                     <p style="margin-top: 1rem;">
                         <a href="/music" style="color: #3498db; text-decoration: none; font-weight: 500;">
                             ☁️ Listen to Compositions →
-                        </a>
-                    </p>
-                </div>
-                <div class="research-card">
-                    <h3>💭 Thoughts & Reflections</h3>
-                    <p>Non-academic musings on the intersection of technology, creativity, and daily life as a researcher.</p>
-                    <p style="margin-top: 1rem;">
-                        <a href="/thoughts" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                            📖 Read Reflections →
                         </a>
                     </p>
                 </div>
