@@ -501,7 +501,7 @@
 }
 
 /* Media Queries - Corrected */
-@media (max-width: 840px) {
+@media (max-width: 1024px) {
     #switch-mode-btn {
         font-size: 8px;
         padding: 8px 12px;
@@ -635,7 +635,13 @@
     box-shadow: 0 0 30px rgba(155, 188, 15, 0.8);
 }
 
-@media (max-width: 520px) {
+@media (max-width: 768px) {
+    #hud, #minimap {
+        top: 70px;
+    }
+}
+
+@media (max-width: 480px) {
     #hud, #minimap {
         top: 70px;
     }

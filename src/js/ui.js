@@ -259,7 +259,7 @@ function updateCurrentTrack() {
         }
     });
     
-    console.log(`Now selected: ${currentTrack.title}`);
+    // Track selection updated silently for better UX
 }
 
 // Global functions for music player
@@ -273,8 +273,8 @@ window.closeMusicPlayer = function() {
 };
 
 window.openSoundCloudPage = function() {
-    const currentTrack = gameData.media.music.tracks[gameData.media.music.currentTrack];
-    window.open(`https://soundcloud.com/zhouqiao-zhao/${currentTrack.title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
+    // Open general SoundCloud profile instead of constructed URL
+    window.open('https://soundcloud.com/zhouqiao-zhao', '_blank');
 };
 
 window.sendMessage = function() {
@@ -293,3 +293,42 @@ window.sendMessage = function() {
         alert('Please fill all fields!');
     }
 };
+
+// Safe email copy function for game interface
+window.copyGameEmail = function() {
+    const email = 'zhouqiao@mit.edu';
+    
+    // Modern clipboard API with fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+            alert('📧 EMAIL COPIED TO CLIPBOARD!\n\nzhouqiao@mit.edu');
+        }).catch(() => {
+            // Fallback for clipboard API failure
+            fallbackCopyGameEmail(email);
+        });
+    } else {
+        // Fallback for browsers without clipboard API
+        fallbackCopyGameEmail(email);
+    }
+};
+
+function fallbackCopyGameEmail(email) {
+    // Create temporary text area
+    const textArea = document.createElement('textarea');
+    textArea.value = email;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        alert('📧 EMAIL COPIED TO CLIPBOARD!\n\nzhouqiao@mit.edu');
+    } catch (err) {
+        alert('📧 COPY FAILED\n\nPlease manually copy: ' + email);
+    }
+    
+    document.body.removeChild(textArea);
+}

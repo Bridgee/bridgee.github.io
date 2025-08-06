@@ -1,0 +1,113 @@
+---
+import BlogLayout from './BlogLayout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<BlogLayout title={title} currentPage="music">
+  <slot />
+  
+  <!-- Music-specific styles -->
+  <style>
+    /* Dark mode subtitle support */
+    :global(body.dark-mode) h3 {
+      color: #fff;
+    }
+    
+    .track-list,
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0;
+      padding: 0 0.5rem;
+    }
+
+    /* Responsive breakpoints matching BlogLayout */
+    @media (max-width: 1024px) {
+      .track-list,
+      .track-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .track-list,
+      .track-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .track-list,
+      .track-grid {
+        gap: 1rem;
+        padding: 0;
+      }
+    }
+    
+    .track-card {
+      background: #f8f9fa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .track-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .track-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    .track-duration {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+    
+    .soundcloud-embed {
+      margin: 1rem 0;
+    }
+    
+    .soundcloud-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ff5500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+    
+    .soundcloud-link:hover {
+      background: #e64a00;
+    }
+    
+    /* Dark mode for music cards */
+    :global(body.dark-mode) .track-card {
+      background: #2a2a2a;
+      border-color: #333;
+    }
+    
+    :global(body.dark-mode) .track-title {
+      color: #fff;
+    }
+    
+    :global(body.dark-mode) .track-duration {
+      color: #aaa;
+    }
+  </style>
+</BlogLayout>

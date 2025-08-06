@@ -211,12 +211,11 @@ export const gameData = {
             <h3>DIRECT CHANNELS:</h3>
             <div style="text-align: center; margin-top: 20px;">
                 <button class="menu-button" onclick="window.open('mailto:zhouqiao@mit.edu', '_blank')">📧 EMAIL</button>
-                <button class="menu-button" onclick="navigator.clipboard.writeText('zhouqiao@mit.edu').then(() => alert('Email copied!'))">📋 COPY EMAIL</button>
+                <button class="menu-button" onclick="copyGameEmail()">📋 COPY EMAIL</button>
             </div>
         `,
     },
   },
-  // Media assets configuration
   media: {
     photos: [
       // Real Flickr photos from bridgezhao account

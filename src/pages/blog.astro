@@ -1,532 +1,25 @@
 ---
+import BlogLayout from '../layouts/BlogLayout.astro';
+import Card from '../components/ui/Card.astro';
+import ProjectTag from '../components/ui/ProjectTag.astro';
 import { gameData } from "../js/data.js";
+
+// Function to get appropriate tag variant based on tag content
+function getTagVariant(tag) {
+  const tagLower = tag.toLowerCase();
+  if (tagLower.includes('research') || tagLower.includes('active')) return 'primary';
+  if (tagLower.includes('collaboration') || tagLower.includes('industry')) return 'success';
+  if (tagLower.includes('interdisciplinary') || tagLower.includes('ethics')) return 'info';
+  if (tagLower.includes('emerging') || tagLower.includes('scalability')) return 'warning';
+  if (tagLower.includes('machine learning') || tagLower.includes('ai')) return 'primary';
+  if (tagLower.includes('behavioral') || tagLower.includes('human')) return 'info';
+  if (tagLower.includes('reinforcement')) return 'secondary';
+  if (tagLower.includes('audio') || tagLower.includes('creative')) return 'warning';
+  return 'default';
+}
 ---
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher</title>
-    <link rel="icon" href="/favicon.svg">
-    <style>
-        /* Professional Academic Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-            transition: all 0.3s ease;
-        }
-        
-        /* Dark Mode */
-        body.dark-mode {
-            color: #e0e0e0;
-            background: #1a1a1a;
-        }
-        
-        body.dark-mode .header {
-            border-bottom-color: #333;
-        }
-        
-        body.dark-mode .name {
-            color: #fff;
-        }
-        
-        body.dark-mode .title {
-            color: #aaa;
-        }
-        
-        body.dark-mode .contact-links a {
-            color: #64b5f6;
-            border-color: #64b5f6;
-        }
-        
-        body.dark-mode .contact-links a:hover {
-            background: #64b5f6;
-            color: #1a1a1a;
-        }
-        
-        body.dark-mode .nav a {
-            color: #fff;
-        }
-        
-        body.dark-mode .nav a:hover, body.dark-mode .nav a.active {
-            background: #333;
-        }
-        
-        body.dark-mode .section-title {
-            color: #fff;
-            border-bottom-color: #64b5f6;
-        }
-        
-        body.dark-mode .research-card {
-            background: #2a2a2a;
-            border-color: #333;
-        }
-        
-        body.dark-mode .research-card h3 {
-            color: #fff;
-        }
-        
-        body.dark-mode .research-card p {
-            color: #ccc;
-        }
-        
-        body.dark-mode .skill-item {
-            background: #2a2a2a;
-        }
-        
-        body.dark-mode .skill-item strong {
-            color: #fff;
-        }
-        
-        body.dark-mode .publication {
-            border-bottom-color: #333;
-        }
-        
-        body.dark-mode .publication-title {
-            color: #fff;
-        }
-        
-        body.dark-mode .publication-details {
-            color: #aaa;
-        }
-        
-        /* Project Cards */
-        .project-card {
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-3px);
-            border-left-color: #2980b9;
-        }
-        
-        .project-meta {
-            margin: 1rem 0;
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .project-tag {
-            background: #ecf0f1;
-            color: #2c3e50;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.75rem;
-            border-radius: 12px;
-            font-weight: 500;
-        }
-        
-        body.dark-mode .project-tag {
-            background: #34495e;
-            color: #ecf0f1;
-        }
-        
-        .project-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .project-btn:hover {
-            background: #2980b9;
-            transform: translateY(-1px);
-        }
-        
-        body.dark-mode .project-btn {
-            background: #64b5f6;
-            color: #1a1a1a;
-        }
-        
-        body.dark-mode .project-btn:hover {
-            background: #42a5f5;
-        }
-        
-        /* Dark mode for research philosophy and roadmap boxes */
-        body.dark-mode div[style*="background: #f8f9fa"] {
-            background: #2a2a2a !important;
-        }
-        
-        body.dark-mode h3[style*="color: #2c3e50"],
-        body.dark-mode h4[style*="color: #3498db"] {
-            color: #fff !important;
-        }
-        
-        body.dark-mode p[style*="color: #666"],
-        body.dark-mode ul[style*="color: #666"] {
-            color: #ccc !important;
-        }
-        
-        body.dark-mode footer {
-            border-top-color: #333;
-            color: #888;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .name {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-        
-        .title {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        
-        .contact-links a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #3498db;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-links a:hover {
-            background: #3498db;
-            color: white;
-        }
-        
-        /* Navigation (updated above for sticky) */
-        
-        .nav a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background 0.3s ease;
-        }
-        
-        .nav a:hover, .nav a.active {
-            background: #ecf0f1;
-        }
-        
-        /* Sections */
-        .section {
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-        }
-        
-        .about-content {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-        
-        .research-interests {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .research-card {
-            padding: 1.5rem;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-        
-        .research-card h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .research-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .skill-item {
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 4px;
-            text-align: center;
-        }
-        
-        .skill-item strong {
-            color: #2c3e50;
-        }
-        
-        /* Fixed Controls - Bottom Positioned */
-        .fixed-controls {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 1001;
-            display: flex;
-            gap: 0.5rem;
-            flex-direction: column;
-        }
-        
-        .mode-switch a, .theme-toggle {
-            background: rgba(52, 152, 219, 0.95);
-            color: white;
-            padding: 0.6rem 1rem;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 0.8rem;
-            backdrop-filter: blur(10px);
-            white-space: nowrap;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .mode-switch a:hover, .theme-toggle:hover {
-            background: rgba(41, 128, 185, 0.95);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        body.dark-mode .mode-switch a, body.dark-mode .theme-toggle {
-            background: rgba(42, 42, 42, 0.95);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        body.dark-mode .mode-switch a:hover, body.dark-mode .theme-toggle:hover {
-            background: rgba(60, 60, 60, 0.95);
-        }
-        
-        /* Sticky Navigation */
-        .nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        body.dark-mode .nav {
-            background: rgba(26, 26, 26, 0.95);
-            border-bottom-color: #333;
-        }
-        
-        /* Publications */
-        .publication {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .publication:last-child {
-            border-bottom: none;
-        }
-        
-        .publication-title {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-        
-        .publication-details {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .fixed-controls {
-                bottom: 0.8rem;
-                right: 0.8rem;
-                gap: 0.4rem;
-            }
-            
-            .mode-switch a, .theme-toggle {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.75rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .name {
-                font-size: 2rem;
-            }
-            
-            .contact-links {
-                gap: 1rem;
-            }
-            
-            .nav {
-                padding: 0.8rem 0;
-                margin-bottom: 1.5rem;
-            }
-            
-            .nav > div {
-                gap: 1rem !important;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav a {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.9rem;
-            }
-            
-            .fixed-controls {
-                bottom: 0.5rem;
-                right: 0.5rem;
-                gap: 0.3rem;
-            }
-            
-            .mode-switch a, .theme-toggle {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.7rem;
-                border-radius: 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .fixed-controls {
-                bottom: 0.3rem;
-                right: 0.3rem;
-                gap: 0.2rem;
-            }
-            
-            .mode-switch a, .theme-toggle {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.65rem;
-                border-radius: 12px;
-            }
-            
-            .nav {
-                padding: 0.6rem 0;
-            }
-            
-            .nav > div {
-                gap: 0.5rem !important;
-            }
-            
-            .nav a {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.8rem;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Fixed Controls -->
-    <div class="fixed-controls">
-        <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">🌙 Dark</button>
-        <div class="mode-switch">
-            <a href="/game">🎮 Interactive Digital Twin</a>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="profile-image">👨‍🔬</div>
-            <h1 class="name">Zhouqiao (Bridge) Zhao</h1>
-            <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics</p>
-            <div class="contact-links">
-                <a href="mailto:zhouqiao@mit.edu">📧 Email</a>
-                <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank">📚 Google Scholar</a>
-                <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank">💼 LinkedIn</a>
-                <a href="https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao" target="_blank">🏛️ Lab Website</a>
-                <a href="/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank">📄 CV</a>
-            </div>
-        </header>
-
-    </div>
-
-    <!-- Sticky Navigation -->
-    <nav class="nav">
-        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-            <a href="#about" class="active">About</a>
-            <a href="#research">Research</a>
-            <a href="#publications">Publications</a>
-            <a href="#projects">Projects</a>
-            <a href="/music">Music</a>
-            <a href="/gallery">Gallery</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <div class="container">
+<BlogLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher" currentPage="about">
 
         <!-- About Section -->
         <section id="about" class="section">
@@ -563,72 +56,67 @@ import { gameData } from "../js/data.js";
         <section id="research" class="section">
             <h2 class="section-title">Research Interests & Roadmap</h2>
             
-            <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db;">
-                <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Philosophy</h3>
-                <p style="line-height: 1.7; color: #666;">
+            <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
+                <p>
                     My research sits at the intersection of artificial intelligence, transportation systems, and human-centered design. I believe in creating technology that not only advances scientific understanding but also meaningfully improves human experiences and societal outcomes.
                 </p>
-            </div>
+            </Card>
             
             <div class="research-interests">
-                <div class="research-card">
-                    <h3>🚗 Connected & Automated Vehicles</h3>
+                <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
                     <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
                     <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="project-tag">Active Research</span>
-                        <span class="project-tag">Industry Collaboration</span>
+                    <div class="project-meta">
+                        <ProjectTag tag="Active Research" variant="primary" />
+                        <ProjectTag tag="Industry Collaboration" variant="success" />
                     </div>
-                </div>
-                <div class="research-card">
-                    <h3>🤖 Human-Centered AI</h3>
+                </Card>
+                <Card variant="research" icon="🤖" title="Human-Centered AI">
                     <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
                     <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="project-tag">Interdisciplinary</span>
-                        <span class="project-tag">Ethics Focus</span>
+                    <div class="project-meta">
+                        <ProjectTag tag="Interdisciplinary" variant="info" />
+                        <ProjectTag tag="Ethics Focus" variant="info" />
                     </div>
-                </div>
-                <div class="research-card">
-                    <h3>🌐 Digital Twin Technologies</h3>
+                </Card>
+                <Card variant="research" icon="🌐" title="Digital Twin Technologies">
                     <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
                     <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="project-tag">Emerging Tech</span>
-                        <span class="project-tag">Scalability</span>
+                    <div class="project-meta">
+                        <ProjectTag tag="Emerging Tech" variant="warning" />
+                        <ProjectTag tag="Scalability" variant="warning" />
                     </div>
-                </div>
+                </Card>
             </div>
             
-            <div style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Roadmap (2025-2027)</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                    <div>
-                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Short-term (2025)</h4>
-                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+            <Card variant="research" icon="🗓️" title="Research Roadmap (2025-2027)" class="roadmap-card">
+                <div class="roadmap-grid">
+                    <div class="roadmap-phase">
+                        <h4 class="phase-title">Short-term (2025)</h4>
+                        <ul class="phase-list">
                             <li>Complete driver digital twin framework</li>
                             <li>Publish multi-agent learning findings</li>
                             <li>Launch industry pilot programs</li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Medium-term (2026)</h4>
-                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+                    <div class="roadmap-phase">
+                        <h4 class="phase-title">Medium-term (2026)</h4>
+                        <ul class="phase-list">
                             <li>Scale to city-wide implementations</li>
                             <li>Develop cross-domain applications</li>
                             <li>Establish international collaborations</li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 style="color: #3498db; margin-bottom: 0.5rem;">Long-term (2027+)</h4>
-                        <ul style="line-height: 1.6; color: #666; padding-left: 1.2rem;">
+                    <div class="roadmap-phase">
+                        <h4 class="phase-title">Long-term (2027+)</h4>
+                        <ul class="phase-list">
                             <li>Pioneer next-gen transportation systems</li>
                             <li>Lead interdisciplinary research initiatives</li>
                             <li>Mentor emerging researchers in the field</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </Card>
         </section>
 
         <!-- Publications Section -->
@@ -659,12 +147,11 @@ import { gameData } from "../js/data.js";
             <h2 class="section-title">Featured Projects</h2>
             <div class="research-interests">
                 {gameData.projects.filter(project => project.featured).map(project => (
-                    <div class="research-card project-card">
-                        <h3>{project.title}</h3>
+                    <Card variant="project" title={project.title}>
                         <p>{project.description}</p>
                         <div class="project-meta">
                             {project.tags.map(tag => (
-                                <span class="project-tag">{tag}</span>
+                                <ProjectTag tag={tag} variant={getTagVariant(tag)} />
                             ))}
                         </div>
                         <p style="margin-top: 1rem;">
@@ -672,7 +159,7 @@ import { gameData } from "../js/data.js";
                                 📖 Learn More →
                             </button>
                         </p>
-                    </div>
+                    </Card>
                 ))}
             </div>
         </section>
@@ -681,24 +168,18 @@ import { gameData } from "../js/data.js";
         <section class="section">
             <h2 class="section-title">Creative Explorations</h2>
             <div class="research-interests">
-                <div class="research-card">
-                    <h3>📸 Photography Gallery</h3>
+                <Card variant="photo" icon="📸" title="Photography Gallery" href="/gallery">
                     <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
                     <p style="margin-top: 1rem;">
-                        <a href="/gallery" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                            🖼️ View Full Gallery →
-                        </a>
+                        <strong style="color: #3498db;">🖼️ View Full Gallery →</strong>
                     </p>
-                </div>
-                <div class="research-card">
-                    <h3>🎵 Music & Sound Design</h3>
+                </Card>
+                <Card variant="track" icon="🎵" title="Music & Sound Design" href="/music">
                     <p>Electronic compositions exploring the intersection of technology and creativity, with influences from complex systems research.</p>
                     <p style="margin-top: 1rem;">
-                        <a href="/music" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                            ☁️ Listen to Compositions →
-                        </a>
+                        <strong style="color: #3498db;">☁️ Listen to Compositions →</strong>
                     </p>
-                </div>
+                </Card>
             </div>
         </section>
 
@@ -713,87 +194,50 @@ import { gameData } from "../js/data.js";
             
             <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
                 <a href="mailto:zhouqiao@mit.edu">📧 zhouqiao@mit.edu</a>
-                <a href="#" onclick="navigator.clipboard.writeText('zhouqiao@mit.edu'); alert('Email copied to clipboard!')">📋 Copy Email</a>
+                <a href="#" onclick="copyEmailAddress()">📋 Copy Email</a>
                 <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank">💼 LinkedIn</a>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; color: #999; font-size: 0.9rem;">
-            <p>© 2025 Zhouqiao (Bridge) Zhao • Last updated: August 2025</p>
-            <p style="margin-top: 0.5rem;">
-                <a href="/game" style="color: #3498db; text-decoration: none;">🎮 Experience Interactive Digital Twin</a>
-            </p>
-        </footer>
-    </div>
+</BlogLayout>
 
-    <script>
-        // Theme Toggle - Enhanced with error handling
-        window.toggleTheme = function() {
-            try {
-                document.body.classList.toggle('dark-mode');
-                const isDark = document.body.classList.contains('dark-mode');
-                const toggleBtn = document.getElementById('theme-toggle');
-                if (toggleBtn) {
-                    toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-                }
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            } catch (error) {
-                console.error('Theme toggle error:', error);
-            }
-        };
-
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                const savedTheme = localStorage.getItem('theme');
-                if (savedTheme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    const toggleBtn = document.getElementById('theme-toggle');
-                    if (toggleBtn) {
-                        toggleBtn.textContent = '☀️ Light';
-                    }
-                }
-            } catch (error) {
-                console.error('Theme loading error:', error);
-            }
-        });
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Update active navigation item
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<script>
+  // Safe email copy function with fallback
+  function copyEmailAddress() {
+    const email = 'zhouqiao@mit.edu';
+    
+    // Modern clipboard API with fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(() => {
+        alert('Email copied to clipboard!');
+      }).catch(() => {
+        // Fallback for clipboard API failure
+        fallbackCopyEmail(email);
+      });
+    } else {
+      // Fallback for browsers without clipboard API
+      fallbackCopyEmail(email);
+    }
+  }
+  
+  function fallbackCopyEmail(email) {
+    // Create temporary text area
+    const textArea = document.createElement('textarea');
+    textArea.value = email;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+      document.execCommand('copy');
+      alert('Email copied to clipboard!');
+    } catch (err) {
+      alert('Could not copy email. Please manually copy: ' + email);
+    }
+    
+    document.body.removeChild(textArea);
+  }
+</script>
