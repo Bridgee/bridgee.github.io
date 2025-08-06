@@ -51,15 +51,26 @@ project/                    # Active development directory
 │   │   ├── game.astro     # Interactive Digital Twin mode
 │   │   ├── blog.astro     # Main academic portfolio
 │   │   ├── music.astro    # Music showcase page
-│   │   ├── gallery.astro  # Photography gallery
-│   │   └── thoughts.astro # Personal reflections
+│   │   └── gallery.astro  # Photography gallery
 │   ├── layouts/
-│   │   └── GameLayout.astro # Game-specific layout
+│   │   ├── GameLayout.astro # Game-specific layout
+│   │   └── BlogLayout.astro # Blog-specific layout
+│   ├── components/         # Reusable UI components (REFACTORED)
+│   │   ├── Card.astro     # Project/content cards
+│   │   ├── Navigation.astro # Site navigation
+│   │   ├── ThemeToggle.astro # Dark/light mode toggle
+│   │   ├── FixedControls.astro # Floating action buttons
+│   │   └── ProjectTag.astro # Project category tags
 │   ├── js/
-│   │   ├── engine.js      # Game engine, movement, camera
-│   │   ├── entities.js    # Game entities, XP system
-│   │   ├── ui.js          # UI interactions, dialogues
-│   │   └── data.js        # Centralized content data
+│   │   ├── game/          # Game-specific modules (NEW)
+│   │   │   ├── engine.js  # Game engine, movement, camera
+│   │   │   ├── entities.js # Game entities, XP system
+│   │   │   └── ui.js      # UI interactions, dialogues
+│   │   └── data/          # Separated data architecture (NEW)
+│   │       ├── navigation.js # Navigation configuration
+│   │       ├── shared.js  # Content used by both modes
+│   │       ├── game.js    # Game-specific data only
+│   │       └── blog.js    # Blog-specific data only
 │   └── css/
 │       ├── palette.css    # Color system & typography
 │       ├── layout.css     # Layout & responsive design
@@ -87,7 +98,34 @@ npm run deploy          # Deploy to GitHub Pages
 
 ## 🎯 Recent Major Updates (August 2025)
 
-### ✅ **CRITICAL CODE REVIEW & BUG FIXES COMPLETED** (Latest)
+### ✅ **PROJECT STRUCTURE REFACTORING COMPLETED** (Latest)
+
+**Professional architecture implemented with complete data separation and component organization:**
+
+#### 🏗️ **Architecture Improvements:**
+1. **Flattened Components Structure** - Removed unnecessary `/ui/` subfolder for simpler, cleaner imports
+2. **Game Module Organization** - Created `/js/game/` folder for game-specific code (engine, entities, ui)
+3. **Data Layer Separation** - Split monolithic data into logical concerns:
+   - `shared.js`: Content used by both game and blog modes (projects, photos, music)
+   - `game.js`: Game-specific data only (player, NPCs, areas, collectibles)
+   - `blog.js`: Blog-specific configuration
+   - `navigation.js`: Navigation configuration with clear pages vs sections distinction
+4. **Component Reusability** - Created modular components (Card, Navigation, ThemeToggle, FixedControls, ProjectTag)
+
+#### ⚡ **Benefits Achieved:**
+- **Clarity**: Obvious file purposes and logical organization
+- **Maintainability**: Easy to find and modify specific functionality
+- **Scalability**: Clean architecture supports future growth
+- **Performance**: Optimized imports and reduced redundancy
+- **Developer Experience**: Intuitive structure for faster development
+
+#### ✅ **Verification Complete:**
+- All functionality, data flows, and visuals successfully ported
+- Build passes with zero errors
+- Cross-references between shared and game-specific data work perfectly
+- Professional structure ready for production and future enhancements
+
+### ✅ **CRITICAL CODE REVIEW & BUG FIXES COMPLETED** (Previous)
 
 **Comprehensive line-by-line code analysis completed with all critical issues resolved:**
 
@@ -193,37 +231,51 @@ The site is automatically deployed to GitHub Pages using:
 
 ## 📊 Content Management
 
-### Centralized Data System
-All content is managed through configuration objects in `src/js/data.js`:
+### Separated Data Architecture
+All content is now managed through specialized data modules for better organization and maintainability:
 
 ```javascript
-// Scalable navigation configuration
+// Navigation configuration - src/js/data/navigation.js
 export const navigationConfig = {
-  blogPages: [ /* Easy addition of new page tabs */ ],
-  blogSections: [ /* Internal page sections */ ]
+  pages: [ /* Different routes/pages */ ],
+  sections: [ /* Internal page anchors */ ]
 };
 
-// Main game and content data
-export const gameData = {
-  player: { /* Player configuration */ },
-  npcs: [ /* Character dialogues and positions */ ],
-  areas: { /* Interactive area content */ },
+// Shared content - src/js/data/shared.js
+export const sharedData = {
   projects: [ /* Featured projects with links */ ],
   media: {
     photos: [ /* Flickr photo data */ ],
     music: { /* SoundCloud track information */ }
-  }
-}
+  },
+  research: { /* Research interests */ }
+};
+
+// Game-specific data - src/js/data/game.js
+export const gameData = {
+  player: { /* Player configuration */ },
+  npcs: [ /* Character dialogues and positions */ ],
+  areas: { /* Interactive area content */ },
+  collectibles: [ /* Game collectibles */ ]
+};
+
+// Blog-specific data - src/js/data/blog.js  
+export const blogData = {
+  siteConfig: { /* Blog configuration */ },
+  publications: [ /* Academic papers */ ],
+  skills: [ /* Skill levels */ ]
+};
 ```
 
 ### Adding Content
-- **Projects**: Add entries to `gameData.projects` array with title, description, tags, and links
-- **Navigation Pages**: Update `navigationConfig.blogPages` for new page tabs
-- **Research Areas**: Modify research interests and roadmap sections
-- **Research Papers**: Update `areas["research-area"].content`
-- **Photos**: Add entries to `media.photos` array
-- **Music**: Add tracks to `media.music.tracks`
-- **Blog Posts**: Create new markdown content (future enhancement)
+- **Projects**: Add entries to `sharedData.projects` array with title, description, tags, and links
+- **Navigation Pages**: Update `navigationConfig.pages` for new page routes
+- **Navigation Sections**: Update `navigationConfig.sections` for internal page anchors
+- **Research Areas**: Modify `sharedData.research.interests` for research topics
+- **Game Areas**: Update `gameData.areas` for interactive game locations
+- **Photos**: Add entries to `sharedData.media.photos` array with Flickr IDs
+- **Music**: Add tracks to `sharedData.media.music.tracks` with SoundCloud IDs
+- **Blog Configuration**: Modify `blogData` for blog-specific settings
 
 ## 🎨 Design Philosophy
 
@@ -380,13 +432,15 @@ src/
 4. **💡 LOW**: Advanced optimizations and testing framework
 
 ### **Development Status**
-- **✅ COMPLETED**: Comprehensive code review and bug fixes (August 2025)
+- **✅ COMPLETED**: Project structure refactoring with professional architecture (August 2025)
+- **✅ COMPLETED**: Data layer separation and component organization
+- **✅ COMPLETED**: Comprehensive code review and bug fixes
 - **✅ COMPLETED**: Production-ready website with zero build errors/warnings
 - **✅ COMPLETED**: Cross-browser compatibility with robust error handling
 - **✅ COMPLETED**: Responsive design tested across all breakpoints
-- **Current**: Fully functional, optimized, and maintainable codebase
-- **Next**: Content updates and feature enhancements
-- **Goal**: Continuous improvements based on user feedback and analytics
+- **Current**: Clean, maintainable, and scalable codebase ready for production
+- **Next**: Content updates and feature enhancements based on improved architecture
+- **Goal**: Continuous improvements leveraging the new modular structure
 
 ---
 

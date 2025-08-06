@@ -1,8 +1,8 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
-import Card from '../components/ui/Card.astro';
-import ProjectTag from '../components/ui/ProjectTag.astro';
-import { gameData } from "../js/data.js";
+import Card from '../components/Card.astro';
+import ProjectTag from '../components/ProjectTag.astro';
+import { sharedData } from "../js/data/shared.js";
 
 // Function to get appropriate tag variant based on tag content
 function getTagVariant(tag) {
@@ -146,7 +146,7 @@ function getTagVariant(tag) {
         <section id="projects" class="section">
             <h2 class="section-title">Featured Projects</h2>
             <div class="research-interests">
-                {gameData.projects.filter(project => project.featured).map(project => (
+                {sharedData.projects.filter(project => project.featured).map(project => (
                     <Card variant="project" title={project.title}>
                         <p>{project.description}</p>
                         <div class="project-meta">

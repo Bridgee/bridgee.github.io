@@ -1,5 +1,5 @@
 ---
-import { navigationConfig } from '../../js/data.js';
+import { navigationConfig } from '../js/data/navigation.js';
 
 interface Props {
   currentPage?: string;
@@ -11,14 +11,14 @@ const { currentPage } = Astro.props;
 <nav class="nav">
   <div class="nav-container">
     <!-- Internal page sections -->
-    {navigationConfig.blogSections.map(section => (
+    {navigationConfig.sections.map(section => (
       <a href={section.href} class={currentPage === (section.href?.startsWith('#') ? section.href.substring(1) : section.href) ? 'active' : ''}>
         {section.label}
       </a>
     ))}
     
     <!-- External pages -->
-    {navigationConfig.blogPages
+    {navigationConfig.pages
       .filter(page => page.section === 'pages')
       .map(page => (
         <a href={page.href}>

@@ -4,7 +4,8 @@ import {
     dialogueSpeaker, dialogueText, dialogueBox, getAchievements, setDialogueState, setCurrentInteraction, setPopupState
 } from './engine.js';
 import { gainXP, unlockAchievement } from './entities.js';
-import { gameData } from './data.js';
+import { gameData } from '../data/game.js';
+import { sharedData } from '../data/shared.js';
 
 // Start dialogue
 export function startDialogue(npc) {
@@ -100,7 +101,7 @@ window.showResearchDetail = function(type) {
 
 window.showPhoto = function(id) {
     const photoIndex = id - 1;
-    const photo = gameData.media.photos[photoIndex];
+    const photo = sharedData.media.photos[photoIndex];
     
     if (!photo) {
         alert('Photo not found!');
@@ -177,7 +178,7 @@ window.showPhoto = function(id) {
 };
 
 window.playTrack = function(action) {
-    const musicData = gameData.media.music;
+    const musicData = sharedData.media.music;
     const playBtn = document.getElementById('play-btn');
     
     if (action === 'prev') {
@@ -241,16 +242,16 @@ window.playTrack = function(action) {
 
 // Global function for track selection
 window.selectTrack = function(trackIndex) {
-    gameData.media.music.currentTrack = trackIndex;
+    sharedData.media.music.currentTrack = trackIndex;
     updateCurrentTrack();
 };
 
 function updateCurrentTrack() {
-    const currentTrack = gameData.media.music.tracks[gameData.media.music.currentTrack];
+    const currentTrack = sharedData.media.music.tracks[sharedData.media.music.currentTrack];
     
     // Update visual selection in track list
     document.querySelectorAll('.track-btn').forEach((btn, index) => {
-        if (index === gameData.media.music.currentTrack) {
+        if (index === sharedData.media.music.currentTrack) {
             btn.style.background = 'var(--highlight)';
             btn.style.color = 'var(--secondary)';
         } else {

@@ -1,23 +1,4 @@
-// Navigation configuration for easy scalability
-export const navigationConfig = {
-  blogPages: [
-    { href: '/blog', label: 'Portfolio Home', section: 'internal' },
-    { href: '/music', label: 'Music', section: 'pages' },
-    { href: '/gallery', label: 'Gallery', section: 'pages' },
-    // Future pages can be easily added here:
-    // { href: '/thoughts', label: 'Thoughts', section: 'pages' },
-    // { href: '/publications', label: 'Publications', section: 'pages' },
-    // { href: '/teaching', label: 'Teaching', section: 'pages' }
-  ],
-  blogSections: [
-    { href: '#about', label: 'About' },
-    { href: '#research', label: 'Research' },
-    { href: '#publications', label: 'Publications' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' }
-  ]
-};
-
+// Game-specific data for Interactive Digital Twin mode only
 export const gameData = {
   player: {
     x: 1250,
@@ -216,52 +197,6 @@ export const gameData = {
         `,
     },
   },
-  media: {
-    photos: [
-      // Real Flickr photos from bridgezhao account
-      { id: "54680329597", title: "Star Track", description: "Celestial night photography capturing star movements", emoji: "⭐" },
-      { id: "54681311838", title: "Purple Island", description: "Mystical landscape with purple hues", emoji: "🟣" },
-      { id: "54680184412", title: "The Game", description: "Creative composition exploring visual storytelling", emoji: "🎮" },
-      { id: "54681001891", title: "Red People", description: "Vibrant street photography with bold colors", emoji: "🔴" },
-      { id: "54680302237", title: "The Grand Teton", description: "Majestic mountain landscape photography", emoji: "🏔️" },
-      { id: "54680359637", title: "Night in Joshua Tree", description: "Desert night scene under starlit sky", emoji: "🌌" }
-    ],
-    music: {
-      // Real SoundCloud tracks from zhouqiao-zhao account
-      tracks: [
-        { id: "2137403307", title: "Spring kids", duration: "1:19" },
-        { id: "2137347381", title: "Island grass", duration: "3:12" },  
-        { id: "2137347393", title: "A glass of ice", duration: "1:04" }
-      ],
-      currentTrack: 0
-    }
-  },
-  projects: [
-    {
-      id: "human-centered-av",
-      title: "Human-Centered Autonomous Driving Framework",
-      description: "Developed a comprehensive framework for integrating human factors into autonomous vehicle decision-making systems, focusing on trust, transparency, and user acceptance.",
-      tags: ["Machine Learning", "Human-AI Interaction"],
-      link: "#", // Replace with actual project link when available
-      featured: true
-    },
-    {
-      id: "personalized-driver-modeling",
-      title: "Personalized Driver Behavior Modeling",
-      description: "Implemented inverse reinforcement learning algorithms to create personalized driving models for individual drivers, improving safety and comfort in autonomous vehicles.",
-      tags: ["Reinforcement Learning", "Behavioral Modeling"],
-      link: "#", // Replace with actual project link when available
-      featured: true
-    },
-    {
-      id: "music-synthesis-platform",
-      title: "Interactive Music Synthesis Platform",
-      description: "Built a real-time interactive music synthesis platform combining algorithmic composition with user-driven creative control, exploring the intersection of AI and artistic expression.",
-      tags: ["Audio Processing", "Creative AI"],
-      link: "https://soundcloud.com/zhouqiao-zhao",
-      featured: true
-    }
-  ],
   collectibles: [
     { type: "xp", position: { top: "700px", left: "1000px" }, icon: "⭐" },
     { type: "xp", position: { top: "300px", left: "1400px" }, icon: "⭐" },

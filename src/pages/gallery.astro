@@ -1,7 +1,7 @@
 ---
 import GalleryLayout from '../layouts/GalleryLayout.astro';
-import Card from '../components/ui/Card.astro';
-import { gameData } from "../js/data.js";
+import Card from '../components/Card.astro';
+import { sharedData } from "../js/data/shared.js";
 ---
 
 <GalleryLayout title="Photography Gallery - Zhouqiao (Bridge) Zhao">
@@ -13,7 +13,7 @@ import { gameData } from "../js/data.js";
         </div>
         
         <div class="gallery-grid">
-            {gameData.media.photos.map(photo => (
+            {sharedData.media.photos.map(photo => (
                 <Card variant="photo" 
                       icon={photo.emoji} 
                       title={photo.title}
