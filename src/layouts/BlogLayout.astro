@@ -18,6 +18,46 @@ const { title, currentPage } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <link rel="icon" href="/website_icon.png">
+  <script is:inline>
+    // Safe email copy function with fallback
+    function copyEmailAddress() {
+      const email = 'zhouqiao@mit.edu';
+      
+      // Modern clipboard API with fallback
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          alert('Email copied to clipboard!');
+        }).catch(() => {
+          // Fallback for clipboard API failure
+          fallbackCopyEmail(email);
+        });
+      } else {
+        // Fallback for browsers without clipboard API
+        fallbackCopyEmail(email);
+      }
+    }
+    
+    function fallbackCopyEmail(email) {
+      // Create temporary text area
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        alert('Email copied to clipboard!');
+      } catch (err) {
+        alert('Could not copy email. Please manually copy: ' + email);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+  </script>
   <style>
     /* Professional Academic Styling */
     * {
@@ -419,7 +459,7 @@ const { title, currentPage } = Astro.props;
       <h1 class="name">Zhouqiao (Bridge) Zhao</h1>
       <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
       <div class="contact-links">
-        <a href="mailto:zhouqiao@mit.edu"><Icon emoji="📧" />Email</a>
+        <a href="#" onclick="copyEmailAddress()"><Icon emoji="📧" />Email</a>
         <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank"><Icon src="/images/icons/google_scholar_icon.svg" />Google Scholar</a>
         <a href="https://www.researchgate.net/profile/Zhouqiao-Zhao" target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
         <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank"><Icon src="/images/icons/linkedin_icon.svg" />LinkedIn</a>
