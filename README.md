@@ -56,11 +56,13 @@ project/                    # Active development directory
 │   │   ├── GameLayout.astro # Game-specific layout
 │   │   └── BlogLayout.astro # Blog-specific layout
 │   ├── components/         # Reusable UI components (REFACTORED)
-│   │   ├── Card.astro     # Project/content cards
-│   │   ├── Navigation.astro # Site navigation
+│   │   ├── Card.astro      # Project/content cards
+│   │   ├── Navigation.astro # Site navigation  
 │   │   ├── ThemeToggle.astro # Dark/light mode toggle
 │   │   ├── FixedControls.astro # Floating action buttons
-│   │   └── ProjectTag.astro # Project category tags
+│   │   ├── ProjectTag.astro # Project category tags
+│   │   ├── ProfileImage.astro # Reusable profile photo component
+│   │   └── Icon.astro      # Flexible emoji/image icon system
 │   ├── js/
 │   │   ├── game/          # Game-specific modules (NEW)
 │   │   │   ├── engine.js  # Game engine, movement, camera
@@ -75,7 +77,17 @@ project/                    # Active development directory
 │       ├── palette.css    # Color system & typography
 │       ├── layout.css     # Layout & responsive design
 │       └── sprites.css    # 8-bit character animations
-├── public/                # Static assets
+├── public/                # Static assets (REORGANIZED)
+│   ├── website_icon.png   # Site favicon
+│   ├── doc/               # Document organization
+│   │   └── Zhouqiao_Zhao_Resume_2025_Jul.pdf
+│   └── images/            # Visual assets
+│       ├── profile-photo.jfif
+│       └── icons/         # Professional icons
+│           ├── google_scholar_icon.svg
+│           ├── linkedin_icon.svg
+│           ├── research_gate_icon.png
+│           └── mit_icon.jpg
 └── dist/                  # Production build output
 ```
 
@@ -98,7 +110,45 @@ npm run deploy          # Deploy to GitHub Pages
 
 ## 🎯 Recent Major Updates (August 2025)
 
-### ✅ **PROJECT STRUCTURE REFACTORING COMPLETED** (Latest)
+### ✅ **COMPONENT SYSTEM & ASSET MANAGEMENT COMPLETED** (Latest)
+
+**Professional component architecture with flexible icon system and organized asset management:**
+
+#### 🧩 **Component System Enhancements:**
+1. **ProfileImage Component** - Reusable profile photo component with fallback emoji support:
+   - Flexible sizing (`small`, `medium`, `large`)
+   - Different variants (`avatar` for index, `header` for blog)
+   - Automatic fallback to emoji if image fails to load
+   - Responsive sizing across all breakpoints
+
+2. **Flexible Icon System** - Dual-mode icon component supporting both emojis and image files:
+   ```astro
+   <!-- Current (emoji) -->
+   <Icon emoji="📧" />
+   
+   <!-- Future (with icon files) -->
+   <Icon src="/images/icons/email.svg" />
+   ```
+   - Smart fallback system if images fail
+   - Easy switching between emoji and professional icons
+   - Consistent sizing and styling
+
+#### 📁 **Asset Organization Improvements:**
+- **Reorganized Public Folder**: Professional structure with logical groupings
+  - `/doc/` for documents (CV, papers, presentations)
+  - `/images/` for visual assets (profile photos, icons)
+  - `/images/icons/` for professional icon collection
+- **Custom Website Icon**: Replaced generic favicon with professional custom icon
+- **Professional Icons**: Added real brand icons (Google Scholar, LinkedIn, ResearchGate, MIT)
+
+#### 🛠️ **Deployment System Fixed:**
+- **gh-pages Cache Issue Resolved**: Fixed persistent deployment problems
+- **Dual Deployment Options**: 
+  - Primary: `npm run deploy` (now working reliably)
+  - Backup: Manual deployment script for edge cases
+- **Clean Deployments**: `--no-history` flag ensures fresh deployments
+
+### ✅ **PROJECT STRUCTURE REFACTORING COMPLETED** (Previous Update)
 
 **Professional architecture implemented with complete data separation and component organization:**
 

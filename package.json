@@ -6,13 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles",
+    "deploy-clean": "astro build && gh-pages -d dist -b gh-pages --dotfiles --src \"**/*\" --remove \"thoughts\"",
+    "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.12.3"
-  },
-  "devDependencies": {
+    "astro": "^5.12.3",
     "gh-pages": "^6.3.0"
   }
 }
