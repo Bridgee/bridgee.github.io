@@ -48,7 +48,8 @@ function getTagVariant(tag) {
             <!-- 2. Research Roadmap with Framework Image -->
             <Card variant="research" icon="🗓️" title="Research Roadmap & Framework" class="roadmap-card">
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <img src="/images/research_framework.png" 
+                    <img id="framework-image" 
+                         src="/images/research_framework.png" 
                          alt="Human-Centered AI Research Framework" 
                          style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
                     <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; font-style: italic;">
@@ -63,20 +64,20 @@ function getTagVariant(tag) {
                     to real-time needs and resilient within mixed-traffic environments.
                 </p>
                 
-                <div style="background: #f8f9fa; padding: 1.0rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <h4 style="color: #2c3e50; margin-bottom: 0.2rem;">Core Modules:</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div class="core-modules-container">
+                    <h4 class="core-modules-title">Core Modules:</h4>
+                    <div class="core-modules-grid">
                         <div>
-                            <h5 style="color: #27ae60; margin-bottom: 0.5rem;">Sensing & Evaluation</h5>
-                            <p style="font-size: 0.9rem; color: #666;">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
+                            <h5 class="module-title module-sensing">Sensing & Evaluation</h5>
+                            <p class="module-description">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
                         </div>
                         <div>
-                            <h5 style="color: #e74c3c; margin-bottom: 0.5rem;">Behavior Modeling</h5>
-                            <p style="font-size: 0.9rem; color: #666;">Machine learning and explainable AI methods for understanding human behavior</p>
+                            <h5 class="module-title module-behavior">Behavior Modeling</h5>
+                            <p class="module-description">Machine learning and explainable AI methods for understanding human behavior</p>
                         </div>
                         <div>
-                            <h5 style="color: #3498db; margin-bottom: 0.5rem;">System Applications</h5>
-                            <p style="font-size: 0.9rem; color: #666;">Optimized automation and mobility solutions for real-world deployment</p>
+                            <h5 class="module-title module-system">System Applications</h5>
+                            <p class="module-description">Optimized automation and mobility solutions for real-world deployment</p>
                         </div>
                     </div>
                 </div>
@@ -193,3 +194,108 @@ function getTagVariant(tag) {
         </section>
 
 </BlogLayout>
+
+<style>
+  /* Core Modules Section Styling */
+  .core-modules-container {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .core-modules-title {
+    color: #2c3e50;
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .core-modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .module-title {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .module-sensing {
+    color: #27ae60;
+  }
+
+  .module-behavior {
+    color: #e74c3c;
+  }
+
+  .module-system {
+    color: #3498db;
+  }
+
+  .module-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* Dark Mode Styles */
+  body.dark-mode .core-modules-container {
+    background: #2a2a2a;
+  }
+
+  body.dark-mode .core-modules-title {
+    color: #fff;
+  }
+
+  body.dark-mode .module-sensing {
+    color: #2ecc71;
+  }
+
+  body.dark-mode .module-behavior {
+    color: #e67e22;
+  }
+
+  body.dark-mode .module-system {
+    color: #64b5f6;
+  }
+
+  body.dark-mode .module-description {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  // Framework image theme switching
+  function updateFrameworkImage() {
+    const frameworkImage = document.getElementById('framework-image');
+    if (frameworkImage) {
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      frameworkImage.src = isDarkMode 
+        ? '/images/research_framework_dark.png' 
+        : '/images/research_framework.png';
+    }
+  }
+
+  // Initial image update on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    updateFrameworkImage();
+  });
+
+  // Listen for theme changes and update image
+  document.addEventListener('click', (event) => {
+    if (event.target.id === 'theme-toggle' || event.target.closest('#theme-toggle')) {
+      // Small delay to ensure theme class is updated
+      setTimeout(updateFrameworkImage, 50);
+    }
+  });
+
+  // Also listen for storage changes (in case theme is changed in another tab)
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'theme') {
+      setTimeout(updateFrameworkImage, 50);
+    }
+  });
+</script>
