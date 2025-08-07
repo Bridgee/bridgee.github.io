@@ -17,7 +17,7 @@ export const blogData = {
     googleScholar: "https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl",
     linkedin: "https://www.linkedin.com/in/zhouqiao-zhao-60560a56/",
     labWebsite: "https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao",
-    cv: "/Zhouqiao_Zhao_Resume_2025_Jul.pdf",
+    cv: "/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf",
     soundcloud: "https://soundcloud.com/zhouqiao-zhao",
     flickr: "https://www.flickr.com/photos/bridgezhao/"
   },

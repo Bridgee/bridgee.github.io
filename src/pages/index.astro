@@ -1,9 +1,14 @@
+---
+import ProfileImage from '../components/ProfileImage.astro';
+import Icon from '../components/Icon.astro';
+---
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zhouqiao (Bridge) Zhao - Digital Playground</title>
-    <link rel="icon" href="/favicon.svg">
+    <link rel="icon" href="/website_icon.png">
     <style>
       * {
         margin: 0;
@@ -50,23 +55,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       }
 
-      .profile-avatar {
-        width: 120px;
-        height: 120px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 48px;
-        margin: 0 auto 2rem;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-      }
-
-      body.dark-mode .profile-avatar {
-        background: linear-gradient(135deg, #64b5f6, #42a5f5);
-        box-shadow: 0 10px 30px rgba(100, 181, 246, 0.3);
-      }
+      /* Profile avatar styles now handled by ProfileImage component */
 
       .main-title {
         font-size: 2.5rem;
@@ -278,14 +267,14 @@
     
     <div class="container">
       <div class="hero-section">
-        <div class="profile-avatar">👨‍🔬</div>
+        <ProfileImage size="medium" variant="avatar" />
         <h1 class="main-title">Zhouqiao (Bridge) Zhao</h1>
-        <p class="subtitle">Postdoctoral Associate • MIT Center for Transportation & Logistics</p>
+        <p class="subtitle">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
         
         <div class="intro-text">
-          <p>Welcome to my digital playground! I'm a researcher exploring the fascinating intersection of artificial intelligence, transportation systems, and human-centered design at MIT.</p>
+          <p>Welcome to my digital playground! I'm a researcher exploring the fascinating intersection of human-centered artificial intelligence, Connected and Automated Vehicles, and Digital Twin at MIT.</p>
           
-          <p style="margin-top: 1.5rem;">Beyond academia, I'm a creative technologist who captures the world through photography and expresses ideas through electronic music composition. This site reflects my interdisciplinary approach - combining serious research with playful, interactive design.</p>
+          <p style="margin-top: 1.5rem;">Beyond academia, I'm a creative technologist who captures the world through photography and expresses ideas through music composition and sound design.</p>
         </div>
 
         <div class="mode-selection">

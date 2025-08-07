@@ -162,7 +162,7 @@ export const gameData = {
                 while capturing its beauty through lens and sound.
             </p>
             <div style="margin-top: 20px; text-align: center;">
-                <button class="menu-button" onclick="window.open('/Zhouqiao_Zhao_Resume_2025_Jul.pdf', '_blank')">📄 DOWNLOAD CV</button>
+                <button class="menu-button" onclick="window.open('/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf', '_blank')">📄 DOWNLOAD CV</button>
                 <button class="menu-button" onclick="window.open('https://www.linkedin.com/in/zhouqiao-zhao-60560a56/', '_blank')">💼 LINKEDIN</button>
             </div>
         `,

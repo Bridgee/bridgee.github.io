@@ -1,0 +1,65 @@
+---
+interface Props {
+  // Simple usage: just provide ONE of these
+  src?: string;    // For image icons: '/images/icons/email.svg' 
+  emoji?: string;  // For emoji icons: '📧'
+  
+  // Optional props
+  alt?: string;
+  size?: string;   // CSS size like '16px', '1.2em' 
+  className?: string;
+  fallback?: string; // Fallback emoji if image fails to load
+}
+
+const { 
+  src, 
+  emoji, 
+  alt = '', 
+  size = '1em',
+  className = '',
+  fallback = '•'
+} = Astro.props;
+
+// Simple logic: if src provided, use image; otherwise use emoji
+const useImage = src && src.length > 0;
+---
+
+{useImage ? (
+  <!-- Image icon with emoji fallback -->
+  <img 
+    src={src} 
+    alt={alt}
+    class={`icon icon-image ${className}`}
+    style={`width: ${size}; height: ${size}; vertical-align: middle;`}
+    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+  />
+  <span class="icon-fallback" style="display: none; font-size: {size}; vertical-align: middle;">{fallback}</span>
+) : (
+  <!-- Emoji icon -->
+  <span 
+    class={`icon icon-emoji ${className}`}
+    style={`font-size: ${size}; vertical-align: middle;`}
+  >
+    {emoji || fallback}
+  </span>
+)}
+
+<style>
+  .icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  .icon-image {
+    object-fit: contain;
+  }
+
+  .icon-emoji {
+    line-height: 1;
+  }
+
+  /* Optional: Filter for icons in dark mode */
+  :global(body.dark-mode) .icon-image {
+    filter: brightness(0.9);
+  }
+</style>

@@ -1,6 +1,8 @@
 ---
 import Navigation from '../components/Navigation.astro';
 import FixedControls from '../components/FixedControls.astro';
+import ProfileImage from '../components/ProfileImage.astro';
+import Icon from '../components/Icon.astro';
 
 interface Props {
   title: string;
@@ -15,7 +17,7 @@ const { title, currentPage } = Astro.props;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
-  <link rel="icon" href="/favicon.svg">
+  <link rel="icon" href="/website_icon.png">
   <style>
     /* Professional Academic Styling */
     * {
@@ -191,19 +193,7 @@ const { title, currentPage } = Astro.props;
       border-bottom: 1px solid #eee;
     }
     
-    .profile-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      background: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    /* Profile image styles now handled by ProfileImage component */
     
     .name {
       font-size: 2.5rem;
@@ -439,15 +429,16 @@ const { title, currentPage } = Astro.props;
   <div class="container">
     <!-- Header Section -->
     <header class="header">
-      <div class="profile-image">👨‍🔬</div>
+      <ProfileImage size="large" variant="header" />
       <h1 class="name">Zhouqiao (Bridge) Zhao</h1>
-      <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics</p>
+      <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
       <div class="contact-links">
-        <a href="mailto:zhouqiao@mit.edu">📧 Email</a>
-        <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank">📚 Google Scholar</a>
-        <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank">💼 LinkedIn</a>
-        <a href="https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao" target="_blank">🏛️ Lab Website</a>
-        <a href="/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank">📄 CV</a>
+        <a href="mailto:zhouqiao@mit.edu"><Icon emoji="📧" />Email</a>
+        <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank"><Icon src="/images/icons/google_scholar_icon.svg" />Google Scholar</a>
+        <a href="https://www.researchgate.net/profile/Zhouqiao-Zhao" target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
+        <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank"><Icon src="/images/icons/linkedin_icon.svg" />LinkedIn</a>
+        <a href="https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao" target="_blank"><Icon src="/images/icons/mit_icon.jpg" />Lab Website</a>
+        <a href="/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank"><Icon emoji="📄" />CV</a>
       </div>
     </header>
   </div>
