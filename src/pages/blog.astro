@@ -31,37 +31,58 @@ function getTagVariant(tag) {
                 
                 <p>Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through electronic music composition. This website itself is a reflection of my interdisciplinary approach - combining serious research with playful, interactive design.</p>
             </div>
-
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <strong>Connected & Automated Vehicles</strong><br>
-                    <span style="color: #27ae60;">████████░░</span> 80%
-                </div>
-                <div class="skill-item">
-                    <strong>Human-Centered AI</strong><br>
-                    <span style="color: #27ae60;">█████████░</span> 88%
-                </div>
-                <div class="skill-item">
-                    <strong>Sound & Synthesizer Design</strong><br>
-                    <span style="color: #27ae60;">███████░░░</span> 70%
-                </div>
-                <div class="skill-item">
-                    <strong>Photography</strong><br>
-                    <span style="color: #27ae60;">██████░░░░</span> 60%
-                </div>
-            </div>
         </section>
 
         <!-- Research Section -->
         <section id="research" class="section">
-            <h2 class="section-title">Research Interests & Roadmap</h2>
+            <h2 class="section-title">Research Vision & Framework</h2>
             
+            <!-- 1. Research Philosophy -->
             <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
                 <p>
                     My research sits at the intersection of artificial intelligence, transportation systems, and human-centered design. I believe in creating technology that not only advances scientific understanding but also meaningfully improves human experiences and societal outcomes.
                 </p>
             </Card>
             
+            <!-- 2. Research Roadmap with Framework Image -->
+            <Card variant="research" icon="🗓️" title="Research Roadmap & Framework" class="roadmap-card">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="/images/research_framework.png" 
+                         alt="Human-Centered AI Research Framework" 
+                         style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; font-style: italic;">
+                        Human-Centered AI Framework for Intelligent Transportation Systems
+                    </p>
+                </div>
+                
+                <p style="margin-bottom: 1.0rem; line-height: 1.0;">
+                    Transportation systems form the backbone of modern society, yet automation is often misconceived as minimizing human involvement. 
+                    In reality, automated systems alter rather than eliminate human roles. My research develops a <strong>human-centered AI system</strong> 
+                    that holistically integrates human behavior into automation design, ensuring Intelligent Transportation Systems are responsive 
+                    to real-time needs and resilient within mixed-traffic environments.
+                </p>
+                
+                <div style="background: #f8f9fa; padding: 1.0rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.2rem;">Core Modules:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <h5 style="color: #27ae60; margin-bottom: 0.5rem;">Sensing & Evaluation</h5>
+                            <p style="font-size: 0.9rem; color: #666;">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
+                        </div>
+                        <div>
+                            <h5 style="color: #e74c3c; margin-bottom: 0.5rem;">Behavior Modeling</h5>
+                            <p style="font-size: 0.9rem; color: #666;">Machine learning and explainable AI methods for understanding human behavior</p>
+                        </div>
+                        <div>
+                            <h5 style="color: #3498db; margin-bottom: 0.5rem;">System Applications</h5>
+                            <p style="font-size: 0.9rem; color: #666;">Optimized automation and mobility solutions for real-world deployment</p>
+                        </div>
+                    </div>
+                </div>
+            </Card>
+            
+            <!-- 3. Detailed Research Areas -->
+            <h3 style="margin: 3rem 0 1.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
             <div class="research-interests">
                 <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
                     <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
@@ -88,35 +109,6 @@ function getTagVariant(tag) {
                     </div>
                 </Card>
             </div>
-            
-            <Card variant="research" icon="🗓️" title="Research Roadmap (2025-2027)" class="roadmap-card">
-                <div class="roadmap-grid">
-                    <div class="roadmap-phase">
-                        <h4 class="phase-title">Short-term (2025)</h4>
-                        <ul class="phase-list">
-                            <li>Complete driver digital twin framework</li>
-                            <li>Publish multi-agent learning findings</li>
-                            <li>Launch industry pilot programs</li>
-                        </ul>
-                    </div>
-                    <div class="roadmap-phase">
-                        <h4 class="phase-title">Medium-term (2026)</h4>
-                        <ul class="phase-list">
-                            <li>Scale to city-wide implementations</li>
-                            <li>Develop cross-domain applications</li>
-                            <li>Establish international collaborations</li>
-                        </ul>
-                    </div>
-                    <div class="roadmap-phase">
-                        <h4 class="phase-title">Long-term (2027+)</h4>
-                        <ul class="phase-list">
-                            <li>Pioneer next-gen transportation systems</li>
-                            <li>Lead interdisciplinary research initiatives</li>
-                            <li>Mentor emerging researchers in the field</li>
-                        </ul>
-                    </div>
-                </div>
-            </Card>
         </section>
 
         <!-- Publications Section -->

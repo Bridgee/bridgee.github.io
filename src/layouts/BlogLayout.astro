@@ -80,13 +80,6 @@ const { title, currentPage } = Astro.props;
       color: #ccc;
     }
     
-    body.dark-mode .skill-item {
-      background: #2a2a2a;
-    }
-    
-    body.dark-mode .skill-item strong {
-      color: #fff;
-    }
     
     body.dark-mode .publication {
       border-bottom-color: #333;
@@ -277,23 +270,6 @@ const { title, currentPage } = Astro.props;
       line-height: 1.6;
     }
     
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    
-    .skill-item {
-      padding: 1rem;
-      background: #f8f9fa;
-      border-radius: 4px;
-      text-align: center;
-    }
-    
-    .skill-item strong {
-      color: #2c3e50;
-    }
     
     /* Publications */
     .publication {
@@ -362,6 +338,16 @@ const { title, currentPage } = Astro.props;
     
     :global(body.dark-mode) .phase-list {
       color: #ccc;
+    }
+
+    /* Dark mode research framework styling */
+    :global(body.dark-mode) img[src*="research_framework"] {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    }
+
+    :global(body.dark-mode) div[style*="background: #f8f9fa"] {
+      background: #2a2a2a !important;
     }
 
     /* Responsive breakpoints: 1024px (tablet), 768px (mobile), 480px (small mobile) */
