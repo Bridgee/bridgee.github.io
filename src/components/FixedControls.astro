@@ -13,12 +13,12 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
   <ThemeToggle />
   {showGameLink && (
     <div class="mode-switch">
-      <a href="/game">🎮 Interactive Digital Twin</a>
+      <a href="/game">🎮 Interactive Mode</a>
     </div>
   )}
   {showBlogLink && (
     <div class="mode-switch">
-      <a href="/blog">📝 Academic Portfolio</a>
+      <a href="/blog">📝 Portfolio Mode</a>
     </div>
   )}
 </div>
@@ -99,15 +99,15 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
 
   @media (max-width: 480px) {
     .fixed-controls {
-      bottom: 0.3rem;
-      right: 0.3rem;
-      gap: 0.2rem;
+      bottom: 0.35rem;
+      right: 0.35rem;
+      gap: 0.25rem;
     }
     
     .mode-switch a {
-      padding: 0.3rem 0.5rem;
+      padding: 0.35rem 0.55rem;
       font-size: 0.65rem;
-      border-radius: 12px;
+      border-radius: 13px;
     }
   }
 </style>
