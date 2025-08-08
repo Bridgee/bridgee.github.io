@@ -3,6 +3,9 @@ import BlogLayout from '../layouts/BlogLayout.astro';
 import Card from '../components/Card.astro';
 import ProjectTag from '../components/ProjectTag.astro';
 import Icon from '../components/Icon.astro';
+import PageSection from '../components/PageSection.astro';
+import SectionSubsection from '../components/SectionSubsection.astro';
+import SubsectionModule from '../components/SubsectionModule.astro';
 import { sharedData } from "../js/data/shared.js";
 
 // Function to get appropriate tag variant based on tag content
@@ -23,8 +26,7 @@ function getTagVariant(tag) {
 <BlogLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher" currentPage="blog">
 
         <!-- About Section -->
-        <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
+        <PageSection id="about" title="About Me" variant="about">
             <div class="about-content">
                 <p>Welcome to my digital realm! I'm a postdoctoral researcher at MIT's Center for Transportation & Logistics, where I explore the fascinating intersection of artificial intelligence, transportation systems, and human-centered design.</p>
                 
@@ -32,101 +34,107 @@ function getTagVariant(tag) {
                 
                 <p>Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through electronic music composition. This website itself is a reflection of my interdisciplinary approach - combining serious research with playful, interactive design.</p>
             </div>
-        </section>
+        </PageSection>
 
         <!-- Research Section -->
-        <section id="research" class="section">
-            <h2 class="section-title">My Research</h2>
+        <PageSection id="research" title="My Research" variant="research">
             
-            <!-- 1. Research Philosophy -->
-            <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
-                <p>
-                    My research sits at the intersection of artificial intelligence, transportation systems, and human-centered design. I believe in creating technology that not only advances scientific understanding but also meaningfully improves human experiences and societal outcomes.
-                </p>
-            </Card>
-            
-            <!-- 2. Research Roadmap with Framework Image -->
-            <Card variant="research" icon="🗺" title="Research Roadmap & Framework" class="roadmap-card">
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <img id="framework-image" 
-                         src="/images/research_framework.png" 
-                         alt="Human-Centered AI Research Framework" 
-                         style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
-                    <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; font-style: italic;">
-                        Human-Centered AI Framework for Intelligent Transportation Systems
+            <!-- Research Philosophy Subsection -->
+            <SectionSubsection variant="research">
+                <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
+                    <p>
+                        My research sits at the intersection of artificial intelligence, transportation systems, and human-centered design. I believe in creating technology that not only advances scientific understanding but also meaningfully improves human experiences and societal outcomes.
                     </p>
-                </div>
-                
-                <p style="margin-bottom: 1.0rem; line-height: 1.0;">
-                    Transportation systems form the backbone of modern society, yet automation is often misconceived as minimizing human involvement. 
-                    In reality, automated systems alter rather than eliminate human roles. My research develops a <strong>human-centered AI system</strong> 
-                    that holistically integrates human behavior into automation design, ensuring Intelligent Transportation Systems are responsive 
-                    to real-time needs and resilient within mixed-traffic environments.
-                </p>
-                
-                <div class="core-modules-container">
-                    <h4 class="core-modules-title">Core Modules:</h4>
-                    <div class="core-modules-grid">
-                        <div>
-                            <h5 class="module-title module-sensing">Sensing & Evaluation</h5>
-                            <p class="module-description">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
-                        </div>
-                        <div>
-                            <h5 class="module-title module-behavior">Behavior Modeling</h5>
-                            <p class="module-description">Machine learning and explainable AI methods for understanding human behavior</p>
-                        </div>
-                        <div>
-                            <h5 class="module-title module-system">System Applications</h5>
-                            <p class="module-description">Optimized automation and mobility solutions for real-world deployment</p>
-                        </div>
-                    </div>
-                </div>
-            </Card>
+                </Card>
+            </SectionSubsection>
             
-            <!-- 3. Detailed Research Areas -->
-            <h3 style="margin: 3rem 0 1.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
-            <div class="research-interests">
-                <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
-                    <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
-                    <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
-                    <div class="project-meta">
-                        <ProjectTag tag="Active Research" variant="primary" />
-                        <ProjectTag tag="Industry Collaboration" variant="success" />
+            <!-- Research Roadmap Subsection -->
+            <SectionSubsection variant="research">
+                <Card variant="research" icon="🗺️" title="Roadmap & Framework" class="roadmap-card">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <img id="framework-image" 
+                             src="/images/research_framework.png" 
+                             alt="Human-Centered AI Research Framework" 
+                             style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                        <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; font-style: italic;">
+                            Human-Centered AI Framework for Intelligent Transportation Systems
+                        </p>
                     </div>
+                    
+                    <p style="margin-bottom: 1.0rem; line-height: 1.0;">
+                        Transportation systems form the backbone of modern society, yet automation is often misconceived as minimizing human involvement. 
+                        In reality, automated systems alter rather than eliminate human roles. My research develops a <strong>human-centered AI system</strong> 
+                        that holistically integrates human behavior into automation design, ensuring Intelligent Transportation Systems are responsive 
+                        to real-time needs and resilient within mixed-traffic environments.
+                    </p>
+                    
+                    <!-- Core Modules Subsubsection -->
+                    <SubsectionModule title="Core Modules:" variant="research">
+                        <div class="core-modules-grid">
+                            <div>
+                                <h5 class="module-title module-sensing">Sensing & Evaluation</h5>
+                                <p class="module-description">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
+                            </div>
+                            <div>
+                                <h5 class="module-title module-behavior">Behavior Modeling</h5>
+                                <p class="module-description">Machine learning and explainable AI methods for understanding human behavior</p>
+                            </div>
+                            <div>
+                                <h5 class="module-title module-system">System Applications</h5>
+                                <p class="module-description">Optimized automation and mobility solutions for real-world deployment</p>
+                            </div>
+                        </div>
+                    </SubsectionModule>
                 </Card>
-                <Card variant="research" icon="🤖" title="Human-Centered AI">
-                    <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
-                    <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
-                    <div class="project-meta">
-                        <ProjectTag tag="Interdisciplinary" variant="info" />
-                        <ProjectTag tag="Ethics Focus" variant="info" />
-                    </div>
-                </Card>
-                <Card variant="research" icon="🌐" title="Digital Twin Technologies">
-                    <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
-                    <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
-                    <div class="project-meta">
-                        <ProjectTag tag="Emerging Tech" variant="warning" />
-                        <ProjectTag tag="Scalability" variant="warning" />
-                    </div>
-                </Card>
-            </div>
-        </section>
+            </SectionSubsection>
+            
+            <!-- Research Focus Areas Subsection -->
+            <SectionSubsection variant="research">
+                <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
+                <div class="research-interests">
+                    <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
+                        <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
+                        <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
+                        <div class="project-meta">
+                            <ProjectTag tag="Active Research" variant="primary" />
+                            <ProjectTag tag="Industry Collaboration" variant="success" />
+                        </div>
+                    </Card>
+                    <Card variant="research" icon="🤖" title="Human-Centered AI">
+                        <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
+                        <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
+                        <div class="project-meta">
+                            <ProjectTag tag="Interdisciplinary" variant="info" />
+                            <ProjectTag tag="Ethics Focus" variant="info" />
+                        </div>
+                    </Card>
+                    <Card variant="research" icon="🌐" title="Digital Twin Technologies">
+                        <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
+                        <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
+                        <div class="project-meta">
+                            <ProjectTag tag="Emerging Tech" variant="warning" />
+                            <ProjectTag tag="Scalability" variant="warning" />
+                        </div>
+                    </Card>
+                </div>
+            </SectionSubsection>
+        </PageSection>
 
         <!-- Publications Section -->
-        <section id="publications" class="section">
-            <h2 class="section-title">Selected Publications</h2>
-            <div class="publication">
-                <div class="publication-title">"Quantum Entanglement in Complex Systems"</div>
-                <div class="publication-details">Nature Physics, 2024</div>
-            </div>
-            <div class="publication">
-                <div class="publication-title">"Neural Networks for Molecular Prediction"</div>
-                <div class="publication-details">Science, 2024</div>
-            </div>
-            <div class="publication">
-                <div class="publication-title">"Protein Folding Dynamics at Scale"</div>
-                <div class="publication-details">Cell, 2025</div>
+        <PageSection id="publications" title="Selected Publications" variant="publications">
+            <div class="research-interests">
+                <Card variant="research" icon="📄" title="Quantum Entanglement in Complex Systems">
+                    <p><strong>Journal:</strong> Nature Physics, 2024</p>
+                    <p>Exploring quantum entanglement phenomena in complex multi-particle systems and their applications to quantum computing architectures.</p>
+                </Card>
+                <Card variant="research" icon="🧠" title="Neural Networks for Molecular Prediction">
+                    <p><strong>Journal:</strong> Science, 2024</p>
+                    <p>Novel deep learning approaches for predicting molecular properties and drug-target interactions with improved accuracy and interpretability.</p>
+                </Card>
+                <Card variant="research" icon="🔬" title="Protein Folding Dynamics at Scale">
+                    <p><strong>Journal:</strong> Cell, 2025</p>
+                    <p>Large-scale computational modeling of protein folding pathways using advanced molecular dynamics simulations and machine learning.</p>
+                </Card>
             </div>
             <p style="margin-top: 2rem; text-align: center;">
                 <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank" 
@@ -134,11 +142,10 @@ function getTagVariant(tag) {
                    <Icon src="/images/icons/google_scholar_icon.svg" />View All Publications on Google Scholar →
                 </a>
             </p>
-        </section>
+        </PageSection>
 
         <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2 class="section-title">Featured Projects</h2>
+        <PageSection id="projects" title="Featured Projects" variant="projects">
             <div class="research-interests">
                 {sharedData.projects.filter(project => project.featured).map(project => (
                     <Card variant="project" title={project.title}>
@@ -156,30 +163,33 @@ function getTagVariant(tag) {
                     </Card>
                 ))}
             </div>
-        </section>
+        </PageSection>
 
         <!-- Creative Work Overview -->
-        <section class="section">
-            <h2 class="section-title">Creative Explorations</h2>
-            <div class="research-interests">
+        <PageSection title="Creative Explorations" variant="creative">
+            <!-- Photography Subsection -->
+            <SectionSubsection variant="creative">
                 <Card variant="photo" icon="📸" title="Photography Gallery" href="/gallery">
                     <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
                     <p style="margin-top: 1rem;">
                         <strong style="color: #3498db;">View Full Gallery →</strong>
                     </p>
                 </Card>
+            </SectionSubsection>
+            
+            <!-- Music Subsection -->
+            <SectionSubsection variant="creative">
                 <Card variant="track" icon="🎵" title="Music & Sound Design" href="/music">
                     <p>Electronic compositions exploring the intersection of technology and creativity, with influences from complex systems research.</p>
                     <p style="margin-top: 1rem;">
                         <strong style="color: #3498db;">Listen to Compositions →</strong>
                     </p>
                 </Card>
-            </div>
-        </section>
+            </SectionSubsection>
+        </PageSection>
 
         <!-- Contact Section -->
-        <section id="contact" class="section">
-            <h2 class="section-title">Get In Touch</h2>
+        <PageSection id="contact" title="Get In Touch" variant="contact">
             <div class="about-content">
                 <p>I'm always interested in collaborating on research projects, discussing innovative ideas, or exploring opportunities at the intersection of AI, transportation, and creative technology.</p>
                 
@@ -191,7 +201,7 @@ function getTagVariant(tag) {
                 <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank"><Icon src="/images/icons/linkedin_icon.svg" /> LinkedIn</a>
                 <a href="https://www.researchgate.net/profile/Zhouqiao-Zhao" target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
             </div>
-        </section>
+        </PageSection>
 
 </BlogLayout>
 

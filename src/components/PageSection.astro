@@ -1,0 +1,102 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  variant?: 'about' | 'research' | 'publications' | 'projects' | 'creative' | 'contact';
+  class?: string;
+}
+
+const { 
+  id, 
+  title, 
+  variant = 'default', 
+  class: className = '' 
+} = Astro.props;
+---
+
+<section id={id} class={`page-section page-section-${variant} ${className}`}>
+  <h2 class="section-title">{title}</h2>
+  <slot />
+</section>
+
+<style>
+  /* Base page section styling with visual hierarchy */
+  .page-section {
+    margin-bottom: 3rem;
+    background: #f8f9fa;
+    border: 1px solid #e1e5e9;
+    border-radius: 16px;
+    padding: 0.75rem 2rem 2rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Variant-specific section styling - can be extended later for visual differentiation */
+  .page-section-about .section-title {
+    border-bottom-color: #7f8c8d;
+  }
+  
+  .page-section-research .section-title {
+    border-bottom-color: #3498db;
+  }
+  
+  .page-section-publications .section-title {
+    border-bottom-color: #27ae60;
+  }
+  
+  .page-section-projects .section-title {
+    border-bottom-color: #e74c3c;
+  }
+  
+  .page-section-creative .section-title {
+    border-bottom-color: #f39c12;
+  }
+  
+  .page-section-contact .section-title {
+    border-bottom-color: #34495e;
+  }
+  
+  /* Dark mode support */
+  :global(body.dark-mode) .page-section {
+    background: #2a2a2a;
+    border-color: #404040;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  :global(body.dark-mode) .section-title {
+    color: #fff;
+  }
+  
+  :global(body.dark-mode) .page-section-about .section-title {
+    border-bottom-color: #95a5a6;
+  }
+  
+  :global(body.dark-mode) .page-section-research .section-title {
+    border-bottom-color: #64b5f6;
+  }
+  
+  :global(body.dark-mode) .page-section-publications .section-title {
+    border-bottom-color: #2ecc71;
+  }
+  
+  :global(body.dark-mode) .page-section-projects .section-title {
+    border-bottom-color: #e67e22;
+  }
+  
+  :global(body.dark-mode) .page-section-creative .section-title {
+    border-bottom-color: #f39c12;
+  }
+  
+  :global(body.dark-mode) .page-section-contact .section-title {
+    border-bottom-color: #64b5f6;
+  }
+</style>

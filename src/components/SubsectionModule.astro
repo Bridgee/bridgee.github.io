@@ -1,0 +1,44 @@
+---
+interface Props {
+  title?: string;
+  variant?: 'about' | 'research' | 'publications' | 'projects' | 'creative' | 'contact';
+  class?: string;
+}
+
+const { 
+  title, 
+  variant = 'default', 
+  class: className = '' 
+} = Astro.props;
+---
+
+<div class={`subsection-module subsection-module-${variant} ${className}`}>
+  {title && <h4 class="module-title">{title}</h4>}
+  <slot />
+</div>
+
+<style>
+  /* Base module styling - maintains current core-modules styling */
+  .subsection-module {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .module-title {
+    color: #2c3e50;
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* Dark mode support */
+  :global(body.dark-mode) .subsection-module {
+    background: #2a2a2a;
+  }
+  
+  :global(body.dark-mode) .module-title {
+    color: #fff;
+  }
+</style>

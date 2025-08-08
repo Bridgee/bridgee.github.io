@@ -10,7 +10,9 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
 ---
 
 <div class="fixed-controls">
-  <ThemeToggle />
+  <div class="back-to-top">
+    <button id="back-to-top-btn">⬆️ Top</button>
+  </div>
   {showGameLink && (
     <div class="mode-switch">
       <a href="/game">🎮 Interactive Mode</a>
@@ -21,6 +23,7 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
       <a href="/blog">📝 Portfolio Mode</a>
     </div>
   )}
+  <ThemeToggle />
 </div>
 
 <style>
@@ -33,6 +36,30 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
+  }
+
+  .back-to-top button {
+    background: rgba(52, 152, 219, 0.95);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
+
+  .back-to-top button:hover {
+    background: rgba(41, 128, 185, 0.95);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   .mode-switch a {
@@ -59,6 +86,16 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
   }
 
   /* Dark mode styling */
+  :global(body.dark-mode) .back-to-top button {
+    background: rgba(42, 42, 42, 0.95);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  :global(body.dark-mode) .back-to-top button:hover {
+    background: rgba(60, 60, 60, 0.95);
+  }
+
   :global(body.dark-mode) .mode-switch a {
     background: rgba(42, 42, 42, 0.95);
     color: white;
@@ -77,6 +114,7 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
       gap: 0.4rem;
     }
     
+    .back-to-top button,
     .mode-switch a {
       padding: 0.5rem 0.8rem;
       font-size: 0.75rem;
@@ -90,6 +128,7 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
       gap: 0.3rem;
     }
     
+    .back-to-top button,
     .mode-switch a {
       padding: 0.4rem 0.6rem;
       font-size: 0.7rem;
@@ -104,6 +143,7 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
       gap: 0.25rem;
     }
     
+    .back-to-top button,
     .mode-switch a {
       padding: 0.35rem 0.55rem;
       font-size: 0.65rem;
@@ -111,3 +151,19 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
     }
   }
 </style>
+
+<script>
+  // Back to top functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+    
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+</script>

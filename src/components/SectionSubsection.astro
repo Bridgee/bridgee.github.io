@@ -1,0 +1,51 @@
+---
+interface Props {
+  title?: string;
+  variant?: 'about' | 'research' | 'publications' | 'projects' | 'creative' | 'contact';
+  class?: string;
+}
+
+const { 
+  title, 
+  variant = 'default', 
+  class: className = '' 
+} = Astro.props;
+---
+
+<div class={`section-subsection section-subsection-${variant} ${className}`}>
+  {title && <h3 class="subsection-title">{title}</h3>}
+  <slot />
+</div>
+
+<style>
+  /* Base subsection styling with nested visual hierarchy */
+  .section-subsection {
+    margin-bottom: 2rem;
+    background: rgba(248, 249, 250, 0.8);
+    border: 1px solid rgba(225, 229, 233, 0.6);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  
+  .subsection-title {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* Variant-specific styling if needed later */
+  .section-subsection-research .subsection-title {
+    color: #2c3e50;
+  }
+  
+  /* Dark mode support */
+  :global(body.dark-mode) .section-subsection {
+    background: rgba(42, 42, 42, 0.8);
+    border-color: rgba(64, 64, 64, 0.6);
+  }
+  
+  :global(body.dark-mode) .subsection-title {
+    color: #fff;
+  }
+</style>
