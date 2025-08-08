@@ -20,7 +20,7 @@ function getTagVariant(tag) {
 }
 ---
 
-<BlogLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher" currentPage="about">
+<BlogLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher" currentPage="blog">
 
         <!-- About Section -->
         <section id="about" class="section">
@@ -46,7 +46,7 @@ function getTagVariant(tag) {
             </Card>
             
             <!-- 2. Research Roadmap with Framework Image -->
-            <Card variant="research" icon="🗓️" title="Research Roadmap & Framework" class="roadmap-card">
+            <Card variant="research" icon="🗺" title="Research Roadmap & Framework" class="roadmap-card">
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <img id="framework-image" 
                          src="/images/research_framework.png" 
@@ -149,9 +149,9 @@ function getTagVariant(tag) {
                             ))}
                         </div>
                         <p style="margin-top: 1rem;">
-                            <button class="project-btn" onclick={`window.open('${project.link}', '_blank')`}>
-                                📖 Learn More →
-                            </button>
+                            <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
+                                Learn More →
+                            </strong>
                         </p>
                     </Card>
                 ))}
@@ -165,13 +165,13 @@ function getTagVariant(tag) {
                 <Card variant="photo" icon="📸" title="Photography Gallery" href="/gallery">
                     <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
                     <p style="margin-top: 1rem;">
-                        <strong style="color: #3498db;">🖼️ View Full Gallery →</strong>
+                        <strong style="color: #3498db;">View Full Gallery →</strong>
                     </p>
                 </Card>
                 <Card variant="track" icon="🎵" title="Music & Sound Design" href="/music">
                     <p>Electronic compositions exploring the intersection of technology and creativity, with influences from complex systems research.</p>
                     <p style="margin-top: 1rem;">
-                        <strong style="color: #3498db;">☁️ Listen to Compositions →</strong>
+                        <strong style="color: #3498db;">Listen to Compositions →</strong>
                     </p>
                 </Card>
             </div>

@@ -10,21 +10,30 @@ const { currentPage } = Astro.props;
 
 <nav class="nav">
   <div class="nav-container">
-    <!-- Internal page sections -->
+    <!-- Section links - always show, but modify links for non-blog pages -->
     {navigationConfig.sections.map(section => (
-      <a href={section.href} class={currentPage === (section.href?.startsWith('#') ? section.href.substring(1) : section.href) ? 'active' : ''}>
+      <a href={currentPage === 'blog' ? section.href : `/blog${section.href}`} 
+         class={currentPage === 'blog' && section.href === '#about' ? 'active' : ''}>
         {section.label}
       </a>
     ))}
     
-    <!-- External pages -->
+    <!-- External page links - always show all pages -->
     {navigationConfig.pages
       .filter(page => page.section === 'pages')
       .map(page => (
-        <a href={page.href}>
+        <a href={page.href} class={currentPage === page.href.replace('/', '') ? 'active' : ''}>
           {page.label}
         </a>
       ))}
+      
+    <!-- Contact link - always at the end -->
+    {navigationConfig.contact.map(contact => (
+      <a href={currentPage === 'blog' ? contact.href : `/blog${contact.href}`} 
+         class={currentPage === 'blog' && contact.href === '#contact' ? 'active' : ''}>
+        {contact.label}
+      </a>
+    ))}
   </div>
 </nav>
 

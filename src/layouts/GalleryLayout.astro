@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<BlogLayout title={title} currentPage="gallery">
+<BlogLayout title={title} currentPage="gallery" showHeader={false}>
   <slot />
   
   <!-- Gallery-specific styles -->
