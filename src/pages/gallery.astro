@@ -2,6 +2,7 @@
 import GalleryLayout from '../layouts/GalleryLayout.astro';
 import Card from '../components/Card.astro';
 import { personal } from "../data/index.js";
+import Icon from '../components/Icon.astro';
 ---
 
 <GalleryLayout title="Photography Gallery - Zhouqiao (Bridge) Zhao">
@@ -9,10 +10,18 @@ import { personal } from "../data/index.js";
     <section class="section">
         <h2 class="section-title">Featured Photography</h2>
         
+        <div class="about-content">
+            <p></p>
+        </div>
+
+        <!-- Featured Photos Section -->
+        <h3 style="font-size: 1.5rem; margin: 2rem 0 1.5rem; color: #2c3e50;">Featured Photos</h3>
+        
         <div class="gallery-grid">
             {personal.media.photos.map(photo => (
                 <Card variant="photo" icon={photo.emoji} title={photo.title}>
                     <div class="photo-container" style="margin-bottom: 1rem; height: auto;">
+                        <!-- Image -->
                         <img 
                             src={`/images/${photo.filename}`} 
                             alt={photo.title} 
@@ -20,7 +29,9 @@ import { personal } from "../data/index.js";
                             loading="lazy" 
                         />
                     </div>
+
                     <p class="photo-description">{photo.description}</p>
+                    
                     <p style="margin-top: 1rem;">
                         <a href={`https://www.flickr.com/photos/bridgezhao/${photo.id}/`} target="_blank" style="color: #3498db;">
                             <strong>View Original on Flickr →</strong>
@@ -30,18 +41,18 @@ import { personal } from "../data/index.js";
             ))}
         </div>
         
+        <!-- About My Photography Section -->
         <Card variant="photo" icon="📷" title="About My Photography">
             <p>Photography serves as both documentation and artistic expression in my life. Whether capturing the intricate details of laboratory equipment, the vast landscapes encountered during field research, or the unexpected beauty found in everyday academic life, each image tells a story of discovery.</p>
             
             <p>My approach to photography mirrors my scientific methodology - careful observation, patient waiting for the right moment, and finding beauty in both the planned and serendipitous encounters with light, form, and meaning.</p>
             
             <p style="margin-top: 1rem;">
-                <a href="https://www.flickr.com/photos/bridgezhao/" target="_blank" class="flickr-link">
-                    <strong style="color: #3498db;">Browse Full Gallery on Flickr →</strong>
+                <a href="https://www.flickr.com/photos/bridgezhao/" target="_blank" class="flickr-link" style="color: #3498db;">
+                    <strong><Icon src="/images/icons/flickr.svg"/> Browse Full Gallery on Flickr →</strong>
                 </a>
             </p>
         </Card>
-        
         
     </section>
 </GalleryLayout>

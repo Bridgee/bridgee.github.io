@@ -20,42 +20,47 @@ export const personal = {
     photos: [
       // Local gallery images with Flickr backup
       {
-        id: "54680329597",
-        filename: "star_track.jpg", 
+        id: "54680329597", 
         title: "Star Track", 
+        emoji: "⭐",
         description: "Celestial night photography capturing star movements", 
-        emoji: "⭐"
+        filename: "star_track.jpg"
       },
       {
         id: "54681311838",
-        filename: "purple_island.jpg", 
-        title: "Purple Island", 
+        title: "Purple Island",
+        emoji: "🏝️" ,
         description: "Mystical landscape with purple hues", 
-        emoji: "🏝️" },
+        filename: "purple_island.jpg",
+      },
       {
         id: "54680184412",
+        title: "The Game",
+        emoji: "♟️" ,
+        description: "Creative composition exploring visual storytelling", 
         filename: "the_game.jpg", 
-        title: "The Game", 
-        description: "Creative composition exploring visual storytelling", emoji: "♟️" },
+      },
       {
         id: "54681001891",
-        filename: "red_people.jpg", 
-        title: "Red People", 
+        title: "Red People",
+        emoji: "👹",
         description: "Vibrant street photography with bold colors", 
-        emoji: "👹" 
+        filename: "red_people.jpg", 
       },
       {
         id: "54680302237",
-        filename: "the_grand_teton.jpg", 
-        title: "The Grand Teton", 
+        title: "The Grand Teton",
+        emoji: "🏔️",
         description: "Majestic mountain landscape photography", 
-        emoji: "🏔️" },
+        filename: "the_grand_teton.jpg", 
+      },
       {
         id: "54680359637",
-        filename: "night_in_joshua_tree.jpg", 
         title: "Night in Joshua Tree", 
+        emoji: "🌌",
         description: "Desert night scene under starlit sky", 
-        emoji: "🌌" }
+        filename: "night_in_joshua_tree.jpg", 
+      }
     ],
     music: {
       // Real SoundCloud tracks from zhouqiao-zhao account
@@ -64,18 +69,19 @@ export const personal = {
           id: "2137403307", 
           title: "Spring kids", 
           link: "https://soundcloud.com/zhouqiao-zhao/spring-kids",
+          description: ""
         },
         {
           id: "2137347381", 
           title: "Island grass",
           link: "https://soundcloud.com/zhouqiao-zhao/island-grass-5",
-          duration: "3:12"
+          description: ""
         },  
         {
           id: "2137347393", 
           title: "A glass of ice", 
           link: "https://soundcloud.com/zhouqiao-zhao/a-glass-of-ice-1",
-          duration: "1:04"
+          description: ""
         }
       ],
       currentTrack: 0

@@ -1,11 +1,12 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
-import Card from '../components/Card.astro';
-import InfoTag from '../components/InfoTag.astro';
-import Icon from '../components/Icon.astro';
+
 import PageSection from '../components/PageSection.astro';
 import SectionSubsection from '../components/SectionSubsection.astro';
 import SubsectionModule from '../components/SubsectionModule.astro';
+import Card from '../components/Card.astro';
+import Icon from '../components/Icon.astro';
+import InfoTag from '../components/InfoTag.astro';
 import { sharedData, publications, personal } from "../data/index.js";
 
 // Function to get appropriate tag variant based on tag content
@@ -38,7 +39,6 @@ function getTagVariant(tag) {
 
         <!-- Research Section -->
         <PageSection id="research" title="My Research" variant="research">
-            
             <!-- Research Philosophy Subsection -->
             <SectionSubsection variant="research">
                 <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
