@@ -11,9 +11,9 @@ export const personal = {
     linkedin: "https://www.linkedin.com/in/zhouqiao-zhao-60560a56/",
     researchGate: "https://www.researchgate.net/profile/Zhouqiao-Zhao",
     labWebsite: "https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao",
-    cv: "/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf",
     soundcloud: "https://soundcloud.com/zhouqiao-zhao",
-    flickr: "https://www.flickr.com/photos/bridgezhao/"
+    flickr: "https://www.flickr.com/photos/bridgezhao/",
+    cv: "/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf",
   },
 
   media: {

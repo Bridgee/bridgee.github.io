@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation.astro';
 import FixedControls from '../components/FixedControls.astro';
 import ProfileImage from '../components/ProfileImage.astro';
 import Icon from '../components/Icon.astro';
+import { personal } from "../data/index.js";
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ const { title, currentPage, showHeader = true } = Astro.props;
   <script is:inline>
     // Safe email copy function with fallback
     function copyEmailAddress() {
-      const email = 'zhouqiao@mit.edu';
+      const email = '{personal.contact.email}';
       
       // Modern clipboard API with fallback
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -469,10 +470,10 @@ const { title, currentPage, showHeader = true } = Astro.props;
         <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
         <div class="contact-links">
           <a href="#" onclick="copyEmailAddress()"><Icon emoji="📧" />Email</a>
-          <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank"><Icon src="/images/icons/google_scholar_icon.svg" />Google Scholar</a>
-          <a href="https://www.researchgate.net/profile/Zhouqiao-Zhao" target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
-          <a href="https://www.linkedin.com/in/zhouqiao-zhao-60560a56/" target="_blank"><Icon src="/images/icons/linkedin_icon.svg" />LinkedIn</a>
-          <a href="https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao" target="_blank"><Icon src="/images/icons/mit_icon.jpg" />Lab Website</a>
+          <a href={personal.links.googleScholar} target="_blank"><Icon src="/images/icons/google_scholar_icon.svg" />Google Scholar</a>
+          <a href={personal.links.researchGate} target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
+          <a href={personal.links.linkedin} target="_blank"><Icon src="/images/icons/linkedin_icon.svg" />LinkedIn</a>
+          <a href={personal.links.labWebsite} target="_blank"><Icon src="/images/icons/mit_icon.jpg" />Lab Website</a>
           <a href="/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank"><Icon emoji="📄" />CV</a>
         </div>
       </header>
