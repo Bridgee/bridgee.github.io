@@ -25,44 +25,23 @@ export const blogData = {
 
   publications: [
     {
-      title: "Quantum Entanglement in Complex Systems",
-      venue: "Nature Physics, 2024",
-      type: "journal"
+      title: "Personalized car following for autonomous driving with inverse reinforcement learning",
+      venue: "2022 International Conference on Robotics and Automation (ICRA)",
+      type: "IEEE Conference Proceedings",
+      link: "/public/doc/personalized_car_following.pdf"
     },
     {
-      title: "Neural Networks for Molecular Prediction", 
-      venue: "Science, 2024",
-      type: "journal"
+      title: "A review of personalization in driving behavior: Dataset, modeling, and validation", 
+      venue: "IEEE Transactions on Intelligent Vehicles",
+      type: "Journal",
+      link: "/public/doc/review_personalization.pdf"
     },
     {
-      title: "Protein Folding Dynamics at Scale",
-      venue: "Cell, 2025", 
-      type: "journal"
+      title: "End-to-end spatio-temporal attention-based lane-change intention prediction from multi-perspective cameras",
+      venue: "2023 IEEE Intelligent Vehicles Symposium (IV)", 
+      type: "IEEE Conference Proceedings",
+      link: "/public/doc/attention_based_lane_change.pdf"
     }
   ],
 
-  skills: [
-    { name: "Connected & Automated Vehicles", level: 80 },
-    { name: "Human-Centered AI", level: 88 },
-    { name: "Sound & Synthesizer Design", level: 70 },
-    { name: "Photography", level: 60 }
-  ],
-
-  roadmap: {
-    "2025": [
-      "Complete driver digital twin framework",
-      "Publish multi-agent learning findings", 
-      "Launch industry pilot programs"
-    ],
-    "2026": [
-      "Scale to city-wide implementations",
-      "Develop cross-domain applications",
-      "Establish international collaborations"
-    ],
-    "2027+": [
-      "Pioneer next-gen transportation systems",
-      "Lead interdisciplinary research initiatives",
-      "Mentor emerging researchers in the field"
-    ]
-  }
 };

@@ -1,7 +1,7 @@
 ---
 import BlogLayout from '../layouts/BlogLayout.astro';
 import Card from '../components/Card.astro';
-import ProjectTag from '../components/ProjectTag.astro';
+import InfoTag from '../components/InfoTag.astro';
 import Icon from '../components/Icon.astro';
 import PageSection from '../components/PageSection.astro';
 import SectionSubsection from '../components/SectionSubsection.astro';
@@ -96,24 +96,24 @@ function getTagVariant(tag) {
                         <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
                         <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
                         <div class="project-meta">
-                            <ProjectTag tag="Active Research" variant="primary" />
-                            <ProjectTag tag="Industry Collaboration" variant="success" />
+                            <InfoTag tag="Active Research" variant="primary" />
+                            <InfoTag tag="Industry Collaboration" variant="success" />
                         </div>
                     </Card>
                     <Card variant="research" icon="🤖" title="Human-Centered AI">
                         <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
                         <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
                         <div class="project-meta">
-                            <ProjectTag tag="Interdisciplinary" variant="info" />
-                            <ProjectTag tag="Ethics Focus" variant="info" />
+                            <InfoTag tag="Interdisciplinary" variant="info" />
+                            <InfoTag tag="Ethics Focus" variant="info" />
                         </div>
                     </Card>
                     <Card variant="research" icon="🌐" title="Digital Twin Technologies">
                         <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
                         <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
                         <div class="project-meta">
-                            <ProjectTag tag="Emerging Tech" variant="warning" />
-                            <ProjectTag tag="Scalability" variant="warning" />
+                            <InfoTag tag="Emerging Tech" variant="warning" />
+                            <InfoTag tag="Scalability" variant="warning" />
                         </div>
                     </Card>
                 </div>
@@ -152,7 +152,7 @@ function getTagVariant(tag) {
                         <p>{project.description}</p>
                         <div class="project-meta">
                             {project.tags.map(tag => (
-                                <ProjectTag tag={tag} variant={getTagVariant(tag)} />
+                                <InfoTag tag={tag} variant={getTagVariant(tag)} />
                             ))}
                         </div>
                         <p style="margin-top: 1rem;">
