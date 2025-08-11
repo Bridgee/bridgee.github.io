@@ -11,10 +11,8 @@ import { personal } from "../data/index.js";
         
         <div class="gallery-grid">
             {personal.media.photos.map(photo => (
-                <Card variant="photo" 
-                      icon={photo.emoji} 
-                      title={photo.title}>
-                    <div class="photo-container" style="margin-bottom: 1rem;">
+                <Card variant="photo" icon={photo.emoji} title={photo.title}>
+                    <div class="photo-container" style="margin-bottom: 1rem; height: auto;">
                         <img 
                             src={`/images/${photo.filename}`} 
                             alt={photo.title} 
@@ -33,13 +31,10 @@ import { personal } from "../data/index.js";
         </div>
         
         <Card variant="photo" icon="📷" title="About My Photography">
-            <p>
-                Photography serves as both documentation and artistic expression in my life. Whether capturing the intricate details of laboratory equipment, the vast landscapes encountered during field research, or the unexpected beauty found in everyday academic life, each image tells a story of discovery.
-            </p>
-            <p style="margin-top: 1rem;">
-                My approach to photography mirrors my scientific methodology - careful observation, patient waiting for the right moment, and finding beauty in both the planned and serendipitous encounters with light, form, and meaning.
-            </p>
-
+            <p>Photography serves as both documentation and artistic expression in my life. Whether capturing the intricate details of laboratory equipment, the vast landscapes encountered during field research, or the unexpected beauty found in everyday academic life, each image tells a story of discovery.</p>
+            
+            <p>My approach to photography mirrors my scientific methodology - careful observation, patient waiting for the right moment, and finding beauty in both the planned and serendipitous encounters with light, form, and meaning.</p>
+            
             <p style="margin-top: 1rem;">
                 <a href="https://www.flickr.com/photos/bridgezhao/" target="_blank" class="flickr-link">
                     <strong style="color: #3498db;">Browse Full Gallery on Flickr →</strong>
