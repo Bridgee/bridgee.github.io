@@ -4,8 +4,7 @@ import {
     dialogueSpeaker, dialogueText, dialogueBox, getAchievements, setDialogueState, setCurrentInteraction, setPopupState
 } from './engine.js';
 import { gainXP, unlockAchievement } from './entities.js';
-import { gameData } from '../data/game.js';
-import { sharedData } from '../data/shared.js';
+import { gameData, sharedData } from '../data/index.js';
 
 // Start dialogue
 export function startDialogue(npc) {

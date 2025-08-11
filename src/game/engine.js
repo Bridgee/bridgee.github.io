@@ -1,7 +1,7 @@
 // Import functions from other modules
 import { collectItem, createParticle } from './entities.js';
 import { startDialogue, continueDialogue, enterArea, closePopup } from './ui.js';
-import { gameData } from '../data/game.js';
+import { gameData } from '../data/index.js';
 
 // Game Variables - Initialize from gameData
 export let player = {

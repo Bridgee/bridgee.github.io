@@ -6,7 +6,7 @@ import Icon from '../components/Icon.astro';
 import PageSection from '../components/PageSection.astro';
 import SectionSubsection from '../components/SectionSubsection.astro';
 import SubsectionModule from '../components/SubsectionModule.astro';
-import { sharedData } from "../js/data/shared.js";
+import { sharedData, publications, personal } from "../data/index.js";
 
 // Function to get appropriate tag variant based on tag content
 function getTagVariant(tag) {
@@ -91,53 +91,49 @@ function getTagVariant(tag) {
             <!-- Research Focus Areas Subsection -->
             <SectionSubsection variant="research">
                 <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
-                <div class="research-interests">
-                    <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
-                        <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
-                        <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
-                        <div class="project-meta">
-                            <InfoTag tag="Active Research" variant="primary" />
-                            <InfoTag tag="Industry Collaboration" variant="success" />
-                        </div>
-                    </Card>
-                    <Card variant="research" icon="🤖" title="Human-Centered AI">
-                        <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
-                        <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
-                        <div class="project-meta">
-                            <InfoTag tag="Interdisciplinary" variant="info" />
-                            <InfoTag tag="Ethics Focus" variant="info" />
-                        </div>
-                    </Card>
-                    <Card variant="research" icon="🌐" title="Digital Twin Technologies">
-                        <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
-                        <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
-                        <div class="project-meta">
-                            <InfoTag tag="Emerging Tech" variant="warning" />
-                            <InfoTag tag="Scalability" variant="warning" />
-                        </div>
-                    </Card>
-                </div>
+                <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
+                    <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
+                    <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
+                    <div class="project-meta">
+                        <InfoTag tag="Active Research" variant="primary" />
+                        <InfoTag tag="Industry Collaboration" variant="success" />
+                    </div>
+                </Card>
+                <Card variant="research" icon="🤖" title="Human-Centered AI">
+                    <p><strong>Current Focus:</strong> Building transparent AI systems that maintain human agency while leveraging machine intelligence for complex decision-making tasks.</p>
+                    <p><strong>Future Direction:</strong> Exploring adaptive interfaces and explainable AI for critical applications in healthcare and transportation.</p>
+                    <div class="project-meta">
+                        <InfoTag tag="Interdisciplinary" variant="info" />
+                        <InfoTag tag="Ethics Focus" variant="info" />
+                    </div>
+                </Card>
+                <Card variant="research" icon="🌐" title="Digital Twin Technologies">
+                    <p><strong>Current Focus:</strong> Creating comprehensive digital replicas of human drivers and vehicles to enable real-time simulation and prediction in autonomous systems.</p>
+                    <p><strong>Future Direction:</strong> Scaling to city-wide transportation networks and exploring applications in other complex systems.</p>
+                    <div class="project-meta">
+                        <InfoTag tag="Emerging Tech" variant="warning" />
+                        <InfoTag tag="Scalability" variant="warning" />
+                    </div>
+                </Card>
             </SectionSubsection>
         </PageSection>
 
         <!-- Publications Section -->
         <PageSection id="publications" title="Selected Publications" variant="publications">
-            <div class="research-interests">
-                <Card variant="research" icon="📄" title="Quantum Entanglement in Complex Systems">
-                    <p><strong>Journal:</strong> Nature Physics, 2024</p>
-                    <p>Exploring quantum entanglement phenomena in complex multi-particle systems and their applications to quantum computing architectures.</p>
+            {publications.map(publication => (
+                <Card variant="research" icon="📄" title={publication.title}>
+                    <p><strong>{publication.venue}</strong></p>
+                    <p>{publication.type}</p>
+                    <p style="margin-top: 1rem;">
+                        <a href={publication.link} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                            📥 Download PDF →
+                        </a>
+                    </p>
                 </Card>
-                <Card variant="research" icon="🧠" title="Neural Networks for Molecular Prediction">
-                    <p><strong>Journal:</strong> Science, 2024</p>
-                    <p>Novel deep learning approaches for predicting molecular properties and drug-target interactions with improved accuracy and interpretability.</p>
-                </Card>
-                <Card variant="research" icon="🔬" title="Protein Folding Dynamics at Scale">
-                    <p><strong>Journal:</strong> Cell, 2025</p>
-                    <p>Large-scale computational modeling of protein folding pathways using advanced molecular dynamics simulations and machine learning.</p>
-                </Card>
-            </div>
+            ))}
+
             <p style="margin-top: 2rem; text-align: center;">
-                <a href="https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl" target="_blank" 
+                <a href={personal.links.googleScholar} target="_blank" 
                    style="color: #3498db; text-decoration: none; font-weight: 500;">
                    <Icon src="/images/icons/google_scholar_icon.svg" />View All Publications on Google Scholar →
                 </a>
@@ -146,23 +142,21 @@ function getTagVariant(tag) {
 
         <!-- Projects Section -->
         <PageSection id="projects" title="Featured Projects" variant="projects">
-            <div class="research-interests">
-                {sharedData.projects.filter(project => project.featured).map(project => (
-                    <Card variant="project" title={project.title}>
-                        <p>{project.description}</p>
-                        <div class="project-meta">
-                            {project.tags.map(tag => (
-                                <InfoTag tag={tag} variant={getTagVariant(tag)} />
-                            ))}
-                        </div>
-                        <p style="margin-top: 1rem;">
-                            <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
-                                Learn More →
-                            </strong>
-                        </p>
-                    </Card>
-                ))}
-            </div>
+            {sharedData.projects.filter(project => project.featured).map(project => (
+                <Card variant="project" title={project.title}>
+                    <p>{project.description}</p>
+                    <div class="project-meta">
+                        {project.tags.map(tag => (
+                            <InfoTag tag={tag} variant={getTagVariant(tag)} />
+                        ))}
+                    </div>
+                    <p style="margin-top: 1rem;">
+                        <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
+                            Learn More →
+                        </strong>
+                    </p>
+                </Card>
+            ))}
         </PageSection>
 
         <!-- Creative Work Overview -->

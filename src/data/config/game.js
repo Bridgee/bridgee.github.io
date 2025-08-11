@@ -53,7 +53,7 @@ export const gameData = {
       position: { top: "750px", left: "1150px", width: "200px", height: "200px" },
       content: `
         <h2>WELCOME TO MY DIGITAL REALM</h2>
-        <p>Greetings, traveler! I'm YOUR NAME, a postdoc researcher at MIT.</p>
+        <p>Greetings, traveler! I'm Zhouqiao (Bridge) Zhao, a postdoc researcher at MIT.</p>
         <p>This interactive portfolio is my digital playground where science meets creativity.</p>
         <div style="margin-top: 20px;">
             <button class="menu-button" onclick="window.location.href='/blog'">📝 ACADEMIC PORTFOLIO</button>
@@ -156,9 +156,9 @@ export const gameData = {
             </div>
             <h3>BACKSTORY:</h3>
             <p style="line-height: 1.8;">
-                Started the academic quest at [University Name], where I discovered the beauty of quantum mechanics. 
+                Started the academic quest at UC Riverside, where I discovered the beauty of complex systems. 
                 Leveled up through various research dungeons, collecting knowledge and skills along the way. 
-                Now embarking on postdoctoral adventures at MIT, seeking to unlock the mysteries of the universe 
+                Now embarking on postdoctoral adventures at MIT, seeking to unlock the mysteries of intelligent transportation 
                 while capturing its beauty through lens and sound.
             </p>
             <div style="margin-top: 20px; text-align: center;">

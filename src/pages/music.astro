@@ -1,7 +1,7 @@
 ---
 import MusicLayout from '../layouts/MusicLayout.astro';
 import Card from '../components/Card.astro';
-import { sharedData } from "../js/data/shared.js";
+import { personal } from "../data/index.js";
 ---
 
 <MusicLayout title="Music & Sound Design - Zhouqiao (Bridge) Zhao">
@@ -15,7 +15,7 @@ import { sharedData } from "../js/data/shared.js";
         <!-- Featured Tracks Section -->
         <h3 style="font-size: 1.5rem; margin: 2rem 0 1.5rem; color: #2c3e50;">Featured Tracks</h3>
             <div class="track-grid">
-                {sharedData.media.music.tracks.map(track => (
+                {personal.media.music.tracks.map(track => (
                     <Card variant="track" 
                           icon="🎵" 
                           title={track.title}
@@ -36,13 +36,11 @@ import { sharedData } from "../js/data/shared.js";
                 <p style="margin-top: 1rem;">
                     The creative process often parallels my scientific work - both involve systematic exploration, hypothesis testing, and iterative refinement to achieve desired outcomes.
                 </p>
+                <p style="margin-top: 1rem;">
+                    <a href="https://soundcloud.com/zhouqiao-zhao" target="_blank" class="soundcloud-link">
+                        <strong style="color: #3498db;">☁️ Explore Full Discography on SoundCloud →</strong>
+                    </a>
+                </p>
             </Card>
-            
-            <p style="text-align: center; margin-top: 2rem;">
-                <a href="https://soundcloud.com/zhouqiao-zhao" target="_blank" 
-                   style="color: #3498db; text-decoration: none; font-weight: 500; font-size: 1.1rem;">
-                   ☁️ Explore Full Discography on SoundCloud →
-                </a>
-            </p>
     </section>
 </MusicLayout>
