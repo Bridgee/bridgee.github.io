@@ -69,19 +69,19 @@ export const personal = {
           id: "2137403307", 
           title: "Spring kids", 
           link: "https://soundcloud.com/zhouqiao-zhao/spring-kids",
-          description: ""
+          description: "Uplifting electronic composition with playful melodies"
         },
         {
           id: "2137347381", 
           title: "Island grass",
           link: "https://soundcloud.com/zhouqiao-zhao/island-grass-5",
-          description: ""
+          description: "Ambient soundscape evoking tropical tranquility"
         },  
         {
           id: "2137347393", 
           title: "A glass of ice", 
           link: "https://soundcloud.com/zhouqiao-zhao/a-glass-of-ice-1",
-          description: ""
+          description: "Crystalline textures with cool, atmospheric tones"
         }
       ],
       currentTrack: 0

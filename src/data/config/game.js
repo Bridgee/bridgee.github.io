@@ -3,7 +3,7 @@ export const gameData = {
   player: {
     x: 1250,
     y: 850,
-    speed: 5,
+    speed: 6,
     width: 32,
     height: 32,
   },
@@ -201,6 +201,7 @@ export const gameData = {
     { type: "xp", position: { top: "700px", left: "1000px" }, icon: "⭐" },
     { type: "xp", position: { top: "300px", left: "1400px" }, icon: "⭐" },
     { type: "achievement", position: { top: "500px", left: "1200px" }, icon: "🏆" },
+    { type: "achievement", position: { top: "190px", left: "800px" }, icon: "🏆" },
     { type: "powerup", position: { top: "1100px", left: "800px" }, icon: "💎" },
     { type: "powerup", position: { top: "1000px", left: "1500px" }, icon: "💍" },
   ],

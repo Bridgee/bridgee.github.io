@@ -1,8 +1,8 @@
 ---
 import MusicLayout from '../layouts/MusicLayout.astro';
 import Card from '../components/Card.astro';
-import { personal } from "../data/index.js";
 import Icon from '../components/Icon.astro';
+import { personal } from "../data/index.js";
 ---
 
 <MusicLayout title="Music & Sound Design - Zhouqiao (Bridge) Zhao">
@@ -38,7 +38,7 @@ import Icon from '../components/Icon.astro';
                     <p class="track-description">{track.description}</p>
 
                     <p style="margin-top: 1rem;">
-                        <a href={track.link} target="_blank" style="color: #3498db;"></a>
+                        <a href={track.link} target="_blank" style="color: #3498db;">
                             <strong>Listen on SoundCloud →</strong>
                         </a>
                     </p>
@@ -47,7 +47,7 @@ import Icon from '../components/Icon.astro';
         </div>
         
         <!-- About My Music Section -->
-        <div class="about-music"></div>
+        <div class="about-music">
             <Card variant="track" icon="🎧" title="About My Music">
                 <p>My electronic music compositions explore the intersection of technology and creativity, often drawing inspiration from my research in complex systems and AI. Each track is an experiment in sound design, utilizing synthesizers and digital processing to create immersive sonic landscapes.</p>
 

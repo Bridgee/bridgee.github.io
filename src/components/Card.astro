@@ -48,7 +48,7 @@ const cardProps = href ? { href, target } : {};
     position: relative;
     max-width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .card:hover,
@@ -81,9 +81,8 @@ const cardProps = href ? { href, target } : {};
   .card-content {
     line-height: 1.6;
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
-    contain: layout style;
   }
 
   /* Remove underlines from all links inside cards */

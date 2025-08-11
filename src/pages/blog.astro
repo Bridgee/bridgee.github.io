@@ -7,7 +7,7 @@ import SubsectionModule from '../components/SubsectionModule.astro';
 import Card from '../components/Card.astro';
 import Icon from '../components/Icon.astro';
 import InfoTag from '../components/InfoTag.astro';
-import { sharedData, publications, personal } from "../data/index.js";
+import { projects, publications, personal } from "../data/index.js";
 
 // Function to get appropriate tag variant based on tag content
 function getTagVariant(tag) {
@@ -142,7 +142,7 @@ function getTagVariant(tag) {
 
         <!-- Projects Section -->
         <PageSection id="projects" title="Featured Projects" variant="projects">
-            {sharedData.projects.filter(project => project.featured).map(project => (
+            {projects.filter(project => project.featured).map(project => (
                 <Card variant="project" title={project.title}>
                     <p>{project.description}</p>
                     <div class="project-meta">
