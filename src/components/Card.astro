@@ -212,4 +212,57 @@ const cardProps = href ? { href, target } : {};
   :global(body.dark-mode) .card-mode-selection:hover .card-title {
     color: #1a1a1a;
   }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .card {
+      padding: 0.8rem;
+      margin-bottom: 0.75rem;
+      border-radius: 6px;
+    }
+    
+    .card-title {
+      font-size: 1.1rem;
+    }
+    
+    .card-icon {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+    }
+    
+    .card-title {
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+    
+    .card-icon {
+      font-size: 1rem;
+    }
+    
+    .card-header {
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .card-content {
+      line-height: 1.4;
+    }
+
+    /* Breakout styles for images and figures on mobile */
+    .card-content img,
+    .card-content .framework-image,
+    .card-content #framework-image {
+      margin-left: -0.5rem !important;
+      margin-right: -0.5rem !important;
+      max-width: calc(100% + 1rem) !important;
+      border-radius: 4px;
+    }
+  }
 </style>

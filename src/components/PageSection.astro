@@ -99,4 +99,41 @@ const {
   :global(body.dark-mode) .page-section-contact .section-title {
     border-bottom-color: #64b5f6;
   }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .page-section {
+      margin-bottom: 2rem;
+      padding: 0.5rem 1rem 1.5rem 1rem;
+      border-radius: 12px;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-section {
+      margin-bottom: 1.25rem;
+      padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+      border-radius: 6px;
+    }
+    
+    .section-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Breakout styles for framework images and figures */
+    .page-section :global(#framework-image),
+    .page-section :global(.framework-image) {
+      margin-left: -0.5rem !important;
+      margin-right: -0.5rem !important;
+      max-width: calc(100% + 1rem) !important;
+      border-radius: 4px;
+    }
+  }
 </style>
