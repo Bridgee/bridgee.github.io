@@ -29,11 +29,38 @@ function getTagVariant(tag) {
         <!-- About Section -->
         <PageSection id="about" title="About Me" variant="about">
             <div class="about-content">
-                <p>Welcome to my digital realm! I'm a postdoctoral researcher at MIT's Center for Transportation & Logistics, where I explore the fascinating intersection of artificial intelligence, transportation systems, and human-centered design.</p>
+                <p>
+                  Welcome to my digital realm! My name is Zhouqiao Zhao (赵周桥), and I go by Bridge.
+                  I'm a postdoctoral researcher at <a href={personal.links.mit_agelab} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">MIT AgeLab</a>
+                  at<a href={personal.links.labWebsite} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> MIT's Center for Transportation & Logistics (CTL)</a>.
+                  My research is supported by the <a href={personal.links.mit_avt} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> MIT Advanced Vehicle Technology Consortium (AVT)</a>, 
+                  where I explore the fascinating intersection of human-centered artificial intelligence, vehicle automation, and transportation systems.
+                </p>
                 
-                <p>My research journey began with discovering the beauty of complex systems and has evolved through various domains, collecting knowledge and skills along the way. I'm passionate about creating solutions that bridge the gap between cutting-edge technology and practical applications that benefit society.</p>
+                <p>
+                  Before joining MIT, I completed my Ph.D. in Electrical and Computer Engineering at
+                  <a href={personal.links.ucr_ece} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> the University of California, Riverside (UCR)</a>, under supervised by
+                  <a href={personal.links.matthew_barth} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Matthew Barth</a> and
+                  <a href={personal.links.guoyuan_wu} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Guoyuan Wu</a>.
+                  I was also fortunate to be part of the Transportation Systems Research Group at
+                  <a href={personal.links.ucr_cecert} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Center for Environmental Research and Technology (CE-CERT)</a>.
+                  My research at UCR focused on Connected and Automated Vehicles (CAV) in the mixed-traffic environment, cooperation in the inteligent transportation system at different scales, and Digital Twin.
+                </p>
                 
-                <p>Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through electronic music composition. This website itself is a reflection of my interdisciplinary approach - combining serious research with playful, interactive design.</p>
+                <p>
+                  I also worked as a research intern at the
+                  <a href={personal.links.intotech} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Toyota Motor North America InfoTech Labs </a>
+                  under the <a href={personal.links.toyota_DT} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Digital Twin Roadmap</a>,
+                  and <a href={personal.links.hri} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Honda Research Institute</a>
+                  in Driver Behavior Modeling.
+                  I am an author of 30+ refereed papers and patent applications. 
+                  I'm passionate about creating solutions that bridge the gap between cutting-edge technology and practical applications that benefit society with human in the center of the loop.
+                </p>
+                
+                <p>
+                  Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through sound design and music composition.
+                  I'm intersted in synthesizer design in both software and hardware. With my Electrical Engineering background, I'm always looking for new ways to create sound that is dynamic and interactive.
+                </p>
             </div>
         </PageSection>
 
@@ -92,7 +119,7 @@ function getTagVariant(tag) {
             <SectionSubsection variant="research">
                 <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
                 <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
-                    <p><strong>Current Focus:</strong> Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
+                    <p>Developing personalized driver models using inverse reinforcement learning to improve autonomous vehicle safety and user acceptance.</p>
                     <p><strong>Future Direction:</strong> Expanding to multi-agent systems and V2X communication protocols for smart city integration.</p>
                     <div class="project-meta">
                         <InfoTag tag="Active Research" variant="primary" />
@@ -186,14 +213,13 @@ function getTagVariant(tag) {
         <PageSection id="contact" title="Get In Touch" variant="contact">
             <div class="about-content">
                 <p>I'm always interested in collaborating on research projects, discussing innovative ideas, or exploring opportunities at the intersection of AI, transportation, and creative technology.</p>
-                
-                <p>Whether you're a fellow researcher, industry professional, or student, feel free to reach out. I particularly welcome discussions about interdisciplinary research, open-source contributions, and creative applications of technology.</p>
             </div>
             
             <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
-                <a href="#" onclick="copyEmailAddress()"><Icon emoji="📧" />Email</a>
-                <a href={personal.links.linkedin} target="_blank"><Icon src="/images/icons/linkedin_icon.svg" /> LinkedIn</a>
+                <a href="#" onclick="copyEmailAddress()"><Icon emoji="📧" />Email</a> |
+                <a href={personal.links.linkedin} target="_blank"><Icon src="/images/icons/linkedin_icon.svg" /> LinkedIn</a> |
                 <a href={personal.links.researchGate} target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
+              </Card>
             </div>
         </PageSection>
 

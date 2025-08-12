@@ -20,10 +20,9 @@ const { title, currentPage, showHeader = true } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <link rel="icon" href="/website_icon.png">
-  <script is:inline>
+  <script is:inline define:vars={{email: personal.contact.email}}>
     // Safe email copy function with fallback
-    function copyEmailAddress() {
-      const email = '{personal.contact.email}';
+    window.copyEmailAddress = function() {
       
       // Modern clipboard API with fallback
       if (navigator.clipboard && navigator.clipboard.writeText) {
