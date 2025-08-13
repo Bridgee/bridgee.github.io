@@ -65,7 +65,7 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Research Section -->
-        <PageSection id="research" title="My Research" variant="research" collapsible={true} initiallyCollapsed={true} collapsedHeight="1200px">
+        <PageSection id="research" title="My Research" variant="research" collapsible={true} initiallyCollapsed={true} collapsedHeight="1000px">
             <!-- Research Philosophy Subsection -->
             <SectionSubsection variant="research">
                 <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
@@ -94,7 +94,7 @@ function getTagVariant(tag) {
             
             <!-- Research Roadmap Subsection -->
             <SectionSubsection variant="research">
-                <Card variant="research" icon="🗺️" title="Roadmap & Framework" class="roadmap-card">
+                <Card variant="research" iconSrc="/images/icons/map_icon.png" title="Roadmap & Framework" class="roadmap-card">
                     <div style="text-align: center; margin-bottom: 2rem;">
                         <img id="framework-image" 
                              src="/images/research_framework.png" 
@@ -135,78 +135,83 @@ function getTagVariant(tag) {
             <!-- Research Focus Areas Subsection -->
             <SectionSubsection variant="research">
                 <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
-                <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
-                    <p>
-                      I explore cooperation in ITS at all scales:
-                      <ul>  
-                        <li><strong>Macro</strong> – ride-sharing optimization, multi-vehicle routing, and coordinated dispatch for mixed fleets.</li>
-                        <li><strong>Meso</strong> – cooperative trajectory planning, eco-ramp merging, and formation control using CDA frameworks.</li>
-                        <li>
-                          <strong>Micro</strong> – driver intention prediction, personalized adaptive cruise control, and cooperative lane merging.
-                          I also integrate vehicle-to-infrastructure (V2I) communication and infrastructure-side perception using roadside perception units (RSPUs). 
-                          These systems enable real-time environment sensing, data sharing, and coordinated decision-making between vehicles and infrastructure.
-                        </li>
-                      </ul>
-                    </p>
+                <div class="research-focus-grid">
+                    <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
+                        <p>
+                        I explore cooperation in ITS at all scales:
+                        <ul>  
+                            <li><strong>Macro</strong> – ride-sharing optimization, multi-vehicle routing, and coordinated dispatch for mixed fleets.</li>
+                            <li><strong>Meso</strong> – cooperative trajectory planning, eco-ramp merging, and formation control using CDA frameworks.</li>
+                            <li>
+                            <strong>Micro</strong> – driver intention prediction, personalized adaptive cruise control, and cooperative lane merging.
+                            I also integrate vehicle-to-infrastructure (V2I) communication and infrastructure-side perception using roadside perception units (RSPUs). 
+                            These systems enable real-time environment sensing, data sharing, and coordinated decision-making between vehicles and infrastructure.
+                            </li>
+                        </ul>
+                        </p>
 
-                    <div class="project-meta">
-                        <InfoTag tag="Cooperative Driving Automation (CDA)" variant="primary" />
-                        <InfoTag tag="V2I & Roadside Perception" variant="success" />
-                        <InfoTag tag="Multi-Scale Coordination (Macro/Meso/Micro)" variant="info" />
-                        <InfoTag tag="Mixed-Traffic Optimization" variant="warning" />
-                    </div>
-                </Card>
-                <Card variant="research" icon="🤖" title="Human-Centered AI">
-                    <p>
-                      I develop personalized and explainable AI models for transportation safety and automation. This includes:
-                      <ul>
-                        <li>Context-aware modeling of the driver–vehicle–environment triad using Graph Neural Networks (GNNs) and multi-modal large language models (MLLMs).</li>
-                        <li>Predicting and interpreting driver responses to safety systems like Forward Collision Warnings (FCW), ensuring systems align with driver expectations.</li>
-                        <li>Designing machine learning pipelines that balance performance with explainability, so stakeholders understand not just what the AI predicts, but why.</li>
-                      </ul>
-                    </p>
+                        <div class="project-meta">
+                            <InfoTag tag="Cooperative Driving Automation (CDA)" variant="primary" />
+                            <InfoTag tag="V2I & Roadside Perception" variant="success" />
+                            <InfoTag tag="Multi-Scale Coordination (Macro/Meso/Micro)" variant="info" />
+                            <InfoTag tag="Mixed-Traffic Optimization" variant="warning" />
+                        </div>
+                    </Card>
+                    <Card variant="research" icon="🤖" title="Human-Centered AI">
+                        <p>
+                        I develop personalized and explainable AI models for transportation safety and automation. This includes:
+                        <ul>
+                            <li>Context-aware modeling of the driver–vehicle–environment triad using Graph Neural Networks (GNNs) and multi-modal large language models (MLLMs).</li>
+                            <li>Predicting and interpreting driver responses to safety systems like Forward Collision Warnings (FCW), ensuring systems align with driver expectations.</li>
+                            <li>Designing machine learning pipelines that balance performance with explainability, so stakeholders understand not just what the AI predicts, but why.</li>
+                        </ul>
+                        </p>
 
-                    <div class="project-meta">
-                        <InfoTag tag="Driver–Vehicle–Environment Modeling" variant="primary" />
-                        <InfoTag tag="Graph Neural Networks (GNN) & MLLM" variant="success" />
-                        <InfoTag tag="Explainable AI (XAI) in Transportation" variant="info" />
-                        <InfoTag tag="Personalized Safety Systems" variant="warning" />
-                    </div>
-                </Card>
-                <Card variant="research" icon="🌐" title="Digital Twin Technologies">
-                    <p>
-                      Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support.
-                      My work focuses on:
-                      <ul>
-                        <li>Building high-fidelity digital twins for ITS and vehicle automation, integrating data from naturalistic driving studies, roadside sensing, and simulations.</li>
-                        <li>Using these twins to test safety systems, optimize traffic flow, and evaluate cooperative strategies before real-world deployment.</li>
-                        <li>Supporting resilient infrastructure planning by simulating the impact of new technologies, policies, and mobility patterns at city and regional scales.</li>
-                      </ul>
-                    </p>
-                    
-                    <div class="project-meta">
-                        <InfoTag tag="High-Fidelity Transportation Simulations" variant="primary" />
-                        <InfoTag tag="Real-Time ITS Optimization" variant="success" />
-                        <InfoTag tag="Scenario-Based Infrastructure Planning" variant="info" />
-                        <InfoTag tag="Data-Driven Policy Testing" variant="warning" />
-                    </div>
-                </Card>
+                        <div class="project-meta">
+                            <InfoTag tag="Driver–Vehicle–Environment Modeling" variant="primary" />
+                            <InfoTag tag="Graph Neural Networks (GNN) & MLLM" variant="success" />
+                            <InfoTag tag="Explainable AI (XAI) in Transportation" variant="info" />
+                            <InfoTag tag="Personalized Safety Systems" variant="warning" />
+                        </div>
+                    </Card>
+                    <Card variant="research" icon="🌐" title="Digital Twin Technologies">
+                        <p>
+                        Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support.
+                        My work focuses on:
+                        <ul>
+                            <li>Building high-fidelity digital twins for ITS and vehicle automation, integrating data from naturalistic driving studies, roadside sensing, and simulations.</li>
+                            <li>Using these twins to test safety systems, optimize traffic flow, and evaluate cooperative strategies before real-world deployment.</li>
+                            <li>Supporting resilient infrastructure planning by simulating the impact of new technologies, policies, and mobility patterns at city and regional scales.</li>
+                        </ul>
+                        </p>
+                        
+                        <div class="project-meta">
+                            <InfoTag tag="High-Fidelity Transportation Simulations" variant="primary" />
+                            <InfoTag tag="Real-Time ITS Optimization" variant="success" />
+                            <InfoTag tag="Scenario-Based Infrastructure Planning" variant="info" />
+                            <InfoTag tag="Data-Driven Policy Testing" variant="warning" />
+                        </div>
+                    </Card>
+                </div>
             </SectionSubsection>
         </PageSection>
 
         <!-- Publications Section -->
-        <PageSection id="publications" title="Publications" variant="publications" collapsible={true} initiallyCollapsed={true} collapsedHeight="800px">
-            {publications.map(publication => (
-                <Card variant="research" icon="📄" title={publication.title}>
-                    <p><strong>{publication.venue}</strong></p>
-                    <p>{publication.type}</p>
-                    <p style="margin-top: 1rem;">
-                        <a href={publication.link} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                            📥 Download PDF →
-                        </a>
-                    </p>
-                </Card>
-            ))}
+        <PageSection id="publications" title="Publications" variant="publications" collapsible={true} initiallyCollapsed={true} collapsedHeight="600px">
+            <div class="publication-cards-grid">
+                {publications.map(publication => (
+                    <Card variant="research" icon="📄" title={publication.title}>
+                        <p>{publication.venue}</p>
+                        <!-- <p>{publication.type}</p> -->
+                        <p>{publication.description}</p>
+                        <p style="margin-top: 1rem;">
+                            <a href={publication.link} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                                <Icon src="/images/icons/download_icon.png" size="2.0em" /> Download PDF →
+                            </a>
+                        </p>
+                    </Card>
+                ))}
+            </div>
 
             <!-- Always visible content (shows even when collapsed) -->
             <p slot="alwaysVisible" style="margin-top: 1rem; text-align: center;">
@@ -218,22 +223,24 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Projects Section -->
-        <PageSection id="projects" title="Projects" variant="projects" collapsible={true} initiallyCollapsed={true} collapsedHeight="800px">
-            {projects.filter(project => project.featured).map(project => (
-                <Card variant="project" title={project.title}>
-                    <p>{project.description}</p>
-                    <div class="project-meta">
-                        {project.tags.map(tag => (
-                            <InfoTag tag={tag} variant={getTagVariant(tag)} />
-                        ))}
-                    </div>
-                    <p style="margin-top: 1rem;">
-                        <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
-                            Learn More →
-                        </strong>
-                    </p>
-                </Card>
-            ))}
+        <PageSection id="projects" title="Projects" variant="projects" collapsible={true} initiallyCollapsed={true} collapsedHeight="600px">
+            <div class="project-cards-grid">
+                {projects.filter(project => project.featured).map(project => (
+                    <Card variant="project" title={project.title}>
+                        <p>{project.description}</p>
+                        <div class="project-meta">
+                            {project.tags.map(tag => (
+                                <InfoTag tag={tag} variant={getTagVariant(tag)} />
+                            ))}
+                        </div>
+                        <p style="margin-top: 1rem;">
+                            <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
+                                Learn More →
+                            </strong>
+                        </p>
+                    </Card>
+                ))}
+            </div>
         </PageSection>
 
         <!-- Creative Work Overview -->
@@ -260,15 +267,19 @@ function getTagVariant(tag) {
 
         <!-- Contact Section -->
         <PageSection id="contact" title="Get In Touch" variant="contact">
-            <div class="about-content">
-                <p>I'm always interested in collaborating on research projects, discussing innovative ideas, or exploring opportunities at the intersection of AI, transportation, and creative technology.</p>
-            </div>
-            
-            <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
-                <a href="#" onclick="copyEmailAddress()" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a> |
-                <a href={personal.links.linkedin} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/linkedin_icon.svg" size="1.3em" /> LinkedIn</a> |
-                <a href={personal.links.researchGate} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/research_gate_icon.png" size="1.3em" />Research Gate</a>
-            </div>
+            <SectionSubsection variant="contact">
+                <Card>
+                    <div class="about-content">
+                        <p>I'm always interested in collaborating on research projects, discussing innovative ideas, or exploring opportunities at the intersection of AI, transportation, and creative technology.</p>
+                    </div>
+                    
+                    <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
+                        <a href="#" onclick="copyEmailAddress()" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a> |
+                        <a href={personal.links.linkedin} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/linkedin_icon.svg" size="1.3em" /> LinkedIn</a> |
+                        <a href={personal.links.researchGate} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/research_gate_icon.png" size="1.3em" />Research Gate</a>
+                    </div>
+                </Card>
+            </SectionSubsection>
         </PageSection>
 
 </BlogHomeLayout>

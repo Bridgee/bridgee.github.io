@@ -1,0 +1,15 @@
+---
+import BlogLayout from './BlogLayout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<BlogLayout title={title} currentPage="project_{Astro.params.project}" showHeader={false}>
+  <div class="project-minicar-root">
+    <slot />
+  </div>
+</BlogLayout>
