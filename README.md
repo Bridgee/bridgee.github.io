@@ -6,18 +6,19 @@ A dual-mode interactive personal website for MIT postdoc researcher Zhouqiao (Br
 
 ## 🎮 Project Overview
 
-This innovative personal website offers two complementary experiences:
+This innovative personal website offers two complementary experiences built on professional hierarchical architecture:
 
 1. **🎮 Interactive Digital Twin**: An 8-bit retro game where visitors explore a virtual world to discover research, photography, music, and personal content through interactive gameplay
-2. **📝 Academic Portfolio**: A professional blog-style interface presenting the same content in a traditional academic format
+2. **📝 Academic Portfolio**: A professional blog-style interface presenting the same content in a traditional academic format with proper layout inheritance
 
 ### ✨ Key Features
 
-- **Dual-Mode Architecture**: Seamless switching between game and blog modes
+- **Hierarchical Layout Architecture**: Professional BlogLayout → Specific Layouts → Pages inheritance system
+- **Dual-Mode Architecture**: Seamless switching between game and blog modes  
 - **Shared Content System**: Centralized data management serves both interfaces
 - **Real Media Integration**: 
   - 🎵 SoundCloud music player with 3 original compositions
-  - 📸 Professional Flickr photo gallery with 6 featured works
+  - 📸 Professional Flickr photo gallery with 6 featured works (responsive on all devices)
   - 📄 Downloadable academic CV
 - **Interactive Gameplay**: 
   - 2400×1600px explorable world with smooth camera following
@@ -25,9 +26,10 @@ This innovative personal website offers two complementary experiences:
   - NPCs with multi-line dialogue systems
   - Mobile-optimized touch controls
 - **Professional Features**:
-  - **Scalable Navigation System**: Easy addition of new pages and sections
-  - **Dynamic Projects Showcase**: Card-based project display with external linking
+  - **Clean Separation of Concerns**: Layouts handle styling/scripts, pages contain pure content
+  - **Astro Scoped Styles Solutions**: Proper `:global()` usage for slotted content styling
   - **Enhanced Research Presentation**: Philosophy, roadmap, and future directions
+  - **Responsive Image Management**: Gallery images properly contained across all devices
   - Dark/light theme toggle across all pages
   - Responsive design optimized for all devices
   - Academic publications and research showcase

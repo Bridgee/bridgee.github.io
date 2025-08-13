@@ -13,7 +13,7 @@ import { personal } from "../data/index.js";
         <div class="gallery-grid">
             {personal.media.photos.map(photo => (
                 <Card variant="photo" icon={photo.emoji} title={photo.title}>
-                    <div class="photo-container" style="margin-bottom: 1rem; height: auto;">
+                    <div class="photo-container">
                         <!-- Image -->
                         <img 
                             src={`/images/${photo.filename}`} 
@@ -26,7 +26,7 @@ import { personal } from "../data/index.js";
                     <p class="photo-description">{photo.description}</p>
                     
                     <p style="margin-top: 1rem;">
-                        <a href={`https://www.flickr.com/photos/bridgezhao/${photo.id}/`} target="_blank" style="color: #3498db;">
+                        <a href={`https://www.flickr.com/photos/bridgezhao/${photo.id}/`} target="_blank" class="flickr-link">
                             <strong>View Original on Flickr →</strong>
                         </a>
                     </p>
@@ -42,7 +42,7 @@ import { personal } from "../data/index.js";
                 <p>My approach to photography mirrors my scientific methodology - careful observation, patient waiting for the right moment, and finding beauty in both the planned and serendipitous encounters with light, form, and meaning.</p>
                 
                 <p style="margin-top: 1rem;">
-                    <a href={personal.links.flickr} target="_blank" class="flickr-link" style="color: #3498db;">
+                    <a href={personal.links.flickr} target="_blank" class="flickr-link">
                         <strong><Icon src="/images/icons/flickr.svg"/> Explore Full Gallery on Flickr →</strong>
                     </a>
                 </p>
@@ -50,107 +50,3 @@ import { personal } from "../data/index.js";
         </div>
     </section>
 </GalleryLayout>
-
-<style>
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        margin: 3rem 0;
-        padding: 0 0.5rem;
-    }
-
-    @media (max-width: 1024px) {
-        .gallery-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .gallery-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .gallery-grid {
-            gap: 1rem;
-            padding: 0;
-        }
-    }
-
-    .photo-container {
-        width: 100%;
-        max-width: 100%;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        background: #f8f9fa;
-        box-sizing: border-box;
-        display: block;
-        overflow: hidden;
-    }
-
-    .gallery-image {
-        width: 100%;
-        height: auto;
-        max-width: 100%;
-        display: block;
-        transition: transform 0.3s ease;
-        cursor: pointer;
-        border-radius: 8px;
-        box-sizing: border-box;
-        user-select: none;
-    }
-
-    .gallery-image:hover {
-        transform: scale(1.01);
-    }
-
-    /* Responsive container constraints */
-    @media (max-width: 1024px) {
-        .photo-container {
-            max-width: calc(100vw - 4rem);
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .photo-container {
-            max-width: calc(100vw - 2rem);
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .photo-container {
-            max-width: calc(100vw - 1rem);
-            width: 100%;
-            margin: 0 auto 1rem;
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-        }
-    }
-
-    /* Dark mode support */
-    :global(body.dark-mode) .photo-container {
-        background: #2a2a2a;
-        border: 1px solid #444;
-    }
-
-    .photo-description {
-        color: #666;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin: 0;
-    }
-
-    :global(body.dark-mode) .photo-description {
-        color: #aaa;
-    }
-</style>

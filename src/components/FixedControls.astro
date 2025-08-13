@@ -1,4 +1,6 @@
 ---
+import Icon from '../components/Icon.astro';
+
 interface Props {
   showGameLink?: boolean;
   showBlogLink?: boolean;
@@ -13,12 +15,12 @@ const { showGameLink = false, showBlogLink = false } = Astro.props;
   </div>
   {showGameLink && (
     <div class="mode-switch">
-      <a href="/game">🎮 Interactive Mode</a>
+      <a href="/game"><Icon src="/images/icons/game_mode_icon.png" /> Interactive Mode</a>
     </div>
   )}
   {showBlogLink && (
     <div class="mode-switch">
-      <a href="/blog">📝 Portfolio Mode</a>
+      <a href="/blog"><Icon src="/images/icons/portfolio_icon.png" /> Portfolio Mode</a>
     </div>
   )}
   <button class="theme-toggle" id="theme-toggle">🌙 Dark</button>

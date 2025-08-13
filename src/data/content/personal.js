@@ -8,6 +8,7 @@ export const personal = {
 
   links: {
     googleScholar: "https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl",
+    youtube_playlist: "https://youtube.com/playlist?list=PLglsfJu-Fhfg893g6oB0Jxnqo_zDuk7b-&si=w8rnWdLvJ6cXvSr6",
     linkedin: "https://www.linkedin.com/in/zhouqiao-zhao-60560a56/",
     researchGate: "https://www.researchgate.net/profile/Zhouqiao-Zhao",
     labWebsite: "https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao",

@@ -1,7 +1,8 @@
 ---
 interface Props {
   title?: string;
-  icon?: string;
+  icon?: string;          // For emoji icons: "📸"
+  iconSrc?: string;       // For custom image icons: "/images/icons/camera.svg"
   variant?: 'default' | 'research' | 'project' | 'track' | 'photo' | 'mode-selection';
   class?: string;
   href?: string;
@@ -11,6 +12,7 @@ interface Props {
 const { 
   title, 
   icon, 
+  iconSrc,
   variant = 'default', 
   class: className = '', 
   href,
@@ -22,9 +24,17 @@ const cardProps = href ? { href, target } : {};
 ---
 
 <CardComponent class={`card card-${variant} ${className}`} {...cardProps}>
-  {(title || icon) && (
+  {(title || icon || iconSrc) && (
     <div class="card-header">
-      {icon && <span class="card-icon">{icon}</span>}
+      {iconSrc ? (
+        <img 
+          src={iconSrc} 
+          alt="" 
+          class="card-icon card-icon-image" 
+        />
+      ) : icon && (
+        <span class="card-icon card-icon-emoji">{icon}</span>
+      )}
       {title && <h3 class="card-title">{title}</h3>}
     </div>
   )}
@@ -67,6 +77,20 @@ const cardProps = href ? { href, target } : {};
   }
 
   .card-icon {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon-image {
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: contain;
+    font-size: inherit;
+  }
+
+  .card-icon-emoji {
     font-size: 1.2rem;
   }
 
@@ -228,6 +252,11 @@ const cardProps = href ? { href, target } : {};
     .card-icon {
       font-size: 1.1rem;
     }
+    
+    .card-icon-image {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -244,6 +273,11 @@ const cardProps = href ? { href, target } : {};
     
     .card-icon {
       font-size: 1rem;
+    }
+    
+    .card-icon-image {
+      width: 1rem;
+      height: 1rem;
     }
     
     .card-header {

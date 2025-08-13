@@ -9,6 +9,137 @@ const { title } = Astro.props;
 ---
 
 <BlogLayout title={title} currentPage="gallery" showHeader={false}>
-  <slot />
+  <div class="gallery-root">
+    <slot />
+  </div>
   
+  <!-- Gallery-specific styles -->
+  <style>
+    /* Grid layout for gallery - GLOBAL because it's used by slotted content */
+    :global(.gallery-grid) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0;
+      padding: 0 0.5rem;
+    }
+
+    /* Photo container - GLOBAL because it's used by slotted content */
+    :global(.photo-container) {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #f8f9fa;
+      box-sizing: border-box;
+      display: block;
+      overflow: hidden; /* CRITICAL: clips hover scale and prevents overflow */
+      height: auto;
+    }
+
+    /* Gallery images - GLOBAL because it's used by slotted content */
+    :global(.gallery-image) {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      border-radius: 8px;
+      user-select: none;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    :global(.gallery-image:hover) {
+      transform: scale(1.01);
+    }
+
+    /* Photo description styling - GLOBAL because it's used by slotted content */
+    :global(.photo-description) {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Flickr link styling - GLOBAL because it's used by slotted content */
+    :global(.flickr-link) {
+      display: inline-block;
+      color: #3498db !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    :global(.flickr-link:hover) {
+      color: #2980b9 !important;
+    }
+
+    /* Section styling - GLOBAL because it's used by slotted content */
+    :global(.about-photography) {
+      margin-top: 3rem;
+    }
+
+    /* Dark mode support - GLOBAL because it targets slotted content */
+    :global(body.dark-mode .photo-container) {
+      background: #2a2a2a;
+      border: 1px solid #444;
+    }
+
+    :global(body.dark-mode .photo-description) {
+      color: #aaa;
+    }
+
+    :global(body.dark-mode .flickr-link) {
+      color: #64b5f6 !important;
+    }
+
+    :global(body.dark-mode .flickr-link:hover) {
+      color: #42a5f5 !important;
+    }
+
+    /* Responsive breakpoints - GLOBAL because they target slotted content */
+    @media (max-width: 1024px) {
+      :global(.gallery-grid) {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      :global(.photo-container) {
+        max-width: calc(100vw - 4rem);
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :global(.gallery-grid) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      :global(.photo-container) {
+        max-width: calc(100vw - 2rem);
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :global(.gallery-grid) {
+        gap: 1rem;
+        padding: 0;
+      }
+
+      :global(.photo-container) {
+        max-width: calc(100vw - 1rem);
+        width: 100%;
+        margin: 0 auto 1rem;
+      }
+      
+      :global(.gallery-image) {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+      }
+    }
+  </style>
 </BlogLayout>

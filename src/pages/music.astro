@@ -14,7 +14,7 @@ import { personal } from "../data/index.js";
             {personal.media.music.tracks.map(track => (
                 <Card variant="track" icon="🎵" title={track.title}>
                     <!-- SoundCloud Embed -->
-                    <div class="track-embed-container" style="margin-bottom: 1rem; height: auto;">
+                    <div class="track-embed-container">
                         <iframe 
                             width="100%"
                             height="300" 
@@ -38,7 +38,7 @@ import { personal } from "../data/index.js";
                     <p class="track-description">{track.description}</p>
 
                     <p style="margin-top: 1rem;">
-                        <a href={track.link} target="_blank" style="color: #3498db;">
+                        <a href={track.link} target="_blank" class="soundcloud-link">
                             <strong>Listen on SoundCloud →</strong>
                         </a>
                     </p>
@@ -54,7 +54,7 @@ import { personal } from "../data/index.js";
                 <p>The creative process often parallels my scientific work - both involve systematic exploration, hypothesis testing, and iterative refinement to achieve desired outcomes.</p>
                 
                 <p style="margin-top: 1rem;">
-                    <a href={personal.links.soundcloud} target="_blank" class="soundcloud-link" style="color: #3498db;">
+                    <a href={personal.links.soundcloud} target="_blank" class="soundcloud-link">
                         <strong><Icon src="/images/icons/sound_cloud.svg"/> Explore Full Discography on SoundCloud →</strong>
                     </a>
                 </p>
