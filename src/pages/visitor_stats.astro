@@ -1,0 +1,74 @@
+---
+import VisitorStatsLayout from '../layouts/VisitorStatsLayout.astro';
+---
+
+<VisitorStatsLayout title="Visitor Statistics - Zhouqiao Zhao">
+  
+  <!-- Stats Display -->
+  <div class="stats-display">
+    <div class="widgets-container">
+      
+      <!-- World Map Section -->
+      <div class="widget-section">
+        <h3 class="widget-title">World Map</h3>
+        <div class="map-widget" id="clustrmaps-map">
+          <!-- Interactive ClustrMaps JS embed for high resolution -->
+          <script 
+            type="text/javascript" 
+            id="clustrmaps" 
+            src="//clustrmaps.com/map_v2.js?d=lws-u2vFGm99-Bp5DcEa0xcx9S-VzC0rrVd1IQ89Z2c&cl=ffffff&w=a">
+          </script>
+        </div>
+      </div>
+      
+      <!-- 3D Globe Section -->
+      <div class="widget-section">
+        <h3 class="widget-title">3D Globe View</h3>
+        <div class="globe-widget" id="globe-container">
+          <!-- Globe with dark mode support -->
+          <script 
+            type="text/javascript" 
+            id="clstr_globe" 
+            src="//clustrmaps.com/globe.js?d=lws-u2vFGm99-Bp5DcEa0xcx9S-VzC0rrVd1IQ89Z2c">
+          </script>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</VisitorStatsLayout>
+
+<script>
+  // Dark mode support for Clustrmaps widgets
+  function updateWidgetColors() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    
+    // Update globe colors for dark mode
+    const globeScript = document.getElementById('clstr_globe');
+    if (globeScript && isDarkMode) {
+      // For dark mode: black background, blue oceans, white text
+      globeScript.src = globeScript.src.replace(
+        /globe\.js\?d=([^&]+)/,
+        'globe.js?d=$1&bg=000000&oc=1a1a1a&tc=ffffff'
+      );
+    }
+  }
+
+  // Check theme on load
+  document.addEventListener('DOMContentLoaded', updateWidgetColors);
+  
+  // Listen for theme changes
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        updateWidgetColors();
+      }
+    });
+  });
+  
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+</script>

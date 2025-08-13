@@ -1,0 +1,251 @@
+---
+import BlogLayout from './BlogLayout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<BlogLayout title={title} showHeader={false}>
+  <div class="stats-page-container">
+    <!-- Back Navigation -->
+    <div class="back-nav">
+      <a href="/blog" style="color: #3498db; text-decoration: none; font-weight: 500;">
+        ← Back to Portfolio
+      </a>
+    </div>
+
+    <!-- Page Header -->
+    <div class="stats-hero">
+      <h1 class="page-title">Global Visitor Reach</h1>
+      <p class="page-subtitle">Real-time visualization of worldwide research connections</p>
+    </div>
+
+    <!-- Main Content Slot -->
+    <slot />
+
+    <!-- Privacy Footer -->
+    <div class="privacy-footer">
+      <p>Anonymous visitor tracking • No personal data collected • <a href="https://clustrmaps.com/site/1c7m0" target="_blank" style="color: #3498db; text-decoration: none;">View detailed statistics →</a></p>
+    </div>
+  </div>
+
+  <!-- Clustrmaps Tracking Script -->
+  <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=lws-u2vFGm99-Bp5DcEa0xcx9S-VzC0rrVd1IQ89Z2c&cl=ffffff&w=a"></script>
+</BlogLayout>
+
+<style>
+  .stats-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .back-nav {
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .stats-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 0;
+  }
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .page-subtitle {
+    font-size: 1.3rem;
+    color: #7f8c8d;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .privacy-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid #eee;
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .privacy-footer p {
+    margin: 0;
+  }
+
+  /* Dark mode support */
+  :global(body.dark-mode) .back-nav {
+    border-bottom-color: #333;
+  }
+
+  :global(body.dark-mode) .page-title {
+    color: #fff;
+  }
+
+  :global(body.dark-mode) .page-subtitle {
+    color: #aaa;
+  }
+
+  :global(body.dark-mode) .privacy-footer {
+    border-top-color: #333;
+    color: #aaa;
+  }
+
+  /* Widget Styling (moved from page for better architecture) */
+  .stats-display {
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  .widgets-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .widget-section {
+    text-align: center;
+  }
+
+  .widget-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+
+  .map-widget {
+    width: 100%;
+    max-width: 700px;
+    height: 400px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .globe-widget {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .globe-widget canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* Dark mode support for widgets */
+  :global(body.dark-mode) .widget-title {
+    color: #fff;
+  }
+
+  :global(body.dark-mode) .map-widget,
+  :global(body.dark-mode) .globe-widget {
+    border-color: #555;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.2rem;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .stats-hero {
+      padding: 2rem 0;
+      margin-bottom: 3rem;
+    }
+
+    .stats-display {
+      margin-bottom: 3rem;
+      padding: 1rem 0;
+    }
+
+    .widgets-container {
+      gap: 3rem;
+    }
+
+    .map-widget {
+      max-width: 500px;
+      height: 300px;
+    }
+
+    .globe-widget {
+      max-width: 300px;
+      height: 300px;
+    }
+
+    .widget-title {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-title {
+      font-size: 1.8rem;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+    }
+
+    .stats-hero {
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .stats-display {
+      margin-bottom: 2rem;
+    }
+
+    .map-widget {
+      max-width: 320px;
+      height: 250px;
+    }
+
+    .globe-widget {
+      max-width: 250px;
+      height: 250px;
+    }
+
+    .widget-title {
+      font-size: 1.1rem;
+    }
+
+    .privacy-footer {
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+  }
+</style>

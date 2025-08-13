@@ -32,47 +32,42 @@ export const personal = {
       // Local gallery images with Flickr backup
       {
         id: "54680329597", 
-        title: "Star Track", 
-        emoji: "⭐",
+        title: "Star Track",
         description: "Celestial night photography capturing star movements", 
         filename: "star_track.jpg"
       },
       {
         id: "54681311838",
         title: "Purple Island",
-        emoji: "🏝️" ,
         description: "Mystical landscape with purple hues", 
         filename: "purple_island.jpg",
       },
       {
         id: "54680184412",
         title: "The Game",
-        emoji: "♟️" ,
         description: "Creative composition exploring visual storytelling", 
         filename: "the_game.jpg", 
       },
       {
         id: "54681001891",
         title: "Red People",
-        emoji: "👹",
         description: "Vibrant street photography with bold colors", 
         filename: "red_people.jpg", 
       },
       {
         id: "54680302237",
         title: "The Grand Teton",
-        emoji: "🏔️",
         description: "Majestic mountain landscape photography", 
         filename: "the_grand_teton.jpg", 
       },
       {
         id: "54680359637",
-        title: "Night in Joshua Tree", 
-        emoji: "🌌",
+        title: "Night in Joshua Tree",
         description: "Desert night scene under starlit sky", 
         filename: "night_in_joshua_tree.jpg", 
       }
     ],
+
     music: {
       // Real SoundCloud tracks from zhouqiao-zhao account
       tracks: [
@@ -80,19 +75,19 @@ export const personal = {
           id: "2137403307", 
           title: "Spring kids", 
           link: "https://soundcloud.com/zhouqiao-zhao/spring-kids",
-          description: "Uplifting electronic composition with playful melodies"
+          description: ""
         },
         {
           id: "2137347381", 
           title: "Island grass",
           link: "https://soundcloud.com/zhouqiao-zhao/island-grass-5",
-          description: "Ambient soundscape evoking tropical tranquility"
+          description: ""
         },  
         {
           id: "2137347393", 
           title: "A glass of ice", 
           link: "https://soundcloud.com/zhouqiao-zhao/a-glass-of-ice-1",
-          description: "Crystalline textures with cool, atmospheric tones"
+          description: ""
         }
       ],
       currentTrack: 0

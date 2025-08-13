@@ -1,15 +1,306 @@
 ---
 import BlogLayout from './BlogLayout.astro';
+import Card from '../components/Card.astro';
+import InfoTag from '../components/InfoTag.astro';
+import Icon from '../components/Icon.astro';
+import { projects } from "../data/index.js";
 
 interface Props {
   title: string;
+  projectSlug: string;
 }
 
-const { title } = Astro.props;
+const { title, projectSlug } = Astro.props;
+
+// Find the project by slug
+const project = projects.find(p => p.slug === projectSlug);
+
+if (!project) {
+  throw new Error(`Project with slug "${projectSlug}" not found`);
+}
+
+// Function to get appropriate tag variant based on tag content
+function getTagVariant(tag) {
+  const tagLower = tag.toLowerCase();
+  if (tagLower.includes('research') || tagLower.includes('active')) return 'primary';
+  if (tagLower.includes('collaboration') || tagLower.includes('industry')) return 'success';
+  if (tagLower.includes('interdisciplinary') || tagLower.includes('ethics')) return 'info';
+  if (tagLower.includes('emerging') || tagLower.includes('scalability')) return 'warning';
+  if (tagLower.includes('machine learning') || tagLower.includes('ai')) return 'primary';
+  if (tagLower.includes('behavioral') || tagLower.includes('human')) return 'info';
+  if (tagLower.includes('reinforcement')) return 'secondary';
+  if (tagLower.includes('audio') || tagLower.includes('creative')) return 'warning';
+  return 'default';
+}
 ---
 
-<BlogLayout title={title} currentPage="project_{Astro.params.project}" showHeader={false}>
-  <div class="project-minicar-root">
-    <slot />
+<BlogLayout title={title} showHeader={false}>
+  <div class="project-detail-container">
+    <!-- Back Navigation -->
+    <div class="back-nav">
+      <a href="/blog" style="color: #3498db; text-decoration: none; font-weight: 500;">
+        ← Back to Portfolio
+      </a>
+    </div>
+
+    <!-- Project Hero Section -->
+    <div class="project-hero">
+      <h1 class="project-title">{project.title}</h1>
+      <div class="project-meta">
+        {project.tags.map(tag => (
+          <InfoTag tag={tag} variant={getTagVariant(tag)} />
+        ))}
+      </div>
+      {project.status && (
+        <div class="project-status">
+          <InfoTag tag={project.status} variant="success" />
+        </div>
+      )}
+    </div>
+
+    <!-- Project Overview -->
+    <Card variant="project" title="Project Overview" icon="📋">
+      <p style="font-size: 1.1rem; line-height: 1.7;">{project.description}</p>
+      
+      {project.objectives && (
+        <div style="margin-top: 2rem;">
+          <h4 style="color: #2c3e50; margin-bottom: 1rem;">Key Objectives:</h4>
+          <ul style="line-height: 1.6;">
+            {project.objectives.map(objective => (
+              <li>{objective}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Card>
+
+    <!-- Project Details Grid -->
+    <div class="project-details-grid">
+      {project.methodology && (
+        <Card variant="research" title="Methodology" icon="🔬">
+          <p>{project.methodology}</p>
+          {project.methods && (
+            <ul style="margin-top: 1rem;">
+              {project.methods.map(method => (
+                <li>{method}</li>
+              ))}
+            </ul>
+          )}
+        </Card>
+      )}
+
+      {project.technologies && (
+        <Card variant="project" title="Technologies & Tools" icon="🛠️">
+          <div class="tech-list">
+            {project.technologies.map(tech => (
+              <InfoTag tag={tech} variant="info" />
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {project.results && (
+        <Card variant="research" title="Results & Impact" icon="📊">
+          <p>{project.results}</p>
+          {project.metrics && (
+            <div style="margin-top: 1.5rem;">
+              <h5 style="color: #3498db; margin-bottom: 1rem;">Key Metrics:</h5>
+              <ul>
+                {project.metrics.map(metric => (
+                  <li>{metric}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Card>
+      )}
+
+      {project.challenges && (
+        <Card variant="project" title="Challenges & Solutions" icon="⚡">
+          <p>{project.challenges}</p>
+        </Card>
+      )}
+    </div>
+
+    <!-- Publications & Links -->
+    {(project.publications || project.links || project.repository) && (
+      <Card variant="research" title="Related Resources" icon="🔗">
+        <div class="resources-grid">
+          {project.publications && (
+            <div class="resource-section">
+              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Publications:</h5>
+              {project.publications.map(pub => (
+                <p style="margin-bottom: 0.5rem;">
+                  <a href={pub.url} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <Icon src="/images/icons/download_icon.png" size="1.2em" /> {pub.title}
+                  </a>
+                </p>
+              ))}
+            </div>
+          )}
+          
+          {project.repository && (
+            <div class="resource-section">
+              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Code Repository:</h5>
+              <p>
+                <a href={project.repository} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                  <Icon src="/images/icons/github_icon.png" size="1.2em" /> View on GitHub
+                </a>
+              </p>
+            </div>
+          )}
+          
+          {project.demo && (
+            <div class="resource-section">
+              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Live Demo:</h5>
+              <p>
+                <a href={project.demo} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                  <Icon src="/images/icons/external_link_icon.png" size="1.2em" /> View Demo
+                </a>
+              </p>
+            </div>
+          )}
+        </div>
+      </Card>
+    )}
+
+    <!-- External Link -->
+    {project.link && (
+      <div class="external-link-section" style="text-align: center; margin-top: 3rem;">
+        <a href={project.link} target="_blank" 
+           style="background: #3498db; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: inline-block; transition: all 0.3s ease;">
+          <Icon src="/images/icons/external_link_icon.png" size="1.3em" /> Visit Full Project Details
+        </a>
+      </div>
+    )}
+
+    <!-- Content Slot for additional custom content -->
+    <div class="project-custom-content">
+      <slot />
+    </div>
   </div>
 </BlogLayout>
+
+<style>
+  .project-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .back-nav {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .project-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+  }
+
+  .project-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .project-status {
+    margin-top: 1rem;
+  }
+
+  .project-details-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .resource-section h5 {
+    margin-bottom: 1rem;
+  }
+
+  .external-link-section a:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
+  }
+
+  .project-custom-content {
+    margin-top: 3rem;
+  }
+
+  /* Dark mode support */
+  :global(body.dark-mode) .back-nav {
+    border-bottom-color: #333;
+  }
+
+  :global(body.dark-mode) .project-title {
+    color: #fff;
+  }
+
+  :global(body.dark-mode) .external-link-section a {
+    background: #64b5f6;
+    color: #1a1a1a;
+  }
+
+  :global(body.dark-mode) .external-link-section a:hover {
+    background: #42a5f5;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .project-title {
+      font-size: 2rem;
+    }
+
+    .project-hero {
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .resources-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-title {
+      font-size: 1.5rem;
+    }
+
+    .project-meta {
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .external-link-section a {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+</style>

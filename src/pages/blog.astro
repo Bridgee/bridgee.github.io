@@ -234,9 +234,9 @@ function getTagVariant(tag) {
                             ))}
                         </div>
                         <p style="margin-top: 1rem;">
-                            <strong style="color: #3498db; cursor: pointer;" onclick={`window.open('${project.link}', '_blank')`}>
-                                Learn More →
-                            </strong>
+                            <a href={`/projects/${project.slug}`} style="color: #3498db; text-decoration: none; font-weight: 500;">
+                                <strong>Learn More →</strong>
+                            </a>
                         </p>
                     </Card>
                 ))}

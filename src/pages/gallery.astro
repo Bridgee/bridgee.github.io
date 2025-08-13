@@ -12,7 +12,7 @@ import { personal } from "../data/index.js";
         
         <div class="gallery-grid">
             {personal.media.photos.map(photo => (
-                <Card variant="photo" icon={photo.emoji} title={photo.title}>
+                <Card variant="photo" title={photo.title}>
                     <div class="photo-container">
                         <!-- Image -->
                         <img 
