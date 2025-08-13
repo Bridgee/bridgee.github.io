@@ -65,7 +65,7 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Research Section -->
-        <PageSection id="research" title="My Research" variant="research">
+        <PageSection id="research" title="My Research" variant="research" collapsible={true} initiallyCollapsed={true} collapsedHeight="1200px">
             <!-- Research Philosophy Subsection -->
             <SectionSubsection variant="research">
                 <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
@@ -195,7 +195,7 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Publications Section -->
-        <PageSection id="publications" title="Selected Publications" variant="publications">
+        <PageSection id="publications" title="Publications" variant="publications" collapsible={true} initiallyCollapsed={true} collapsedHeight="800px">
             {publications.map(publication => (
                 <Card variant="research" icon="📄" title={publication.title}>
                     <p><strong>{publication.venue}</strong></p>
@@ -208,16 +208,17 @@ function getTagVariant(tag) {
                 </Card>
             ))}
 
-            <p style="margin-top: 2rem; text-align: center;">
+            <!-- Always visible content (shows even when collapsed) -->
+            <p slot="alwaysVisible" style="margin-top: 1rem; text-align: center;">
                 <a href={personal.links.googleScholar} target="_blank" 
                    style="color: #3498db; text-decoration: none; font-weight: 500;">
-                   <Icon src="/images/icons/google_scholar_icon.svg" />View All Publications on Google Scholar →
+                   <Icon src="/images/icons/google_scholar_icon.svg" size="1.3em" />View All Publications on Google Scholar →
                 </a>
             </p>
         </PageSection>
 
         <!-- Projects Section -->
-        <PageSection id="projects" title="Featured Projects" variant="projects">
+        <PageSection id="projects" title="Projects" variant="projects" collapsible={true} initiallyCollapsed={true} collapsedHeight="800px">
             {projects.filter(project => project.featured).map(project => (
                 <Card variant="project" title={project.title}>
                     <p>{project.description}</p>
@@ -240,7 +241,7 @@ function getTagVariant(tag) {
             <!-- Creative Cards in a single container -->
             <SectionSubsection variant="creative">
                 <div class="creative-cards-grid">
-                    <Card variant="photo" icon="📸" title="Photography Gallery" href="/gallery">
+                    <Card variant="photo" iconSrc="/images/icons/gallery_icon.png" title="Photography Gallery" href="/gallery">
                         <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
                         <p style="margin-top: 1rem;">
                             <strong style="color: #3498db;">View Full Gallery →</strong>
@@ -264,10 +265,9 @@ function getTagVariant(tag) {
             </div>
             
             <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
-                <a href="#" onclick="copyEmailAddress()"><Icon emoji="📧" />Email</a> |
-                <a href={personal.links.linkedin} target="_blank"><Icon src="/images/icons/linkedin_icon.svg" /> LinkedIn</a> |
-                <a href={personal.links.researchGate} target="_blank"><Icon src="/images/icons/research_gate_icon.png" />Research Gate</a>
-              </Card>
+                <a href="#" onclick="copyEmailAddress()" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a> |
+                <a href={personal.links.linkedin} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/linkedin_icon.svg" size="1.3em" /> LinkedIn</a> |
+                <a href={personal.links.researchGate} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/research_gate_icon.png" size="1.3em" />Research Gate</a>
             </div>
         </PageSection>
 

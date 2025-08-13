@@ -4,19 +4,43 @@ interface Props {
   title: string;
   variant?: 'about' | 'research' | 'publications' | 'projects' | 'creative' | 'contact';
   class?: string;
+  collapsible?: boolean;
+  initiallyCollapsed?: boolean;
+  collapsedHeight?: string;
 }
 
 const { 
   id, 
   title, 
   variant = 'default', 
-  class: className = '' 
+  class: className = '',
+  collapsible = false,
+  initiallyCollapsed = false,
+  collapsedHeight = '200px'
 } = Astro.props;
 ---
 
-<section id={id} class={`page-section page-section-${variant} ${className}`}>
-  <h2 class="section-title">{title}</h2>
-  <slot />
+<section id={id} class={`page-section page-section-${variant} ${className} ${collapsible ? 'collapsible' : ''}`} data-collapsible={collapsible} data-initially-collapsed={initiallyCollapsed} data-collapsed-height={collapsedHeight}>
+  <div class="section-header">
+    <h2 class="section-title">{title}</h2>
+  </div>
+  <div class="section-content" data-section-id={id}>
+    <slot />
+  </div>
+  
+  <!-- Always visible content (stays visible even when collapsed) -->
+  <div class="section-always-visible">
+    <slot name="alwaysVisible" />
+  </div>
+  
+  {collapsible && (
+    <div class="collapse-toggle-container">
+      <button class="collapse-toggle" aria-label={`Toggle ${title} section`} type="button">
+        <span class="toggle-icon">▼</span>
+        <span class="toggle-text"></span>
+      </button>
+    </div>
+  )}
 </section>
 
 <style>
@@ -31,13 +55,130 @@ const {
     position: relative;
   }
   
+  .section-header {
+    margin-bottom: 0.5rem;
+  }
+  
   .section-title {
     font-size: 1.8rem;
     font-weight: 600;
     color: #2c3e50;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     border-bottom: 2px solid #3498db;
     padding-bottom: 0.5rem;
+  }
+
+  /* Collapsible toggle button container */
+  .collapse-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .collapse-toggle {
+    background: rgba(52, 152, 219, 0.1);
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    color: #3498db;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .collapse-toggle:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .toggle-icon {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  /* Collapsed state - button is always visible, just changes text/icon */
+  .page-section.collapsed .toggle-icon {
+    transform: rotate(0deg);
+  }
+
+  .page-section:not(.collapsed) .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .page-section.collapsed .toggle-text::before {
+    content: 'Show More';
+  }
+
+  .toggle-text::before {
+    content: 'Show Less';
+  }
+
+  /* Section content with collapsible behavior */
+  .section-content {
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+  }
+
+  .collapsible .section-content {
+    max-height: none;
+  }
+
+  .collapsible.collapsed .section-content {
+    max-height: var(--collapsed-height, 200px);
+    position: relative;
+  }
+
+  /* When collapsed, position the button container over the fade */
+  .collapsible.collapsed .collapse-toggle-container {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+
+  /* Always visible content styling */
+  .section-always-visible {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e1e5e9;
+  }
+
+  /* Hide always visible content when empty */
+  .section-always-visible:empty {
+    display: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  /* When collapsed, ensure always visible content appears after the fade */
+  .collapsible.collapsed .section-always-visible {
+    position: relative;
+    z-index: 5;
+    background: #f8f9fa;
+    margin-top: 0;
+    padding-top: 1rem;
+  }
+
+  /* Fade effect for collapsed content - make it stronger */
+  .collapsible.collapsed .section-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(transparent, #f8f9fa 70%);
+    pointer-events: none;
   }
   
   /* Variant-specific section styling - can be extended later for visual differentiation */
@@ -75,6 +216,32 @@ const {
   :global(body.dark-mode) .section-title {
     color: #fff;
   }
+
+  /* Dark mode collapsible elements */
+  :global(body.dark-mode) .collapse-toggle {
+    background: rgba(100, 181, 246, 0.1);
+    border-color: #64b5f6;
+    color: #64b5f6;
+  }
+
+  :global(body.dark-mode) .collapse-toggle:hover {
+    background: #64b5f6;
+    color: #2a2a2a;
+  }
+
+  /* Dark mode fade effect */
+  :global(body.dark-mode) .collapsible.collapsed .section-content::after {
+    background: linear-gradient(transparent, #2a2a2a 70%);
+  }
+
+  /* Dark mode always visible section */
+  :global(body.dark-mode) .section-always-visible {
+    border-top-color: #404040;
+  }
+
+  :global(body.dark-mode) .collapsible.collapsed .section-always-visible {
+    background: #2a2a2a;
+  }
   
   :global(body.dark-mode) .page-section-about .section-title {
     border-bottom-color: #95a5a6;
@@ -110,8 +277,14 @@ const {
     
     .section-title {
       font-size: 1.5rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0;
       padding-bottom: 0.3rem;
+    }
+
+    .collapse-toggle {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 16px;
     }
   }
 
@@ -137,3 +310,61 @@ const {
     }
   }
 </style>
+
+<script>
+  // Initialize collapsible sections
+  function initializeCollapsibleSections() {
+    const collapsibleSections = document.querySelectorAll('[data-collapsible="true"]');
+    
+    collapsibleSections.forEach(section => {
+      const toggle = section.querySelector('.collapse-toggle');
+      const content = section.querySelector('.section-content');
+      const initiallyCollapsed = section.dataset.initiallyCollapsed === 'true';
+      const collapsedHeight = section.dataset.collapsedHeight || '200px';
+      
+      if (!toggle || !content) return;
+      
+      // Set CSS custom property for collapsed height
+      section.style.setProperty('--collapsed-height', collapsedHeight);
+      
+      // Set initial state
+      if (initiallyCollapsed) {
+        section.classList.add('collapsed');
+      }
+      
+      // Add click event listener
+      toggle.addEventListener('click', function() {
+        const isCollapsed = section.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+          // Expand
+          section.classList.remove('collapsed');
+        } else {
+          // Collapse
+          section.classList.add('collapsed');
+          
+          // Scroll section into view if it's partially off-screen
+          setTimeout(() => {
+            const rect = section.getBoundingClientRect();
+            const isPartiallyVisible = rect.top < 0 || rect.bottom > window.innerHeight;
+            
+            if (isPartiallyVisible) {
+              section.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest' 
+              });
+            }
+          }, 100);
+        }
+      });
+    });
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCollapsibleSections);
+  } else {
+    initializeCollapsibleSections();
+  }
+</script>
