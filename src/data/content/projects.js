@@ -6,7 +6,7 @@ export const projects = [
     title: "Miniature Connected & Automated Vehicle Fleets",
     description: "Developed a comprehensive framework for integrating human factors into autonomous vehicle decision-making systems, focusing on trust, transparency, and user acceptance.",
     tags: ["Cooperative Driving Automation", "Robotics"],
-    link: "/project_minicar",
+    link: "",
     featured: true,
     status: "Active Research",
     objectives: [
@@ -45,7 +45,7 @@ export const projects = [
     title: "Personalized Adaptive Cruise Control (P-ACC)",
     description: "Implemented inverse reinforcement learning algorithms to create personalized driving models for individual drivers, improving safety and comfort in autonomous vehicles.",
     tags: ["Inverse Reinforcement Learning", "Behavioral Modeling"],
-    link: "/project_pacc",
+    link: "",
     featured: true,
     status: "Published Research",
     objectives: [

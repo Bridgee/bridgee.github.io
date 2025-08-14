@@ -9,9 +9,17 @@ interface Props {
   title: string;
   currentPage?: string;
   showHeader?: boolean;
+  showBackButton?: boolean;
+  backButtonTarget?: string;
 }
 
-const { title, currentPage, showHeader = true } = Astro.props;
+const { 
+  title, 
+  currentPage, 
+  showHeader = true, 
+  showBackButton = false, 
+  backButtonTarget = '' 
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -456,9 +464,13 @@ const { title, currentPage, showHeader = true } = Astro.props;
   </style>
 </head>
 
-<body>
+<body class="dark-mode">
   <!-- Fixed Controls -->
-  <FixedControls showGameLink={true} />
+  <FixedControls 
+    showGameLink={true} 
+    showBackButton={showBackButton} 
+    backButtonTarget={backButtonTarget} 
+  />
 
 {showHeader && (
     <div class="header-container">
@@ -491,10 +503,10 @@ const { title, currentPage, showHeader = true } = Astro.props;
     <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; color: #999; font-size: 0.9rem;">
       <p>© 2025 Zhouqiao (Bridge) Zhao • Last updated: August 2025</p>
       <p style="margin-top: 0.5rem;">
-        <a href="/game" style="color: #3498db; text-decoration: none;"><Icon src="/images/icons/game_mode_icon.png" size="1.3em" /> Experience Interactive Digital Twin in Game Mode</a>
+        <a href="/game" style="color: #3498db; text-decoration: none;"><Icon src="/images/icons/game_mode_icon.png" size="2.4em" /> Experience Interactive Digital Twin in Game Mode</a>
       </p>
       <p style="margin-top: 0.5rem;">
-        <a href="/visitor_stats" style="color: #3498db; text-decoration: none;">📊 View Visitor Statistics</a>
+        <a href="/visitor_stats" style="color: #3498db; text-decoration: none;"><Icon src="/images/icons/visitor_stats_icon.png" size="2.4em" /> Visitor Stats</a>
       </p>
     </footer>
   </div>

@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<BlogLayout title={title} currentPage="gallery" showHeader={false}>
+<BlogLayout title={title} currentPage="gallery" showHeader={false} showBackButton={true} backButtonTarget="creative">
   <div class="gallery-root">
     <slot />
   </div>

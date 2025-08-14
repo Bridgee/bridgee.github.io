@@ -332,23 +332,56 @@ const {
         section.classList.add('collapsed');
       }
       
-      // Add click event listener
+      // Add click event listener with improved scroll positioning
       toggle.addEventListener('click', function() {
         const isCollapsed = section.classList.contains('collapsed');
+        const currentScrollY = window.scrollY;
+        const sectionRect = section.getBoundingClientRect();
+        const sectionTop = sectionRect.top + currentScrollY;
+        const sectionBottom = sectionRect.bottom + currentScrollY;
         
         if (isCollapsed) {
-          // Expand
+          // Expanding: Remember current position relative to section start
+          const relativePosition = currentScrollY - sectionTop;
+          
+          // Expand the section
           section.classList.remove('collapsed');
+          
+          // After expansion, maintain relative position within the section
+          setTimeout(() => {
+            // If user was viewing content within the section, maintain that position
+            if (relativePosition > 0 && relativePosition < sectionRect.height) {
+              const newScrollPosition = sectionTop + relativePosition;
+              window.scrollTo({
+                top: Math.max(0, newScrollPosition),
+                behavior: 'smooth'
+              });
+            }
+            // If user was scrolled past this section, no adjustment needed
+          }, 100);
+          
         } else {
-          // Collapse
+          // Collapsing: Position to show the end of visible content
+          const collapsedHeightPx = parseInt(collapsedHeight) || 200;
+          
           section.classList.add('collapsed');
           
-          // Scroll section into view if it's partially off-screen
           setTimeout(() => {
-            const rect = section.getBoundingClientRect();
-            const isPartiallyVisible = rect.top < 0 || rect.bottom > window.innerHeight;
+            // Calculate where the collapsed content ends
+            const collapsedContentEnd = sectionTop + collapsedHeightPx + 100; // +100 for section header
             
-            if (isPartiallyVisible) {
+            // If user is scrolled past the collapsed content, adjust position
+            if (currentScrollY > collapsedContentEnd) {
+              // Position to show the bottom of the collapsed content and the expand button
+              window.scrollTo({
+                top: collapsedContentEnd - 100, // Show a bit above the expand button
+                behavior: 'smooth'
+              });
+            } else if (sectionTop < currentScrollY && currentScrollY < collapsedContentEnd) {
+              // User is within the section, keep current position if it's still visible
+              // No adjustment needed
+            } else if (currentScrollY < sectionTop) {
+              // User is above the section, scroll to show the section start
               section.scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start',

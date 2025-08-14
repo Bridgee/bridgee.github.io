@@ -33,38 +33,38 @@ export const personal = {
       {
         id: "54680329597", 
         title: "Star Track",
-        description: "Celestial night photography capturing star movements", 
-        filename: "star_track.jpg"
+        filename: "star_track.jpg",
+        description: "",
       },
       {
         id: "54681311838",
         title: "Purple Island",
-        description: "Mystical landscape with purple hues", 
         filename: "purple_island.jpg",
+        description: "",
       },
       {
         id: "54680184412",
         title: "The Game",
-        description: "Creative composition exploring visual storytelling", 
         filename: "the_game.jpg", 
+        description: "",
       },
       {
         id: "54681001891",
         title: "Red People",
-        description: "Vibrant street photography with bold colors", 
-        filename: "red_people.jpg", 
+        filename: "red_people.jpg",
+        description: "",
       },
       {
         id: "54680302237",
         title: "The Grand Teton",
-        description: "Majestic mountain landscape photography", 
-        filename: "the_grand_teton.jpg", 
+        filename: "the_grand_teton.jpg",
+        description: "", 
       },
       {
         id: "54680359637",
         title: "Night in Joshua Tree",
-        description: "Desert night scene under starlit sky", 
         filename: "night_in_joshua_tree.jpg", 
+        description: "", 
       }
     ],
 

@@ -65,10 +65,10 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Research Section -->
-        <PageSection id="research" title="My Research" variant="research" collapsible={true} initiallyCollapsed={true} collapsedHeight="1000px">
-            <!-- Research Philosophy Subsection -->
+        <PageSection id="research" title="My Research" variant="research" collapsible={true} initiallyCollapsed={true} collapsedHeight="900px">
+            <!-- Research Vision Subsection -->
             <SectionSubsection variant="research">
-                <Card variant="research" icon="🎯" title="Research Philosophy" class="philosophy-card">
+                <Card variant="research" iconSrc="/images/icons/vision_icon.png" title="Vision" class="vision-card">
                     <p>
                         I believe the future of transportation lies in human-centered AI—automation that adapts to people, infrastructure, and diverse real-world contexts rather than replacing them. 
                         Roads in the coming decades will remain mixed environments, with human drivers, connected and automated vehicles (CAVs), and advanced driver-assistance systems (ADAS) sharing space. 
@@ -134,9 +134,9 @@ function getTagVariant(tag) {
             
             <!-- Research Focus Areas Subsection -->
             <SectionSubsection variant="research">
-                <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Research Focus Areas</h3>
+                <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Focus Areas</h3>
                 <div class="research-focus-grid">
-                    <Card variant="research" icon="🚗" title="Connected & Automated Vehicles">
+                    <Card variant="research" iconSrc="/images/icons/av_car_icon.png" title="Connected & Automated Vehicles">
                         <p>
                         I explore cooperation in ITS at all scales:
                         <ul>  
@@ -157,7 +157,7 @@ function getTagVariant(tag) {
                             <InfoTag tag="Mixed-Traffic Optimization" variant="warning" />
                         </div>
                     </Card>
-                    <Card variant="research" icon="🤖" title="Human-Centered AI">
+                    <Card variant="research" iconSrc="/images/icons/robot_icon.png" title="Human-Centered AI">
                         <p>
                         I develop personalized and explainable AI models for transportation safety and automation. This includes:
                         <ul>
@@ -174,7 +174,7 @@ function getTagVariant(tag) {
                             <InfoTag tag="Personalized Safety Systems" variant="warning" />
                         </div>
                     </Card>
-                    <Card variant="research" icon="🌐" title="Digital Twin Technologies">
+                    <Card variant="research" iconSrc="/images/icons/digital_twin_icon.png" title="Digital Twin Technologies">
                         <p>
                         Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support.
                         My work focuses on:
@@ -200,7 +200,7 @@ function getTagVariant(tag) {
         <PageSection id="publications" title="Publications" variant="publications" collapsible={true} initiallyCollapsed={true} collapsedHeight="600px">
             <div class="publication-cards-grid">
                 {publications.map(publication => (
-                    <Card variant="research" icon="📄" title={publication.title}>
+                    <Card variant="research" title={publication.title}>
                         <p>{publication.venue}</p>
                         <!-- <p>{publication.type}</p> -->
                         <p>{publication.description}</p>
@@ -244,7 +244,7 @@ function getTagVariant(tag) {
         </PageSection>
 
         <!-- Creative Work Overview -->
-        <PageSection title="Creative Explorations" variant="creative">
+        <PageSection id="creative" title="Creative Explorations" variant="creative">
             <!-- Creative Cards in a single container -->
             <SectionSubsection variant="creative">
                 <div class="creative-cards-grid">
@@ -283,3 +283,45 @@ function getTagVariant(tag) {
         </PageSection>
 
 </BlogHomeLayout>
+
+<script>
+  // Handle smart navigation from subpages
+  function handleSmartNavigation() {
+    // Check if we need to scroll to a specific section
+    const targetSection = sessionStorage.getItem('scrollToSection');
+    
+    if (targetSection) {
+      // Clear the session storage
+      sessionStorage.removeItem('scrollToSection');
+      
+      // Wait for page to fully load, then scroll
+      setTimeout(() => {
+        const sectionElement = document.getElementById(targetSection);
+        if (sectionElement) {
+          // Smooth scroll to the section
+          sectionElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+          
+          // Add a subtle highlight effect
+          sectionElement.style.transition = 'background-color 0.5s ease';
+          const originalBg = window.getComputedStyle(sectionElement).backgroundColor;
+          sectionElement.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+          
+          setTimeout(() => {
+            sectionElement.style.backgroundColor = originalBg;
+          }, 2000);
+        }
+      }, 500);
+    }
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleSmartNavigation);
+  } else {
+    handleSmartNavigation();
+  }
+</script>

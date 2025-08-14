@@ -34,14 +34,8 @@ function getTagVariant(tag) {
 }
 ---
 
-<BlogLayout title={title} showHeader={false}>
+<BlogLayout title={title} showHeader={false} showBackButton={true} backButtonTarget="projects">
   <div class="project-detail-container">
-    <!-- Back Navigation -->
-    <div class="back-nav">
-      <a href="/blog" style="color: #3498db; text-decoration: none; font-weight: 500;">
-        ← Back to Portfolio
-      </a>
-    </div>
 
     <!-- Project Hero Section -->
     <div class="project-hero">
@@ -100,7 +94,7 @@ function getTagVariant(tag) {
       )}
 
       {project.results && (
-        <Card variant="research" title="Results & Impact" icon="📊">
+        <Card variant="research" title="Results & Impact" iconSrc="/images/icons/result_icon.png">
           <p>{project.results}</p>
           {project.metrics && (
             <div style="margin-top: 1.5rem;">
@@ -155,7 +149,7 @@ function getTagVariant(tag) {
               <h5 style="color: #2c3e50; margin-bottom: 1rem;">Live Demo:</h5>
               <p>
                 <a href={project.demo} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                  <Icon src="/images/icons/external_link_icon.png" size="1.2em" /> View Demo
+                  🔗 View Demo
                 </a>
               </p>
             </div>
@@ -169,7 +163,7 @@ function getTagVariant(tag) {
       <div class="external-link-section" style="text-align: center; margin-top: 3rem;">
         <a href={project.link} target="_blank" 
            style="background: #3498db; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: inline-block; transition: all 0.3s ease;">
-          <Icon src="/images/icons/external_link_icon.png" size="1.3em" /> Visit Full Project Details
+          🔗 Visit Full Project Details
         </a>
       </div>
     )}
@@ -187,11 +181,6 @@ function getTagVariant(tag) {
     margin: 0 auto;
   }
 
-  .back-nav {
-    margin-bottom: 2rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-  }
 
   .project-hero {
     text-align: center;
@@ -254,9 +243,6 @@ function getTagVariant(tag) {
   }
 
   /* Dark mode support */
-  :global(body.dark-mode) .back-nav {
-    border-bottom-color: #333;
-  }
 
   :global(body.dark-mode) .project-title {
     color: #fff;
