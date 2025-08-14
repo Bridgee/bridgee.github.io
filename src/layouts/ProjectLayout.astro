@@ -4,6 +4,7 @@ import Card from '../components/Card.astro';
 import InfoTag from '../components/InfoTag.astro';
 import Icon from '../components/Icon.astro';
 import { projects } from "../data/index.js";
+import { getTagVariant } from '../utils/tags.js';
 
 interface Props {
   title: string;
@@ -17,20 +18,6 @@ const project = projects.find(p => p.slug === projectSlug);
 
 if (!project) {
   throw new Error(`Project with slug "${projectSlug}" not found`);
-}
-
-// Function to get appropriate tag variant based on tag content
-function getTagVariant(tag) {
-  const tagLower = tag.toLowerCase();
-  if (tagLower.includes('research') || tagLower.includes('active')) return 'primary';
-  if (tagLower.includes('collaboration') || tagLower.includes('industry')) return 'success';
-  if (tagLower.includes('interdisciplinary') || tagLower.includes('ethics')) return 'info';
-  if (tagLower.includes('emerging') || tagLower.includes('scalability')) return 'warning';
-  if (tagLower.includes('machine learning') || tagLower.includes('ai')) return 'primary';
-  if (tagLower.includes('behavioral') || tagLower.includes('human')) return 'info';
-  if (tagLower.includes('reinforcement')) return 'secondary';
-  if (tagLower.includes('audio') || tagLower.includes('creative')) return 'warning';
-  return 'default';
 }
 ---
 

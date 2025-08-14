@@ -306,32 +306,12 @@ import Icon from '../components/Icon.astro';
     </div>
 
     <script>
-      // Theme Toggle - Enhanced with error handling
-      window.toggleTheme = function() {
-        try {
-          document.body.classList.toggle('dark-mode');
-          const isDark = document.body.classList.contains('dark-mode');
-          const toggleBtn = document.getElementById('theme-toggle');
-          if (toggleBtn) {
-            toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-          }
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        } catch (error) {
-          // Theme toggle error (silenced in production)
-        }
-      };
+      import { initializeTheme } from '../utils/theme.js';
 
-      // Load saved theme
+      // Load saved theme using shared utility
       document.addEventListener('DOMContentLoaded', () => {
         try {
-          const savedTheme = localStorage.getItem('theme');
-          if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            const toggleBtn = document.getElementById('theme-toggle');
-            if (toggleBtn) {
-              toggleBtn.textContent = '☀️ Light';
-            }
-          }
+          initializeTheme();
         } catch (error) {
           // Theme loading error (silenced in production)
         }

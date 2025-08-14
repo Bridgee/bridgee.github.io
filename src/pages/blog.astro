@@ -8,20 +8,7 @@ import Card from '../components/Card.astro';
 import Icon from '../components/Icon.astro';
 import InfoTag from '../components/InfoTag.astro';
 import { projects, publications, personal } from "../data/index.js";
-
-// Function to get appropriate tag variant based on tag content
-function getTagVariant(tag) {
-  const tagLower = tag.toLowerCase();
-  if (tagLower.includes('research') || tagLower.includes('active')) return 'primary';
-  if (tagLower.includes('collaboration') || tagLower.includes('industry')) return 'success';
-  if (tagLower.includes('interdisciplinary') || tagLower.includes('ethics')) return 'info';
-  if (tagLower.includes('emerging') || tagLower.includes('scalability')) return 'warning';
-  if (tagLower.includes('machine learning') || tagLower.includes('ai')) return 'primary';
-  if (tagLower.includes('behavioral') || tagLower.includes('human')) return 'info';
-  if (tagLower.includes('reinforcement')) return 'secondary';
-  if (tagLower.includes('audio') || tagLower.includes('creative')) return 'warning';
-  return 'default';
-}
+import { getTagVariant } from '../utils/tags.js';
 ---
 
 <BlogHomeLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher">
@@ -42,9 +29,10 @@ function getTagVariant(tag) {
                   <a href={personal.links.ucr_ece} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> the University of California, Riverside (UCR)</a>, under supervised by
                   <a href={personal.links.matthew_barth} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Matthew Barth</a> and
                   <a href={personal.links.guoyuan_wu} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Guoyuan Wu</a>.
-                  I was also fortunate to be part of the Transportation Systems Research Group at
+                  I was also a part of the Transportation Systems Research Group at
                   <a href={personal.links.ucr_cecert} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Center for Environmental Research and Technology (CE-CERT)</a>.
-                  My research at UCR focused on Connected and Automated Vehicles (CAV) in the mixed-traffic environment, cooperation in the inteligent transportation system at different scales, and Digital Twin.
+                  My research at UCR focused on Connected and Automated Vehicles (CAV) in the mixed-traffic environment, cooperation in the inteligent transportation system at different scales, and Digital Twin
+                  <a href={personal.links.dissertation} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">[Dissertation]</a>.
                 </p>
                 
                 <p>

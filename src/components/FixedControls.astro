@@ -247,51 +247,13 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
 </style>
 
 <script>
-  // Theme Toggle functionality with error handling
-  function toggleTheme() {
-    try {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      const toggleBtn = document.getElementById('theme-toggle');
-      if (toggleBtn) {
-        toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-      }
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    } catch (error) {
-      // Theme toggle error (silenced in production)
-    }
-  }
+  import { initializeTheme } from '../utils/theme.js';
 
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', () => {
     try {
-      // Load saved theme, defaulting to dark mode
-      const savedTheme = localStorage.getItem('theme');
-      const toggleBtn = document.getElementById('theme-toggle');
-      
-      // Default to dark mode if no preference is saved
-      if (savedTheme === 'light') {
-        // User explicitly chose light mode
-        document.body.classList.remove('dark-mode');
-        if (toggleBtn) {
-          toggleBtn.textContent = '🌙 Dark';
-        }
-      } else {
-        // Default to dark mode (savedTheme is null, undefined, or 'dark')
-        document.body.classList.add('dark-mode');
-        if (toggleBtn) {
-          toggleBtn.textContent = '☀️ Light';
-        }
-        // Save the default preference
-        if (!savedTheme) {
-          localStorage.setItem('theme', 'dark');
-        }
-      }
-      
-      // Attach theme toggle event listener
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', toggleTheme);
-      }
+      // Initialize theme using shared utility
+      initializeTheme();
 
       // Back to top functionality
       const backToTopBtn = document.getElementById('back-to-top-btn');
@@ -320,7 +282,4 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       // Initialization error (silenced in production)
     }
   });
-
-  // Make toggleTheme available globally for inline onclick handlers
-  window.toggleTheme = toggleTheme;
 </script>

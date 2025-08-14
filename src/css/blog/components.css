@@ -1,0 +1,229 @@
+/* Component CSS - Shared component styles */
+/* This file contains component-specific CSS that was duplicated across layout files */
+
+/* Research Cards */
+.research-interests {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin: 3rem 0;
+  padding: 0 0.5rem;
+}
+
+.research-card {
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.research-card h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.research-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+body.dark-mode .research-card {
+  background: #2a2a2a;
+  border-color: #333;
+}
+
+body.dark-mode .research-card h3 {
+  color: #fff;
+}
+
+body.dark-mode .research-card p {
+  color: #ccc;
+}
+
+/* Project Cards */
+.project-card {
+  border-left: 4px solid #3498db;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-left-color: #2980b9;
+}
+
+.project-meta {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-tag {
+  background: #ecf0f1;
+  color: #2c3e50;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+body.dark-mode .project-tag {
+  background: #34495e;
+  color: #ecf0f1;
+}
+
+.project-btn {
+  display: inline-block;
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.project-btn:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+body.dark-mode .project-btn {
+  background: #64b5f6;
+  color: #1a1a1a;
+}
+
+body.dark-mode .project-btn:hover {
+  background: #42a5f5;
+}
+
+/* Publications */
+.publication {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.publication:last-child {
+  border-bottom: none;
+}
+
+.publication-title {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.publication-details {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+body.dark-mode .publication {
+  border-bottom-color: #333;
+}
+
+body.dark-mode .publication-title {
+  color: #fff;
+}
+
+body.dark-mode .publication-details {
+  color: #aaa;
+}
+
+/* Roadmap Components */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.roadmap-phase {
+  padding: 1rem;
+  background: rgba(52, 152, 219, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #3498db;
+}
+
+.phase-title {
+  color: #3498db;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.phase-list {
+  line-height: 1.8;
+  color: #555;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.phase-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Dark mode roadmap styling */
+:global(body.dark-mode) .roadmap-phase {
+  background: rgba(52, 152, 219, 0.1);
+  border-left-color: #64b5f6;
+}
+
+:global(body.dark-mode) .phase-title {
+  color: #64b5f6;
+}
+
+:global(body.dark-mode) .phase-list {
+  color: #ccc;
+}
+
+/* Research Framework and Philosophy Boxes */
+div[style*="background: #f8f9fa"] {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+body.dark-mode div[style*="background: #f8f9fa"] {
+  background: #2a2a2a !important;
+}
+
+h3[style*="color: #2c3e50"],
+h4[style*="color: #3498db"] {
+  color: #2c3e50;
+}
+
+body.dark-mode h3[style*="color: #2c3e50"],
+body.dark-mode h4[style*="color: #3498db"] {
+  color: #fff !important;
+}
+
+p[style*="color: #666"],
+ul[style*="color: #666"] {
+  color: #666;
+}
+
+body.dark-mode p[style*="color: #666"],
+body.dark-mode ul[style*="color: #666"] {
+  color: #ccc !important;
+}
+
+/* Research Framework Images */
+img[src*="research_framework"] {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body.dark-mode img[src*="research_framework"] {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}

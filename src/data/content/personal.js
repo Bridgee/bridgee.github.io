@@ -25,6 +25,7 @@ export const personal = {
     intotech: "https://amrd.toyota.com/division/itl/",
     toyota_DT: "https://www.youtube.com/watch?v=5_kU-PzQH0g",
     cv: "/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf",
+    dissertation: "/doc/dissertation.pdf"
   },
 
   media: {
