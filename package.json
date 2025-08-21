@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy-clean": "astro build && gh-pages -d dist -b gh-pages --dotfiles --src \"**/*\" --remove \"thoughts\"",
-    "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
+    "deploy": "deploy-manual.bat",
+    "deploy-gh": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
+    "deploy:force": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history --force",
     "astro": "astro"
   },
   "dependencies": {

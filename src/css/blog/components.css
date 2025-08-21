@@ -227,3 +227,55 @@ body.dark-mode img[src*="research_framework"] {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
 }
+
+/* Core Modules Styling */
+.core-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.module-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.module-description {
+  color: #555 !important;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/* Individual module colors - matching flowchart */
+.module-sensing {
+  color: #4CAF50 !important;
+}
+
+.module-behavior {
+  color: #D84315 !important;
+}
+
+.module-system {
+  color: #2196F3 !important;
+}
+
+/* Dark mode for Core Modules */
+body.dark-mode .module-sensing {
+  color: #66BB6A !important;
+}
+
+body.dark-mode .module-behavior {
+  color: #FF5722 !important;
+}
+
+body.dark-mode .module-system {
+  color: #42A5F5 !important;
+}
+
+body.dark-mode .module-description {
+  color: #ccc !important;
+}

@@ -8,14 +8,9 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<BlogLayout title={title} showHeader={false}>
+<BlogLayout title={title} showHeader={false} showBackButton={true} backButtonTarget="about">
+  
   <div class="stats-page-container">
-    <!-- Back Navigation -->
-    <div class="back-nav">
-      <a href="/blog" style="color: #3498db; text-decoration: none; font-weight: 500;">
-        ← Back to Portfolio
-      </a>
-    </div>
 
     <!-- Page Header -->
     <div class="stats-hero">
@@ -43,11 +38,6 @@ const { title } = Astro.props;
     padding: 0 1rem;
   }
 
-  .back-nav {
-    margin-bottom: 3rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #eee;
-  }
 
   .stats-hero {
     text-align: center;
@@ -84,9 +74,6 @@ const { title } = Astro.props;
   }
 
   /* Dark mode support */
-  :global(body.dark-mode) .back-nav {
-    border-bottom-color: #333;
-  }
 
   :global(body.dark-mode) .page-title {
     color: #fff;

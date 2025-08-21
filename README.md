@@ -75,10 +75,15 @@ project/                    # Active development directory
 │   │       ├── shared.js  # Content used by both modes
 │   │       ├── game.js    # Game-specific data only
 │   │       └── blog.js    # Blog-specific data only
-│   └── css/
-│       ├── palette.css    # Color system & typography
-│       ├── layout.css     # Layout & responsive design
-│       └── sprites.css    # 8-bit character animations
+│   └── css/               # Organized CSS architecture (REFACTORED)
+│       ├── blog/          # Blog mode styles
+│       │   ├── base.css       # Foundation styles
+│       │   ├── components.css # Component styles  
+│       │   └── responsive.css # Responsive breakpoints
+│       └── game/          # Game mode styles
+│           ├── palette.css    # GameBoy colors & fonts
+│           ├── layout.css     # Game UI & layout
+│           └── sprites.css    # 8-bit sprites & animations
 ├── public/                # Static assets (REORGANIZED)
 │   ├── website_icon.png   # Site favicon
 │   ├── doc/               # Document organization
