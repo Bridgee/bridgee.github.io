@@ -32,11 +32,6 @@ if (!project) {
           <InfoTag tag={tag} variant={getTagVariant(tag)} />
         ))}
       </div>
-      {project.status && (
-        <div class="project-status">
-          <InfoTag tag={project.status} variant="success" />
-        </div>
-      )}
     </div>
 
     <!-- Project Overview -->
@@ -45,7 +40,7 @@ if (!project) {
       
       {project.objectives && (
         <div style="margin-top: 2rem;">
-          <h4 style="color: #2c3e50; margin-bottom: 1rem;">Key Objectives:</h4>
+          <h4 style="color: #879db4; margin-bottom: 1rem;">Key Objectives:</h4>
           <ul style="line-height: 1.6;">
             {project.objectives.map(objective => (
               <li>{objective}</li>
@@ -57,6 +52,22 @@ if (!project) {
 
     <!-- Project Details Grid -->
     <div class="project-details-grid">
+      {project.challenges && (
+        <Card variant="project" title="Challenges & Solutions" icon="⚡">
+          <p>{project.challenges}</p>
+        </Card>
+      )}
+      
+      {project.technologies && (
+        <Card variant="project" title="Technologies & Tools" icon="🛠️">
+          <div class="tech-list">
+            {project.technologies.map(tech => (
+              <InfoTag tag={tech} variant="info" />
+            ))}
+          </div>
+        </Card>
+      )}
+      
       {project.methodology && (
         <Card variant="research" title="Methodology" icon="🔬">
           <p>{project.methodology}</p>
@@ -69,23 +80,13 @@ if (!project) {
           )}
         </Card>
       )}
-
-      {project.technologies && (
-        <Card variant="project" title="Technologies & Tools" icon="🛠️">
-          <div class="tech-list">
-            {project.technologies.map(tech => (
-              <InfoTag tag={tech} variant="info" />
-            ))}
-          </div>
-        </Card>
-      )}
-
+      
       {project.results && (
         <Card variant="research" title="Results & Impact" iconSrc="/images/icons/result_icon.png">
           <p>{project.results}</p>
           {project.metrics && (
             <div style="margin-top: 1.5rem;">
-              <h5 style="color: #3498db; margin-bottom: 1rem;">Key Metrics:</h5>
+              <h4 style="color: #879db4; margin-bottom: 1rem;">Key Metrics:</h4>
               <ul>
                 {project.metrics.map(metric => (
                   <li>{metric}</li>
@@ -96,9 +97,24 @@ if (!project) {
         </Card>
       )}
 
-      {project.challenges && (
-        <Card variant="project" title="Challenges & Solutions" icon="⚡">
-          <p>{project.challenges}</p>
+      {project.videos && (
+        <Card variant="research" title="Videos" icon="🎥">
+          <div class="videos-grid">
+            {project.videos.map(video => (
+              <div class="video-container">
+                <h4 style="color: #879db4; margin-bottom: 1rem;">{video.title}</h4>
+                <div class="video-wrapper">
+                  <iframe 
+                    src={video.url.replace('watch?v=', 'embed/').replace('&t=', '?start=').replace('s', '')} 
+                    title={video.title} 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            ))}
+          </div>
         </Card>
       )}
     </div>
@@ -107,9 +123,23 @@ if (!project) {
     {(project.publications || project.links || project.repository) && (
       <Card variant="research" title="Related Resources" icon="🔗">
         <div class="resources-grid">
+
+          {project.links && (
+            <div class="resource-section">
+              <h4 style="color: #879db4; margin-bottom: 1rem;">External Links:</h4>
+              {project.links.map(link => (
+                <p style="margin-bottom: 0.5rem;">
+                  <a href={link.url} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    🔗 {link.title}
+                  </a>
+                </p>
+              ))}
+            </div>
+          )}
+
           {project.publications && (
             <div class="resource-section">
-              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Publications:</h5>
+              <h4 style="color: #879db4; margin-bottom: 1rem;">Publications:</h4>
               {project.publications.map(pub => (
                 <p style="margin-bottom: 0.5rem;">
                   <a href={pub.url} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
@@ -122,7 +152,7 @@ if (!project) {
           
           {project.repository && (
             <div class="resource-section">
-              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Code Repository:</h5>
+              <h4 style="color: #879db4; margin-bottom: 1rem;">Code Repository:</h4>
               <p>
                 <a href={project.repository} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
                   <Icon src="/images/icons/github_icon.png" size="1.2em" /> View on GitHub
@@ -130,29 +160,8 @@ if (!project) {
               </p>
             </div>
           )}
-          
-          {project.demo && (
-            <div class="resource-section">
-              <h5 style="color: #2c3e50; margin-bottom: 1rem;">Live Demo:</h5>
-              <p>
-                <a href={project.demo} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                  🔗 View Demo
-                </a>
-              </p>
-            </div>
-          )}
         </div>
       </Card>
-    )}
-
-    <!-- External Link -->
-    {project.link && (
-      <div class="external-link-section" style="text-align: center; margin-top: 3rem;">
-        <a href={project.link} target="_blank" 
-           style="background: #3498db; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: inline-block; transition: all 0.3s ease;">
-          🔗 Visit Full Project Details
-        </a>
-      </div>
     )}
 
     <!-- Content Slot for additional custom content -->
@@ -244,6 +253,80 @@ if (!project) {
     background: #42a5f5;
   }
 
+  /* Video styling */
+  .videos-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .video-container {
+    margin-bottom: 2rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+
+  /* Dark mode video styling */
+  :global(body.dark-mode) .video-wrapper {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* Consistent section header styling */
+  .video-container h4,
+  .resource-section h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #879db4;
+  }
+
+  /* Dark mode support for all headers */
+  :global(body.dark-mode) .video-container h4,
+  :global(body.dark-mode) .resource-section h4,
+  :global(body.dark-mode) h4[style*="color: #879db4"] {
+    color: #a8bcc8 !important;
+  }
+
+  /* Improve spacing and visual hierarchy */
+  .video-container {
+    margin-bottom: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(135, 157, 180, 0.05);
+  }
+
+  :global(body.dark-mode) .video-container {
+    background: rgba(168, 188, 200, 0.08);
+  }
+
+  .resource-section {
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(135, 157, 180, 0.05);
+    margin-bottom: 1.5rem;
+  }
+
+  :global(body.dark-mode) .resource-section {
+    background: rgba(168, 188, 200, 0.08);
+  }
+
   /* Responsive design */
   @media (max-width: 768px) {
     .project-title {
@@ -258,6 +341,15 @@ if (!project) {
     .resources-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+    }
+
+    .video-container {
+      padding: 0.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .video-container h4 {
+      font-size: 1rem;
     }
   }
 
@@ -274,6 +366,20 @@ if (!project) {
     .external-link-section a {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
+    }
+
+    .video-container {
+      padding: 0.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .video-container h4,
+    .resource-section h4 {
+      font-size: 0.95rem;
+    }
+
+    .resource-section {
+      padding: 0.5rem;
     }
   }
 </style>

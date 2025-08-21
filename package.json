@@ -6,9 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy-clean": "astro build && gh-pages -d dist -b gh-pages --dotfiles --src \"**/*\" --remove \"thoughts\"",
-    "deploy": "astro build && node deploy-script.js",
-    "deploy-gh": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
+    "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
     "deploy:force": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history --force",
     "astro": "astro"
   },

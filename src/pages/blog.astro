@@ -214,7 +214,7 @@ import { getTagVariant } from '../utils/tags.js';
         <!-- Projects Section -->
         <PageSection id="projects" title="Projects" variant="projects" collapsible={true} initiallyCollapsed={true} collapsedHeight="600px">
             <div class="project-cards-grid">
-                {projects.filter(project => project.featured).map(project => (
+                {projects.map(project => (
                     <Card variant="project" title={project.title}>
                         <p>{project.description}</p>
                         <div class="project-meta">
