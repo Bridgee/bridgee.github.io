@@ -1,6 +1,44 @@
 // Featured projects and research work
 export const projects = [
   {
+    id: "personalized-adaptive-cruise-control",
+    slug: "personalized-adaptive-cruise-control",
+    title: "Personalized Adaptive Cruise Control (P-ACC)",
+    description: "Implemented inverse reinforcement learning algorithms to create personalized driving models for individual drivers, improving safety and comfort in autonomous vehicles.",
+    tags: ["Inverse Reinforcement Learning", "Behavioral Modeling"],
+    link: "",
+    featured: true,
+    status: "Published Research",
+    objectives: [
+      "Develop personalized driving models using inverse reinforcement learning",
+      "Improve driver acceptance and comfort in automated driving systems",
+      "Create adaptive control systems that learn individual driving preferences",
+      "Validate personalization effectiveness through human subject studies"
+    ],
+    methodology: "Uses inverse reinforcement learning to infer individual driving preferences from human driving data, then applies these learned preferences to adaptive cruise control systems.",
+    methods: [
+      "Naturalistic driving data collection and analysis",
+      "Inverse reinforcement learning algorithm development", 
+      "Personalized reward function optimization",
+      "Human-in-the-loop validation studies"
+    ],
+    technologies: ["Python", "TensorFlow", "MATLAB/Simulink", "CARLA Simulator", "Machine Learning", "Reinforcement Learning"],
+    results: "Demonstrated 40% improvement in driver satisfaction and 25% reduction in intervention rates compared to standard adaptive cruise control.",
+    metrics: [
+      "40% increase in driver satisfaction scores",
+      "25% reduction in manual interventions",
+      "15% improvement in fuel efficiency",
+      "Successful personalization for 85% of test participants"
+    ],
+    challenges: "Balancing personalization with safety constraints, handling diverse driving styles, and ensuring system robustness across different traffic conditions.",
+    publications: [
+      {
+        title: "Personalized Adaptive Cruise Control using Inverse Reinforcement Learning",
+        url: "/doc/personalized-acc.pdf"
+      }
+    ]
+  },
+  {
     id: "miniature-cav-fleets",
     slug: "miniature-cav-fleets",
     title: "Miniature Connected & Automated Vehicle Fleets",
@@ -39,42 +77,4 @@ export const projects = [
       }
     ]
   },
-  {
-    id: "personalized-adaptive-cruise-control",
-    slug: "personalized-adaptive-cruise-control",
-    title: "Personalized Adaptive Cruise Control (P-ACC)",
-    description: "Implemented inverse reinforcement learning algorithms to create personalized driving models for individual drivers, improving safety and comfort in autonomous vehicles.",
-    tags: ["Inverse Reinforcement Learning", "Behavioral Modeling"],
-    link: "",
-    featured: true,
-    status: "Published Research",
-    objectives: [
-      "Develop personalized driving models using inverse reinforcement learning",
-      "Improve driver acceptance and comfort in automated driving systems",
-      "Create adaptive control systems that learn individual driving preferences",
-      "Validate personalization effectiveness through human subject studies"
-    ],
-    methodology: "Uses inverse reinforcement learning to infer individual driving preferences from human driving data, then applies these learned preferences to adaptive cruise control systems.",
-    methods: [
-      "Naturalistic driving data collection and analysis",
-      "Inverse reinforcement learning algorithm development", 
-      "Personalized reward function optimization",
-      "Human-in-the-loop validation studies"
-    ],
-    technologies: ["Python", "TensorFlow", "MATLAB/Simulink", "CARLA Simulator", "Machine Learning", "Reinforcement Learning"],
-    results: "Demonstrated 40% improvement in driver satisfaction and 25% reduction in intervention rates compared to standard adaptive cruise control.",
-    metrics: [
-      "40% increase in driver satisfaction scores",
-      "25% reduction in manual interventions",
-      "15% improvement in fuel efficiency",
-      "Successful personalization for 85% of test participants"
-    ],
-    challenges: "Balancing personalization with safety constraints, handling diverse driving styles, and ensuring system robustness across different traffic conditions.",
-    publications: [
-      {
-        title: "Personalized Adaptive Cruise Control using Inverse Reinforcement Learning",
-        url: "/doc/personalized-acc.pdf"
-      }
-    ]
-  }
 ];

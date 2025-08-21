@@ -7,12 +7,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy-clean": "astro build && gh-pages -d dist -b gh-pages --dotfiles --src \"**/*\" --remove \"thoughts\"",
-    "deploy": "deploy-manual.bat",
+    "deploy": "astro build && node deploy-script.js",
     "deploy-gh": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
     "deploy:force": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history --force",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.5.0",
     "astro": "^5.12.9",
     "gh-pages": "^6.3.0"
   }
