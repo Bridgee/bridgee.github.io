@@ -88,46 +88,58 @@ export const projects = [
     slug: "miniature-cav-fleets",
     title: "Miniature Connected & Automated Vehicle Fleets",
     scope_tags: [
-      "Cooperative Driving Automation", 
-      "Robotics"
+      "Cooperative Driving Automation",
     ],
     keywords: [
+      "Connected andAutomated Vehicles",
       "ROS2 (Robot Operating System 2)", 
       "Raspberry Pi 4",
-      "3D Printing",
       "Camera and Lidar Perception",
-      "SLAM",
-      "Control",
+      "FFFB Control",
       "Wireless Communication",
     ],
 
     // Overview
     overview: {
-      summary: "Developed a fleet of miniature connected and automated vehicles to simulate cooperative driving automation in different traffic scenarios. The project involved designing and building the vehicles perception, decision making, and control algorithms, developing communication protocols, and validating the system in various traffic scenarios.",
+      summary: "Developed a fleet of miniature connected and automated vehicles to simulate cooperative driving automation in different traffic scenarios. The project designed and built the vehicles perception, decision making, control, and communication protocols from scratch, and the fleet was tested in various traffic scenarios.",
       bullets: [
-        "Design and build a miniature testbed for cooperative driving automation research",
-        "Develop V2V and V2I communication protocols for small-scale fleet coordination",
-        "Create scalable algorithms for multi-vehicle trajectory planning and optimization",
-        "Validate cooperation strategies through real-world miniature vehicle experiments"
-      ]
+        "Miniature testbed with multiple miniature connected and automated vehicles for cooperative driving automation proof-of-concept",
+        "#-Shape track for urban scenario and J-shape track for highway scenario",
+        "1:18 scale RC cars with ackermann steering and differential drive robot car for better maneuverability",
+        "V2V communication protocol for small-scale fleet coordination",
+      ],
     },
 
     // Details
     methodology: {
       summary: "",
       bullets: [ 
-        "Design and build miniature connected and automated vehicles",
-        "Develop V2V and V2I communication protocols for small-scale fleet coordination",
-        "Create scalable algorithms for multi-vehicle trajectory planning and optimization",
-        "Validate cooperation strategies through real-world miniature vehicle experiments"
+        "Sensors: speed encoders, one-dimensional LiDAR, fish-eye camera",
+        "Computing Unit: Raspberry Pi 4B with ROS2 (Robot Operating System 2)",
+        "Auxiliary circuits: motor driver, PWM driver",
+        "Perception: U-Net for semantic segmentation, and ellipse detection for traffic sign detection",
+        "Control: FFFB (Feed-Forward-Feedback) controller",
+        "V2V Communication: IEEE 802.11p (Wi-Fi)"
       ],
+      images: [
+        {
+          src: "/images/project_autotrac_cam_view.jpg",
+          alt: "Traffic sign detection and environment perception"
+        },
+      ]
     }, 
 
     results: {
       summary: "Successfully demonstrated cooperative driving automation in a miniature fleet of connected and automated vehicles in highway and urban driving scenarios.",
       bullets: [
-        "",
-        "The AUTOTRAC project team was also awarded the People's Choice Award in the Student Poster Competition at the IEEE SusTech 2021 conference."
+        "2nd place in International AUTOnomous vehicle TRAffic Challenge (called AUTOTRAC), held on June 17, 2021. AUTOTRAC is an internationally recognized competition funded by the European Commission under the Joint Research Centre's (JRC) Exploratory Research Program, aiming to raise awareness about the potential impact of automated vehicles' cooperation in future transport networks. The final event of the competition was held as part of the 7th International IEEE Conference on Models and Technologies for Intelligent Transportation Systems.",
+        "People's Choice Award in the Student Poster Competition at the IEEE SusTech 2021 conference."
+      ],
+      images: [
+        {
+          src: "/images/project_autotrac_team.avif",
+          alt: "CE-CERT AUTOTRAC Team"
+        },
       ]
     },
 
