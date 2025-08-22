@@ -139,11 +139,11 @@ import { getTagVariant } from '../utils/tags.js';
                         </ul>
                         </p>
 
-                        <div class="project-meta">
-                            <InfoTag tag="Cooperative Driving Automation (CDA)" variant="primary" />
-                            <InfoTag tag="V2I & Roadside Perception" variant="success" />
-                            <InfoTag tag="Multi-Scale Coordination (Macro/Meso/Micro)" variant="info" />
-                            <InfoTag tag="Mixed-Traffic Optimization" variant="warning" />
+                        <div class="research-keywords">
+                            <span class="research-keyword keyword-blue">Cooperative Driving Automation (CDA)</span>
+                            <span class="research-keyword keyword-green">V2I & Roadside Perception</span>
+                            <span class="research-keyword keyword-purple">Multi-Scale Coordination (Macro/Meso/Micro)</span>
+                            <span class="research-keyword keyword-orange">Mixed-Traffic Optimization</span>
                         </div>
                     </Card>
                     <Card variant="research" iconSrc="/images/icons/robot_icon.png" title="Human-Centered AI">
@@ -156,11 +156,11 @@ import { getTagVariant } from '../utils/tags.js';
                         </ul>
                         </p>
 
-                        <div class="project-meta">
-                            <InfoTag tag="Driver–Vehicle–Environment Modeling" variant="primary" />
-                            <InfoTag tag="Graph Neural Networks (GNN) & MLLM" variant="success" />
-                            <InfoTag tag="Explainable AI (XAI) in Transportation" variant="info" />
-                            <InfoTag tag="Personalized Safety Systems" variant="warning" />
+                        <div class="research-keywords">
+                            <span class="research-keyword keyword-blue">Driver–Vehicle–Environment Modeling</span>
+                            <span class="research-keyword keyword-green">Graph Neural Networks (GNN) & MLLM</span>
+                            <span class="research-keyword keyword-purple">Explainable AI (XAI) in Transportation</span>
+                            <span class="research-keyword keyword-orange">Personalized Safety Systems</span>
                         </div>
                     </Card>
                     <Card variant="research" iconSrc="/images/icons/digital_twin_icon.png" title="Digital Twin Technologies">
@@ -174,11 +174,11 @@ import { getTagVariant } from '../utils/tags.js';
                         </ul>
                         </p>
                         
-                        <div class="project-meta">
-                            <InfoTag tag="High-Fidelity Transportation Simulations" variant="primary" />
-                            <InfoTag tag="Real-Time ITS Optimization" variant="success" />
-                            <InfoTag tag="Scenario-Based Infrastructure Planning" variant="info" />
-                            <InfoTag tag="Data-Driven Policy Testing" variant="warning" />
+                        <div class="research-keywords">
+                            <span class="research-keyword keyword-blue">High-Fidelity Transportation Simulations</span>
+                            <span class="research-keyword keyword-green">Real-Time ITS Optimization</span>
+                            <span class="research-keyword keyword-purple">Scenario-Based Infrastructure Planning</span>
+                            <span class="research-keyword keyword-orange">Data-Driven Policy Testing</span>
                         </div>
                     </Card>
                 </div>
@@ -193,6 +193,13 @@ import { getTagVariant } from '../utils/tags.js';
                         <p>{publication.venue}</p>
                         <!-- <p>{publication.type}</p> -->
                         <p>{publication.description}</p>
+                        {publication.scope_tags && (
+                            <div class="project-meta">
+                                {publication.scope_tags.map(tag => (
+                                    <InfoTag tag={tag} variant={getTagVariant(tag)} />
+                                ))}
+                            </div>
+                        )}
                         <p style="margin-top: 1rem;">
                             <a href={publication.link} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
                                 <Icon src="/images/icons/download_icon.png" size="2.0em" /> Download PDF →
@@ -238,14 +245,14 @@ import { getTagVariant } from '../utils/tags.js';
             <SectionSubsection variant="creative">
                 <div class="creative-cards-grid">
                     <Card variant="photo" iconSrc="/images/icons/gallery_icon.png" title="Photography Gallery" href="/gallery">
-                        <p>Capturing moments between experiments and explorations - from laboratory details to vast research landscapes.</p>
+                        <p>Photography serves as both documentation and artistic expression in my life. I'm drawn to vintage lenses because they capture something beyond just sharp images - they capture a vibe, a mood, a feeling that modern optics often miss.</p>
                         <p style="margin-top: 1rem;">
                             <strong style="color: #3498db;">View Full Gallery →</strong>
                         </p>
                     </Card>
                     
                     <Card variant="track" iconSrc="/images/icons/music_icon.png" title="Musics & Sound Design" href="/music">
-                        <p>Electronic compositions exploring the intersection of technology and creativity, with influences from complex systems research.</p>
+                        <p>I'm a composer, sound designer, and music synthesizer designer/experimenter who leverages my EE background in signal processing and circuit design. Sound design and synthesis fascinate me because they represent the perfect fusion of technical precision and creative expression.</p>
                         <p style="margin-top: 1rem;">
                             <strong style="color: #3498db;">Listen to Compositions →</strong>
                         </p>

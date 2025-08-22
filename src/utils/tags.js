@@ -3,10 +3,16 @@
 
 /**
  * Get appropriate tag variant based on tag content
+ * Maps core modules to colors matching the research roadmap framework
  * @param {string} tag - The tag text to analyze
  * @returns {string} - The variant name for styling
  */
 export function getTagVariant(tag) {
+  // Core Modules (matching roadmap colors)
+  if (tag === 'Sensing & Evaluation') return 'success';  // Green (#4CAF50)
+  if (tag === 'Behavior Modeling') return 'warning';     // Red/Orange (#D84315) - matches roadmap
+  if (tag === 'System Applications') return 'primary';   // Blue (#2196F3)
+  
   const tagLower = tag.toLowerCase();
   
   // Research and active projects

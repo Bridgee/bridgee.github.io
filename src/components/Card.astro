@@ -109,6 +109,22 @@ const cardProps = href ? { href, target } : {};
     box-sizing: border-box;
   }
 
+  /* Bullet point styling for all screen sizes */
+  .card-content ul,
+  .card-content ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .card-content li {
+    margin-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
   /* Remove underlines from all links inside cards */
   .card-content a {
     text-decoration: none;
@@ -287,6 +303,22 @@ const cardProps = href ? { href, target } : {};
     
     .card-content {
       line-height: 1.4;
+    }
+
+    /* Fix bullet point overflow on mobile */
+    .card-content ul,
+    .card-content ol {
+      margin: 0;
+      padding-left: 1rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    .card-content li {
+      margin-bottom: 0.25rem;
+      padding-right: 0.25rem;
+      word-break: break-word;
+      line-height: 1.3;
     }
 
     /* Breakout styles for images and figures on mobile */

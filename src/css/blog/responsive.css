@@ -45,6 +45,20 @@
   .section-title {
     font-size: 1.5rem;
   }
+
+  /* Bullet point fixes for tablet/mobile */
+  .card-content ul,
+  .card-content ol {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0;
+  }
+  
+  .card-content li {
+    padding-right: 0.5rem;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 }
 
 /* Small Mobile - 480px and below */
@@ -90,5 +104,19 @@
   
   .about-content {
     font-size: 1rem;
+  }
+
+  /* Additional bullet point fixes for very small screens */
+  .card-content ul,
+  .card-content ol {
+    padding-left: 1rem;
+    margin: 0.25rem 0;
+  }
+  
+  .card-content li {
+    margin-bottom: 0.25rem;
+    padding-right: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 }

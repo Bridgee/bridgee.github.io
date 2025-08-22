@@ -5,7 +5,7 @@ export const projects = [
     // Meta data
     slug: "personalized-adaptive-cruise-control",
     title: "Personalized Adaptive Cruise Control (P-ACC)",
-    scope_tags: ["Inverse Reinforcement Learning", "Behavioral Modeling"],
+    scope_tags: ["Behavior Modeling", "System Applications"],
     keywords: [
       "Inverse Reinforcement Learning", 
       "Gaussian Process Regression",
@@ -55,7 +55,7 @@ export const projects = [
     // Meta data
     slug: "human-in-the-loop-simulation-and-testing-platform",
     title: "Human-in-the-loop Simulation and Testing Platform",
-    scope_tags: ["Simulation", "Testing", "Validation"],
+    scope_tags: ["Sensing & Evaluation", "System Applications"],
 
     // Overview
     description: "Developed a human-in-the-loop simulation platform to test and validate autonomous driving algorithms in real-world scenarios.",
@@ -70,7 +70,7 @@ export const projects = [
     // Meta data
     slug: "cooperative-driving-automation",
     title: "Cooperative Driving Automation (CDA) for Ramp Merging",
-    scope_tags: ["Cooperative Driving Automation", "Traffic Management"],
+    scope_tags: ["System Applications"],
 
     // Overview
     description: "Developed cooperative driving automation (CDA) algorithms for safe and efficient ramp merging in mixed traffic environments.",
@@ -85,7 +85,7 @@ export const projects = [
     // Meta data
     slug: "roadside-perception",
     title: "Roadside Perception and Vehicle-to-Infrastructure (V2I) Communication",
-    scope_tags: ["Roadside Perception", "V2I Communication"],
+    scope_tags: ["Sensing & Evaluation", "System Applications"],
 
     // Overview
     description: "Developed roadside perception and V2I communication systems for real-time traffic monitoring and cooperative driving automation.",
@@ -100,9 +100,7 @@ export const projects = [
     // Meta data
     slug: "miniature-cav-fleets",
     title: "Miniature Connected & Automated Vehicle Fleets",
-    scope_tags: [
-      "Cooperative Driving Automation",
-    ],
+    scope_tags: ["Sensing & Evaluation", "System Applications"],
     keywords: [
       "Connected andAutomated Vehicles",
       "ROS2 (Robot Operating System 2)", 
