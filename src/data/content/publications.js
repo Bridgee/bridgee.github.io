@@ -6,7 +6,7 @@ export const publications = [
     type: "Journal",
     link: "/doc/review_personalization.pdf",
     description: "This paper provides a systematic review of personalization in driving behavior. It proposes a taxonomy to categorize personalized driving behaviors and surveys relevant datasets, modeling methodologies, and validation techniques. The paper emphasizes the need for intelligent vehicles to adapt to the complex and heterogeneous behaviors of human drivers to create a safe and efficient traffic environment.",
-    scope_tags: ["Sensing & Evaluation", "Behavior Modeling"],
+    scope_tags: ["Sensing & Evaluation", "Behavior Modeling", "System Applications"],
     year: 2025
   },
   {
