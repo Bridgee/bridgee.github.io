@@ -19,6 +19,40 @@ const project = projects.find(p => p.slug === projectSlug);
 if (!project) {
   throw new Error(`Project with slug "${projectSlug}" not found`);
 }
+
+// Helper function to convert YouTube URL to embed format
+function getYouTubeEmbedUrl(url) {
+  try {
+    const urlObj = new URL(url);
+    
+    // Extract video ID
+    let videoId = '';
+    if (urlObj.hostname.includes('youtube.com')) {
+      videoId = urlObj.searchParams.get('v');
+    } else if (urlObj.hostname.includes('youtu.be')) {
+      videoId = urlObj.pathname.slice(1);
+    }
+    
+    if (!videoId) return url; // Return original if we can't parse
+    
+    // Build embed URL
+    let embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    
+    // Handle timestamp parameter
+    const timestamp = urlObj.searchParams.get('t');
+    if (timestamp) {
+      const seconds = timestamp.replace('s', ''); // Remove 's' suffix if present
+      if (seconds && !isNaN(seconds)) {
+        embedUrl += `?start=${seconds}`;
+      }
+    }
+    
+    return embedUrl;
+  } catch (e) {
+    console.warn('Failed to parse YouTube URL:', url);
+    return url; // Return original URL as fallback
+  }
+}
 ---
 
 <BlogLayout title={title} showHeader={false} showBackButton={true} backButtonTarget="projects">
@@ -122,11 +156,14 @@ if (!project) {
                 <h4 class="section-header">{video.title}</h4>
                 <div class="video-wrapper">
                   <iframe 
-                    src={video.url.replace('watch?v=', 'embed/').replace('&t=', '?start=').replace('s', '')} 
+                    src={getYouTubeEmbedUrl(video.url)} 
                     title={video.title} 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    style="border: none;" 
+                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
                     allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
                   ></iframe>
                 </div>
               </div>

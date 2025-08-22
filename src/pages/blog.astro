@@ -216,9 +216,9 @@ import { getTagVariant } from '../utils/tags.js';
             <div class="project-cards-grid">
                 {projects.map(project => (
                     <Card variant="project" title={project.title}>
-                        <p>{project.description}</p>
+                        <p>{project.description || project.overview?.summary}</p>
                         <div class="project-meta">
-                            {project.tags.map(tag => (
+                            {project.scope_tags && project.scope_tags.map(tag => (
                                 <InfoTag tag={tag} variant={getTagVariant(tag)} />
                             ))}
                         </div>
