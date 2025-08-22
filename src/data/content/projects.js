@@ -1,10 +1,19 @@
 // Featured projects and research work
 export const projects = [
+  // P-ACC
   {
     // Meta data
     slug: "personalized-adaptive-cruise-control",
     title: "Personalized Adaptive Cruise Control (P-ACC)",
     scope_tags: ["Inverse Reinforcement Learning", "Behavioral Modeling"],
+    keywords: [
+      "Inverse Reinforcement Learning", 
+      "Gaussian Process Regression",
+      "Behavioral Modeling", 
+      "Adaptive Cruise Control",
+      "Real-time Learning",
+      "Human-in-the-loop Validation"
+    ],
 
     // Overview
     description: "Implemented inverse reinforcement learning algorithms to create personalized driving models for individual drivers, improving safety and comfort in autonomous vehicles.", 
@@ -41,6 +50,7 @@ export const projects = [
     ]
   },
 
+  // Human-in-the-loop simulation and testing platform
   {
     // Meta data
     slug: "human-in-the-loop-simulation-and-testing-platform",
@@ -55,6 +65,7 @@ export const projects = [
     // Resources
   },
 
+  // Ramp
   {
     // Meta data
     slug: "cooperative-driving-automation",
@@ -69,6 +80,7 @@ export const projects = [
     // Resources
   },
 
+  // Roadside perception and V2I communication
   {
     // Meta data
     slug: "roadside-perception",
@@ -83,6 +95,7 @@ export const projects = [
     // Resources
   },
 
+  // Miniature CAV fleets
   {
     // Meta data
     slug: "miniature-cav-fleets",
