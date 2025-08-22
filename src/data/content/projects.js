@@ -41,6 +41,16 @@ export const projects = [
         "Online Phase: GPR-based adaptation updates driving gap preference table (DGPT) in real-time using driver feedback",
         "Cloud Architecture: Digital Twin framework stores personalized models, enables incremental learning and federated model sharing",
         "Maximum cumulative reward criterion for model selection and real-time implementation"
+      ],
+      images: [
+        {
+          src: "/images/project_pacc_dt.png",
+          alt: "P-ACC Digital Twin framework"
+        },
+        {
+          src: "/images/project_pacc_online_learning.png",
+          alt: "P-ACC IRL (offline) + GPR (online) learning"
+        },
       ]
     },
 
@@ -52,8 +62,19 @@ export const projects = [
         "Real-time Learning: 62.8% reduction in driver intervention (PoI) and 62.2% reduction in intervention frequency (NIM)",
         "Weather Adaptation: Successful personalization across clear sky, night, and foggy weather conditions",
         "Driver Classification: Effective model selection using cumulative reward criterion for untrained drivers"
-      ]
+      ],
     },
+
+    videos: [
+      {
+        title: "P-ACC Presentation on ICRA 2022",
+        url: "https://www.youtube.com/watch?v=emf0OvAOkMc&pp=0gcJCa0JAYcqIYzv",
+      },
+      {
+        title: "Toyota Digital Twin Roadmap",
+        url: "https://www.youtube.com/watch?v=5_kU-PzQH0g" ,
+      }
+    ],
     
     // Resources
     publications: [
@@ -69,6 +90,12 @@ export const projects = [
         title: "Inverse Reinforcement Learning and Gaussian Process Regression-based Real-time Framework for Personalized Adaptive Cruise Control",
         url: "/doc/real_time_pacc_with_gpr.pdf"
       }
+    ],
+    links: [
+      {
+        title: "Eco-Friendly ITS-DT",
+        url: "https://www.cert.ucr.edu/transportation-systems-vehicle-infrastructure-interaction/eco-friendly-intelligent-transportation-systems#toyota-digital-twin"
+      },
     ]
   },
 
@@ -113,7 +140,13 @@ export const projects = [
         "Context-aware modeling: triads of vehicle-driver-environment interactions with XAI explainability",
         "Multiple AI approaches: CNN-RNN with attention mechanisms, Graph Neural Networks (GNN), Large Language Models (LLM)",
         "Cross-scenario analysis: highway vs local roads, different automation levels, various traffic conditions"
-      ]
+      ],
+      images: [
+        {
+          src: "/images/project_behavior_modeling_lane_change.png",
+          alt: "Flowchart for lane change prediction"
+        },
+      ],
     },
 
     results: {
@@ -196,6 +229,24 @@ export const projects = [
         "Multi-Human Support: Simultaneous multiple human drivers in shared virtual scenarios via networked simulation",
         "Real-time Communication: V2V and V2I communication protocols with realistic network delay modeling",
         "Validation Methods: Comparative analysis between simulation and real-world driving data for algorithm validation"
+      ],
+      images: [
+        {
+          src: "/images/project_dyno_flowchart.jpg",
+          alt: "DiL platform flowchart"
+        },
+        {
+          src: "/images/project_dyno_pt_optimization.jpg",
+          alt: "DiL platform powertrain optimization"
+        },
+        {
+          src: "/images/project_dyno_vd_optimization.jpg",
+          alt: "DiL platform vehicle dynamics optimization"
+        },
+        {
+          src: "/images/project_game_engine.jpg",
+          alt: "Game engine-based simulation for driver personalization studies"
+        }
       ]
     },
 
@@ -210,6 +261,17 @@ export const projects = [
         "Hardware Validation: Dyno-in-the-Loop testing validated across passenger cars, transit buses, and electric vehicles"
       ]
     },
+
+    videos: [
+      {
+        title: "DiL Presentation at SAE World Congress 2020",
+        url: "https://www.youtube.com/watch?v=ZxwppbHmcIY&t",
+      },
+      {
+        title: "Modularized PHEB Modeling",
+        url: "https://www.youtube.com/watch?v=8ed7obTcP6Y&t=736s",
+      }
+    ],
 
     // Resources
     publications: [
@@ -230,6 +292,10 @@ export const projects = [
       {
         title: "CE-CERT Shared Vehicle Testing Facility",
         url: "https://www.cert.ucr.edu/shared-vehicle-testing"
+      },
+      {
+        title: "USDOE, ARPA-E Funded Project",
+        url: "https://www.cert.ucr.edu/innovative-vehicle-powertrain-eco-operation-system-efficient-plug-hybrid-electric-buses"
       }
     ]
   },
@@ -239,7 +305,8 @@ export const projects = [
   // MPC, LQR, optimal control: hierarchical structure, corridor level, ramp level, vehicle level
   // trajectory optimization
   // quantified improvement from 3 perspectives: mobility, sustaintability, and safety
-  // videos
+  // videos: presentation on IV Symposium2020: https://www.youtube.com/watch?v=BRihgKCiG4M, Demo on three scenarios: https://www.youtube.com/watch?v=fvL2_pBQYhI
+  // methodology images: project_ramp_architecture.png and project_ramp_geometry.png
   {
     // Meta data
     slug: "cooperative-driving-automation",
@@ -258,9 +325,10 @@ export const projects = [
   // Innovation Corridor: https://www.cert.ucr.edu/riverside-innovation-corridor
   // Smart Intersection with RSPU: camera, lidar, gps with RTK, wireless communication
   // LiDAR: https://www.youtube.com/watch?v=0egpmgkzyG0
-  // Camera: video placeholder
+  // Camera: https://www.youtube.com/watch?v=yl-4032b-_k
   // Background substraction paper
   // Autocalibration, dynamic background subtraction based on hierarchical learning, validation in both CARLA simulation and real-world validation with communication delay
+  // 3 demo images: project_rspu_architecture.png, project_rspu_communication_topology.jpg, project_rspu_results.png
   {
     // Meta data
     slug: "roadside-perception",
@@ -376,4 +444,5 @@ export const projects = [
     ],
     repository: "https://github.com/Bridgee/autotrac_ros",
   },
+
 ];
