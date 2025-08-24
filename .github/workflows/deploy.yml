@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]        # change if your default branch is different
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -13,10 +13,28 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: withastro/action@v2
-        # optional inputs:
-        # path: .            # root of your project
-        # node-version: 20
-        # package-manager: npm
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build with Astro
+        run: npm run build
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
