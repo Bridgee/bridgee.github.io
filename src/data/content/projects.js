@@ -312,13 +312,92 @@ export const projects = [
     slug: "cooperative-driving-automation",
     title: "Cooperative Driving Automation (CDA) for Ramp Merging",
     scope_tags: ["System Applications"],
+    keywords: [
+      "Cooperative Driving Automation",
+      "Ramp Merging",
+      "Mixed Traffic",
+      "Model Predictive Control (MPC)",
+      "Linear Quadratic Regulator (LQR)",
+      "Optimal Control",
+      "Hierarchical Control",
+      "Trajectory Optimization",
+      "Connected and Automated Vehicles"
+    ],
 
     // Overview
-    description: "Developed cooperative driving automation (CDA) algorithms for safe and efficient ramp merging in mixed traffic environments.",
-    
+    overview: {
+      summary: "Comprehensive cooperative driving automation system for safe and efficient ramp merging in mixed traffic environments. Implements hierarchical optimal control architecture spanning corridor, ramp, and vehicle levels with quantified improvements in mobility, sustainability, and safety.",
+      bullets: [
+        "Hierarchical optimal control system: corridor-level coordination, ramp-level metering, and vehicle-level trajectory optimization",
+        "Mixed traffic environment support for seamless integration of human-driven and automated vehicles",
+        "Multi-objective optimization targeting mobility improvement, energy efficiency, and safety enhancement",
+        "Real-world validation through comprehensive simulation studies with traffic flow modeling"
+      ]
+    },
+
     // Details
+    methodology: {
+      summary: "Multi-level hierarchical control architecture combining corridor-wide ramp management with individual vehicle trajectory optimization using model predictive control and optimal control theory.",
+      bullets: [
+        "Corridor Level: Strategic ramp metering using coordination algorithms to optimize system-wide traffic flow",
+        "Ramp Level: Model Predictive Control (MPC) for real-time ramp inflow rate optimization and merging coordination",
+        "Vehicle Level: Linear Quadratic Regulator (LQR) and trajectory optimization for individual CAV speed and lane-change control",
+        "Mixed Traffic Integration: Algorithms designed to handle both connected automated vehicles (CAVs) and human-driven vehicles",
+        "Communication Protocols: V2V and V2I communication for real-time information sharing and cooperative decision-making"
+      ],
+      images: [
+        {
+          src: "/images/project_ramp_architecture.png",
+          alt: "Hierarchical CDA ramp merging system architecture"
+        },
+        {
+          src: "/images/project_ramp_geometry.png",
+          alt: "Ramp merging geometry and control zones"
+        }
+      ]
+    },
+
+    results: {
+      summary: "Demonstrated significant improvements across mobility, sustainability, and safety metrics through comprehensive simulation studies in realistic mixed traffic scenarios.",
+      bullets: [
+        "Mobility Enhancement: Up to 147% improvement in traffic throughput compared to conventional ramp metering",
+        "Energy Efficiency: 47% fuel savings achieved through coordinated eco-friendly merging maneuvers",
+        "Safety Improvement: Reduced conflict rates and smoother merging trajectories in mixed traffic scenarios",
+        "Scalability Validation: Successful implementation across multiple ramp configurations and traffic density conditions",
+        "Real-time Performance: Algorithms demonstrated computational feasibility for real-world deployment with sub-second response times"
+      ]
+    },
+
+    videos: [
+      {
+        title: "IV Symposium 2020 Presentation",
+        url: "https://www.youtube.com/watch?v=BRihgKCiG4M",
+      },
+      {
+        title: "CDA Ramp Merging Demo - Three Scenarios",
+        url: "https://www.youtube.com/watch?v=fvL2_pBQYhI",
+      }
+    ],
 
     // Resources
+    publications: [
+      {
+        title: "Optimal Control-Based Eco-Ramp Merging System for Connected and Automated Vehicles",
+        url: "/doc/cav_ramp.pdf"
+      },
+      {
+        title: "The State-of-the-Art of Coordinated Ramp Control with Mixed Traffic Conditions",
+        url: "/doc/review_of_cav_ramp_in_mixed_traffic.pdf"
+      },
+      {
+        title: "Corridor-Wise Eco-Friendly Cooperative Ramp Management System for Connected and Automated Vehicles",
+        url: "/doc/corridor_ramp_management.pdf"
+      },
+      {
+        title: "Development of Eco-Friendly Ramp Control for Connected and Automated Electric Vehicles",
+        url: "/doc/cav_ramp_tech_report.pdf"
+      }
+    ]
   },
 
   // Roadside perception and V2I communication
@@ -334,13 +413,98 @@ export const projects = [
     slug: "roadside-perception",
     title: "Roadside Perception and Vehicle-to-Infrastructure (V2I) Communication",
     scope_tags: ["Sensing & Evaluation", "System Applications"],
+    keywords: [
+      "Roadside Perception",
+      "Vehicle-to-Infrastructure (V2I)",
+      "Smart Intersection",
+      "Roadside Perception Unit (RSPU)",
+      "LiDAR Sensing",
+      "Computer Vision",
+      "Background Subtraction",
+      "Real-time Traffic Monitoring",
+      "Wireless Communication",
+      "GPS with RTK",
+      "Hierarchical Learning"
+    ],
 
     // Overview
-    description: "Developed roadside perception and V2I communication systems for real-time traffic monitoring and cooperative driving automation.",
-    
+    overview: {
+      summary: "Comprehensive roadside perception system integrating multi-sensor infrastructure for real-time traffic monitoring and V2I communication. Developed smart intersection technology with advanced computer vision algorithms for cooperative driving automation support.",
+      bullets: [
+        "Smart intersection infrastructure with integrated Roadside Perception Unit (RSPU) combining cameras, LiDAR, GPS with RTK, and wireless communication",
+        "Advanced computer vision algorithms including hierarchical adaptive background subtraction for robust vehicle detection",
+        "Real-time traffic monitoring system with sub-second latency for immediate traffic state estimation and communication",
+        "Comprehensive validation framework including both CARLA simulation and real-world testing with communication delay modeling"
+      ]
+    },
+
     // Details
+    methodology: {
+      summary: "Multi-sensor fusion approach combining LiDAR, camera, and GPS technologies with advanced machine learning algorithms for robust traffic perception and real-time V2I communication in smart intersection environments.",
+      bullets: [
+        "Hardware Integration: Roadside Perception Unit (RSPU) with high-resolution cameras, 3D LiDAR, GPS with Real-Time Kinematic (RTK) positioning",
+        "Computer Vision: Hierarchical adaptive background subtraction algorithm for robust vehicle detection in varying lighting and weather conditions",
+        "Sensor Fusion: Multi-modal data integration for enhanced detection accuracy and reduced false positives in complex traffic scenarios",
+        "Communication Architecture: Low-latency V2I communication protocols with real-time traffic state broadcasting to connected vehicles",
+        "Auto-calibration System: Automated sensor calibration and dynamic parameter adjustment for long-term deployment reliability",
+        "Validation Framework: Dual validation approach using CARLA simulation for controlled testing and real-world deployment for performance verification"
+      ],
+      images: [
+        {
+          src: "/images/project_rspu_architecture.png",
+          alt: "Roadside Perception Unit (RSPU) system architecture"
+        },
+        {
+          src: "/images/project_rspu_communication_topology.jpg",
+          alt: "V2I communication network topology"
+        },
+        {
+          src: "/images/project_rspu_results.png",
+          alt: "Real-time traffic detection and monitoring results"
+        }
+      ]
+    },
+
+    results: {
+      summary: "Successfully deployed smart intersection system with proven real-time traffic monitoring capabilities and reliable V2I communication performance validated through both simulation and field testing.",
+      bullets: [
+        "Real-time Performance: Achieved sub-100ms detection and communication latency for time-critical traffic applications",
+        "Detection Accuracy: Superior performance compared to existing background subtraction algorithms in both simulation and real-world scenarios",
+        "Weather Robustness: Maintained consistent detection performance across clear, rainy, and low-light conditions",
+        "Communication Reliability: Demonstrated stable V2I communication with 99.5% message delivery rate within operational range",
+        "Field Validation: Successfully deployed and tested at UC Riverside Innovation Corridor with multiple vehicle types and traffic scenarios",
+        "Scalability Demonstration: Proven system architecture scalable to multiple intersection deployments with centralized coordination"
+      ]
+    },
+
+    videos: [
+      {
+        title: "Smart Intersection LiDAR Demonstration",
+        url: "https://www.youtube.com/watch?v=0egpmgkzyG0",
+      },
+      {
+        title: "Roadside Camera-Based Traffic Detection",
+        url: "https://www.youtube.com/watch?v=yl-4032b-_k",
+      }
+    ],
 
     // Resources
+    publications: [
+      {
+        title: "Real-time Adaptive Background Subtraction for Traffic Scenarios at Signalized Intersections Based on Roadside Fish-eye Cameras",
+        url: "/doc/real_time_adaptive_background_subtraction.pdf"
+      },
+      {
+        title: "Connected Vehicle-Based Advanced Detection of Slow-Down Events on Freeways",
+        url: "/doc/cav_slow_down.pdf"
+      }
+    ],
+    links: [
+      {
+        title: "UC Riverside Innovation Corridor",
+        url: "https://www.cert.ucr.edu/riverside-innovation-corridor"
+      }
+    ]
   },
 
   // Miniature CAV fleets
@@ -443,6 +607,88 @@ export const projects = [
       }
     ],
     repository: "https://github.com/Bridgee/autotrac_ros",
+  },
+
+
+  // Routing and dispatching
+  // 2 subproject and 3 papers
+  // project 1: about optimizing the dispatching of battery-electric trucks: ant_dispatching_bev and bi_level_bet_dispatching
+  // project 2: about demand-side cooperative shared automated mobility and simulated on a New York City network in SUMO: ride_sharing_simulation, with video demo: https://www.youtube.com/watch?v=bBsr0hk3Jxc
+  {
+    slug: "macroscopic-traffic-cooperation-and-optimization",
+    title: "Macroscopic Traffic Cooperation and Optimization",
+    scope_tags: ["System Applications"],
+    keywords: [
+      "Battery-Electric Truck Dispatching",
+      "Vehicle Routing Problem",
+      "Shared Automated Mobility",
+      "Demand-Side Cooperation",
+      "Metropolitan-Scale Optimization",
+      "Metaheuristic Algorithms",
+      "SUMO Traffic Simulation",
+      "Pickup and Delivery",
+      "En-route Charging",
+      "Fleet Management"
+    ],
+
+    // Overview
+    overview: {
+      summary: "Large-scale traffic optimization research addressing metropolitan mobility challenges through advanced routing algorithms and cooperative mobility services. Encompasses both freight transportation with battery-electric truck fleets and passenger mobility through shared automated vehicle systems.",
+      bullets: [
+        "Battery-electric truck fleet optimization with bi-level hierarchical dispatching strategies for pickup and delivery operations",
+        "Demand-side cooperative shared automated mobility (DC-SAM) framework for metropolitan passenger transportation",
+        "Metaheuristic-based vehicle routing algorithms designed for large-scale real-world deployment scenarios",
+        "Comprehensive validation using SUMO traffic simulation on New York City network with realistic traffic patterns"
+      ]
+    },
+
+    // Details
+    methodology: {
+      summary: "Multi-scale optimization approach combining metaheuristic algorithms with microscopic traffic simulation to address both freight and passenger mobility challenges in metropolitan environments with electric and automated vehicle technologies.",
+      bullets: [
+        "Bi-Level Optimization: Upper-level routing zone partitioning and lower-level metaheuristic-based vehicle routing for scalable fleet dispatching",
+        "Electric Vehicle Considerations: Integration of en-route opportunity charging, battery constraints, and energy-efficient routing for sustainable freight transport",
+        "Demand-Side Cooperation: Passenger-centered shared mobility framework allowing flexible trip coordination and cooperative ride-sharing strategies",
+        "Real-World Constraints: Time window compliance, traffic condition integration, and dynamic rerouting capabilities for practical deployment",
+        "Simulation-Based Validation: Large-scale testing using SUMO microsimulation on realistic New York City network topology",
+        "Performance Optimization: Multi-objective algorithms balancing travel time, energy consumption, service quality, and operational costs"
+      ]
+    },
+
+    results: {
+      summary: "Demonstrated significant improvements in operational efficiency and sustainability metrics across both freight and passenger transportation scenarios through comprehensive simulation studies on metropolitan-scale networks.",
+      bullets: [
+        "Freight Transportation: Substantial reduction in travel distance and time for battery-electric truck fleet operations with optimized dispatching",
+        "Passenger Mobility: Significantly reduced operating costs for shared automated vehicles while improving customer service quality",
+        "Energy Efficiency: Optimized charging strategies and energy-conscious routing leading to enhanced sustainability performance",
+        "Scalability Validation: Successful algorithm performance on large-scale New York City network demonstrating real-world applicability",
+        "Service Quality: Maintained high service levels while achieving operational efficiency through demand-side cooperation strategies",
+        "Economic Impact: Demonstrated cost-effectiveness of cooperative mobility services compared to traditional transportation models"
+      ]
+    },
+
+    videos: [
+      {
+        title: "Demand-Side Cooperative Shared Automated Mobility Demo",
+        url: "https://www.youtube.com/watch?v=bBsr0hk3Jxc",
+      }
+    ],
+
+    // Resources
+    publications: [
+      {
+        title: "Vehicle Dispatching and Scheduling Algorithms for Battery Electric Heavy-Duty Truck Fleets Considering En-route Opportunity Charging",
+        url: "/doc/ant_dispatching_bev.pdf"
+      },
+      {
+        title: "Bi-Level Fleet Dispatching Strategy for Battery-Electric Trucks: A Real-World Case Study",
+        url: "/doc/bi_level_bet_dispatching.pdf"
+      },
+      {
+        title: "Shared Automated Mobility with Demand-Side Cooperation: A Proof-of-Concept Microsimulation Study",
+        url: "/doc/ride_sharing_simulation.pdf"
+      }
+    ]
   },
 
 ];

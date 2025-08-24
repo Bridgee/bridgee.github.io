@@ -12,14 +12,15 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   color: #333;
-  background: #fff;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  min-height: 100vh;
   transition: all 0.3s ease;
 }
 
 /* Dark Mode Base */
 body.dark-mode {
   color: #e0e0e0;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #1e2833 0%, #0f0f0f 100%);
 }
 
 /* Container and Layout */

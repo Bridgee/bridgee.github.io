@@ -1,7 +1,7 @@
 ---
 interface Props {
   tag: string;
-  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'info';
+  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'info' | 'subtle';
 }
 
 const { tag, variant = 'default' } = Astro.props;
@@ -98,6 +98,20 @@ const { tag, variant = 'default' } = Astro.props;
     background: linear-gradient(135deg, #7d3c98 0%, #6c3483 100%);
   }
 
+  /* Subtle variant for research focus keywords */
+  .info-tag-subtle {
+    background: rgba(255, 255, 255, 0.8);
+    color: #2c3e50;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .info-tag-subtle:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
   /* Dark mode adjustments */
   :global(body.dark-mode) .info-tag-default {
     background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
@@ -116,5 +130,17 @@ const { tag, variant = 'default' } = Astro.props;
 
   :global(body.dark-mode) .info-tag:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Dark mode for subtle variant */
+  :global(body.dark-mode) .info-tag-subtle {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  :global(body.dark-mode) .info-tag-subtle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 </style>

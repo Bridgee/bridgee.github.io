@@ -33,7 +33,7 @@ const useImage = src && src.length > 0;
     style={`width: ${size}; height: ${size}; vertical-align: middle;`}
     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
   />
-  <span class="icon-fallback" style="display: none; font-size: {size}; vertical-align: middle;">{fallback}</span>
+  <span class="icon-fallback" style={`display: none; font-size: ${size}; vertical-align: middle;`}>{fallback}</span>
 ) : (
   <!-- Emoji icon -->
   <span 

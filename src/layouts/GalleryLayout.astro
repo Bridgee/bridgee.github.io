@@ -18,7 +18,7 @@ const { title } = Astro.props;
     /* Grid layout for gallery - GLOBAL because it's used by slotted content */
     :global(.gallery-grid) {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: 1fr;
       gap: 2.5rem;
       margin: 3rem 0;
       padding: 0 0.5rem;

@@ -42,11 +42,12 @@ const { currentPage } = Astro.props;
   .nav {
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(227, 242, 253, 0.9);
+    backdrop-filter: blur(15px);
     z-index: 100;
     padding: 1rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(243, 229, 245, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .nav-container {
@@ -67,13 +68,15 @@ const { currentPage } = Astro.props;
 
   .nav a:hover, 
   .nav a.active {
-    background: #ecf0f1;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
   }
 
   /* Dark mode support */
   :global(body.dark-mode) .nav {
-    background: rgba(26, 26, 26, 0.95);
-    border-bottom-color: #333;
+    background: rgba(30, 40, 51, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   :global(body.dark-mode) .nav a {
@@ -82,7 +85,8 @@ const { currentPage } = Astro.props;
 
   :global(body.dark-mode) .nav a:hover, 
   :global(body.dark-mode) .nav a.active {
-    background: #333;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e3f2fd;
   }
 
   /* Responsive design */
