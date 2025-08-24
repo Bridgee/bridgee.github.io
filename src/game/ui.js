@@ -332,3 +332,203 @@ function fallbackCopyGameEmail(email) {
     
     document.body.removeChild(textArea);
 }
+
+// Global function for research detail popup
+window.showResearchDetail = function(researchId) {
+    // Use actual blog content instead of generic descriptions
+    const researchAreas = {
+        'cooperative-driving': {
+            title: 'Cooperative Driving Automation',
+            description: 'I explore cooperation in ITS at all scales: Macro – ride-sharing optimization, multi-vehicle routing, and coordinated dispatch for mixed fleets. Meso – cooperative trajectory planning, eco-ramp merging, and formation control using CDA frameworks. Micro – driver intention prediction, personalized adaptive cruise control, and cooperative lane merging. I also integrate vehicle-to-infrastructure (V2I) communication and infrastructure-side perception using roadside perception units (RSPUs).',
+            tags: ['Cooperative Driving Automation (CDA)', 'V2I & Roadside Perception', 'Multi-Scale Coordination', 'Mixed-Traffic Optimization'],
+            icon: '🚗'
+        },
+        'human-ai': {
+            title: 'Human-Centered AI',
+            description: 'I develop personalized and explainable AI models for transportation safety and automation. This includes context-aware modeling of the driver–vehicle–environment triad using Graph Neural Networks (GNNs) and multi-modal large language models (MLLMs), predicting and interpreting driver responses to safety systems like Forward Collision Warnings (FCW), and designing machine learning pipelines that balance performance with explainability.',
+            tags: ['Driver–Vehicle–Environment Modeling', 'Graph Neural Networks (GNN) & MLLM', 'Explainable AI (XAI)', 'Personalized Safety Systems'],
+            icon: '🧠'
+        },
+        'digital-twins': {
+            title: 'Digital Twin Technologies',
+            description: 'Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support. My work focuses on building high-fidelity digital twins for ITS and vehicle automation, using these twins to test safety systems and optimize traffic flow, and supporting resilient infrastructure planning by simulating the impact of new technologies, policies, and mobility patterns at city and regional scales.',
+            tags: ['High-Fidelity Transportation Simulations', 'Real-Time ITS Optimization', 'Scenario-Based Infrastructure Planning', 'Data-Driven Policy Testing'],
+            icon: '🤖'
+        }
+    };
+    
+    const research = researchAreas[researchId];
+    if (!research) {
+        alert('Research area details not found!');
+        return;
+    }
+    
+    // Create research detail modal
+    const researchModal = document.createElement('div');
+    researchModal.id = 'research-modal';
+    researchModal.style.cssText = `
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: var(--primary); border: 3px solid var(--secondary);
+        padding: 25px; z-index: 10000; max-width: 500px; width: 95%;
+        font-family: inherit; color: var(--secondary); 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        max-height: 80vh; overflow-y: auto;
+    `;
+    
+    researchModal.innerHTML = `
+        <div style="text-align: center;">
+            <div style="font-size: 48px; margin-bottom: 15px;">${research.icon}</div>
+            <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 16px;">${research.title}</h2>
+            
+            <div style="text-align: left; margin: 20px 0;">
+                <p style="font-size: 10px; line-height: 1.6; margin-bottom: 15px;">${research.description}</p>
+                
+                <div style="margin: 15px 0;">
+                    <h4 style="color: var(--accent); font-size: 10px; margin-bottom: 8px;">🔍 KEY AREAS:</h4>
+                    ${research.tags.map(tag => 
+                        `<span style="background: var(--highlight); padding: 3px 8px; margin: 2px; 
+                                      font-size: 8px; border-radius: 10px; display: inline-block;">${tag}</span>`
+                    ).join('')}
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <button onclick="closeResearchDetail()" 
+                        style="padding: 10px 20px; background: var(--highlight); 
+                               border: 2px solid var(--secondary); color: var(--secondary); 
+                               font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
+                <button onclick="window.open('/blog#research', '_blank')" 
+                        style="padding: 10px 20px; background: transparent; 
+                               border: 2px solid var(--secondary); color: var(--secondary); 
+                               font-family: inherit; cursor: pointer;">VIEW FULL RESEARCH</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(researchModal);
+    
+    // Add close function
+    window.closeResearchDetail = function() {
+        const modal = document.getElementById('research-modal');
+        if (modal) modal.remove();
+    };
+    
+    // Close on click outside
+    researchModal.addEventListener('click', (e) => {
+        if (e.target === researchModal) {
+            window.closeResearchDetail();
+        }
+    });
+};
+
+// Global publication browser functionality
+let currentPaperIndex = 0;
+
+// Import publications data (available via gameData imports)
+import { publications } from '../data/index.js';
+
+window.nextPaper = function() {
+    currentPaperIndex = (currentPaperIndex + 1) % publications.length;
+    updatePaperDisplay();
+};
+
+window.previousPaper = function() {
+    currentPaperIndex = (currentPaperIndex - 1 + publications.length) % publications.length;
+    updatePaperDisplay();
+};
+
+function updatePaperDisplay() {
+    const paper = publications[currentPaperIndex];
+    const paperElement = document.getElementById('current-paper');
+    const counterElement = document.getElementById('paper-counter');
+    const scrollThumb = document.getElementById('paper-scroll-thumb');
+    
+    if (paperElement && paper) {
+        paperElement.innerHTML = `
+            <strong>${paper.title}</strong><br>
+            <em style="color: var(--accent);">${paper.venue} (${paper.year})</em><br>
+            <div style="margin: 12px 0; text-align: center;">
+                <button onclick="showPaperDetails(${currentPaperIndex})" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📋 DETAILS</button>
+            </div>
+        `;
+    }
+    
+    if (counterElement) {
+        counterElement.textContent = `Paper ${currentPaperIndex + 1} of ${publications.length}`;
+    }
+    
+    if (scrollThumb) {
+        const thumbPosition = (currentPaperIndex / (publications.length - 1)) * (100 - parseFloat(scrollThumb.style.width));
+        scrollThumb.style.marginLeft = `${thumbPosition}%`;
+    }
+}
+
+// Global function for paper details popup
+window.showPaperDetails = function(paperIndex) {
+    const paper = publications[paperIndex];
+    if (!paper) {
+        alert('Paper details not found!');
+        return;
+    }
+    
+    // Create paper details modal
+    const paperModal = document.createElement('div');
+    paperModal.id = 'paper-modal';
+    paperModal.style.cssText = `
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: var(--primary); border: 3px solid var(--secondary);
+        padding: 25px; z-index: 10000; max-width: 600px; width: 95%;
+        font-family: inherit; color: var(--secondary); 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        max-height: 80vh; overflow-y: auto;
+    `;
+    
+    paperModal.innerHTML = `
+        <div style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 15px;">📄</div>
+            <h2 style="color: var(--accent); margin-bottom: 15px; font-size: 14px; line-height: 1.3;">${paper.title}</h2>
+            <p style="color: var(--accent); margin-bottom: 20px; font-size: 12px; font-style: italic;">${paper.venue} (${paper.year}) - ${paper.type}</p>
+            
+            <div style="text-align: left; margin: 20px 0;">
+                <h3 style="color: var(--secondary); font-size: 12px; margin-bottom: 15px;">📋 ABSTRACT:</h3>
+                <p style="font-size: 11px; line-height: 1.6; margin-bottom: 20px; background: var(--highlight); padding: 15px; border-radius: 5px;">${paper.description}</p>
+                
+                ${paper.scope_tags ? `
+                <div style="margin: 15px 0;">
+                    <h4 style="color: var(--accent); font-size: 10px; margin-bottom: 8px;">🏷️ RESEARCH AREAS:</h4>
+                    ${paper.scope_tags.map(tag => 
+                        `<span style="background: var(--secondary); color: var(--primary); padding: 3px 8px; margin: 2px; 
+                                      font-size: 8px; border-radius: 10px; display: inline-block;">${tag}</span>`
+                    ).join('')}
+                </div>
+                ` : ''}
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <button onclick="closePaperDetails()" 
+                        style="padding: 10px 20px; background: var(--highlight); 
+                               border: 2px solid var(--secondary); color: var(--secondary); 
+                               font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
+                <button onclick="window.open('${paper.link}', '_blank')" 
+                        style="padding: 10px 20px; background: transparent; 
+                               border: 2px solid var(--secondary); color: var(--secondary); 
+                               font-family: inherit; cursor: pointer;">📄 READ FULL PAPER</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(paperModal);
+    
+    // Add close function
+    window.closePaperDetails = function() {
+        const modal = document.getElementById('paper-modal');
+        if (modal) modal.remove();
+    };
+    
+    // Close on click outside
+    paperModal.addEventListener('click', (e) => {
+        if (e.target === paperModal) {
+            window.closePaperDetails();
+        }
+    });
+};

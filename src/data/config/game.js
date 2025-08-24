@@ -1,4 +1,8 @@
 // Game-specific data for Interactive Digital Twin mode only
+import { publications } from '../content/publications.js';
+import { research } from '../content/research.js'; 
+import { personal } from '../content/personal.js';
+
 export const gameData = {
   player: {
     x: 1250,
@@ -69,21 +73,41 @@ export const gameData = {
         position: { top: "400px", left: "300px", width: "300px", height: "250px" },
         content: `
             <h2>RESEARCH LABORATORY</h2>
-            <h3>Research Focus:</h3>
-            <div style="margin: 20px 0;">
-                <button class="menu-button" onclick="showResearchDetail('autonomy')">🤖 Human-Centered Autonomy</button>
-                <button class="menu-button" onclick="showResearchDetail('modeling')">🚗 Driver Behavior Modeling</button>
-                <button class="menu-button" onclick="showResearchDetail('twinning')">🚁 Digital Twinning of Intelligent Vehicles</button>
+            <h3>🎯 Research Focus Areas:</h3>
+            <div style="margin: 15px 0;">
+                <button class="menu-button" onclick="showResearchDetail('cooperative-driving')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
+                    🚗 Cooperative Driving Automation
+                </button>
+                <button class="menu-button" onclick="showResearchDetail('human-ai')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
+                    🧠 Human-Centered AI
+                </button>
+                <button class="menu-button" onclick="showResearchDetail('digital-twins')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
+                    🤖 Digital Twin Technologies
+                </button>
             </div>
-            <h3>Recent Publications:</h3>
-            <ul style="margin-left: 20px; line-height: 2; font-size: 8px;">
-                <li>Liao, X., Zhao, X., Wang, Z., Zhao, Z., Han, K., Gupta, R., Barth, M. J., & Wu, G. (2023). Driver digital twin for online prediction of personalized lane-change behavior. IEEE Internet of Things Journal.</li>
-                <li>Zhao, Z., Wang, Z., Han, K., Gupta, R., Tiwari, P., Wu, G., & Barth, M. J. (2022). Personalized car following for autonomous driving with inverse reinforcement learning. In 2022 International Conference on Robotics and Automation (ICRA).</li>
-                <li>Liao, X., Wang, Z., Zhao, X., Zhao, Z., Han, K., Tiwari, P., Barth, M. J., & Wu, G. (2022). Online prediction of lane change with a hierarchical learning-based approach. In 2022 International Conference on Robotics and Automation (ICRA).</li>
-            </ul>
-            <div style="margin-top: 20px;">
-                <button class="menu-button" onclick="window.open('https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl=en', '_blank')">📚 GOOGLE SCHOLAR</button>
-                <button class="menu-button" onclick="window.open('https://ctl.mit.edu/about/bio/zhouqiao-bridge-zhao', '_blank')">💻 Lab Website</button>
+            
+            <h3>📚 Publications Archive (${publications.length} papers):</h3>
+            <div id="publication-browser" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 120px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <button onclick="previousPaper()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <div id="paper-counter" style="font-size: 8px; color: var(--secondary);">Paper 1 of ${publications.length}</div>
+                    <button onclick="nextPaper()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                </div>
+                <div id="paper-scroll-bar" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
+                    <div id="paper-scroll-thumb" style="background: var(--accent); height: 100%; width: ${Math.round(100/publications.length)}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
+                </div>
+                <div id="current-paper" style="font-size: 10px; line-height: 1.4;">
+                    <strong>${publications[0].title}</strong><br>
+                    <em style="color: var(--accent);">${publications[0].venue} (${publications[0].year})</em><br>
+                    <div style="margin: 12px 0; text-align: center;">
+                        <button onclick="showPaperDetails(0)" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📋 DETAILS</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="menu-button" onclick="window.open('${personal.links.googleScholar}', '_blank')">📚 ALL PUBLICATIONS</button>
+                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')">🔬 RESEARCHGATE</button>
             </div>
         `,
     },
