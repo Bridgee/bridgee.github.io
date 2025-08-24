@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history",
-    "deploy:force": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history --force",
+    "deploy:clean": "astro build && gh-pages -d dist -b gh-pages --dotfiles --no-history --add",
     "astro": "astro"
   },
   "dependencies": {
