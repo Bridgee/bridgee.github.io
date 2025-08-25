@@ -1,8 +1,8 @@
 /* Player Character */
 #player {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     z-index: 100;
     transition: none;
 }
@@ -12,13 +12,36 @@
     height: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(8, 4px);
-    grid-template-rows: repeat(8, 4px);
+    grid-template-columns: repeat(8, 6px);
+    grid-template-rows: repeat(8, 6px);
 }
 
 .pixel {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
+}
+
+/* NPC Characters */
+.npc {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    z-index: 50;
+    cursor: pointer;
+}
+
+.npc-sprite {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 6px);
+    grid-template-rows: repeat(8, 6px);
+}
+
+.npc-sprite .pixel {
+    width: 6px !important;
+    height: 6px !important;
 }
 
 /* ---------- PLAYER ORIENTATIONS (from v3.html) ---------- */
@@ -277,4 +300,86 @@
 .musician .pixel:nth-child(42), .musician .pixel:nth-child(43), .musician .pixel:nth-child(44), .musician .pixel:nth-child(45),
 .musician .pixel:nth-child(46), .musician .pixel:nth-child(47), .musician .pixel:nth-child(51), .musician .pixel:nth-child(54) {
     background-color: #3498db;
+}
+
+/* NPC Color Variants - Override specific sprite colors */
+
+/* Blue Scientist (Dr. Chen) */
+.npc.color-blue .scientist .pixel:nth-child(10), .npc.color-blue .scientist .pixel:nth-child(11), .npc.color-blue .scientist .pixel:nth-child(14), .npc.color-blue .scientist .pixel:nth-child(15),
+.npc.color-blue .scientist .pixel:nth-child(18), .npc.color-blue .scientist .pixel:nth-child(19), .npc.color-blue .scientist .pixel:nth-child(20), .npc.color-blue .scientist .pixel:nth-child(21),
+.npc.color-blue .scientist .pixel:nth-child(22), .npc.color-blue .scientist .pixel:nth-child(23), .npc.color-blue .scientist .pixel:nth-child(26), .npc.color-blue .scientist .pixel:nth-child(27),
+.npc.color-blue .scientist .pixel:nth-child(28), .npc.color-blue .scientist .pixel:nth-child(29), .npc.color-blue .scientist .pixel:nth-child(30), .npc.color-blue .scientist .pixel:nth-child(31),
+.npc.color-blue .scientist .pixel:nth-child(34), .npc.color-blue .scientist .pixel:nth-child(35), .npc.color-blue .scientist .pixel:nth-child(36), .npc.color-blue .scientist .pixel:nth-child(37),
+.npc.color-blue .scientist .pixel:nth-child(38), .npc.color-blue .scientist .pixel:nth-child(39), .npc.color-blue .scientist .pixel:nth-child(42), .npc.color-blue .scientist .pixel:nth-child(43),
+.npc.color-blue .scientist .pixel:nth-child(44), .npc.color-blue .scientist .pixel:nth-child(45), .npc.color-blue .scientist .pixel:nth-child(46), .npc.color-blue .scientist .pixel:nth-child(47),
+.npc.color-blue .scientist .pixel:nth-child(51), .npc.color-blue .scientist .pixel:nth-child(54) {
+    background-color: #E6F3FF !important; /* Light blue for lab coat */
+}
+
+/* Cyan Scientist (Pixel) */
+.npc.color-cyan .scientist .pixel:nth-child(10), .npc.color-cyan .scientist .pixel:nth-child(11), .npc.color-cyan .scientist .pixel:nth-child(14), .npc.color-cyan .scientist .pixel:nth-child(15),
+.npc.color-cyan .scientist .pixel:nth-child(18), .npc.color-cyan .scientist .pixel:nth-child(19), .npc.color-cyan .scientist .pixel:nth-child(20), .npc.color-cyan .scientist .pixel:nth-child(21),
+.npc.color-cyan .scientist .pixel:nth-child(22), .npc.color-cyan .scientist .pixel:nth-child(23), .npc.color-cyan .scientist .pixel:nth-child(26), .npc.color-cyan .scientist .pixel:nth-child(27),
+.npc.color-cyan .scientist .pixel:nth-child(28), .npc.color-cyan .scientist .pixel:nth-child(29), .npc.color-cyan .scientist .pixel:nth-child(30), .npc.color-cyan .scientist .pixel:nth-child(31),
+.npc.color-cyan .scientist .pixel:nth-child(34), .npc.color-cyan .scientist .pixel:nth-child(35), .npc.color-cyan .scientist .pixel:nth-child(36), .npc.color-cyan .scientist .pixel:nth-child(37),
+.npc.color-cyan .scientist .pixel:nth-child(38), .npc.color-cyan .scientist .pixel:nth-child(39), .npc.color-cyan .scientist .pixel:nth-child(42), .npc.color-cyan .scientist .pixel:nth-child(43),
+.npc.color-cyan .scientist .pixel:nth-child(44), .npc.color-cyan .scientist .pixel:nth-child(45), .npc.color-cyan .scientist .pixel:nth-child(46), .npc.color-cyan .scientist .pixel:nth-child(47),
+.npc.color-cyan .scientist .pixel:nth-child(51), .npc.color-cyan .scientist .pixel:nth-child(54) {
+    background-color: #E0FFFF !important; /* Light cyan for lab coat */
+}
+
+/* Purple Photographer (Maya) */
+.npc.color-purple .photographer .pixel:nth-child(10), .npc.color-purple .photographer .pixel:nth-child(11), .npc.color-purple .photographer .pixel:nth-child(14), .npc.color-purple .photographer .pixel:nth-child(15),
+.npc.color-purple .photographer .pixel:nth-child(18), .npc.color-purple .photographer .pixel:nth-child(19), .npc.color-purple .photographer .pixel:nth-child(20), .npc.color-purple .photographer .pixel:nth-child(21),
+.npc.color-purple .photographer .pixel:nth-child(22), .npc.color-purple .photographer .pixel:nth-child(23), .npc.color-purple .photographer .pixel:nth-child(26), .npc.color-purple .photographer .pixel:nth-child(27),
+.npc.color-purple .photographer .pixel:nth-child(28), .npc.color-purple .photographer .pixel:nth-child(29), .npc.color-purple .photographer .pixel:nth-child(30), .npc.color-purple .photographer .pixel:nth-child(31),
+.npc.color-purple .photographer .pixel:nth-child(35), .npc.color-purple .photographer .pixel:nth-child(36), .npc.color-purple .photographer .pixel:nth-child(37), .npc.color-purple .photographer .pixel:nth-child(38),
+.npc.color-purple .photographer .pixel:nth-child(42), .npc.color-purple .photographer .pixel:nth-child(43), .npc.color-purple .photographer .pixel:nth-child(44), .npc.color-purple .photographer .pixel:nth-child(45),
+.npc.color-purple .photographer .pixel:nth-child(46), .npc.color-purple .photographer .pixel:nth-child(47), .npc.color-purple .photographer .pixel:nth-child(51), .npc.color-purple .photographer .pixel:nth-child(54) {
+    background-color: #E6B3FF !important; /* Light purple */
+}
+
+/* Pink Photographer (Luna) */
+.npc.color-pink .photographer .pixel:nth-child(10), .npc.color-pink .photographer .pixel:nth-child(11), .npc.color-pink .photographer .pixel:nth-child(14), .npc.color-pink .photographer .pixel:nth-child(15),
+.npc.color-pink .photographer .pixel:nth-child(18), .npc.color-pink .photographer .pixel:nth-child(19), .npc.color-pink .photographer .pixel:nth-child(20), .npc.color-pink .photographer .pixel:nth-child(21),
+.npc.color-pink .photographer .pixel:nth-child(22), .npc.color-pink .photographer .pixel:nth-child(23), .npc.color-pink .photographer .pixel:nth-child(26), .npc.color-pink .photographer .pixel:nth-child(27),
+.npc.color-pink .photographer .pixel:nth-child(28), .npc.color-pink .photographer .pixel:nth-child(29), .npc.color-pink .photographer .pixel:nth-child(30), .npc.color-pink .photographer .pixel:nth-child(31),
+.npc.color-pink .photographer .pixel:nth-child(35), .npc.color-pink .photographer .pixel:nth-child(36), .npc.color-pink .photographer .pixel:nth-child(37), .npc.color-pink .photographer .pixel:nth-child(38),
+.npc.color-pink .photographer .pixel:nth-child(42), .npc.color-pink .photographer .pixel:nth-child(43), .npc.color-pink .photographer .pixel:nth-child(44), .npc.color-pink .photographer .pixel:nth-child(45),
+.npc.color-pink .photographer .pixel:nth-child(46), .npc.color-pink .photographer .pixel:nth-child(47), .npc.color-pink .photographer .pixel:nth-child(51), .npc.color-pink .photographer .pixel:nth-child(54) {
+    background-color: #FFB3E6 !important; /* Light pink */
+}
+
+/* Orange Musician (Alex) */
+.npc.color-orange .musician .pixel:nth-child(10), .npc.color-orange .musician .pixel:nth-child(11), .npc.color-orange .musician .pixel:nth-child(14), .npc.color-orange .musician .pixel:nth-child(15),
+.npc.color-orange .musician .pixel:nth-child(18), .npc.color-orange .musician .pixel:nth-child(19), .npc.color-orange .musician .pixel:nth-child(20), .npc.color-orange .musician .pixel:nth-child(21),
+.npc.color-orange .musician .pixel:nth-child(22), .npc.color-orange .musician .pixel:nth-child(23), .npc.color-orange .musician .pixel:nth-child(26), .npc.color-orange .musician .pixel:nth-child(27),
+.npc.color-orange .musician .pixel:nth-child(28), .npc.color-orange .musician .pixel:nth-child(29), .npc.color-orange .musician .pixel:nth-child(30), .npc.color-orange .musician .pixel:nth-child(31),
+.npc.color-orange .musician .pixel:nth-child(35), .npc.color-orange .musician .pixel:nth-child(36), .npc.color-orange .musician .pixel:nth-child(37), .npc.color-orange .musician .pixel:nth-child(38),
+.npc.color-orange .musician .pixel:nth-child(42), .npc.color-orange .musician .pixel:nth-child(43), .npc.color-orange .musician .pixel:nth-child(44), .npc.color-orange .musician .pixel:nth-child(45),
+.npc.color-orange .musician .pixel:nth-child(46), .npc.color-orange .musician .pixel:nth-child(47), .npc.color-orange .musician .pixel:nth-child(51), .npc.color-orange .musician .pixel:nth-child(54) {
+    background-color: #FFD699 !important; /* Light orange */
+}
+
+/* Green Scientist (Pixel) */
+.npc.color-green .scientist .pixel:nth-child(10), .npc.color-green .scientist .pixel:nth-child(11), .npc.color-green .scientist .pixel:nth-child(14), .npc.color-green .scientist .pixel:nth-child(15),
+.npc.color-green .scientist .pixel:nth-child(18), .npc.color-green .scientist .pixel:nth-child(19), .npc.color-green .scientist .pixel:nth-child(20), .npc.color-green .scientist .pixel:nth-child(21),
+.npc.color-green .scientist .pixel:nth-child(22), .npc.color-green .scientist .pixel:nth-child(23), .npc.color-green .scientist .pixel:nth-child(26), .npc.color-green .scientist .pixel:nth-child(27),
+.npc.color-green .scientist .pixel:nth-child(28), .npc.color-green .scientist .pixel:nth-child(29), .npc.color-green .scientist .pixel:nth-child(30), .npc.color-green .scientist .pixel:nth-child(31),
+.npc.color-green .scientist .pixel:nth-child(34), .npc.color-green .scientist .pixel:nth-child(35), .npc.color-green .scientist .pixel:nth-child(36), .npc.color-green .scientist .pixel:nth-child(37),
+.npc.color-green .scientist .pixel:nth-child(38), .npc.color-green .scientist .pixel:nth-child(39), .npc.color-green .scientist .pixel:nth-child(42), .npc.color-green .scientist .pixel:nth-child(43),
+.npc.color-green .scientist .pixel:nth-child(44), .npc.color-green .scientist .pixel:nth-child(45), .npc.color-green .scientist .pixel:nth-child(46), .npc.color-green .scientist .pixel:nth-child(47),
+.npc.color-green .scientist .pixel:nth-child(51), .npc.color-green .scientist .pixel:nth-child(54) {
+    background-color: #B3FFB3 !important; /* Light green for lab coat */
+}
+
+/* Red Photographer (Luna) */
+.npc.color-red .photographer .pixel:nth-child(10), .npc.color-red .photographer .pixel:nth-child(11), .npc.color-red .photographer .pixel:nth-child(14), .npc.color-red .photographer .pixel:nth-child(15),
+.npc.color-red .photographer .pixel:nth-child(18), .npc.color-red .photographer .pixel:nth-child(19), .npc.color-red .photographer .pixel:nth-child(20), .npc.color-red .photographer .pixel:nth-child(21),
+.npc.color-red .photographer .pixel:nth-child(22), .npc.color-red .photographer .pixel:nth-child(23), .npc.color-red .photographer .pixel:nth-child(26), .npc.color-red .photographer .pixel:nth-child(27),
+.npc.color-red .photographer .pixel:nth-child(28), .npc.color-red .photographer .pixel:nth-child(29), .npc.color-red .photographer .pixel:nth-child(30), .npc.color-red .photographer .pixel:nth-child(31),
+.npc.color-red .photographer .pixel:nth-child(35), .npc.color-red .photographer .pixel:nth-child(36), .npc.color-red .photographer .pixel:nth-child(37), .npc.color-red .photographer .pixel:nth-child(38),
+.npc.color-red .photographer .pixel:nth-child(42), .npc.color-red .photographer .pixel:nth-child(43), .npc.color-red .photographer .pixel:nth-child(44), .npc.color-red .photographer .pixel:nth-child(45),
+.npc.color-red .photographer .pixel:nth-child(46), .npc.color-red .photographer .pixel:nth-child(47), .npc.color-red .photographer .pixel:nth-child(51), .npc.color-red .photographer .pixel:nth-child(54) {
+    background-color: #FFB3B3 !important; /* Light red */
 }

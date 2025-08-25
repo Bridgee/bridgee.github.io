@@ -1,5 +1,6 @@
 // Game-specific data for Interactive Digital Twin mode only
 import { publications } from '../content/publications.js';
+import { projects } from '../content/projects.js';
 import { research } from '../content/research.js'; 
 import { personal } from '../content/personal.js';
 
@@ -8,8 +9,8 @@ export const gameData = {
     x: 1250,
     y: 850,
     speed: 6,
-    width: 32,
-    height: 32,
+    width: 48,
+    height: 48,
   },
   world: {
     width: 2400,
@@ -17,37 +18,71 @@ export const gameData = {
   },
   npcs: [
     {
-      name: "Dr. Smith",
+      name: "Dr. Chen",
       dialogue: [
-        "Welcome to Bridge's Digital Twin!",
-        "I research human-centered autonomous driving here.",
-        "The Research Lab has details on our latest publications!",
-        "We're creating digital twins of drivers to improve vehicle safety.",
+        "Welcome to Bridge's research world!",
+        "Did you know Bridge developed P-ACC using inverse reinforcement learning?",
+        "The system learns individual driver preferences and adapts in real-time!",
+        "Check the Papers Board - there are 15+ publications on cooperative driving!",
+        "Bridge's work on digital twins is revolutionizing transportation safety.",
       ],
-      position: { top: "600px", left: "500px" },
+      position: { top: "650px", left: "400px" },
       sprite: "scientist",
+      color: "blue",
     },
     {
       name: "Maya",
       dialogue: [
-        "Hey there! I love photography!",
-        "Have you checked out the Gallery?",
-        "I captured some amazing shots at MIT.",
-        "Each photo tells a story of discovery.",
+        "Bridge captures more than just research - check out the photography!",
+        "Those vintage lens shots have such amazing character and warmth.",
+        "I love how Bridge finds beauty between experiments and equations.",
+        "The Gallery shows work from MIT, Grand Teton, and Joshua Tree!",
+        "Each photo tells a story of curiosity and discovery.",
       ],
       position: { top: "450px", left: "1500px" },
       sprite: "photographer",
+      color: "purple",
     },
     {
-      name: "DJ Byte",
+      name: "Alex",
       dialogue: [
-        "Yo! Welcome to the beat zone!",
-        "I spin electronic tracks all day.",
-        "Check out the Music Studio for some tunes!",
-        "Music and science go hand in hand.",
+        "Bridge's music production skills are incredible!",
+        "Those electronic tracks blend science and creativity perfectly.",
+        "The Music Studio has 'Spring kids', 'Island grass', and more!",
+        "It's amazing how someone can model driver behavior AND create beats.",
+        "Music and math both have patterns - Bridge sees them everywhere!",
       ],
       position: { top: "1050px", left: "400px" },
       sprite: "musician",
+      color: "orange",
+    },
+    {
+      name: "Pixel",
+      dialogue: [
+        "Beep boop! I'm the lab's AI assistant... sort of.",
+        "Fun fact: Bridge's GNN models have 127,000+ parameters!",
+        "I tried to learn driver behavior but kept getting carsick...",
+        "Did you know cooperative driving requires 0.3ms response times?",
+        "Error 404: Sarcasm module not found. Just kidding!",
+        "Bridge taught me that humans are just really complex neural networks.",
+      ],
+      position: { top: "800px", left: "1700px" },
+      sprite: "scientist",
+      color: "green",
+    },
+    {
+      name: "Luna",
+      dialogue: [
+        "I collect interesting data patterns like some people collect stamps.",
+        "Bridge once said 'Every driver has a unique behavioral fingerprint.'",
+        "I've been watching traffic for 3 years... cars are weird.",
+        "The most beautiful equation? Probably something about entropy.",
+        "Sometimes I wonder if autonomous cars dream of electric sheep...",
+        "Want to hear a joke about UDP? Never mind, you might not get it.",
+      ],
+      position: { top: "300px", left: "1200px" },
+      sprite: "photographer",
+      color: "red",
     },
   ],
   areas: {
@@ -56,9 +91,9 @@ export const gameData = {
       icon: "🏠",
       position: { top: "750px", left: "1150px", width: "200px", height: "200px" },
       content: `
-        <h2>WELCOME TO MY DIGITAL REALM</h2>
-        <p>Greetings, traveler! I'm Zhouqiao (Bridge) Zhao, a postdoc researcher at MIT.</p>
-        <p>This interactive portfolio is my digital playground where science meets creativity.</p>
+        <h2>WELCOME TO MY RESEARCH WORLD</h2>
+        <p>Greetings, traveler! I'm Zhouqiao (Bridge) Zhao, a Postdoctoral Associate at MIT.</p>
+        <p>This interactive portfolio showcases my research in intelligent transportation systems and human-centered AI.</p>
         <div style="margin-top: 20px;">
             <button class="menu-button" onclick="window.location.href='/blog'">📝 ACADEMIC PORTFOLIO</button>
             <button class="menu-button" onclick="showStats()">VIEW STATS</button>
@@ -73,6 +108,44 @@ export const gameData = {
         position: { top: "400px", left: "300px", width: "300px", height: "250px" },
         content: `
             <h2>RESEARCH LABORATORY</h2>
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 32px; margin-bottom: 10px;">🧬</div>
+                <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
+                    Exploring cooperation in intelligent transportation systems through multi-scale coordination,
+                    human-centered AI, and digital twin technologies.
+                </p>
+            </div>
+            
+            <h3>📋 Research Philosophy:</h3>
+            <div style="background: var(--highlight); padding: 15px; margin: 15px 0; border-radius: 5px; font-size: 9px; line-height: 1.5;">
+                <p style="margin-bottom: 10px;">
+                    <strong>Multi-Scale Approach:</strong> From macro-level fleet coordination to micro-level driver modeling
+                </p>
+                <p style="margin-bottom: 10px;">
+                    <strong>Context-Aware Modeling:</strong> Driver–Vehicle–Environment triad using Graph Neural Networks
+                </p>
+                <p>
+                    <strong>Human-Centered Design:</strong> Balancing automation capabilities with human agency and explainability
+                </p>
+            </div>
+            
+            <h3>🗺️ Research Roadmap:</h3>
+            <div style="background: var(--highlight); padding: 15px; margin: 15px 0; border-radius: 5px; font-size: 9px; line-height: 1.5;">
+                <p style="margin-bottom: 10px;">
+                    <strong>Current Focus:</strong> Multi-scale cooperative driving systems integrating human factors, AI, and digital twin technologies
+                </p>
+                <p style="margin-bottom: 10px;">
+                    <strong>Methodology:</strong> Context-aware modeling using Driver–Vehicle–Environment triad with Graph Neural Networks and explainable AI
+                </p>
+                <p>
+                    <strong>Impact:</strong> Creating safer, more efficient transportation systems that preserve human agency while maximizing automation benefits
+                </p>
+            </div>
+
+            <div style="margin: 15px 0; text-align: center;">
+                <button class="menu-button" onclick="showResearchRoadmap()" style="font-size: 9px; padding: 8px 12px; margin: 5px;">🗺️ VIEW FRAMEWORK</button>
+            </div>
+            
             <h3>🎯 Research Focus Areas:</h3>
             <div style="margin: 15px 0;">
                 <button class="menu-button" onclick="showResearchDetail('cooperative-driving')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
@@ -86,7 +159,25 @@ export const gameData = {
                 </button>
             </div>
             
-            <h3>📚 Publications Archive (${publications.length} papers):</h3>
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="menu-button" onclick="window.open('/blog#research', '_blank')">📖 FULL RESEARCH</button>
+                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')">🔬 RESEARCHGATE</button>
+            </div>
+        `,
+    },
+    "papers-board": {
+        label: "PAPERS",
+        icon: "📋",
+        position: { top: "450px", left: "650px", width: "100px", height: "70px" },
+        content: `
+            <h2>📋 RESEARCH PAPERS</h2>
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 32px; margin-bottom: 10px;">📄</div>
+                <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
+                    Browse ${publications.length} peer-reviewed publications in autonomous driving, human-AI interaction, and transportation systems.
+                </p>
+            </div>
+            
             <div id="publication-browser" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 120px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                     <button onclick="previousPaper()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
@@ -100,14 +191,53 @@ export const gameData = {
                     <strong>${publications[0].title}</strong><br>
                     <em style="color: var(--accent);">${publications[0].venue} (${publications[0].year})</em><br>
                     <div style="margin: 12px 0; text-align: center;">
-                        <button onclick="showPaperDetails(0)" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📋 DETAILS</button>
+                        <button onclick="showPaperDetails(0)" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📄 DETAILS</button>
                     </div>
                 </div>
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
                 <button class="menu-button" onclick="window.open('${personal.links.googleScholar}', '_blank')">📚 ALL PUBLICATIONS</button>
-                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')">🔬 RESEARCHGATE</button>
+            </div>
+        `,
+    },
+    "projects-board": {
+        label: "PROJECTS",
+        icon: "📁",
+        position: { top: "550px", left: "650px", width: "100px", height: "70px" },
+        content: `
+            <h2>📁 RESEARCH PROJECTS</h2>
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 32px; margin-bottom: 10px;">🚀</div>
+                <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
+                    Explore ${projects.length} major research projects with interactive demos, publications, and technical details.
+                </p>
+            </div>
+            
+            <div id="project-browser-board" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 120px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <button onclick="previousProjectBoard()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <div id="project-counter-board" style="font-size: 8px; color: var(--secondary);">Project 1 of ${projects.length}</div>
+                    <button onclick="nextProjectBoard()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                </div>
+                <div id="project-scroll-bar-board" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
+                    <div id="project-scroll-thumb-board" style="background: var(--accent); height: 100%; width: ${Math.round(100/projects.length)}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
+                </div>
+                <div id="current-project-board" style="font-size: 10px; line-height: 1.4;">
+                    <strong>${projects[0].title}</strong><br>
+                    <div style="margin: 8px 0;">
+                        ${projects[0].scope_tags ? projects[0].scope_tags.map(tag => 
+                            `<span style="background: var(--secondary); color: var(--primary); padding: 2px 6px; margin: 1px; font-size: 7px; border-radius: 8px; display: inline-block;">${tag}</span>`
+                        ).join('') : ''}
+                    </div>
+                    <div style="margin: 12px 0; text-align: center;">
+                        <button onclick="showProjectDetails(0)" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">🚀 DETAILS</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="menu-button" onclick="window.open('/blog#projects', '_blank')">📁 ALL PROJECTS</button>
             </div>
         `,
     },
@@ -116,18 +246,49 @@ export const gameData = {
         icon: "📸",
         position: { top: "400px", left: "1800px", width: "300px", height: "250px" },
         content: `
-            <h2>PHOTOGRAPHY GALLERY</h2>
-            <p>Capturing moments between experiments...</p>
-            <div class="gallery-grid">
-                <div class="gallery-thumb" onclick="showPhoto(1)"><div style="padding: 20px; color: var(--secondary);">📸<br>Star Track</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(2)"><div style="padding: 20px; color: var(--secondary);">🟣<br>Purple Island</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(3)"><div style="padding: 20px; color: var(--secondary);">🎮<br>The Game</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(4)"><div style="padding: 20px; color: var(--secondary);">🔴<br>Red People</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(5)"><div style="padding: 20px; color: var(--secondary);">🏔️<br>Grand Teton</div></div>
-                <div class="gallery-thumb" onclick="showPhoto(6)"><div style="padding: 20px; color: var(--secondary);">🌌<br>Joshua Tree</div></div>
+            <h2>📸 PHOTOGRAPHY STUDIO</h2>
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 32px; margin-bottom: 10px;">🖼️</div>
+                <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
+                    Captured moments from research adventures, travels, and life between experiments.
+                </p>
             </div>
-            <div style="margin-top: 20px; text-align: center;">
-                <button class="menu-button" onclick="window.open('https://www.flickr.com/photos/bridgezhao/', '_blank')">🖼️ FLICKR</button>
+            
+            <div id="photo-browser" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 140px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                    <button onclick="previousPhotoPage()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <div id="photo-page-counter" style="font-size: 8px; color: var(--secondary);">Page 1 of ${Math.ceil(personal.media.photos.length / 4)}</div>
+                    <button onclick="nextPhotoPage()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                </div>
+                <div id="photo-page-scroll-bar" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
+                    <div id="photo-page-scroll-thumb" style="background: var(--accent); height: 100%; width: ${Math.round(100/Math.ceil(personal.media.photos.length / 4))}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
+                </div>
+                
+                <!-- Multi-photo grid layout -->
+                <div id="photo-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin: 10px 0;">
+                    ${personal.media.photos.slice(0, 4).map((photo, index) => `
+                        <div style="text-align: center; cursor: pointer;" onclick="showPhotoDetails(${index})">
+                            <div style="background: white; padding: 14px 14px 27px 14px; margin: 0 auto; width: 122px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                                <div style="width: 94px; height: 70px; background: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 14px; overflow: hidden;">
+                                    <img src="/images/${photo.filename}" 
+                                         style="width: 94px; height: 70px; object-fit: cover; border-radius: 4px;"
+                                         onerror="this.style.display='none'; this.parentElement.innerHTML='📸';">
+                                </div>
+                                <div style="color: #333; font-size: 9px; font-weight: bold; line-height: 1.3; overflow: hidden; text-overflow: ellipsis;">
+                                    ${photo.title.length > 12 ? photo.title.substring(0, 12) + '...' : photo.title}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin: 12px 0; text-align: center; font-size: 7px; color: var(--secondary);">
+                    Click any photo to view full size
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="menu-button" onclick="window.open('https://www.flickr.com/photos/bridgezhao/', '_blank')">☁️ FLICKR GALLERY</button>
             </div>
         `,
     },
@@ -157,37 +318,48 @@ export const gameData = {
         icon: "👤",
         position: { top: "900px", left: "1550px", width: "250px", height: "200px" },
         content: `
-            <h2>PLAYER PROFILE</h2>
+            <h2>👤 PLAYER PROFILE</h2>
             <div style="display: flex; gap: 20px; margin: 20px 0;">
                 <div style="flex: 1;">
                     <h3>STATS:</h3>
                     <ul style="line-height: 2;">
                         <li>Level: {player.level}</li>
                         <li>XP: {player.xp}/{player.xpToNextLevel}</li>
-                        <li>Class: Researcher/Artist</li>
-                        <li>Location: MIT, Cambridge</li>
+                        <li>Class: Researcher/Creator</li>
+                        <li>Location: ${personal.contact.location}</li>
                     </ul>
                 </div>
                 <div style="flex: 1;">
                     <h3>SKILLS:</h3>
-                    <ul style="line-height: 2;">
-                        <li>Connected and Automated Vehicle [████████░░] 80%</li>
-                        <li>Human-Centered AI [█████████░] 88%</li>
-                        <li>Sound and Synthesizer Design [███████░░░] 70%</li>
-                        <li>Photography [██████░░░░] 60%</li>
+                    <ul style="line-height: 1.8; font-size: 9px;">
+                        <li>Cooperative Driving AI [████████░░] 85%</li>
+                        <li>Human-Centered Design [█████████░] 88%</li>
+                        <li>Music Production [███████░░░] 75%</li>
+                        <li>Photography [██████░░░░] 65%</li>
+                        <li>Digital Twin Tech [███████░░░] 70%</li>
                     </ul>
                 </div>
             </div>
-            <h3>BACKSTORY:</h3>
-            <p style="line-height: 1.8;">
-                Started the academic quest at UC Riverside, where I discovered the beauty of complex systems. 
-                Leveled up through various research dungeons, collecting knowledge and skills along the way. 
-                Now embarking on postdoctoral adventures at MIT, seeking to unlock the mysteries of intelligent transportation 
-                while capturing its beauty through lens and sound.
+            <h3>JOURNEY:</h3>
+            <p style="line-height: 1.8; font-size: 9px;">
+                Completed PhD at UC Riverside in connected and automated vehicle systems. 
+                Leveled up through research challenges and creative projects along the way. 
+                Now at MIT, exploring the intersection of AI, transportation, and human behavior 
+                while capturing the world through music and photography.
             </p>
-            <div style="margin-top: 20px; text-align: center;">
-                <button class="menu-button" onclick="window.open('/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf', '_blank')">📄 DOWNLOAD CV</button>
-                <button class="menu-button" onclick="window.open('https://www.linkedin.com/in/zhouqiao-zhao-60560a56/', '_blank')">💼 LINKEDIN</button>
+            
+            <h3 style="font-size: 9px; margin: 15px 0 8px 0;">🏛️ AFFILIATIONS:</h3>
+            <div style="font-size: 8px; line-height: 1.5; margin-bottom: 15px;">
+                <a href="${personal.links.mit_ctl}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT CTL</a> • 
+                <a href="${personal.links.mit_agelab}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT AgeLab</a> • 
+                <a href="${personal.links.mit_avt}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT AVT</a> • 
+                <a href="${personal.links.ucr_ece}" target="_blank" style="color: var(--secondary); text-decoration: none;">UC Riverside</a>
+            </div>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="menu-button" onclick="window.open('${personal.links.cv}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">📄 CV</button>
+                <button class="menu-button" onclick="window.open('${personal.links.linkedin}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">💼 LINKEDIN</button>
+                <button class="menu-button" onclick="window.open('${personal.links.labWebsite}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🏛️ MIT BIO</button>
             </div>
         `,
     },
@@ -196,27 +368,31 @@ export const gameData = {
         icon: "✉️",
         position: { top: "1200px", left: "1100px", width: "300px", height: "150px" },
         content: `
-            <h2>COMMUNICATION PORTAL</h2>
-            <p>Send a message through the digital void...</p>
-            <div style="margin: 20px 0;">
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">NAME:</label>
-                    <input type="text" id="contact-name" name="name" style="width: 100%; padding: 8px; background: var(--highlight); border: 2px solid var(--secondary); color: var(--secondary); font-family: inherit; font-size: 10px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">EMAIL:</label>
-                    <input type="email" id="contact-email" name="email" style="width: 100%; padding: 8px; background: var(--highlight); border: 2px solid var(--secondary); color: var(--secondary); font-family: inherit; font-size: 10px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">MESSAGE:</label>
-                    <textarea id="contact-message" rows="4" name="message" style="width: 100%; padding: 8px; background: var(--highlight); border: 2px solid var(--secondary); color: var(--secondary); font-family: inherit; font-size: 10px; resize: none;"></textarea>
-                </div>
-                <button class="menu-button" onclick="sendMessage()">📤 TRANSMIT MESSAGE</button>
+            <h2>📧 CONTACT HUB</h2>
+            <div style="text-align: center; margin: 20px 0;">
+                <div style="font-size: 48px; margin-bottom: 15px;">📬</div>
+                <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
+                    <strong>Connect for research collaborations, opportunities in transportation AI, and discussions.</strong>
+                </p>
             </div>
-            <h3>DIRECT CHANNELS:</h3>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="menu-button" onclick="window.open('mailto:zhouqiao@mit.edu', '_blank')">📧 EMAIL</button>
-                <button class="menu-button" onclick="copyGameEmail()">📋 COPY EMAIL</button>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="menu-button" onclick="copyGameEmail()" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+                    📋 COPY EMAIL
+                </button>
+                <button class="menu-button" onclick="window.open('${personal.links.linkedin}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+                    💼 LINKEDIN
+                </button>
+                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+                    🔬 RESEARCHGATE
+                </button>
+                <button class="menu-button" onclick="window.open('${personal.links.googleScholar}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+                    📚 SCHOLAR
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 15px; font-size: 8px; color: var(--accent); opacity: 0.8;">
+                Open to research discussions and academic collaborations
             </div>
         `,
     },

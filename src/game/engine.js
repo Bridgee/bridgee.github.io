@@ -1,5 +1,5 @@
 // Import functions from other modules
-import { collectItem, createParticle } from './entities.js';
+import { collectItem, createParticle, triggerAchievement } from './entities.js';
 import { startDialogue, continueDialogue, enterArea, closePopup } from './ui.js';
 import { gameData } from '../data/index.js';
 
@@ -31,7 +31,7 @@ export let isInDialogue = false;
 export let isPopupOpen = false; // New state for popup
 
 // DOM element references
-export let gameWorld, playerElement, playerSprite, hudCoords, hudScore, hudLevel, hudAchievements;
+export let gameWorld, playerElement, playerSprite, hudScore, hudLevel, hudAchievements;
 export let interactionPrompt, dialogueBox, dialogueSpeaker, dialogueText, minimapPlayer;
 
 // Cached interactive collections
@@ -64,7 +64,6 @@ function initDOMReferences() {
     gameWorld = document.getElementById('game-world');
     playerElement = document.getElementById('player');
     playerSprite = playerElement?.querySelector('.player-sprite');
-    hudCoords = document.getElementById('coordinates');
     hudScore = document.getElementById('score');
     hudLevel = document.getElementById('level');
     hudAchievements = document.getElementById('achievements');
@@ -127,6 +126,19 @@ export function initGame() {
     
     setInterval(checkProximity, 100);
     gameLoop();
+    
+    // Welcome message after loading
+    setTimeout(() => {
+        const achievementEl = document.getElementById('achievement');
+        const achievementText = document.getElementById('achievement-text');
+        if (achievementEl && achievementText) {
+            achievementText.textContent = "🎮 WELCOME TO THE RESEARCH WORLD! Start exploring!";
+            achievementEl.style.display = 'block';
+            setTimeout(() => {
+                achievementEl.style.display = 'none';
+            }, 4000);
+        }
+    }, 2000);
 }
 
 function gameLoop() {
@@ -211,7 +223,6 @@ function updatePlayerPosition() {
         playerElement.style.top = player.y + 'px';
         if (playerSprite) playerSprite.className = `player-sprite facing-${player.direction}${player.isMoving ? ' moving' : ''}`;
     }
-    if (hudCoords) hudCoords.textContent = `X: ${Math.floor(player.x)} | Y: ${Math.floor(player.y)}`;
 }
 
 function updateCamera() {

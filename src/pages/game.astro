@@ -21,6 +21,8 @@ import { gameData } from "../data/index.js";
             ))}
 
             <!-- Decorative Elements -->
+            
+            <!-- Trees -->
             <div class="tree" style="top: 300px; left: 200px;">
                 <div class="tree-top"></div>
                 <div class="tree-trunk"></div>
@@ -37,10 +39,73 @@ import { gameData } from "../data/index.js";
                 <div class="tree-top"></div>
                 <div class="tree-trunk"></div>
             </div>
+            <div class="tree" style="top: 150px; left: 1800px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 1200px; left: 1500px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 600px; left: 100px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree" style="top: 1400px; left: 800px;">
+                <div class="tree-top"></div>
+                <div class="tree-trunk"></div>
+            </div>
+
+            <!-- Fences -->
+            <div class="fence horizontal" style="top: 400px; left: 500px;"></div>
+            <div class="fence horizontal" style="top: 400px; left: 620px;"></div>
+            <div class="fence horizontal" style="top: 400px; left: 740px;"></div>
+            
+            <div class="fence vertical" style="top: 1000px; left: 600px;"></div>
+            <div class="fence vertical" style="top: 1080px; left: 600px;"></div>
+            <div class="fence vertical" style="top: 1160px; left: 600px;"></div>
+            
+            <div class="fence horizontal" style="top: 1300px; left: 1200px;"></div>
+            <div class="fence horizontal" style="top: 1300px; left: 1320px;"></div>
+            
+            <!-- River -->
+            <div class="river" style="top: 800px; left: 1200px;"></div>
+            <div class="river" style="top: 880px; left: 1150px;"></div>
+            <div class="river" style="top: 960px; left: 1100px;"></div>
+            <div class="river" style="top: 1040px; left: 1050px;"></div>
+            <div class="river" style="top: 1120px; left: 1000px;"></div>
+            <div class="river" style="top: 1200px; left: 950px;"></div>
+
+            <!-- Grass Patches -->
+            <div class="grass-patch" style="top: 250px; left: 800px;"></div>
+            <div class="grass-patch" style="top: 350px; left: 1400px;"></div>
+            <div class="grass-patch" style="top: 700px; left: 300px;"></div>
+            <div class="grass-patch" style="top: 1100px; left: 200px;"></div>
+            <div class="grass-patch" style="top: 200px; left: 1200px;"></div>
+            <div class="grass-patch" style="top: 1400px; left: 1400px;"></div>
+            <div class="grass-patch" style="top: 900px; left: 1700px;"></div>
+
+            <!-- Rocks -->
+            <div class="rock" style="top: 450px; left: 300px;"></div>
+            <div class="rock" style="top: 1250px; left: 600px;"></div>
+            <div class="rock" style="top: 750px; left: 1400px;"></div>
+            <div class="rock" style="top: 550px; left: 1800px;"></div>
+
+            <!-- Flowers -->
+            <div class="flowers" style="top: 320px; left: 950px;"></div>
+            <div class="flowers" style="top: 1050px; left: 400px;"></div>
+            <div class="flowers" style="top: 180px; left: 700px;"></div>
+            <div class="flowers" style="top: 1350px; left: 1100px;"></div>
+
+            <!-- Bushes -->
+            <div class="bush" style="top: 650px; left: 500px;"></div>
+            <div class="bush" style="top: 850px; left: 1600px;"></div>
+            <div class="bush" style="top: 1150px; left: 1300px;"></div>
+            <div class="bush" style="top: 380px; left: 1500px;"></div>
 
             <!-- Dynamic NPCs -->
             {gameData.npcs.map(npc => (
-              <div class="npc" style={`top: ${npc.position.top}; left: ${npc.position.left};`} data-name={npc.name} data-dialogue={JSON.stringify(npc.dialogue)}>
+              <div class={`npc color-${npc.color}`} style={`top: ${npc.position.top}; left: ${npc.position.left};`} data-name={npc.name} data-dialogue={JSON.stringify(npc.dialogue)}>
                 <div class={`npc-sprite ${npc.sprite}`}>
                   {Array.from({ length: 64 }).map(() => <div class="pixel"></div>)}
                 </div>
@@ -64,10 +129,9 @@ import { gameData } from "../data/index.js";
     
     <!-- HUD -->
     <div id="hud">
-        <div id="coordinates">X: 0 | Y: 0</div>
         <div id="score">XP: 0</div>
         <div id="level">LEVEL: 1</div>
-        <div id="achievements">🏆 0/10</div>
+        <div id="achievements">🏆 0/{gameData.collectibles.length}</div>
     </div>
     
     <!-- Instructions -->
@@ -102,6 +166,14 @@ import { gameData } from "../data/index.js";
         <div class="minimap-area" style="top: 55px; left: 95px; width: 15px; height: 12px;"></div>
         <div class="minimap-area" style="top: 75px; left: 65px; width: 18px; height: 10px;"></div>
         <div class="minimap-area" style="top: 45px; left: 65px; width: 12px; height: 12px; background-color: var(--secondary);"></div>
+        <div class="minimap-area" style="top: 28px; left: 41px; width: 6px; height: 4px; background-color: #8B4513;"></div>
+        <div class="minimap-area" style="top: 34px; left: 41px; width: 6px; height: 4px; background-color: #8B4513;"></div>
+        <!-- NPCs on minimap -->
+        <div class="minimap-npc" style="top: 40px; left: 25px; width: 4px; height: 4px; background-color: #4A90E2; border-radius: 50%;"></div> <!-- Dr. Chen - Blue (650px, 400px) -->
+        <div class="minimap-npc" style="top: 28px; left: 94px; width: 4px; height: 4px; background-color: #8A2BE2; border-radius: 50%;"></div> <!-- Maya - Purple (450px, 1500px) -->
+        <div class="minimap-npc" style="top: 65px; left: 25px; width: 4px; height: 4px; background-color: #FF8C00; border-radius: 50%;"></div> <!-- Alex - Orange (1050px, 400px) -->
+        <div class="minimap-npc" style="top: 50px; left: 106px; width: 4px; height: 4px; background-color: #22C55E; border-radius: 50%;"></div> <!-- Pixel - Green (800px, 1700px) -->
+        <div class="minimap-npc" style="top: 18px; left: 75px; width: 4px; height: 4px; background-color: #EF4444; border-radius: 50%;"></div> <!-- Luna - Red (300px, 1200px) -->
         <div id="minimap-player"></div>
     </div>
     
