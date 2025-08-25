@@ -58,189 +58,204 @@
     filter: brightness(1.1);
 }
 
-/* Area-specific architectural designs */
+/* 8-bit Pixel Architecture */
 
-/* Home Base - House shape */
-#home-area {
-    background: var(--primary);
-    border: 4px solid var(--secondary);
-    border-radius: 8px;
-    position: relative;
-}
-
-#home-area::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 30px solid var(--secondary);
-}
-
-/* Research Lab - Laboratory building */
-#research-area {
-    background: linear-gradient(135deg, var(--primary) 0%, rgba(15, 56, 15, 0.8) 100%);
-    border: 4px solid var(--secondary);
-    border-radius: 4px;
-    position: relative;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-#research-area::before {
-    content: '🔬';
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: var(--accent);
-    color: var(--primary);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    border: 2px solid var(--secondary);
-}
-
-/* Information Boards - Wooden board style */
-#papers-board, #projects-board {
-    background: linear-gradient(45deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
-    border: 6px solid #654321;
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-#papers-board::before, #projects-board::before {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #2F1B14;
-    border-radius: 50%;
-    box-shadow: 
-        inset 1px 1px 2px rgba(0, 0, 0, 0.5),
-        0 1px 2px rgba(255, 255, 255, 0.2);
-}
-
-#papers-board::before {
-    top: 10px;
-    left: 10px;
-}
-
-#projects-board::before {
-    top: 10px;
-    right: 10px;
-}
-
-/* Gallery - Picture frame style */
-#gallery-area {
-    background: linear-gradient(45deg, #DAA520 0%, #FFD700 50%, #DAA520 100%);
-    border: 8px solid #B8860B;
-    border-style: ridge;
-    position: relative;
-    box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
-}
-
-#gallery-area::before {
-    content: '';
+/* Base architecture styling */
+.area-architecture {
     position: absolute;
     top: 8px;
     left: 8px;
-    right: 8px;
-    bottom: 8px;
-    border: 2px solid #8B7355;
-    background: rgba(255, 255, 255, 0.1);
+    width: 48px;
+    height: 48px;
+    display: grid;
+    grid-template-columns: repeat(8, 6px);
+    grid-template-rows: repeat(8, 6px);
+    z-index: 5;
 }
 
-/* Music Studio - Recording booth style */
-#music-area {
-    background: radial-gradient(circle, var(--primary) 0%, #1a3d1a 70%);
-    border: 4px solid var(--secondary);
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0 0 20px rgba(155, 188, 15, 0.3);
+.building-pixel {
+    width: 6px;
+    height: 6px;
+    background: transparent;
 }
 
-#music-area::before {
-    content: '♪';
-    position: absolute;
-    top: -10px;
-    left: -10px;
+/* Home Building - House shape */
+.home-building .building-pixel:nth-child(2),
+.home-building .building-pixel:nth-child(3),
+.home-building .building-pixel:nth-child(6),
+.home-building .building-pixel:nth-child(7) {
+    background: var(--primary);
+}
+
+.home-building .building-pixel:nth-child(10),
+.home-building .building-pixel:nth-child(11),
+.home-building .building-pixel:nth-child(14),
+.home-building .building-pixel:nth-child(15) {
+    background: var(--secondary);
+}
+
+.home-building .building-pixel:nth-child(18),
+.home-building .building-pixel:nth-child(19),
+.home-building .building-pixel:nth-child(22),
+.home-building .building-pixel:nth-child(23) {
+    background: var(--primary);
+}
+
+.home-building .building-pixel:nth-child(26),
+.home-building .building-pixel:nth-child(27),
+.home-building .building-pixel:nth-child(30),
+.home-building .building-pixel:nth-child(31) {
+    background: var(--secondary);
+}
+
+/* Research Building - Laboratory shape */
+.research-building .building-pixel:nth-child(1),
+.research-building .building-pixel:nth-child(2),
+.research-building .building-pixel:nth-child(7),
+.research-building .building-pixel:nth-child(8),
+.research-building .building-pixel:nth-child(9),
+.research-building .building-pixel:nth-child(16),
+.research-building .building-pixel:nth-child(17),
+.research-building .building-pixel:nth-child(24) {
     background: var(--accent);
-    color: var(--primary);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    border: 2px solid var(--secondary);
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+.research-building .building-pixel:nth-child(3),
+.research-building .building-pixel:nth-child(4),
+.research-building .building-pixel:nth-child(5),
+.research-building .building-pixel:nth-child(6),
+.research-building .building-pixel:nth-child(11),
+.research-building .building-pixel:nth-child(12),
+.research-building .building-pixel:nth-child(13),
+.research-building .building-pixel:nth-child(14) {
+    background: var(--secondary);
 }
 
-/* About Area - Profile badge style */
-#about-area {
-    background: linear-gradient(135deg, var(--primary) 0%, rgba(15, 56, 15, 0.9) 100%);
+/* Papers Building - Information board */
+.papers-building .building-pixel:nth-child(1),
+.papers-building .building-pixel:nth-child(8),
+.papers-building .building-pixel:nth-child(9),
+.papers-building .building-pixel:nth-child(16),
+.papers-building .building-pixel:nth-child(17),
+.papers-building .building-pixel:nth-child(24),
+.papers-building .building-pixel:nth-child(25),
+.papers-building .building-pixel:nth-child(32) {
+    background: #654321;
+}
+
+.papers-building .building-pixel:nth-child(2),
+.papers-building .building-pixel:nth-child(3),
+.papers-building .building-pixel:nth-child(4),
+.papers-building .building-pixel:nth-child(5),
+.papers-building .building-pixel:nth-child(6),
+.papers-building .building-pixel:nth-child(7) {
+    background: #8B4513;
+}
+
+/* Projects Building - Rocket/Tech shape */
+.projects-building .building-pixel:nth-child(4),
+.projects-building .building-pixel:nth-child(5),
+.projects-building .building-pixel:nth-child(11),
+.projects-building .building-pixel:nth-child(14),
+.projects-building .building-pixel:nth-child(19),
+.projects-building .building-pixel:nth-child(22),
+.projects-building .building-pixel:nth-child(27),
+.projects-building .building-pixel:nth-child(30) {
+    background: #4A90E2;
+}
+
+.projects-building .building-pixel:nth-child(12),
+.projects-building .building-pixel:nth-child(13),
+.projects-building .building-pixel:nth-child(20),
+.projects-building .building-pixel:nth-child(21),
+.projects-building .building-pixel:nth-child(28),
+.projects-building .building-pixel:nth-child(29) {
+    background: #357ABD;
+}
+
+/* Gallery Building - Picture frame shape */
+.gallery-building .building-pixel:nth-child(1),
+.gallery-building .building-pixel:nth-child(2),
+.gallery-building .building-pixel:nth-child(3),
+.gallery-building .building-pixel:nth-child(6),
+.gallery-building .building-pixel:nth-child(7),
+.gallery-building .building-pixel:nth-child(8),
+.gallery-building .building-pixel:nth-child(9),
+.gallery-building .building-pixel:nth-child(16),
+.gallery-building .building-pixel:nth-child(17),
+.gallery-building .building-pixel:nth-child(24) {
+    background: #DAA520;
+}
+
+.gallery-building .building-pixel:nth-child(4),
+.gallery-building .building-pixel:nth-child(5),
+.gallery-building .building-pixel:nth-child(12),
+.gallery-building .building-pixel:nth-child(13),
+.gallery-building .building-pixel:nth-child(20),
+.gallery-building .building-pixel:nth-child(21) {
+    background: #FFD700;
+}
+
+/* Music Building - Musical note shape */
+.music-building .building-pixel:nth-child(3),
+.music-building .building-pixel:nth-child(4),
+.music-building .building-pixel:nth-child(11),
+.music-building .building-pixel:nth-child(12),
+.music-building .building-pixel:nth-child(20),
+.music-building .building-pixel:nth-child(27),
+.music-building .building-pixel:nth-child(28) {
+    background: #9B59B6;
+}
+
+.music-building .building-pixel:nth-child(19),
+.music-building .building-pixel:nth-child(26) {
+    background: #8E44AD;
+}
+
+/* About Building - Person/Profile shape */
+.about-building .building-pixel:nth-child(3),
+.about-building .building-pixel:nth-child(4),
+.about-building .building-pixel:nth-child(5),
+.about-building .building-pixel:nth-child(6),
+.about-building .building-pixel:nth-child(11),
+.about-building .building-pixel:nth-child(14),
+.about-building .building-pixel:nth-child(19),
+.about-building .building-pixel:nth-child(22) {
+    background: #E67E22;
+}
+
+.about-building .building-pixel:nth-child(12),
+.about-building .building-pixel:nth-child(13),
+.about-building .building-pixel:nth-child(20),
+.about-building .building-pixel:nth-child(21) {
+    background: #D35400;
+}
+
+/* Contact Building - Communication/Mail shape */
+.contact-building .building-pixel:nth-child(2),
+.contact-building .building-pixel:nth-child(3),
+.contact-building .building-pixel:nth-child(6),
+.contact-building .building-pixel:nth-child(7),
+.contact-building .building-pixel:nth-child(9),
+.contact-building .building-pixel:nth-child(16),
+.contact-building .building-pixel:nth-child(17),
+.contact-building .building-pixel:nth-child(24) {
+    background: #1ABC9C;
+}
+
+.contact-building .building-pixel:nth-child(4),
+.contact-building .building-pixel:nth-child(5),
+.contact-building .building-pixel:nth-child(12),
+.contact-building .building-pixel:nth-child(13) {
+    background: #16A085;
+}
+
+/* Area base styling */
+#home-area, #research-area, #papers-area, #projects-area, #gallery-area, #music-area, #about-area, #contact-area {
+    background: var(--highlight);
     border: 4px solid var(--secondary);
-    border-radius: 50px;
-    position: relative;
-    box-shadow: 0 0 25px rgba(155, 188, 15, 0.4);
 }
 
-#about-area::before {
-    content: '👤';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent);
-    color: var(--primary);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    border: 2px solid var(--secondary);
-}
-
-/* Contact Area - Communication terminal */
-#contact-area {
-    background: linear-gradient(90deg, var(--primary) 0%, rgba(15, 56, 15, 0.9) 100%);
-    border: 4px solid var(--secondary);
-    border-radius: 6px;
-    position: relative;
-    box-shadow: 
-        0 0 20px rgba(155, 188, 15, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
-}
-
-#contact-area::before {
-    content: '📡';
-    position: absolute;
-    top: -8px;
-    right: 10px;
-    font-size: 20px;
-    animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
 
 .area-label {
     position: absolute;
@@ -309,76 +324,27 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Specific Areas */
-#home-area {
-    top: 750px;
-    left: 1150px;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(155, 188, 15, 0.3);
-}
-
-#research-area {
-    top: 400px;
-    left: 300px;
-    width: 300px;
-    height: 250px;
-}
-
-#gallery-area {
-    top: 400px;
-    left: 1800px;
-    width: 300px;
-    height: 250px;
-}
-
-#music-area {
-    top: 900px;
-    left: 600px;
-    width: 250px;
-    height: 200px;
-}
-
-#about-area {
-    top: 900px;
-    left: 1550px;
-    width: 250px;
-    height: 200px;
-}
-
-#contact-area {
-    top: 1200px;
-    left: 1100px;
-    width: 300px;
-    height: 150px;
-}
 
 /* Decorative Elements */
-.tree {
+
+/* Fences */
+.fence {
     position: absolute;
-    width: 48px;
-    height: 64px;
-    background-color: var(--primary);
-    cursor: default;
+    z-index: 3;
+    background: linear-gradient(45deg, #8B4513 0%, #A0522D 100%);
+    border: 2px solid #654321;
 }
 
-.tree-top {
-    position: absolute;
-    top: 0;
-    left: 8px;
-    width: 32px;
-    height: 40px;
-    background-color: var(--highlight);
+.fence.horizontal {
+    width: 120px;
+    height: 20px;
 }
 
-.tree-trunk {
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    width: 8px;
-    height: 24px;
-    background-color: var(--primary);
+.fence.vertical {
+    width: 20px;
+    height: 80px;
 }
+
 
 /* HUD */
 #hud {

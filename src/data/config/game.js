@@ -91,9 +91,9 @@ export const gameData = {
       icon: "🏠",
       position: { top: "750px", left: "1150px", width: "200px", height: "200px" },
       content: `
-        <h2>WELCOME TO MY RESEARCH WORLD</h2>
+        <h2>WELCOME TO MY DIGITAL REALM</h2>
         <p>Greetings, traveler! I'm Zhouqiao (Bridge) Zhao, a Postdoctoral Associate at MIT.</p>
-        <p>This interactive portfolio showcases my research in intelligent transportation systems and human-centered AI.</p>
+        <p>This interactive portfolio showcases my research, creative projects, music, photography, and personal journey as a scientist and creator.</p>
         <div style="margin-top: 20px;">
             <button class="menu-button" onclick="window.location.href='/blog'">📝 ACADEMIC PORTFOLIO</button>
             <button class="menu-button" onclick="showStats()">VIEW STATS</button>
@@ -168,7 +168,7 @@ export const gameData = {
     "papers-board": {
         label: "PAPERS",
         icon: "📋",
-        position: { top: "450px", left: "650px", width: "100px", height: "70px" },
+        position: { top: "430px", left: "620px", width: "100px", height: "70px" },
         content: `
             <h2>📋 RESEARCH PAPERS</h2>
             <div style="text-align: center; margin: 15px 0;">
@@ -204,7 +204,7 @@ export const gameData = {
     "projects-board": {
         label: "PROJECTS",
         icon: "📁",
-        position: { top: "550px", left: "650px", width: "100px", height: "70px" },
+        position: { top: "504px", left: "620px", width: "100px", height: "70px" },
         content: `
             <h2>📁 RESEARCH PROJECTS</h2>
             <div style="text-align: center; margin: 15px 0;">

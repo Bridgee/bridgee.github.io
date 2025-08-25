@@ -17,91 +17,38 @@ import { gameData } from "../data/index.js";
               <div id={id} class="game-area" style={`top: ${area.position.top}; left: ${area.position.left}; width: ${area.position.width}; height: ${area.position.height};`}>
                 <div class="area-label">{area.label}</div>
                 <div class="area-icon" role="img" aria-label={area.label} set:html={area.icon} />
+                <!-- 8-bit pixel architecture -->
+                <div class={`area-architecture ${id.replace('-area', '')}-building`}>
+                  {Array.from({ length: 64 }).map(() => <div class="building-pixel"></div>)}
+                </div>
               </div>
             ))}
 
             <!-- Decorative Elements -->
             
-            <!-- Trees -->
-            <div class="tree" style="top: 300px; left: 200px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 500px; left: 1600px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 800px; left: 900px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 1000px; left: 300px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 150px; left: 1800px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 1200px; left: 1500px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 600px; left: 100px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-            <div class="tree" style="top: 1400px; left: 800px;">
-                <div class="tree-top"></div>
-                <div class="tree-trunk"></div>
-            </div>
-
-            <!-- Fences -->
-            <div class="fence horizontal" style="top: 400px; left: 500px;"></div>
-            <div class="fence horizontal" style="top: 400px; left: 620px;"></div>
-            <div class="fence horizontal" style="top: 400px; left: 740px;"></div>
+            <!-- Fences - positioned in clear areas away from all interactive elements -->
+            <!-- Top area clear zone -->
+            <div class="fence horizontal" style="top: 100px; left: 400px;"></div>
+            <div class="fence horizontal" style="top: 100px; left: 520px;"></div>
+            <div class="fence horizontal" style="top: 100px; left: 640px;"></div>
             
-            <div class="fence vertical" style="top: 1000px; left: 600px;"></div>
-            <div class="fence vertical" style="top: 1080px; left: 600px;"></div>
-            <div class="fence vertical" style="top: 1160px; left: 600px;"></div>
+            <!-- Middle-left clear zone -->  
+            <div class="fence vertical" style="top: 750px; left: 200px;"></div>
+            <div class="fence vertical" style="top: 830px; left: 200px;"></div>
             
-            <div class="fence horizontal" style="top: 1300px; left: 1200px;"></div>
-            <div class="fence horizontal" style="top: 1300px; left: 1320px;"></div>
+            <!-- Bottom clear zone -->
+            <div class="fence horizontal" style="top: 1450px; left: 600px;"></div>
+            <div class="fence horizontal" style="top: 1450px; left: 720px;"></div>
             
-            <!-- River -->
-            <div class="river" style="top: 800px; left: 1200px;"></div>
-            <div class="river" style="top: 880px; left: 1150px;"></div>
-            <div class="river" style="top: 960px; left: 1100px;"></div>
-            <div class="river" style="top: 1040px; left: 1050px;"></div>
-            <div class="river" style="top: 1120px; left: 1000px;"></div>
-            <div class="river" style="top: 1200px; left: 950px;"></div>
-
-            <!-- Grass Patches -->
-            <div class="grass-patch" style="top: 250px; left: 800px;"></div>
-            <div class="grass-patch" style="top: 350px; left: 1400px;"></div>
-            <div class="grass-patch" style="top: 700px; left: 300px;"></div>
-            <div class="grass-patch" style="top: 1100px; left: 200px;"></div>
-            <div class="grass-patch" style="top: 200px; left: 1200px;"></div>
-            <div class="grass-patch" style="top: 1400px; left: 1400px;"></div>
-            <div class="grass-patch" style="top: 900px; left: 1700px;"></div>
-
-            <!-- Rocks -->
-            <div class="rock" style="top: 450px; left: 300px;"></div>
-            <div class="rock" style="top: 1250px; left: 600px;"></div>
-            <div class="rock" style="top: 750px; left: 1400px;"></div>
-            <div class="rock" style="top: 550px; left: 1800px;"></div>
-
-            <!-- Flowers -->
-            <div class="flowers" style="top: 320px; left: 950px;"></div>
-            <div class="flowers" style="top: 1050px; left: 400px;"></div>
-            <div class="flowers" style="top: 180px; left: 700px;"></div>
-            <div class="flowers" style="top: 1350px; left: 1100px;"></div>
-
-            <!-- Bushes -->
-            <div class="bush" style="top: 650px; left: 500px;"></div>
-            <div class="bush" style="top: 850px; left: 1600px;"></div>
-            <div class="bush" style="top: 1150px; left: 1300px;"></div>
-            <div class="bush" style="top: 380px; left: 1500px;"></div>
+            <!-- Lower right corner _| shaped fence -->
+            <!-- Horizontal part extending LEFT -->
+            <div class="fence horizontal" style="top: 1500px; left: 2000px;"></div>
+            <div class="fence horizontal" style="top: 1500px; left: 2120px;"></div>
+            
+            <!-- Vertical part going UP -->
+            <div class="fence vertical" style="top: 1420px; left: 2240px;"></div>
+            <div class="fence vertical" style="top: 1340px; left: 2240px;"></div>
+            <div class="fence vertical" style="top: 1260px; left: 2240px;"></div>
 
             <!-- Dynamic NPCs -->
             {gameData.npcs.map(npc => (

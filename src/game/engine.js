@@ -196,6 +196,46 @@ function handleKeyUp(e) {
     }
 }
 
+// Fence collision detection
+function checkFenceCollision(playerX, playerY) {
+    const fences = [
+        // Top area clear zone
+        { x: 400, y: 100, width: 120, height: 20 },
+        { x: 520, y: 100, width: 120, height: 20 },
+        { x: 640, y: 100, width: 120, height: 20 },
+        
+        // Middle-left clear zone
+        { x: 200, y: 750, width: 20, height: 80 },
+        { x: 200, y: 830, width: 20, height: 80 },
+        
+        // Bottom clear zone
+        { x: 600, y: 1450, width: 120, height: 20 },
+        { x: 720, y: 1450, width: 120, height: 20 },
+        
+        // Lower right corner _| shaped fence
+        // Horizontal part
+        { x: 2000, y: 1500, width: 120, height: 20 },
+        { x: 2120, y: 1500, width: 120, height: 20 },
+        
+        // Vertical part
+        { x: 2240, y: 1420, width: 20, height: 80 },
+        { x: 2240, y: 1340, width: 20, height: 80 },
+        { x: 2240, y: 1260, width: 20, height: 80 }
+    ];
+    
+    // Check collision with each fence
+    for (const fence of fences) {
+        if (playerX < fence.x + fence.width &&
+            playerX + player.width > fence.x &&
+            playerY < fence.y + fence.height &&
+            playerY + player.height > fence.y) {
+            return true; // Collision detected
+        }
+    }
+    
+    return false; // No collision
+}
+
 function handleMovement() {
     if (isInDialogue || isPopupOpen) return; // Updated logic
     
@@ -208,8 +248,13 @@ function handleMovement() {
     if (keys['arrowleft'] || keys['a']) { newX -= player.speed; player.direction = 'left'; moved = true; }
     if (keys['arrowright'] || keys['d']) { newX += player.speed; player.direction = 'right'; moved = true; }
     
-    if (newX >= 0 && newX <= world.width - player.width) player.x = newX;
-    if (newY >= 0 && newY <= world.height - player.height) player.y = newY;
+    // Check world boundaries and fence collisions
+    if (newX >= 0 && newX <= world.width - player.width && !checkFenceCollision(newX, player.y)) {
+        player.x = newX;
+    }
+    if (newY >= 0 && newY <= world.height - player.height && !checkFenceCollision(player.x, newY)) {
+        player.y = newY;
+    }
     
     if (moved) {
         updatePlayerPosition();
