@@ -101,6 +101,10 @@ for (const [relativePath, requiredReferences] of sharedUsageChecks) {
 const fixedControlsSource = fs.readFileSync(path.join(repoRoot, 'src/components/FixedControls.astro'), 'utf8');
 assert(fixedControlsSource.includes('position: fixed'), 'Page controls must remain fixed to the viewport.');
 assert(!fixedControlsSource.includes('position: static'), 'Responsive styles must not move page controls back into document flow.');
+assert(fixedControlsSource.includes('--control-min-height: 44px'), 'Page controls must preserve a 44px minimum target size.');
+assert(fixedControlsSource.includes('grid-template-columns: repeat(2, minmax(0, 1fr))'), 'Narrow screens must use the compact two-column control layout.');
+assert(fixedControlsSource.includes('orientation: landscape'), 'Page controls must include a short-landscape layout.');
+assert(fixedControlsSource.includes('grid-auto-flow: column'), 'Short-landscape controls must render in one horizontal row.');
 
 const forbiddenDuplicatedFacts = [
   personal.identity.displayName,
