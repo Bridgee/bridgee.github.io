@@ -235,20 +235,23 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
 
   @media (max-width: 480px), (max-height: 520px) {
     .fixed-controls {
-      position: static;
-      width: calc(100% - 1rem);
-      margin: 0.5rem auto 0;
+      position: fixed;
+      bottom: max(0.35rem, env(safe-area-inset-bottom));
+      right: max(0.35rem, env(safe-area-inset-right));
+      width: min(18rem, calc(100vw - 0.7rem));
+      max-width: calc(100vw - 0.7rem);
+      margin: 0;
       gap: 0.25rem;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      justify-content: end;
       align-items: stretch;
     }
 
     .back-to-top,
     .back-button,
     .mode-switch {
-      flex: 0 1 auto;
+      min-width: 0;
     }
     
     .back-to-top button,
@@ -258,11 +261,15 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       padding: 0.35rem 0.55rem;
       font-size: 0.65rem;
       border-radius: 13px;
-      width: auto;
+      width: 100%;
       min-height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+    }
+
+    :global(body) {
+      padding-bottom: 6.5rem;
     }
   }
 </style>

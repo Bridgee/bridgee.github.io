@@ -98,6 +98,10 @@ for (const [relativePath, requiredReferences] of sharedUsageChecks) {
   }
 }
 
+const fixedControlsSource = fs.readFileSync(path.join(repoRoot, 'src/components/FixedControls.astro'), 'utf8');
+assert(fixedControlsSource.includes('position: fixed'), 'Page controls must remain fixed to the viewport.');
+assert(!fixedControlsSource.includes('position: static'), 'Responsive styles must not move page controls back into document flow.');
+
 const forbiddenDuplicatedFacts = [
   personal.identity.displayName,
   personal.currentRole.title,
