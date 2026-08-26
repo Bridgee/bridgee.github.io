@@ -105,6 +105,7 @@ assert(fixedControlsSource.includes('--control-min-height: 44px'), 'Page control
 assert(fixedControlsSource.includes('grid-template-columns: repeat(2, minmax(0, 1fr))'), 'Narrow screens must use the compact two-column control layout.');
 assert(fixedControlsSource.includes('orientation: landscape'), 'Page controls must include a short-landscape layout.');
 assert(fixedControlsSource.includes('grid-auto-flow: column'), 'Short-landscape controls must render in one horizontal row.');
+assert(fixedControlsSource.includes('grid-auto-columns: minmax(0, 1fr)'), 'Short-landscape controls must use equal-width columns.');
 
 const forbiddenDuplicatedFacts = [
   personal.identity.displayName,
