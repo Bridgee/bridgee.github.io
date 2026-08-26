@@ -1,0 +1,1 @@
+import{t as e}from"./theme.DPS_NjhZ.js";document.addEventListener(`DOMContentLoaded`,()=>{e(),document.querySelectorAll(`.mode-card`).forEach(e=>{e.addEventListener(`click`,()=>{let t=e.getAttribute(`href`);t&&localStorage.setItem(`prefMode`,t)})})});
