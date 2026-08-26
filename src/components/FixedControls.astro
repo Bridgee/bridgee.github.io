@@ -233,8 +233,13 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
     }
   }
 
+</style>
+
+<!-- Keep this critical responsive rule inline so cached external CSS cannot move
+     the global controls back into document flow after a deployment. -->
+<style is:inline>
   @media (max-width: 480px), (max-height: 520px) {
-    .fixed-controls {
+    body .fixed-controls {
       position: fixed;
       bottom: max(0.35rem, env(safe-area-inset-bottom));
       right: max(0.35rem, env(safe-area-inset-right));
@@ -248,16 +253,16 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       align-items: stretch;
     }
 
-    .back-to-top,
-    .back-button,
-    .mode-switch {
+    body .fixed-controls .back-to-top,
+    body .fixed-controls .back-button,
+    body .fixed-controls .mode-switch {
       min-width: 0;
     }
-    
-    .back-to-top button,
-    .back-button a,
-    .mode-switch a,
-    .theme-toggle {
+
+    body .fixed-controls .back-to-top button,
+    body .fixed-controls .back-button a,
+    body .fixed-controls .mode-switch a,
+    body .fixed-controls .theme-toggle {
       padding: 0.35rem 0.55rem;
       font-size: 0.65rem;
       border-radius: 13px;
@@ -268,7 +273,7 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       justify-content: center;
     }
 
-    :global(body) {
+    body {
       padding-bottom: 6.5rem;
     }
   }
