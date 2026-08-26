@@ -1,13 +1,22 @@
 // Publications and academic content
 export const publications = [
   {
-    title: "A Review of Personalization in Driving Behavior: Dataset, Modeling, and Validation",
-    venue: "IEEE Transactions on Intelligent Vehicles",
-    type: "Journal",
-    link: "/doc/review_personalization.pdf",
-    description: "This paper provides a systematic review of personalization in driving behavior. It proposes a taxonomy to categorize personalized driving behaviors and surveys relevant datasets, modeling methodologies, and validation techniques. The paper emphasizes the need for intelligent vehicles to adapt to the complex and heterogeneous behaviors of human drivers to create a safe and efficient traffic environment.",
+    title: "From Prediction to Design: Using Context-Aware Graph Neural Networks and Explainable AI to Anticipate Transfer-of-Control",
+    venue: "2026 SAE World Congress",
+    type: "SAE Technical Paper",
+    link: "https://doi.org/10.4271/2026-01-0049",
+    description: "This work presents a context-aware framework that fuses driver behavior, vehicle kinematics, and the surrounding environment to classify driver-initiated transfers of control and predict their timing. A hierarchical graph neural network supports prediction, while explainable AI reveals how behavioral and contextual cues evolve before transitions between manual driving and partial automation.",
     scope_tags: ["Sensing & Evaluation", "Behavior Modeling", "System Applications"],
-    year: 2025
+    year: 2026
+  },
+  {
+    title: "Large-Language-Model-Agent-Enabled Analysis of Semi-Structured Interviews: Comparing Driver Experience Across Partial Automation Systems",
+    venue: "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+    type: "Conference Proceeding",
+    link: "https://doi.org/10.1177/10711813261475249",
+    description: "This study uses a large-language-model-agent-enabled workflow to analyze semi-structured interviews and compare driver experiences across partial automation systems. The work connects scalable qualitative analysis with human-factors questions about how drivers understand, use, and evaluate vehicle automation.",
+    scope_tags: ["Sensing & Evaluation", "Behavior Modeling"],
+    year: 2026
   },
   {
     title: "Design, Implementation, and Evaluation of an Innovative Vehicle-Powertrain Eco-Operation System for Plug-In Hybrid Electric Buses",
@@ -17,6 +26,15 @@ export const publications = [
     description: "This paper presents a Connected Eco-Bus system that co-optimizes the vehicle dynamics and powertrain controls of a plug-in hybrid electric bus (PHEB) to improve its energy efficiency. The system is evaluated through both simulation and Dynamometer-in-the-Loop testing, and the results show that it can achieve energy efficiency improvements of up to 32.4%.",
     scope_tags: ["Sensing & Evaluation", "System Applications"],
     year: 2025
+  },
+  {
+    title: "A Review of Personalization in Driving Behavior: Dataset, Modeling, and Validation",
+    venue: "IEEE Transactions on Intelligent Vehicles",
+    type: "Journal",
+    link: "/doc/review_personalization.pdf",
+    description: "This paper provides a systematic review of personalization in driving behavior. It proposes a taxonomy to categorize personalized driving behaviors and surveys relevant datasets, modeling methodologies, and validation techniques. The paper emphasizes the need for intelligent vehicles to adapt to the complex and heterogeneous behaviors of human drivers to create a safe and efficient traffic environment.",
+    scope_tags: ["Sensing & Evaluation", "Behavior Modeling", "System Applications"],
+    year: 2024
   },
   {
     title: "Driver Behavior in Response to Forward Collision Warnings Considering Driving Context",
@@ -79,7 +97,7 @@ export const publications = [
     link: "/doc/autotrac.pdf",
     description: "This paper discusses the use of robotic competitions to design and test future transport systems. It presents the case of the JRC AUTOTRAC 2020, the first European robotic traffic competition for automated miniature vehicles. The competition aimed to engage a broader community in designing and testing solutions for improving traffic flow using connected and automated vehicles (CAVs).",
     scope_tags: ["Sensing & Evaluation", "System Applications"],
-    year: 2023
+    year: 2022
   },
   {
     title: "Online Prediction of Lane Change with a Hierarchical Learning-Based Approach",
@@ -154,7 +172,7 @@ export const publications = [
     year: 2020
   },
   {
-    title: "Optimal Control-Based Eco-Ramp Merging System for Connected and Automated Vehicles",
+    title: "Optimal Control-Based Eco-Ramp Merging System for Connected and Automated Electric Vehicles",
     venue: "2020 IEEE Intelligent Vehicles Symposium (IV)",
     type: "Conference Proceeding",
     link: "/doc/cav_ramp.pdf",
@@ -181,7 +199,7 @@ export const publications = [
     year: 2020
   },
   {
-    title: "Developing a Data-driven Modularized Model of a Plug-in Hybrid Electric Bus (PHEB) for Connected and Automated Vehicle Applications",
+    title: "Developing a Data-driven Modularized Model for a Plug-in Hybrid Electric Bus (PHEB) for Connected and Automated Vehicle Applications",
     venue: "2020 IEEE 23rd International Conference on Intelligent Transportation Systems",
     type: "Conference Proceeding",
     link: "/doc/lstm_truck_modeling.pdf",

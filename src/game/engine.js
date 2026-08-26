@@ -1,7 +1,8 @@
 // Import functions from other modules
-import { collectItem, createParticle, triggerAchievement } from './entities.js';
+import { collectItem, createParticle } from './entities.js';
 import { startDialogue, continueDialogue, enterArea, closePopup } from './ui.js';
 import { gameData } from '../data/index.js';
+import { showGameNotification } from './notifications.js';
 
 // Game Variables - Initialize from gameData
 export let player = {
@@ -39,7 +40,7 @@ export let npcList = [], areaList = [], collectibleList = [];
 
 // State management functions
 export function incrementAchievements() {
-    if (achievements < 10) achievements++;
+    achievements++;
 }
 
 export function getAchievements() {
@@ -76,10 +77,12 @@ function initDOMReferences() {
 
 // Game initialization
 export function initGame() {
+    const loadingScreen = document.getElementById('loading-screen');
     setTimeout(() => {
-        document.getElementById('loading-screen').style.opacity = '0';
+        if (!loadingScreen) return;
+        loadingScreen.style.opacity = '0';
         setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
+            loadingScreen.style.display = 'none';
         }, 500);
     }, 1000);
     
@@ -89,16 +92,17 @@ export function initGame() {
     areaList = Array.from(document.querySelectorAll('.game-area'));
     collectibleList = Array.from(document.querySelectorAll('.collectible'));
     
-    areaList.forEach(area => {
-        area.setAttribute('role', 'button');
-        area.setAttribute('tabindex', '0');
-        area.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                enterArea(area);
+    const activateOnKeyboard = (element, action) => {
+        element.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                event.stopPropagation();
+                action();
             }
         });
-    });
+    };
+
+    areaList.forEach(area => activateOnKeyboard(area, () => enterArea(area)));
     
     updatePlayerPosition();
     attachEventListeners();
@@ -111,17 +115,20 @@ export function initGame() {
     });
     
     areaList.forEach(area => {
-        area.addEventListener('click', (e) => {
-            if (!e.target.closest('.area-label')) enterArea(area);
-        });
+        area.addEventListener('click', () => enterArea(area));
     });
     
     npcList.forEach(npc => {
         npc.addEventListener('click', () => startDialogue(npc));
+        activateOnKeyboard(npc, () => {
+            if (isInDialogue && currentInteraction?.element === npc) continueDialogue();
+            else startDialogue(npc);
+        });
     });
     
     collectibleList.forEach(item => {
         item.addEventListener('click', () => collectItem(item));
+        activateOnKeyboard(item, () => collectItem(item));
     });
     
     setInterval(checkProximity, 100);
@@ -129,15 +136,7 @@ export function initGame() {
     
     // Welcome message after loading
     setTimeout(() => {
-        const achievementEl = document.getElementById('achievement');
-        const achievementText = document.getElementById('achievement-text');
-        if (achievementEl && achievementText) {
-            achievementText.textContent = "🎮 WELCOME TO THE RESEARCH WORLD! Start exploring!";
-            achievementEl.style.display = 'block';
-            setTimeout(() => {
-                achievementEl.style.display = 'none';
-            }, 4000);
-        }
+        showGameNotification('🎮 WELCOME TO THE RESEARCH WORLD! Start exploring!', { duration: 4000 });
     }, 2000);
 }
 
@@ -198,33 +197,7 @@ function handleKeyUp(e) {
 
 // Fence collision detection
 function checkFenceCollision(playerX, playerY) {
-    const fences = [
-        // Top area clear zone
-        { x: 400, y: 100, width: 120, height: 20 },
-        { x: 520, y: 100, width: 120, height: 20 },
-        { x: 640, y: 100, width: 120, height: 20 },
-        
-        // Middle-left clear zone
-        { x: 200, y: 750, width: 20, height: 80 },
-        { x: 200, y: 830, width: 20, height: 80 },
-        
-        // Bottom clear zone
-        { x: 600, y: 1450, width: 120, height: 20 },
-        { x: 720, y: 1450, width: 120, height: 20 },
-        
-        // Lower right corner _| shaped fence
-        // Horizontal part
-        { x: 2000, y: 1500, width: 120, height: 20 },
-        { x: 2120, y: 1500, width: 120, height: 20 },
-        
-        // Vertical part
-        { x: 2240, y: 1420, width: 20, height: 80 },
-        { x: 2240, y: 1340, width: 20, height: 80 },
-        { x: 2240, y: 1260, width: 20, height: 80 }
-    ];
-    
-    // Check collision with each fence
-    for (const fence of fences) {
+    for (const fence of gameData.fences) {
         if (playerX < fence.x + fence.width &&
             playerX + player.width > fence.x &&
             playerY < fence.y + fence.height &&
@@ -310,8 +283,10 @@ function checkProximity() {
     const pcy = player.y + player.height / 2;
 
     for (const npc of npcList) {
-        if (Math.hypot(pcx - (parseInt(npc.style.left) + 16), pcy - (parseInt(npc.style.top) + 16)) < R) {
-            showInteractionPrompt(npc);
+        const npcCenterX = npc.offsetLeft + npc.offsetWidth / 2;
+        const npcCenterY = npc.offsetTop + npc.offsetHeight / 2;
+        if (Math.hypot(pcx - npcCenterX, pcy - npcCenterY) < R) {
+            showInteractionPrompt();
             setCurrentInteraction({ type: 'npc', element: npc });
             return;
         }
@@ -319,7 +294,7 @@ function checkProximity() {
 
     for (const area of areaList) {
         if (pcx > area.offsetLeft && pcx < area.offsetLeft + area.offsetWidth && pcy > area.offsetTop && pcy < area.offsetTop + area.offsetHeight) {
-            showInteractionPrompt(area);
+            showInteractionPrompt();
             setCurrentInteraction({ type: 'area', element: area });
             return;
         }
@@ -327,8 +302,10 @@ function checkProximity() {
 
     for (const item of collectibleList) {
         if (collectedItems.has(item)) continue;
-        if (Math.hypot(pcx - (parseInt(item.style.left) + 12), pcy - (parseInt(item.style.top) + 12)) < R) {
-            showInteractionPrompt(item);
+        const itemCenterX = item.offsetLeft + item.offsetWidth / 2;
+        const itemCenterY = item.offsetTop + item.offsetHeight / 2;
+        if (Math.hypot(pcx - itemCenterX, pcy - itemCenterY) < R) {
+            showInteractionPrompt();
             setCurrentInteraction({ type: 'collectible', element: item });
             return;
         }
@@ -338,7 +315,7 @@ function checkProximity() {
     setCurrentInteraction(null);
 }
 
-function showInteractionPrompt(element) {
+function showInteractionPrompt() {
     if (!interactionPrompt) return;
     interactionPrompt.style.display = 'block';
     const desiredLeft = player.x - camera.x + player.width / 2 - interactionPrompt.offsetWidth / 2;
@@ -379,10 +356,7 @@ function attachButtonHandlers() {
 
         const press = (e) => {
             e.preventDefault();
-            if (keyName === 'action') {
-                interact();
-                return;
-            }
+            if (keyName === 'action') return;
             keys[keyName] = true;
             if (!player.isMoving) {
                 player.isMoving = true;
@@ -404,14 +378,13 @@ function attachButtonHandlers() {
         btn.addEventListener('pointerdown', press);
         btn.addEventListener('pointerup', release);
         btn.addEventListener('pointerleave', release);
+        btn.addEventListener('pointercancel', release);
         btn.addEventListener('contextmenu', e => e.preventDefault());
+        if (keyName === 'action') btn.addEventListener('click', interact);
     });
 
     const closeBtn = document.querySelector('.popup-close');
     if (closeBtn) {
         closeBtn.addEventListener('click', closePopup);
-        closeBtn.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') closePopup();
-        });
     }
 }

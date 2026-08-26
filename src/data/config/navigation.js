@@ -1,4 +1,6 @@
-// Navigation configuration for easy scalability
+// Navigation configuration for easy scalability.
+import { research } from '../content/research.js';
+
 export const navigationConfig = {
   pages: [
     { href: '/music', label: 'Music', section: 'pages' },
@@ -10,6 +12,7 @@ export const navigationConfig = {
   ],
   sections: [
     { href: '#about', label: 'About' },
+    { href: '#haits', label: research.lab.shortName },
     { href: '#research', label: 'Research' },
     { href: '#publications', label: 'Publications' },
     { href: '#projects', label: 'Projects' }

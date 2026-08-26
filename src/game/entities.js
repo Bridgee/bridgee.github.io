@@ -1,9 +1,10 @@
 // Import from engine.js
 import { 
     player, collectedItems, collectibleList, gameWorld,
-    hudScore, hudLevel, hudAchievements, incrementAchievements, getAchievements
+    hudScore, hudLevel, hudAchievements, incrementAchievements
 } from './engine.js';
 import { gameData } from '../data/index.js';
+import { showGameNotification } from './notifications.js';
 
 // Gain XP and level up
 export function gainXP(amount) {
@@ -19,16 +20,7 @@ export function gainXP(amount) {
         } else if (player.level === 10 && !unlockedAchievements.has('LEVEL_10')) {
             unlockAchievement('LEVEL_10');
         } else {
-            // Show level up notification without achievement
-            const achievementEl = document.getElementById('achievement');
-            const achievementText = document.getElementById('achievement-text');
-            if (achievementEl && achievementText) {
-                achievementText.textContent = `🆙 LEVEL UP! You reached level ${player.level}!`;
-                achievementEl.style.display = 'block';
-                setTimeout(() => {
-                    achievementEl.style.display = 'none';
-                }, 3000);
-            }
+            showGameNotification(`🆙 LEVEL UP! You reached level ${player.level}!`, { duration: 3000 });
         }
     }
     updateHUD();
@@ -49,16 +41,7 @@ export function unlockAchievement(achievementKey) {
         gainXP(achievement.xp);
     }
     
-    // Show achievement notification
-    const achievementEl = document.getElementById('achievement');
-    const achievementText = document.getElementById('achievement-text');
-    if (achievementEl && achievementText) {
-        achievementText.textContent = achievement.text;
-        achievementEl.style.display = 'block';
-        setTimeout(() => {
-            achievementEl.style.display = 'none';
-        }, 4000); // Increased to 4s for longer text
-    }
+    showGameNotification(achievement.text, { duration: 4000 });
     updateHUD();
 }
 

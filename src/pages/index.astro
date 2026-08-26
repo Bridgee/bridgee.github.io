@@ -1,6 +1,7 @@
 ---
 import ProfileImage from '../components/ProfileImage.astro';
 import Icon from '../components/Icon.astro';
+import { modeConfig, personal, research, siteConfig } from '../data/index.js';
 
 // Import shared CSS for theme consistency
 import '../css/blog/base.css';
@@ -11,16 +12,19 @@ import '../css/blog/components.css';
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhouqiao (Bridge) Zhao - Digital Playground</title>
+    <title>{siteConfig.siteName}</title>
+    <meta name="description" content={siteConfig.description}>
     <link rel="icon" href="/website_icon.png">
     <style>
       /* Override base.css body styles for index page */
       body {
         background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        overflow-x: hidden;
       }
 
       /* Dark Mode */
@@ -191,6 +195,7 @@ import '../css/blog/components.css';
         z-index: 1001 !important;
         white-space: nowrap !important;
         font-weight: 500 !important;
+        min-height: 44px;
       }
 
       body.dark-mode .theme-toggle {
@@ -226,6 +231,12 @@ import '../css/blog/components.css';
 
       @media (max-width: 480px) {
 
+        .theme-toggle {
+          top: 0.5rem;
+          right: 0.5rem;
+          bottom: auto;
+        }
+
         .hero-section {
           padding: 1.5rem;
         }
@@ -237,21 +248,21 @@ import '../css/blog/components.css';
     </style>
   </head>
   <body class="dark-mode">
-    <button class="theme-toggle" id="theme-toggle">☀️ Light</button>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true">☀️ Light</button>
     
     <div class="container">
       <div class="mode-selection-intro">
         <ProfileImage size="medium" variant="avatar" />
-        <h1 class="main-title">Zhouqiao (Bridge) Zhao</h1>
-        <p class="subtitle">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
+        <h1 class="main-title">{personal.identity.displayName}</h1>
+        <p class="subtitle">{personal.currentRole.headline}</p>
         
         <div class="intro-text">
           <p>
-            Welcome! I'm Bridge, a postdoctoral researcher at MIT.
+            {personal.bio.homeIntroduction}
           </p>
           
           <p style="margin-top: 1.5rem;">
-            I'm an Electrical and Computer Engineer working at the intersection of Human-Centered AI, Connected and Automated Vehicles (CAV), and Intelligent Transportation Systems (ITS). 
+            My research develops {research.summary} The agenda spans {research.agendaChain.join(' → ')}.
           </p>
 
           <p style="margin-top: 1.5rem;">
@@ -259,78 +270,37 @@ import '../css/blog/components.css';
           </p>
 
           <p style="margin-top: 1.5rem;">
-            This site is my digital playground—explore my research, creative projects, and etc., in either portfolio mode or an interactive 8-bit world:
+            This site is my digital playground—explore my research and creative work in either portfolio mode or an interactive 8-bit world:
           </p>
         </div>
 
         <div class="mode-selection">
-          <a href="/blog" class="mode-card" id="blogBtn">
-            <span class="mode-icon"><Icon src="/images/icons/portfolio_icon.png" /></span>
-            <h3 class="mode-title"> Portfolio Mode</h3>
-            <p class="mode-description">Browse my portfolio in a clean and traditional format.</p>
+          <a href={modeConfig.portfolio.path} class="mode-card" id="blogBtn">
+            <span class="mode-icon"><Icon src={modeConfig.portfolio.icon} /></span>
+            <h3 class="mode-title">{modeConfig.portfolio.label}</h3>
+            <p class="mode-description">{modeConfig.portfolio.description}</p>
           </a>
           
-          <a href="/game" class="mode-card" id="gameBtn">
-            <span class="mode-icon"><Icon src="/images/icons/game_mode_icon.png" /></span>
-            <h3 class="mode-title">Interactive Mode</h3>
-            <p class="mode-description">Explore my world as an 8-bit adventure!</p>
+          <a href={modeConfig.interactive.path} class="mode-card" id="gameBtn">
+            <span class="mode-icon"><Icon src={modeConfig.interactive.icon} /></span>
+            <h3 class="mode-title">{modeConfig.interactive.label}</h3>
+            <p class="mode-description">{modeConfig.interactive.description}</p>
           </a>
         </div>
       </div>
     </div>
 
-    <script is:inline>
-      // Inline theme management for index page compatibility
-      function toggleTheme() {
-        try {
-          document.body.classList.toggle('dark-mode');
-          const isDark = document.body.classList.contains('dark-mode');
-          const toggleBtn = document.getElementById('theme-toggle');
-          if (toggleBtn) {
-            toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-          }
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        } catch (error) {
-          console.error('Theme toggle error:', error);
-        }
-      }
+    <script>
+      import { initializeTheme } from '../utils/theme.js';
 
-      function initializeTheme() {
-        try {
-          const savedTheme = localStorage.getItem('theme');
-          const toggleBtn = document.getElementById('theme-toggle');
-          
-          if (savedTheme === 'light') {
-            document.body.classList.remove('dark-mode');
-            if (toggleBtn) {
-              toggleBtn.textContent = '🌙 Dark';
-            }
-          } else {
-            document.body.classList.add('dark-mode');
-            if (toggleBtn) {
-              toggleBtn.textContent = '☀️ Light';
-            }
-            if (!savedTheme) {
-              localStorage.setItem('theme', 'dark');
-            }
-          }
-          
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', toggleTheme);
-          }
-        } catch (error) {
-          console.error('Theme initialization error:', error);
-        }
-      }
-
-      // Initialize theme and set up event listeners
       document.addEventListener('DOMContentLoaded', () => {
         initializeTheme();
 
         // Store mode preference when clicking mode cards
         document.querySelectorAll('.mode-card').forEach(card => {
           card.addEventListener('click', () => {
-            localStorage.setItem('prefMode', card.getAttribute('href'));
+            const href = card.getAttribute('href');
+            if (href) localStorage.setItem('prefMode', href);
           });
         });
       });

@@ -1,558 +1,75 @@
-# Interactive 8-Bit Personal Website
+# Zhouqiao (Bridge) Zhao — Personal Website
 
-A dual-mode interactive personal website for MIT postdoc researcher Zhouqiao (Bridge) Zhao, combining an 8-bit game experience with a professional academic portfolio.
+Source for [bridgee.github.io](https://bridgee.github.io), the personal academic and creative website of Zhouqiao (Bridge) Zhao, Assistant Professor of Electrical and Computer Engineering at Loyola Marymount University and lead of the HAITS Lab.
 
-🚀 **Live Site**: [https://Bridgee.github.io](https://Bridgee.github.io)
+The site has two connected experiences:
 
-## 🎮 Project Overview
+- **Portfolio Mode** presents the academic profile, HAITS Lab, research agenda, publications, projects, photography, and music.
+- **Interactive Mode** presents the same core content as an explorable 8-bit world.
 
-This innovative personal website offers two complementary experiences built on professional hierarchical architecture:
+Both modes are generated from shared content modules so identity and research updates remain consistent across the site.
 
-1. **🎮 Interactive Digital Twin**: An 8-bit retro game where visitors explore a virtual world to discover research, photography, music, and personal content through interactive gameplay
-2. **📝 Academic Portfolio**: A professional blog-style interface presenting the same content in a traditional academic format with proper layout inheritance
+## Local setup
 
-### ✨ Key Features
-
-- **Hierarchical Layout Architecture**: Professional BlogLayout → Specific Layouts → Pages inheritance system
-- **Dual-Mode Architecture**: Seamless switching between game and blog modes  
-- **Shared Content System**: Centralized data management serves both interfaces
-- **Real Media Integration**: 
-  - 🎵 SoundCloud music player with 3 original compositions
-  - 📸 Professional Flickr photo gallery with 6 featured works (responsive on all devices)
-  - 📄 Downloadable academic CV
-- **Interactive Gameplay**: 
-  - 2400×1600px explorable world with smooth camera following
-  - XP/achievement system rewarding exploration
-  - NPCs with multi-line dialogue systems
-  - Mobile-optimized touch controls
-- **Professional Features**:
-  - **Clean Separation of Concerns**: Layouts handle styling/scripts, pages contain pure content
-  - **Astro Scoped Styles Solutions**: Proper `:global()` usage for slotted content styling
-  - **Enhanced Research Presentation**: Philosophy, roadmap, and future directions
-  - **Responsive Image Management**: Gallery images properly contained across all devices
-  - Dark/light theme toggle across all pages
-  - Responsive design optimized for all devices
-  - Academic publications and research showcase
-  - Multi-page blog architecture (Music, Gallery)
-
-## 🛠️ Technical Stack
-
-- **Framework**: Astro (Static Site Generator)
-- **Runtime**: Vanilla JavaScript ES6 modules
-- **Styling**: Custom CSS with GameBoy-inspired retro palette
-- **Deployment**: GitHub Pages
-- **Build System**: npm with automated deployment pipeline
-
-## 📁 Project Structure
-
-```
-project/                    # Active development directory
-├── src/
-│   ├── pages/
-│   │   ├── index.astro    # Landing page with mode selection
-│   │   ├── game.astro     # Interactive Digital Twin mode
-│   │   ├── blog.astro     # Main academic portfolio
-│   │   ├── music.astro    # Music showcase page
-│   │   └── gallery.astro  # Photography gallery
-│   ├── layouts/
-│   │   ├── GameLayout.astro # Game-specific layout
-│   │   └── BlogLayout.astro # Blog-specific layout
-│   ├── components/         # Reusable UI components (REFACTORED)
-│   │   ├── Card.astro      # Project/content cards
-│   │   ├── Navigation.astro # Site navigation  
-│   │   ├── ThemeToggle.astro # Dark/light mode toggle
-│   │   ├── FixedControls.astro # Floating action buttons
-│   │   ├── ProjectTag.astro # Project category tags
-│   │   ├── ProfileImage.astro # Reusable profile photo component
-│   │   └── Icon.astro      # Flexible emoji/image icon system
-│   ├── js/
-│   │   ├── game/          # Game-specific modules (NEW)
-│   │   │   ├── engine.js  # Game engine, movement, camera
-│   │   │   ├── entities.js # Game entities, XP system
-│   │   │   └── ui.js      # UI interactions, dialogues
-│   │   └── data/          # Separated data architecture (NEW)
-│   │       ├── navigation.js # Navigation configuration
-│   │       ├── shared.js  # Content used by both modes
-│   │       ├── game.js    # Game-specific data only
-│   │       └── blog.js    # Blog-specific data only
-│   └── css/               # Organized CSS architecture (REFACTORED)
-│       ├── blog/          # Blog mode styles
-│       │   ├── base.css       # Foundation styles
-│       │   ├── components.css # Component styles  
-│       │   └── responsive.css # Responsive breakpoints
-│       └── game/          # Game mode styles
-│           ├── palette.css    # GameBoy colors & fonts
-│           ├── layout.css     # Game UI & layout
-│           └── sprites.css    # 8-bit sprites & animations
-├── public/                # Static assets (REORGANIZED)
-│   ├── website_icon.png   # Site favicon
-│   ├── doc/               # Document organization
-│   │   └── Zhouqiao_Zhao_Resume_2025_Jul.pdf
-│   └── images/            # Visual assets
-│       ├── profile-photo.jfif
-│       └── icons/         # Professional icons
-│           ├── google_scholar_icon.svg
-│           ├── linkedin_icon.svg
-│           ├── research_gate_icon.png
-│           └── mit_icon.jpg
-└── dist/                  # Production build output
-```
-
-## 🚀 Development
-
-### Prerequisites
-- Node.js (v16+)
-- npm
-
-### Setup & Development
+The repository is pinned to Node.js 24.19.0 in `.nvmrc`. Node 22.12 or newer is supported.
 
 ```bash
-cd project/
-npm install              # Install dependencies
-npm run dev             # Start development server (http://localhost:4321)
-npm run build           # Build for production
-npm run preview         # Preview production build
-npm run deploy          # Deploy to GitHub Pages
+nvm install
+nvm use
+npm ci
+npm run validate
+npm run dev
 ```
 
-## 🎯 Recent Major Updates (August 2025)
+Useful commands:
 
-### ✅ **PROJECT FINALIZATION & DOCUMENTATION COMPLETE** (Latest - August 22, 2025)
-
-**Final project refinements with comprehensive documentation updates:**
-
-#### 🎯 **Latest Fixes & Improvements:**
-1. **ProjectLayout Enhancement** - Complete restructuring and optimization:
-   - **Tags System**: Consolidated scope tags and keywords with proper left alignment
-   - **Responsive Bullet Lists**: Fixed overflow issues on narrow windows with proper text wrapping
-   - **CSS Optimization**: Eliminated redundancy, unified section headers, consistent styling
-   - **Data Structure Fix**: Resolved "Cannot read properties of undefined" build errors
-   - **YouTube Embedding**: Proper iframe implementation with responsive 16:9 aspect ratio
-
-2. **SEO & Search Console Integration**:
-   - **Google Site Verification**: Successfully verified with Google Search Console
-   - **Automated Sitemap**: Generated sitemap-index.xml and sitemap-0.xml for 11 pages
-   - **Robots.txt**: Proper search engine guidance with sitemap reference
-   - **URL Structure**: Clean URLs for all project pages and main sections
-
-3. **Research Roadmap Visual Fix**:
-   - **Core Modules Coloring**: Restored proper flowchart colors (green, brown-orange, blue)
-   - **Module-specific Styling**: `.module-sensing`, `.module-behavior`, `.module-system` classes
-   - **Visual Consistency**: Research roadmap now displays with correct color coding
-
-4. **Deployment System Optimization**:
-   - **Windows Compatibility**: Fixed npm run deploy mmap errors with custom deployment script
-   - **Incremental Deployment**: Preserves Git history while avoiding Windows-specific issues
-   - **Cache Management**: Resolved gh-pages cache problems for reliable deployments
-   - **Build Verification**: All 11 pages build successfully with zero errors
-
-5. **Visitor Stats Enhancement**:
-   - **Widget Optimization**: Reduced 2D map (700x400→500x300) and 3D globe (400x400→280x280) sizes
-   - **FixedControls Integration**: Standardized back button behavior across all subpages
-   - **Responsive Scaling**: Improved mobile experience with appropriately sized widgets
-
-### ✅ **COMPREHENSIVE CODE ARCHITECTURE REFACTORING COMPLETED** (Previous - August 14, 2025)
-
-**Professional-grade codebase transformation with dramatic quality improvements:**
-
-#### 🚨 **CRITICAL CSS DUPLICATION CRISIS RESOLVED:**
-1. **Massive Code Reduction** - BlogLayout.astro: **513 lines** → **124 lines** (**76% reduction!**)
-2. **Shared CSS Architecture** - Created professional 3-module system:
-   - **`css/blog/base.css`** - Foundation styles (body, typography, containers)
-   - **`css/blog/components.css`** - Component styles (cards, buttons, research sections)  
-   - **`css/blog/responsive.css`** - Standardized responsive breakpoints
-3. **Clear Mode Separation** - Organized CSS with crystal-clear structure:
-   ```
-   src/css/
-   ├── blog/     # 📝 Blog mode styles
-   └── game/     # 🎮 Game mode styles (palette, layout, sprites)
-   ```
-
-#### ⚡ **CODE QUALITY EXCELLENCE ACHIEVED:**
-1. **Utility Consolidation** - Eliminated duplicate functions:
-   - **Theme Management**: Centralized in `utils/theme.js` with proper error handling
-   - **Tag Variants**: Consolidated in `utils/tags.js` with consistent logic
-2. **Import Optimization** - Fixed incorrect HTML links → proper Astro CSS imports
-3. **Build Quality**: **100% clean builds** with zero errors/warnings across 8 pages
-4. **Production Ready**: Removed all debug code, optimized for deployment
-
-#### 🎯 **RESULTS ACHIEVED:**
-- **Quality Score**: **100/100** - Perfect architecture, performance, and maintainability
-- **Zero Technical Debt**: All code duplication and structural issues resolved
-- **Professional Standards**: Industry-grade CSS architecture and component organization
-- **Future-Ready**: Scalable foundation for long-term development and maintenance
-
-### ✅ **ADVANCED MOBILE RESPONSIVENESS & LAYOUT OPTIMIZATION COMPLETED** (Previous Update)
-
-**Comprehensive mobile content optimization delivering dramatically improved user experience:**
-
-#### 📱 **Mobile Content Utilization Improvements:**
-- **Progressive Padding Reduction**: Systematic optimization across all nested component levels
-  - **PageSection**: `0.75rem` → `0.5rem` mobile padding for wider content area
-  - **SectionSubsection**: `0.75rem` → `0.25rem` padding with reduced visual weight  
-  - **SubsectionModule**: `0.5rem` → `0.25rem` padding for minimal vertical footprint
-  - **Card Component**: `1rem` → `0.5rem` padding with content breakout capabilities
-
-#### 🖼️ **Research Framework Image Enhancement:**
-- **Content Breakout Styling**: Research roadmap figure now utilizes full screen width on mobile
-- **Image Extension**: `margin-left/right: -0.5rem` breaks images out of card constraints
-- **Maximum Visibility**: `max-width: calc(100% + 1rem)` ensures detailed diagrams are readable
-- **Mobile Research Experience**: Complex research frameworks now clearly visible on small screens
-
-#### 🎨 **Creative Explorations Layout Fix:**
-- **Issue Resolved**: Cards no longer appear narrower than other sections
-- **Structural Solution**: Consolidated separate SectionSubsection containers into unified grid layout
-- **CSS Grid Implementation**: `grid-template-columns: repeat(auto-fit, minmax(350px, 1fr))`
-- **Visual Consistency**: All section cards now maintain consistent width relationships
-
-#### 🔧 **Progressive Enhancement Strategy:**
-- **Desktop (1024px+)**: Full padding for comfortable reading experience
-- **Tablet (768px)**: Moderate reduction balancing content visibility and spacing
-- **Mobile (480px)**: Minimal padding maximizing content area while preserving usability
-- **Smart Backgrounds**: Reduced opacity on mobile maintains visual hierarchy with less visual weight
-
-#### 📊 **User Experience Impact:**
-- **Content Visibility**: Users see 40-60% more content without additional scrolling
-- **Research Accessibility**: Framework diagrams and roadmaps clearly readable on mobile devices
-- **Reduced Friction**: Eliminated user frustration with tiny, cramped mobile content
-- **Professional Polish**: Maintained academic presentation while optimizing for mobile consumption
-
-### ✅ **COMPONENT SYSTEM & ASSET MANAGEMENT COMPLETED** (Previous Update)
-
-**Professional component architecture with flexible icon system and organized asset management:**
-
-#### 🧩 **Component System Enhancements:**
-1. **ProfileImage Component** - Reusable profile photo component with fallback emoji support:
-   - Flexible sizing (`small`, `medium`, `large`)
-   - Different variants (`avatar` for index, `header` for blog)
-   - Automatic fallback to emoji if image fails to load
-   - Responsive sizing across all breakpoints
-
-2. **Flexible Icon System** - Dual-mode icon component supporting both emojis and image files:
-   ```astro
-   <!-- Current (emoji) -->
-   <Icon emoji="📧" />
-   
-   <!-- Future (with icon files) -->
-   <Icon src="/images/icons/email.svg" />
-   ```
-   - Smart fallback system if images fail
-   - Easy switching between emoji and professional icons
-   - Consistent sizing and styling
-
-#### 📁 **Asset Organization Improvements:**
-- **Reorganized Public Folder**: Professional structure with logical groupings
-  - `/doc/` for documents (CV, papers, presentations)
-  - `/images/` for visual assets (profile photos, icons)
-  - `/images/icons/` for professional icon collection
-- **Custom Website Icon**: Replaced generic favicon with professional custom icon
-- **Professional Icons**: Added real brand icons (Google Scholar, LinkedIn, ResearchGate, MIT)
-
-#### 🛠️ **Deployment System Fixed:**
-- **gh-pages Cache Issue Resolved**: Fixed persistent deployment problems
-- **Dual Deployment Options**: 
-  - Primary: `npm run deploy` (now working reliably)
-  - Backup: Manual deployment script for edge cases
-- **Clean Deployments**: `--no-history` flag ensures fresh deployments
-
-### ✅ **PROJECT STRUCTURE REFACTORING COMPLETED** (Previous Update)
-
-**Professional architecture implemented with complete data separation and component organization:**
-
-#### 🏗️ **Architecture Improvements:**
-1. **Flattened Components Structure** - Removed unnecessary `/ui/` subfolder for simpler, cleaner imports
-2. **Game Module Organization** - Created `/js/game/` folder for game-specific code (engine, entities, ui)
-3. **Data Layer Separation** - Split monolithic data into logical concerns:
-   - `shared.js`: Content used by both game and blog modes (projects, photos, music)
-   - `game.js`: Game-specific data only (player, NPCs, areas, collectibles)
-   - `blog.js`: Blog-specific configuration
-   - `navigation.js`: Navigation configuration with clear pages vs sections distinction
-4. **Component Reusability** - Created modular components (Card, Navigation, ThemeToggle, FixedControls, ProjectTag)
-
-#### ⚡ **Benefits Achieved:**
-- **Clarity**: Obvious file purposes and logical organization
-- **Maintainability**: Easy to find and modify specific functionality
-- **Scalability**: Clean architecture supports future growth
-- **Performance**: Optimized imports and reduced redundancy
-- **Developer Experience**: Intuitive structure for faster development
-
-#### ✅ **Verification Complete:**
-- All functionality, data flows, and visuals successfully ported
-- Build passes with zero errors
-- Cross-references between shared and game-specific data work perfectly
-- Professional structure ready for production and future enhancements
-
-### ✅ **CRITICAL CODE REVIEW & BUG FIXES COMPLETED** (Previous)
-
-**Comprehensive line-by-line code analysis completed with all critical issues resolved:**
-
-#### 🚨 **Critical Bugs Fixed:**
-1. **Unsafe Clipboard API Usage** - Fixed blog.astro email copy with proper fallbacks for non-HTTPS environments
-2. **Invalid HTML Structure** - Corrected nested section elements in music.astro causing markup violations
-3. **Broken SoundCloud URLs** - Fixed incorrectly constructed track URLs using title strings instead of proper profile links
-4. **Missing JavaScript Functions** - Added safe email copy function with cross-browser compatibility
-5. **CSS Syntax Errors** - Resolved missing bracket in media query causing build warnings
-6. **Inconsistent Responsive Breakpoints** - Standardized all breakpoints to 1024px/768px/480px across entire project
-7. **Production Debug Code** - Removed console.log statements for cleaner production builds
-
-#### ⚡ **Performance & Quality Improvements:**
-- **Build Status**: ✅ Clean builds with zero errors/warnings
-- **Cross-browser Compatibility**: Enhanced with robust fallback mechanisms
-- **Responsive Design**: Consistent behavior across all screen sizes
-- **Dark Mode**: Fixed theme inconsistencies across all components
-- **Error Handling**: Added comprehensive try-catch blocks and user feedback
-- **Code Quality**: Removed redundant code and optimized CSS specificity
-
-#### 📱 **Mobile & Accessibility Enhancements:**
-- **Touch Controls**: Optimized button positioning and sizing
-- **Keyboard Navigation**: Enhanced focus states and accessibility
-- **Screen Readers**: Improved semantic markup and ARIA labels
-- **Performance**: Reduced bundle size and optimized asset loading
-
-### ✅ Content Architecture & Navigation Overhaul (Previous)
-- **Scalable Navigation System**: Implemented centralized navigation configuration for easy future expansion
-- **Projects Section**: New card-based project showcase with external linking and dynamic content management
-- **Enhanced Research Section**: Added research philosophy, current focus, future directions, and 2025-2027 roadmap
-- **Streamlined Structure**: Temporarily disabled Thoughts section, focusing on core academic and creative content
-- **Data-Driven Design**: Projects now managed through centralized `gameData.projects` configuration
-
-### ✅ Responsive Design Overhaul (Previous Update)
-- **Problem Solved**: Fixed interactive button responsiveness and alignment issues
-- **Mobile Optimization**: Enhanced button scaling across all screen sizes (1024px → 768px → 480px breakpoints)
-- **Layout Improvement**: Moved buttons to bottom-right to prevent navigation blocking
-- **Visual Enhancement**: Fixed dark/light theme button contrast issues
-
-### 🎨 Theme System Improvements
-- **Color Fixes**: Resolved weird shading on dark/light toggle buttons
-- **Consistent Styling**: Unified button appearance across all pages
-- **Better Contrast**: Improved visibility in both light and dark modes
-- **Backdrop Effects**: Enhanced blur and transparency for better visual hierarchy
-
-### 📱 Mobile Experience Enhancement
-- **Touch Optimization**: Better button positioning for mobile devices
-- **Navigation Fixes**: Sticky navigation no longer blocked by control buttons
-- **Responsive Scaling**: Progressive button size reduction for different screen sizes
-- **Accessibility**: Maintained touch-friendly button sizes while optimizing layout
-
-### 🏗️ Architecture Improvements
-- **Bottom-Positioned Controls**: All interactive buttons moved to bottom-right corner
-- **Z-Index Management**: Proper layering hierarchy (controls: 1001, navigation: 100)
-- **Cross-Page Consistency**: Unified responsive behavior across all blog pages
-- **Performance**: Optimized CSS with backdrop-filter blur for better visual effects
-
-## 🎮 Game Features
-
-### Core Gameplay
-- **Exploration**: Navigate a retro-styled research campus
-- **Interactions**: Talk to NPCs, visit themed areas, collect items
-- **Progression**: XP system with achievements for engagement tracking
-- **Discovery**: Hidden collectibles and easter eggs throughout the world
-
-### Interactive Areas
-- **🏠 Home Base**: Welcome center with stats and controls
-- **🔬 Research Lab**: Research interests, roadmap, and academic links
-- **📁 Projects Showcase**: Featured project cards with external links
-- **📸 Photo Gallery**: Flickr integration with professional photography
-- **🎵 Music Studio**: SoundCloud player with original compositions
-- **👤 About Me**: RPG-style character stats and academic journey
-- **✉️ Contact Portal**: Interactive message system
-
-### Characters
-- **Dr. Smith**: Research-focused scientist NPC
-- **Maya**: Photography enthusiast character
-- **DJ Byte**: Music-oriented character
-
-## 📝 Blog Mode Features
-
-### Multi-Page Architecture
-- **Portfolio Home**: Comprehensive about, research, publications, and projects overview
-- **Projects Section**: Dynamic card-based project showcase with external linking
-- **Research Roadmap**: Enhanced research interests with philosophy and 2025-2027 timeline
-- **Music Page**: Dedicated showcase for electronic compositions
-- **Gallery Page**: Professional photography portfolio
-- **Scalable Structure**: Easy addition of new pages through centralized configuration
-
-### Professional Elements
-- **Academic CV**: Downloadable resume integration
-- **Publication List**: Curated research papers with external links
-- **Contact Integration**: Professional contact information and social links
-- **Navigation**: Sticky header with smooth scrolling between sections
-
-## 🌐 Deployment
-
-The site is automatically deployed to GitHub Pages using:
-- **Build Process**: `astro build` generates static files in `dist/`
-- **Deployment**: `gh-pages` package pushes to GitHub Pages
-- **Domain**: Custom GitHub Pages URL with proper asset handling
-- **Jekyll Bypass**: `.nojekyll` file prevents Jekyll processing conflicts
-
-## 📊 Content Management
-
-### Separated Data Architecture
-All content is now managed through specialized data modules for better organization and maintainability:
-
-```javascript
-// Navigation configuration - src/js/data/navigation.js
-export const navigationConfig = {
-  pages: [ /* Different routes/pages */ ],
-  sections: [ /* Internal page anchors */ ]
-};
-
-// Shared content - src/js/data/shared.js
-export const sharedData = {
-  projects: [ /* Featured projects with links */ ],
-  media: {
-    photos: [ /* Flickr photo data */ ],
-    music: { /* SoundCloud track information */ }
-  },
-  research: { /* Research interests */ }
-};
-
-// Game-specific data - src/js/data/game.js
-export const gameData = {
-  player: { /* Player configuration */ },
-  npcs: [ /* Character dialogues and positions */ ],
-  areas: { /* Interactive area content */ },
-  collectibles: [ /* Game collectibles */ ]
-};
-
-// Blog-specific data - src/js/data/blog.js  
-export const blogData = {
-  siteConfig: { /* Blog configuration */ },
-  publications: [ /* Academic papers */ ],
-  skills: [ /* Skill levels */ ]
-};
+```bash
+npm run check     # Astro and TypeScript diagnostics
+npm run build     # Production build in dist/
+npm run preview   # Preview the production build
+npm run validate  # Check, then build
 ```
 
-### Adding Content
-- **Projects**: Add entries to `sharedData.projects` array with title, description, tags, and links
-- **Navigation Pages**: Update `navigationConfig.pages` for new page routes
-- **Navigation Sections**: Update `navigationConfig.sections` for internal page anchors
-- **Research Areas**: Modify `sharedData.research.interests` for research topics
-- **Game Areas**: Update `gameData.areas` for interactive game locations
-- **Photos**: Add entries to `sharedData.media.photos` array with Flickr IDs
-- **Music**: Add tracks to `sharedData.media.music.tracks` with SoundCloud IDs
-- **Blog Configuration**: Modify `blogData` for blog-specific settings
+To check the live status of every external URL rendered by the production build:
 
-## 🎨 Design Philosophy
+```bash
+npm run build
+npm run validate:external
+```
 
-### Visual Identity
-- **Retro Aesthetic**: GameBoy-inspired green color palette
-- **8-Bit Graphics**: Custom pixel art sprites and animations
-- **Modern UX**: Clean, accessible interface design
-- **Professional Balance**: Playful yet academically appropriate
+The external check is intentionally separate because third-party login walls, bot protection, and rate limits can make network results inconclusive even when a link works in a browser.
 
-### User Experience
-- **Progressive Disclosure**: Content revealed through exploration or direct navigation
-- **Accessibility**: ARIA labels, keyboard navigation, mobile optimization
-- **Performance**: Lightweight static generation with selective JavaScript enhancement
-- **Cross-Platform**: Consistent experience across desktop, tablet, and mobile
+Astro telemetry can be disabled in restricted environments with `ASTRO_TELEMETRY_DISABLED=1`.
 
-## 🔧 Technical Architecture
+## Content architecture
 
-### Module System
-- **ES6 Modules**: Clean separation of concerns across JavaScript files
-- **State Management**: Shared state through module exports/imports
-- **DOM Caching**: Performance optimization through element caching
-- **Event Handling**: Efficient input processing for both keyboard and touch
+- `docs/MAINTENANCE_CONTEXT.md` — consolidated career timeline, HAITS identity, research agenda, and wording rules
+- `docs/CONTENT_SOURCE_AUDIT.md` — cross-source fact reconciliation, external-profile drift, and link-review decisions
+- `src/data/content/personal.js` — current role, contact details, institutional links, CV, photography, and music
+- `src/data/content/research.js` — HAITS research agenda and multi-scale research chain
+- `src/data/content/publications.js` — selected publications shown in both site modes
+- `src/data/content/projects.js` — detailed research project records
+- `src/data/config/modes.js` — labels, routes, icons, and descriptions for the two site presentations
+- `src/data/config/game.js` — Interactive Mode areas and NPC dialogue
+- `src/pages/blog.astro` — Portfolio Mode narrative and section structure
+- `src/layouts/BlogLayout.astro` — shared academic header, contact links, metadata, and footer
+- `public/doc/Zhouqiao_Zhao_CV.pdf` — stable public path for the current CV
 
-### Responsive Design
-- **Mobile-First**: Optimized for mobile devices with progressive enhancement
-- **Flexible Layouts**: CSS Grid and Flexbox for adaptive content
-- **Touch Controls**: Native mobile game controls for touch devices
-- **Viewport Adaptation**: Dynamic sizing based on screen dimensions
+The research project archive intentionally preserves historical MIT and UC Riverside affiliations where they describe work completed at those institutions.
 
-### Performance Optimization
-- **Static Generation**: Fast loading through pre-built static files
-- **Selective Hydration**: JavaScript only where needed (game mode)
-- **Asset Optimization**: Optimized images and minimal external dependencies
-- **Caching Strategy**: Efficient browser caching through proper headers
+## Deployment
 
-## 📈 Future Enhancements
+GitHub Pages serves the generated site from the `gh-pages` branch. The `main` branch contains source code.
 
-### Planned Features
-- **Thoughts Section**: Re-enable personal reflections page when content is ready
-- **Dynamic Blog System**: Markdown-based content management
-- **Project Detail Pages**: Individual pages for each project with comprehensive documentation
-- **Analytics Integration**: User interaction tracking and insights
-- **Enhanced Animations**: More sophisticated sprite animations
-- **Audio Integration**: Background music and sound effects
-- **User Feedback**: Interactive rating and comment systems
+Deployment changes remote state and should be run intentionally only after review:
 
-### Technical Improvements
-- **Navigation API**: Programmatic navigation management for complex page structures
-- **Content Management System**: Enhanced data organization and management tools
-- **TypeScript Migration**: Enhanced type safety and developer experience
-- **Component Library**: Reusable UI components across modes
-- **Testing Suite**: Automated testing for game mechanics and UI
-- **CI/CD Pipeline**: Automated testing and deployment workflows
+```bash
+npm run validate
+npm run deploy
+```
 
-## 📄 License
+`deploy-script.js` builds the site and publishes `dist/` with the local `gh-pages` dependency. It is cross-platform and does not use the former Windows-only `rmdir` or `xcopy` workflow.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Workspace migration note
 
-## 👤 About the Author
-
-**Zhouqiao (Bridge) Zhao**  
-Postdoctoral Associate, MIT Center for Transportation & Logistics
-
-- 📧 Email: zhouqiao@mit.edu
-- 🔗 LinkedIn: [Zhouqiao Zhao](https://www.linkedin.com/in/zhouqiao-zhao-60560a56/)
-- 📚 Google Scholar: [Publications](https://scholar.google.com/citations?user=Y1s8cw0AAAAJ&hl)
-- 🎵 SoundCloud: [Electronic Music](https://soundcloud.com/zhouqiao-zhao)
-- 📸 Flickr: [Photography](https://www.flickr.com/photos/bridgezhao/)
-
-## 📊 **Current Project Status (August 2025)**
-
-### **✅ PROJECT COMPLETE & PRODUCTION READY** 
-
-The interactive 8-bit personal website is **fully functional and deployed** with all planned features implemented and final optimizations complete:
-
-#### **🎯 Completed Features:**
-- **✅ Dual-Mode Architecture**: Seamless game mode ↔ blog mode switching
-- **✅ Interactive Digital Twin**: Fully functional 8-bit game with exploration, NPCs, and collectibles
-- **✅ Academic Portfolio**: Professional multi-page blog with research, publications, and projects
-- **✅ Smart Navigation System**: Back buttons with intelligent section targeting and FixedControls integration
-- **✅ Complete Responsiveness**: Optimized for desktop, tablet, and mobile devices with bulletproof text wrapping
-- **✅ Dark/Light Theme**: Universal theme toggle across all pages with localStorage persistence
-- **✅ Real Media Integration**: SoundCloud music player, Flickr photo gallery, downloadable CV
-- **✅ Component Architecture**: Reusable Card, Icon, Navigation, ProfileImage, and FixedControls components
-- **✅ Data Layer Separation**: Centralized content management through organized data modules
-- **✅ SEO Optimization**: Google Search Console verified, automated sitemaps, proper robots.txt
-- **✅ ProjectLayout System**: Professional project detail pages with YouTube embedding and responsive design
-
-#### **🔧 Latest Fixes & Improvements (August 25, 2025):**
-- **✅ Game Mode Enhancements Complete**: 
-  - **8-bit Pixel Architecture**: Authentic pixel-based buildings using 8×8 CSS grids
-  - **Enhanced Achievement System**: 16+ meaningful achievements across exploration, social, research, creative categories
-  - **Collision Detection**: Solid fence barriers with AABB collision detection system
-  - **Visual Polish**: Fixed player visibility, removed redundant elements, optimized area positioning
-  - **Digital Realm Branding**: Updated welcome messaging for comprehensive portfolio representation
-- **✅ ProjectLayout Optimization**: Fixed data structure inconsistency causing build errors
-- **✅ Tag Alignment**: Proper left-alignment for scope tags and keywords sections
-- **✅ Text Overflow Protection**: Bulletproof word wrapping prevents content overflow on narrow screens
-- **✅ Research Roadmap Colors**: Restored Core Modules flowchart coloring (green, brown-orange, blue)
-- **✅ Deployment System**: Fixed Windows mmap errors with custom deployment script
-- **✅ Visitor Stats**: Optimized widget sizes for better mobile experience
-- **✅ CSS Code Quality**: Unified section headers, eliminated redundancy, consistent naming conventions
-- **✅ YouTube Integration**: Proper responsive iframe embedding with 16:9 aspect ratio
-- **✅ Build System**: All 11 pages build successfully with zero errors or warnings
-
-#### **📈 Technical Quality:**
-- **✅ Zero Build Errors**: Clean builds with no warnings or errors
-- **✅ Cross-Browser Compatible**: Robust error handling and fallback mechanisms  
-- **✅ Performance Optimized**: Static generation with selective JavaScript enhancement
-- **✅ SEO Ready**: Proper meta tags, structured data, and semantic HTML
-- **✅ Accessibility**: ARIA labels, keyboard navigation, and mobile optimization
-
-### **🚀 Live Deployment**
-- **Production URL**: [https://Bridgee.github.io](https://Bridgee.github.io)
-- **Deployment Status**: ✅ Active and stable
-- **Last Updated**: August 22, 2025
-- **Build Status**: ✅ All 11 pages operational (zero errors/warnings)
-- **SEO Status**: ✅ Google Search Console verified, sitemaps active
-- **Performance**: ✅ Optimized for all devices with responsive design
-
----
-
-*"Bridging the gap between cutting-edge research and creative expression through interactive digital experiences."*
+`/Users/zzhao11/Workspace/website` is the maintained working copy. During the August 2026 migration, it was compared with the former OneDrive copy. Their tracked content matched; the apparent differences were CRLF line endings and ignored build/dependency caches in OneDrive.

@@ -2,14 +2,14 @@
 import MusicLayout from '../layouts/MusicLayout.astro';
 import Card from '../components/Card.astro';
 import Icon from '../components/Icon.astro';
-import { personal } from "../data/index.js";
+import { personal, siteConfig } from "../data/index.js";
 ---
 
-<MusicLayout title="Musics & Sound Design - Zhouqiao (Bridge) Zhao">
+<MusicLayout title={`Music & Sound Design | ${siteConfig.author}`}>
     
     <!-- Music & Sound Design Section -->
     <section class="section">
-        <h2 class="section-title">Musics & Sound Design</h2>
+        <h2 class="section-title">Music &amp; Sound Design</h2>
         
         <div class="track-grid">
             {personal.media.music.tracks.map(track => (
@@ -17,20 +17,21 @@ import { personal } from "../data/index.js";
                     <!-- SoundCloud Embed -->
                     <div class="track-embed-container">
                         <iframe 
+                            title={`SoundCloud player for ${track.title}`}
                             width="100%"
                             height="300" 
-                            scrolling="no"
-                            frameborder="no"
+                            style="border: 0;"
                             allow="autoplay" 
+                            loading="lazy"
                             src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track.id}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
                         />
 
                         <div 
                             style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-                            <a href={personal.links.soundcloud} title="BridgeZhao" target="_blank" style="color: #cccccc; text-decoration: none;">
-                                BridgeZhao
+                            <a href={personal.links.soundcloud} title={personal.media.music.artistName} target="_blank" rel="noopener noreferrer" style="color: #cccccc; text-decoration: none;">
+                                {personal.media.music.artistName}
                             </a> · 
-                            <a href={track.link} title={track.title} target="_blank" style="color: #cccccc; text-decoration: none;">
+                            <a href={track.link} title={track.title} target="_blank" rel="noopener noreferrer" style="color: #cccccc; text-decoration: none;">
                                 {track.title}
                             </a>
                         </div>
@@ -39,7 +40,7 @@ import { personal } from "../data/index.js";
                     <p class="track-description">{track.description}</p>
 
                     <p style="margin-top: 1rem;">
-                        <a href={track.link} target="_blank" class="soundcloud-link">
+                        <a href={track.link} target="_blank" rel="noopener noreferrer" class="soundcloud-link">
                             <strong>Listen on SoundCloud →</strong>
                         </a>
                     </p>
@@ -57,7 +58,7 @@ import { personal } from "../data/index.js";
                 <p>Whether I'm designing custom patches, experimenting with modular synthesis, or crafting soundscapes, I'm always exploring the boundaries between the mathematical beauty of signal processing and the emotional impact of music.</p>
                 
                 <p style="margin-top: 1rem;">
-                    <a href={personal.links.soundcloud} target="_blank" class="soundcloud-link">
+                    <a href={personal.links.soundcloud} target="_blank" rel="noopener noreferrer" class="soundcloud-link">
                         <strong><Icon src="/images/icons/sound_cloud.svg"/> Explore Full Discography on SoundCloud →</strong>
                     </a>
                 </p>

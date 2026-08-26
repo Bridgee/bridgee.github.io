@@ -1,6 +1,7 @@
 // Unified data export - single source of truth for ALL content and config
 export { siteConfig } from './config/site.js';
 export { navigationConfig } from './config/navigation.js';
+export { modeConfig } from './config/modes.js';
 export { gameData } from './config/game.js';
 
 export { publications } from './content/publications.js';

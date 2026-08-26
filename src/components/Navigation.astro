@@ -8,12 +8,13 @@ interface Props {
 const { currentPage } = Astro.props;
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label="Primary navigation">
   <div class="nav-container">
     <!-- Section links - always show, but modify links for non-blog pages -->
     {navigationConfig.sections.map(section => (
       <a href={currentPage === 'blog' ? section.href : `/blog${section.href}`} 
-         class={currentPage === 'blog' && section.href === '#about' ? 'active' : ''}>
+         class={currentPage === 'blog' && section.href === '#about' ? 'active' : ''}
+         aria-current={currentPage === 'blog' && section.href === '#about' ? 'location' : undefined}>
         {section.label}
       </a>
     ))}
@@ -22,7 +23,9 @@ const { currentPage } = Astro.props;
     {navigationConfig.pages
       .filter(page => page.section === 'pages')
       .map(page => (
-        <a href={page.href} class={currentPage === page.href.replace('/', '') ? 'active' : ''}>
+        <a href={page.href}
+           class={currentPage === page.href.replace('/', '') ? 'active' : ''}
+           aria-current={currentPage === page.href.replace('/', '') ? 'page' : undefined}>
           {page.label}
         </a>
       ))}
@@ -64,6 +67,9 @@ const { currentPage } = Astro.props;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: background 0.3s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .nav a:hover, 
@@ -126,13 +132,15 @@ const { currentPage } = Astro.props;
 <script>
   // Smooth scrolling for navigation
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (event) => {
+        event.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (!href) return;
+        const target = document.querySelector<HTMLElement>(href);
         if (target) {
           // Get navigation height for offset
-          const nav = document.querySelector('.nav');
+          const nav = document.querySelector<HTMLElement>('.nav');
           const navHeight = nav ? nav.offsetHeight : 0;
           const targetPosition = target.offsetTop - navHeight - 20; // Extra 20px padding
           
@@ -140,30 +148,35 @@ const { currentPage } = Astro.props;
             top: targetPosition,
             behavior: 'smooth'
           });
+          history.replaceState(null, '', href);
         }
       });
     });
 
-    // Update active navigation item on scroll
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('.section');
-      const navLinks = document.querySelectorAll('.nav a');
+    const updateActiveNavigation = () => {
+      const sections = document.querySelectorAll<HTMLElement>('.page-section');
+      if (!sections.length) return;
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]');
       
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute('id');
+        if (window.scrollY >= sectionTop - 200) {
+          current = section.id;
         }
       });
 
       navLinks.forEach(link => {
         link.classList.remove('active');
+        link.removeAttribute('aria-current');
         if (link.getAttribute('href') === `#${current}`) {
           link.classList.add('active');
+          link.setAttribute('aria-current', 'location');
         }
       });
-    });
+    };
+
+    window.addEventListener('scroll', updateActiveNavigation, { passive: true });
+    updateActiveNavigation();
   });
 </script>

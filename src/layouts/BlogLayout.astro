@@ -3,7 +3,7 @@ import Navigation from '../components/Navigation.astro';
 import FixedControls from '../components/FixedControls.astro';
 import ProfileImage from '../components/ProfileImage.astro';
 import Icon from '../components/Icon.astro';
-import { personal } from "../data/index.js";
+import { modeConfig, personal, research, siteConfig } from "../data/index.js";
 
 // Import blog CSS architecture
 import '../css/blog/base.css';
@@ -32,72 +32,28 @@ const {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
+  <meta name="description" content={siteConfig.description}>
   <link rel="icon" href="/website_icon.png">
-  
-  <script is:inline define:vars={{email: personal.contact.email}}>
-    // Safe email copy function with fallback
-    window.copyEmailAddress = function() {
-      
-      // Modern clipboard API with fallback
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(() => {
-          alert('Email copied to clipboard!');
-        }).catch(() => {
-          // Fallback for clipboard API failure
-          fallbackCopyEmail(email);
-        });
-      } else {
-        // Fallback for browsers without clipboard API
-        fallbackCopyEmail(email);
-      }
-    }
-    
-    function fallbackCopyEmail(email) {
-      // Create temporary text area
-      const textArea = document.createElement('textarea');
-      textArea.value = email;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      
-      try {
-        document.execCommand('copy');
-        alert('Email copied to clipboard!');
-      } catch (err) {
-        alert('Could not copy email. Please manually copy: ' + email);
-      }
-      
-      document.body.removeChild(textArea);
-    }
-  </script>
 </head>
 
 <body class="dark-mode">
-  <!-- Fixed Controls -->
-  <FixedControls 
-    showGameLink={true} 
-    showBackButton={showBackButton} 
-    backButtonTarget={backButtonTarget} 
-  />
-
 {showHeader && (
     <div class="header-container">
       <!-- Header Section -->
       <header class="header">
         <ProfileImage size="large" variant="header" />
-        <h1 class="name">Zhouqiao (Bridge) Zhao</h1>
-        <p class="title">Postdoctoral Associate • MIT Center for Transportation & Logistics • AgeLab</p>
+        <h1 class="name">{personal.identity.displayName}</h1>
+        <p class="title">{personal.currentRole.headline}</p>
         <div class="contact-links">
-          <a href="#" onclick="copyEmailAddress()"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a>
-          <a href={personal.links.googleScholar} target="_blank"><Icon src="/images/icons/google_scholar_icon.svg" size="1.3em" />Google Scholar</a>
-          <a href={personal.links.researchGate} target="_blank"><Icon src="/images/icons/research_gate_icon.png" size="1.3em" />Research Gate</a>
-          <a href={personal.links.linkedin} target="_blank"><Icon src="/images/icons/linkedin_icon.svg" size="1.3em" />LinkedIn</a>
-          <a href={personal.links.labWebsite} target="_blank"><Icon src="/images/icons/mit_icon.jpg" size="1.3em" />Lab Website</a>
-          <a href={personal.links.youtube_playlist} target="_blank"><Icon src="/images/icons/youtube_icon.png" size="1.3em" />Youtube</a>
-          <a href="/doc/Zhouqiao_Zhao_Resume_2025_Jul.pdf" target="_blank"><Icon src="/images/icons/cv_icon.png" size="1.3em" />CV</a>
+          <a href={`mailto:${personal.contact.email}`}><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a>
+          {personal.academicProfiles.map(profile => (
+            <a href={profile.url} target="_blank" rel="noopener noreferrer">
+              <Icon src={profile.iconSrc} emoji={profile.icon} fallback={profile.icon} size="1.3em" />{profile.label}
+            </a>
+          ))}
+          <a href={personal.links.haitsLab}><Icon emoji="🧠" size="1.3em" />{research.lab.shortName}</a>
+          <a href={personal.links.youtubePlaylist} target="_blank" rel="noopener noreferrer"><Icon src="/images/icons/youtube_icon.png" size="1.3em" />YouTube</a>
+          <a href={personal.links.cv} target="_blank" rel="noopener noreferrer"><Icon src="/images/icons/cv_icon.png" size="1.3em" />CV</a>
         </div>
       </header>
     </div>
@@ -106,18 +62,22 @@ const {
   <!-- Navigation -->
   <Navigation currentPage={currentPage} />
 
+  <!-- Fixed Controls -->
+  <FixedControls
+    showGameLink={true}
+    showBackButton={showBackButton}
+    backButtonTarget={backButtonTarget}
+  />
+
   <div class="container">
     <!-- Page Content Slot -->
     <slot />
 
     <!-- Footer -->
     <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; color: #999; font-size: 0.9rem;">
-      <p>© 2025 Zhouqiao (Bridge) Zhao • Last updated: August 2025</p>
+      <p>© 2026 {personal.identity.displayName} • Last updated: {siteConfig.lastUpdated}</p>
       <p style="margin-top: 0.5rem;">
-        <a href="/game" style="color: #3498db; text-decoration: none;"><Icon src="/images/icons/game_mode_icon.png" size="2.4em" /> Experience Interactive Digital Twin in Game Mode</a>
-      </p>
-      <p style="margin-top: 0.5rem;">
-        <a href="/visitor_stats" style="color: #3498db; text-decoration: none;"><Icon src="/images/icons/visitor_stats_icon.png" size="2.4em" /> Visitor Stats</a>
+        <a href={modeConfig.interactive.path} style="color: #3498db; text-decoration: none;"><Icon src={modeConfig.interactive.icon} size="2.4em" /> Experience the site in {modeConfig.interactive.label}</a>
       </p>
     </footer>
   </div>

@@ -3,13 +3,15 @@
 import "../css/game/palette.css";
 import "../css/game/layout.css";
 import "../css/game/sprites.css";
+import { modeConfig, siteConfig } from "../data/index.js";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Interactive Digital Twin - Zhouqiao (Bridge) Zhao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{modeConfig.interactive.label} | {siteConfig.author}</title>
+    <meta name="description" content={`${modeConfig.interactive.description} ${siteConfig.description}`} />
     <link rel="icon" href="/website_icon.png" />
   </head>
 

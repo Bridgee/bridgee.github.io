@@ -4,11 +4,33 @@ import {
     dialogueSpeaker, dialogueText, dialogueBox, getAchievements, setDialogueState, setCurrentInteraction, setPopupState
 } from './engine.js';
 import { gainXP, triggerAchievement } from './entities.js';
-import { gameData, personal } from '../data/index.js';
+import { gameData, personal, projects, publications, research } from '../data/index.js';
+import { closeDialog, closeDialogById, openDialog } from './dialogs.js';
 
 // Track interactions for achievements
 let talkedToNPCs = new Set();
 let viewedAreas = new Set();
+
+// Transient presentation state stays outside the shared content modules.
+// Each area is re-rendered from this state whenever its popup opens.
+const areaViewState = {
+    projectIndex: 0,
+    paperIndex: 0,
+    photoPage: 0,
+    trackIndex: 0,
+};
+
+function configureGameModal(modal, label, options = {}) {
+    modal.classList.add('game-modal');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', label);
+    modal.gameDialogOptions = { label, ...options };
+}
+
+function presentGameModal(modal) {
+    return openDialog(modal, modal.gameDialogOptions);
+}
 
 // Start dialogue
 export function startDialogue(npc) {
@@ -75,8 +97,8 @@ export function enterArea(area) {
             triggerAchievement('AREA_EXPLORER');
         }
         
-        // World traveler achievement (all 7 major areas)
-        if (visitedAreas.size >= 7) {
+        // World traveler achievement (all interactive areas)
+        if (visitedAreas.size >= Object.keys(gameData.areas).length) {
             triggerAchievement('WORLD_TRAVELER');
         }
     }
@@ -122,37 +144,34 @@ function showAreaContent(areaId) {
             popupContent.innerHTML = areaContent;
         }
     }
+
+    syncAreaView(areaId);
     
     popup.style.display = 'block';
+    openDialog(popup, {
+        label: `${gameData.areas[areaId]?.label || 'Game area'} details`,
+        removeOnClose: false,
+        onAfterClose: () => setPopupState(false),
+    });
     setPopupState(true);
 }
 
 // Close popup
 export function closePopup() {
     const popup = document.getElementById('popup');
-    if (popup) popup.style.display = 'none';
+    if (popup) closeDialog(popup);
     setPopupState(false);
 }
 
-// Global window functions for popup content
-window.showStats = function() {
-    alert(`PLAYER STATS:\n\nLevel: ${player.level}\nXP: ${player.xp}/${player.xpToNextLevel}\nAchievements: ${getAchievements()}/10\nAreas Visited: ${visitedAreas.size}/6\nItems Collected: ${collectedItems.size}`);
-};
+function showStats() {
+    alert(`PLAYER STATS:\n\nLevel: ${player.level}\nXP: ${player.xp}/${player.xpToNextLevel}\nAchievements: ${getAchievements()}\nAreas Visited: ${visitedAreas.size}/${Object.keys(gameData.areas).length}\nItems Collected: ${collectedItems.size}`);
+}
 
-window.showControls = function() {
+function showControls() {
     alert('GAME CONTROLS:\n\n🎮 Movement:\n• WASD or Arrow Keys\n• Mobile: Touch buttons\n\n🎯 Interactions:\n• SPACE or Click to interact\n• ESC to close popups\n\n📱 Mobile:\n• Tap to move\n• Tap objects to interact');
-};
+}
 
-window.showResearchDetail = function(type) {
-    const details = {
-        'autonomy': 'Human-Centered Autonomy Research:\n\nDeveloping AI systems that augment human capabilities in autonomous vehicles while maintaining transparency, trust, and ethical considerations. Focus on creating seamless human-machine interfaces for intelligent transportation systems that enhance safety and accessibility.\n\nKey areas: Human-AI interaction, trust in automation, ethical AI design.',
-        'modeling': 'Driver Behavior Modeling:\n\nUtilizing advanced machine learning techniques to model and predict individual driver behaviors for personalized autonomous driving systems. Research includes inverse reinforcement learning and hierarchical learning approaches for lane-change prediction and car-following behaviors.\n\nKey methods: Inverse reinforcement learning, personalized prediction models, real-time behavior analysis.',
-        'twinning': 'Digital Twinning of Intelligent Vehicles:\n\nCreating comprehensive digital twins of drivers and vehicles to improve autonomous driving safety and performance. These digital replicas enable real-time simulation and prediction of driving scenarios, enhancing decision-making in complex traffic environments.\n\nApplications: Safety enhancement, personalized driving assistance, predictive maintenance.'
-    };
-    alert(details[type] || 'Research details coming soon!');
-};
-
-window.showPhoto = function(id) {
+function showPhoto(id) {
     const photoIndex = id - 1;
     const photo = personal.media.photos[photoIndex];
     
@@ -164,6 +183,7 @@ window.showPhoto = function(id) {
     // Create photo viewer modal
     const photoModal = document.createElement('div');
     photoModal.id = 'photo-modal';
+    configureGameModal(photoModal, `Photo: ${photo.title}`);
     photoModal.style.cssText = `
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
         background: rgba(0,0,0,0.9); z-index: 10000; display: flex; 
@@ -171,7 +191,7 @@ window.showPhoto = function(id) {
     `;
     
     // Try multiple Flickr image URL formats for better compatibility
-    const flickrPageUrl = `https://www.flickr.com/photos/bridgezhao/${photo.id}/`;
+    const flickrPageUrl = `${personal.links.flickr}${photo.id}/`;
     
     photoModal.innerHTML = `
         <div style="max-width: 90%; max-height: 90%; text-align: center;">
@@ -181,7 +201,7 @@ window.showPhoto = function(id) {
             <div style="color: white; margin-top: 10px; font-family: inherit;">
                 <h3>${photo.title}</h3>
                 <p style="font-size: 12px; line-height: 1.4;">${photo.description}</p>
-                <a href="${flickrPageUrl}" target="_blank" 
+                <a href="${flickrPageUrl}" target="_blank" rel="noopener noreferrer"
                    style="color: var(--secondary); text-decoration: none; font-size: 10px;">
                    View on Flickr ↗
                 </a>
@@ -215,14 +235,14 @@ window.showPhoto = function(id) {
             ${photo.description ? `<p style="font-size: 12px; margin-bottom: 20px; line-height: 1.4; opacity: 0.9;">${photo.description}</p>` : ''}
             
             <div style="margin-bottom: 20px;">
-                <a href="${flickrPageUrl}" target="_blank" 
+                <a href="${flickrPageUrl}" target="_blank" rel="noopener noreferrer"
                    style="color: var(--secondary); text-decoration: none; 
                           padding: 10px 20px; border: 2px solid var(--secondary);
                           display: inline-block; background: var(--highlight);
                           font-size: 11px; margin-right: 10px;">
                    📷 VIEW ON FLICKR
                 </a>
-                <a href="https://www.flickr.com/photos/bridgezhao/" target="_blank" 
+                <a href="${personal.links.flickr}" target="_blank" rel="noopener noreferrer"
                    style="color: var(--secondary); text-decoration: none; 
                           padding: 10px 20px; border: 2px solid var(--secondary);
                           display: inline-block; background: transparent;
@@ -235,37 +255,42 @@ window.showPhoto = function(id) {
     
     photoModal.addEventListener('click', (e) => {
         if (e.target.tagName !== 'A') {
-            document.body.removeChild(photoModal);
+            closeDialog(photoModal);
         }
     });
     
-    document.body.appendChild(photoModal);
-};
+    presentGameModal(photoModal);
+}
 
-window.playTrack = function(action) {
+function playTrack(action) {
     const musicData = personal.media.music;
     const playBtn = document.getElementById('play-btn');
     
     if (action === 'prev') {
-        musicData.currentTrack = (musicData.currentTrack - 1 + musicData.tracks.length) % musicData.tracks.length;
+        areaViewState.trackIndex = (areaViewState.trackIndex - 1 + musicData.tracks.length) % musicData.tracks.length;
         updateCurrentTrack();
     } else if (action === 'next') {
-        musicData.currentTrack = (musicData.currentTrack + 1) % musicData.tracks.length;
+        areaViewState.trackIndex = (areaViewState.trackIndex + 1) % musicData.tracks.length;
         updateCurrentTrack();
     } else if (action === 'toggle') {
-        const currentTrack = musicData.tracks[musicData.currentTrack];
+        const currentTrack = musicData.tracks[areaViewState.trackIndex];
         
         // Check if music modal already exists
         const existingModal = document.getElementById('music-modal');
         if (existingModal) {
-            document.body.removeChild(existingModal);
-            if (playBtn) playBtn.textContent = '▶';
+            closeDialog(existingModal);
             return;
         }
         
         // Create SoundCloud embed modal
         const musicModal = document.createElement('div');
         musicModal.id = 'music-modal';
+        configureGameModal(musicModal, `Now playing: ${currentTrack.title}`, {
+            onAfterClose: () => {
+                const currentPlayButton = document.getElementById('play-btn');
+                if (currentPlayButton) currentPlayButton.textContent = '▶';
+            },
+        });
         musicModal.style.cssText = `
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: var(--primary); border: 3px solid var(--secondary);
@@ -278,45 +303,45 @@ window.playTrack = function(action) {
         musicModal.innerHTML = `
             <div style="text-align: center;">
                 <h3>🎵 NOW PLAYING</h3>
-                <p style="margin: 10px 0; font-size: 14px;">${currentTrack.title} (${currentTrack.duration})</p>
-                <iframe id="soundcloud-player" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
+                <p style="margin: 10px 0; font-size: 14px;">${currentTrack.title}</p>
+                <iframe id="soundcloud-player" title="SoundCloud player for ${currentTrack.title}" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
                         src="${soundcloudEmbed}"></iframe>
                 <div style="margin-top: 15px;">
-                    <button onclick="closeMusicPlayer()" 
+                    <button type="button" data-game-action="close-dialog" data-dialog-id="music-modal"
                             style="padding: 8px 16px; background: var(--highlight); 
                                    border: 2px solid var(--secondary); color: var(--secondary); 
                                    font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
-                    <button onclick="openSoundCloudPage()" 
+                    <a href="${personal.links.soundcloud}" target="_blank" rel="noopener noreferrer"
                             style="padding: 8px 16px; background: transparent; 
                                    border: 2px solid var(--secondary); color: var(--secondary); 
-                                   font-family: inherit; cursor: pointer;">OPEN IN SOUNDCLOUD</button>
+                                   font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">OPEN IN SOUNDCLOUD</a>
                 </div>
                 <p style="font-size: 10px; margin-top: 10px; opacity: 0.8;">
-                    Music continues playing even when closed. Visit SoundCloud to control playback.
+                    Closing this player stops playback. Open SoundCloud to continue listening.
                 </p>
             </div>
         `;
         
-        document.body.appendChild(musicModal);
+        presentGameModal(musicModal);
         
         if (playBtn) {
             playBtn.textContent = '⏸';
         }
     }
-};
+}
 
-// Global function for track selection
-window.selectTrack = function(trackIndex) {
-    personal.media.music.currentTrack = trackIndex;
+function selectTrack(trackIndex) {
+    if (!Number.isInteger(trackIndex) || !personal.media.music.tracks[trackIndex]) return;
+    areaViewState.trackIndex = trackIndex;
     updateCurrentTrack();
-};
+}
 
 function updateCurrentTrack() {
-    const currentTrack = personal.media.music.tracks[personal.media.music.currentTrack];
-    
     // Update visual selection in track list
     document.querySelectorAll('.track-btn').forEach((btn, index) => {
-        if (index === personal.media.music.currentTrack) {
+        const isSelected = index === areaViewState.trackIndex;
+        btn.setAttribute('aria-pressed', String(isSelected));
+        if (isSelected) {
             btn.style.background = 'var(--highlight)';
             btn.style.color = 'var(--secondary)';
         } else {
@@ -328,46 +353,14 @@ function updateCurrentTrack() {
     // Track selection updated silently for better UX
 }
 
-// Global functions for music player
-window.closeMusicPlayer = function() {
-    const modal = document.getElementById('music-modal');
-    if (modal) {
-        document.body.removeChild(modal);
-        const playBtn = document.getElementById('play-btn');
-        if (playBtn) playBtn.textContent = '▶';
-    }
-};
-
-window.openSoundCloudPage = function() {
-    // Open general SoundCloud profile instead of constructed URL
-    window.open('https://soundcloud.com/zhouqiao-zhao', '_blank');
-};
-
-window.sendMessage = function() {
-    const name = document.getElementById('contact-name')?.value;
-    const email = document.getElementById('contact-email')?.value;
-    const message = document.getElementById('contact-message')?.value;
-    
-    if (name && email && message) {
-        gainXP(50);
-        alert('MESSAGE SENT SUCCESSFULLY!\n\nThank you for reaching out!');
-        closePopup();
-        document.getElementById('contact-name').value = '';
-        document.getElementById('contact-email').value = '';
-        document.getElementById('contact-message').value = '';
-    } else {
-        alert('Please fill all fields!');
-    }
-};
-
 // Safe email copy function for game interface
-window.copyGameEmail = function() {
-    const email = 'zhouqiao@mit.edu';
+function copyGameEmail() {
+    const email = personal.contact.email;
     
     // Modern clipboard API with fallback
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email).then(() => {
-            alert('📧 EMAIL COPIED TO CLIPBOARD!\n\nzhouqiao@mit.edu');
+            alert(`📧 EMAIL COPIED TO CLIPBOARD!\n\n${email}`);
         }).catch(() => {
             // Fallback for clipboard API failure
             fallbackCopyGameEmail(email);
@@ -376,55 +369,26 @@ window.copyGameEmail = function() {
         // Fallback for browsers without clipboard API
         fallbackCopyGameEmail(email);
     }
-};
+}
 
 function fallbackCopyGameEmail(email) {
-    // Create temporary text area
-    const textArea = document.createElement('textarea');
-    textArea.value = email;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-        document.execCommand('copy');
-        alert('📧 EMAIL COPIED TO CLIPBOARD!\n\nzhouqiao@mit.edu');
-    } catch (err) {
-        alert('📧 COPY FAILED\n\nPlease manually copy: ' + email);
-    }
-    
-    document.body.removeChild(textArea);
+    window.prompt('Copy this email address:', email);
 }
 
 // Global function for research detail popup
-window.showResearchDetail = function(researchId) {
+function showResearchDetail(researchId) {
     // Use actual blog content instead of generic descriptions
-    const researchAreas = {
-        'cooperative-driving': {
-            title: 'Cooperative Driving Automation',
-            description: 'I explore cooperation in ITS at all scales: Macro – ride-sharing optimization, multi-vehicle routing, and coordinated dispatch for mixed fleets. Meso – cooperative trajectory planning, eco-ramp merging, and formation control using CDA frameworks. Micro – driver intention prediction, personalized adaptive cruise control, and cooperative lane merging. I also integrate vehicle-to-infrastructure (V2I) communication and infrastructure-side perception using roadside perception units (RSPUs).',
-            tags: ['Cooperative Driving Automation (CDA)', 'V2I & Roadside Perception', 'Multi-Scale Coordination', 'Mixed-Traffic Optimization'],
-            icon: '🚗'
-        },
-        'human-ai': {
-            title: 'Human-Centered AI',
-            description: 'I develop personalized and explainable AI models for transportation safety and automation. This includes context-aware modeling of the driver–vehicle–environment triad using Graph Neural Networks (GNNs) and multi-modal large language models (MLLMs), predicting and interpreting driver responses to safety systems like Forward Collision Warnings (FCW), and designing machine learning pipelines that balance performance with explainability.',
-            tags: ['Driver–Vehicle–Environment Modeling', 'Graph Neural Networks (GNN) & MLLM', 'Explainable AI (XAI)', 'Personalized Safety Systems'],
-            icon: '🧠'
-        },
-        'digital-twins': {
-            title: 'Digital Twin Technologies',
-            description: 'Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support. My work focuses on building high-fidelity digital twins for ITS and vehicle automation, using these twins to test safety systems and optimize traffic flow, and supporting resilient infrastructure planning by simulating the impact of new technologies, policies, and mobility patterns at city and regional scales.',
-            tags: ['High-Fidelity Transportation Simulations', 'Real-Time ITS Optimization', 'Scenario-Based Infrastructure Planning', 'Data-Driven Policy Testing'],
-            icon: '🤖'
-        }
-    };
-    
-    const research = researchAreas[researchId];
-    if (!research) {
+    const researchAreas = Object.fromEntries(
+        research.interests.map(area => [area.id, {
+            title: area.title,
+            description: `${area.description} ${area.methods}`,
+            tags: area.tags,
+            icon: area.icon
+        }])
+    );
+
+    const researchArea = researchAreas[researchId];
+    if (!researchArea) {
         alert('Research area details not found!');
         return;
     }
@@ -432,6 +396,7 @@ window.showResearchDetail = function(researchId) {
     // Create research detail modal
     const researchModal = document.createElement('div');
     researchModal.id = 'research-modal';
+    configureGameModal(researchModal, researchArea.title);
     researchModal.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: var(--primary); border: 3px solid var(--secondary);
@@ -443,15 +408,15 @@ window.showResearchDetail = function(researchId) {
     
     researchModal.innerHTML = `
         <div style="text-align: center;">
-            <div style="font-size: 48px; margin-bottom: 15px;">${research.icon}</div>
-            <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 16px;">${research.title}</h2>
+            <div style="font-size: 48px; margin-bottom: 15px;">${researchArea.icon}</div>
+            <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 16px;">${researchArea.title}</h2>
             
             <div style="text-align: left; margin: 20px 0;">
-                <p style="font-size: 10px; line-height: 1.6; margin-bottom: 15px;">${research.description}</p>
+                <p style="font-size: 10px; line-height: 1.6; margin-bottom: 15px;">${researchArea.description}</p>
                 
                 <div style="margin: 15px 0;">
                     <h4 style="color: var(--accent); font-size: 10px; margin-bottom: 8px;">🔍 KEY AREAS:</h4>
-                    ${research.tags.map(tag => 
+                    ${researchArea.tags.map(tag =>
                         `<span style="background: var(--highlight); padding: 3px 8px; margin: 2px; 
                                       font-size: 8px; border-radius: 10px; display: inline-block;">${tag}</span>`
                     ).join('')}
@@ -459,83 +424,30 @@ window.showResearchDetail = function(researchId) {
             </div>
             
             <div style="text-align: center; margin-top: 25px;">
-                <button onclick="closeResearchDetail()" 
+                <button type="button" data-game-action="close-dialog" data-dialog-id="research-modal"
                         style="padding: 10px 20px; background: var(--highlight); 
                                border: 2px solid var(--secondary); color: var(--secondary); 
                                font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
-                <button onclick="window.open('/blog#research', '_blank')" 
+                <a href="/blog#research"
                         style="padding: 10px 20px; background: transparent; 
                                border: 2px solid var(--secondary); color: var(--secondary); 
-                               font-family: inherit; cursor: pointer;">VIEW FULL RESEARCH</button>
+                               font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">VIEW FULL RESEARCH</a>
             </div>
         </div>
     `;
     
-    document.body.appendChild(researchModal);
-    
-    // Add close function
-    window.closeResearchDetail = function() {
-        const modal = document.getElementById('research-modal');
-        if (modal) modal.remove();
-    };
+    presentGameModal(researchModal);
     
     // Close on click outside
     researchModal.addEventListener('click', (e) => {
         if (e.target === researchModal) {
-            window.closeResearchDetail();
+            closeDialog(researchModal);
         }
     });
-};
-
-// Global project browser functionality
-let currentProjectIndex = 0;
-
-// Import projects data (available via gameData imports)
-import { projects } from '../data/index.js';
-
-window.nextProject = function() {
-    currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-    updateProjectDisplay();
-};
-
-window.previousProject = function() {
-    currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
-    updateProjectDisplay();
-};
-
-function updateProjectDisplay() {
-    const project = projects[currentProjectIndex];
-    const projectElement = document.getElementById('current-project');
-    const counterElement = document.getElementById('project-counter');
-    const scrollThumb = document.getElementById('project-scroll-thumb');
-    
-    if (projectElement && project) {
-        projectElement.innerHTML = `
-            <strong>${project.title}</strong><br>
-            <div style="margin: 8px 0;">
-                ${project.scope_tags ? project.scope_tags.map(tag => 
-                    `<span style="background: var(--secondary); color: var(--primary); padding: 2px 6px; margin: 1px; font-size: 7px; border-radius: 8px; display: inline-block;">${tag}</span>`
-                ).join('') : ''}
-            </div>
-            <div style="margin: 12px 0; text-align: center;">
-                <button onclick="showProjectDetails(${currentProjectIndex})" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer; margin-right: 8px;">📋 DETAILS</button>
-                <button onclick="window.open('/projects/${project.slug}', '_blank')" style="padding: 6px 12px; background: var(--highlight); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">🔗 EXPLORE</button>
-            </div>
-        `;
-    }
-    
-    if (counterElement) {
-        counterElement.textContent = `Project ${currentProjectIndex + 1} of ${projects.length}`;
-    }
-    
-    if (scrollThumb) {
-        const thumbPosition = (currentProjectIndex / (projects.length - 1)) * (100 - parseFloat(scrollThumb.style.width));
-        scrollThumb.style.marginLeft = `${thumbPosition}%`;
-    }
 }
 
 // Global function for project details popup
-window.showProjectDetails = function(projectIndex) {
+function showProjectDetails(projectIndex) {
     // Trigger research achievement
     triggerAchievement('PROJECT_SCOUT');
     
@@ -548,6 +460,7 @@ window.showProjectDetails = function(projectIndex) {
     // Create project details modal
     const projectModal = document.createElement('div');
     projectModal.id = 'project-modal';
+    configureGameModal(projectModal, project.title);
     projectModal.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: var(--primary); border: 3px solid var(--secondary);
@@ -598,39 +511,34 @@ window.showProjectDetails = function(projectIndex) {
             </div>
             
             <div style="text-align: center; margin-top: 25px;">
-                <button onclick="closeProjectDetails()" 
+                <button type="button" data-game-action="close-dialog" data-dialog-id="project-modal"
                         style="padding: 10px 20px; background: var(--highlight); 
                                border: 2px solid var(--secondary); color: var(--secondary); 
                                font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
-                <button onclick="window.open('/projects/${project.slug}', '_blank')" 
+                <a href="/projects/${project.slug}"
                         style="padding: 10px 20px; background: transparent; 
                                border: 2px solid var(--secondary); color: var(--secondary); 
-                               font-family: inherit; cursor: pointer;">🔗 EXPLORE PROJECT</button>
+                               font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">🔗 EXPLORE PROJECT</a>
             </div>
         </div>
     `;
     
-    document.body.appendChild(projectModal);
-    
-    // Add close function
-    window.closeProjectDetails = function() {
-        const modal = document.getElementById('project-modal');
-        if (modal) modal.remove();
-    };
+    presentGameModal(projectModal);
     
     // Close on click outside
     projectModal.addEventListener('click', (e) => {
         if (e.target === projectModal) {
-            window.closeProjectDetails();
+            closeDialog(projectModal);
         }
     });
-};
+}
 
 // Global function for research roadmap popup  
-window.showResearchRoadmap = function() {
+function showResearchRoadmap() {
     // Create roadmap modal using standard popup style
     const roadmapModal = document.createElement('div');
     roadmapModal.id = 'roadmap-modal';
+    configureGameModal(roadmapModal, 'Research framework');
     roadmapModal.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: var(--primary); border: 3px solid var(--secondary);
@@ -647,8 +555,7 @@ window.showResearchRoadmap = function() {
             
             <div style="text-align: center; margin: 20px 0;">
                 <p style="font-size: 11px; line-height: 1.6; margin-bottom: 20px; background: var(--highlight); padding: 15px; border-radius: 5px;">
-                    Multi-scale framework integrating cooperative driving automation, human-centered AI, and digital twin technologies 
-                    for safer and more efficient transportation systems.
+                    Human-centered AI connecting behavior and interaction to trajectories, mobility choices, intelligent agents and fleets, transportation networks, and system-level operations.
                 </p>
                 
                 <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0;">
@@ -664,18 +571,18 @@ window.showResearchRoadmap = function() {
                         
                         <div style="text-align: left;">
                             <div style="margin-bottom: 15px;">
-                                <h4 style="color: #4A90E2; margin-bottom: 5px;">🚗 Cooperative Driving Automation (CDA)</h4>
-                                <p style="font-size: 10px;">Multi-scale coordination: Macro (fleet optimization) → Meso (trajectory planning) → Micro (driver modeling)</p>
+                                <h4 style="color: #4A90E2; margin-bottom: 5px;">👥 Human Behavior &amp; Interaction</h4>
+                                <p style="font-size: 10px;">Multimodal and context-aware modeling of how people behave, react, decide, and interact</p>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
-                                <h4 style="color: #7B68EE; margin-bottom: 5px;">🧠 Human-Centered AI</h4>
-                                <p style="font-size: 10px;">Context-aware Driver–Vehicle–Environment modeling using Graph Neural Networks and explainable AI</p>
+                                <h4 style="color: #7B68EE; margin-bottom: 5px;">🧠 Intelligent Agents &amp; Coordination</h4>
+                                <p style="font-size: 10px;">Prediction, planning, personalization, and coordination for agents, vehicles, and fleets</p>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
-                                <h4 style="color: #FF6B6B; margin-bottom: 5px;">🤖 Digital Twin Technologies</h4>
-                                <p style="font-size: 10px;">High-fidelity simulations for scenario testing, predictive analytics, and real-time decision support</p>
+                                <h4 style="color: #FF6B6B; margin-bottom: 5px;">🚦 Transportation Systems &amp; Digital Twins</h4>
+                                <p style="font-size: 10px;">Network optimization, system operations, simulation, and digital twins for safety, sustainability, and mobility</p>
                             </div>
                         </div>
                     </div>
@@ -683,58 +590,63 @@ window.showResearchRoadmap = function() {
             </div>
             
             <div style="text-align: center; margin-top: 25px;">
-                <button onclick="closeRoadmapModal()" 
+                <button type="button" data-game-action="close-dialog" data-dialog-id="roadmap-modal"
                         style="padding: 10px 20px; background: var(--highlight); 
                                border: 2px solid var(--secondary); color: var(--secondary); 
                                font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
-                <button onclick="window.open('/blog#research', '_blank')" 
+                <a href="/blog#research"
                         style="padding: 10px 20px; background: transparent; 
                                border: 2px solid var(--secondary); color: var(--secondary); 
-                               font-family: inherit; cursor: pointer;">FULL RESEARCH</button>
+                               font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">FULL RESEARCH</a>
             </div>
         </div>
     `;
     
-    // Add close functions
-    window.closeRoadmapModal = function() {
-        const modal = document.getElementById('roadmap-modal');
-        if (modal) modal.remove();
-    };
-    
-    // Close on click outside or ESC key
+    // Close when the modal itself is used as a backdrop.
     roadmapModal.addEventListener('click', (e) => {
         if (e.target === roadmapModal) {
-            window.closeRoadmapModal();
+            closeDialog(roadmapModal);
         }
     });
     
-    // Close on ESC key
-    const handleKeyPress = (e) => {
-        if (e.key === 'Escape') {
-            window.closeRoadmapModal();
-            document.removeEventListener('keydown', handleKeyPress);
-        }
+    presentGameModal(roadmapModal);
+}
+
+function updateScrollThumb(scrollThumb, currentIndex, itemCount) {
+    if (!scrollThumb) return;
+    if (itemCount <= 1) {
+        scrollThumb.style.marginLeft = '0%';
+        return;
+    }
+
+    const fallbackWidth = 100 / itemCount;
+    const thumbWidth = Number.parseFloat(scrollThumb.style.width) || fallbackWidth;
+    const thumbPosition = (currentIndex / (itemCount - 1)) * (100 - thumbWidth);
+    scrollThumb.style.marginLeft = `${thumbPosition}%`;
+}
+
+function syncAreaView(areaId) {
+    const areaRenderers = {
+        'papers-board': updatePaperDisplay,
+        'projects-board': updateProjectBoardDisplay,
+        'gallery-area': updatePhotoGrid,
+        'music-area': updateCurrentTrack,
     };
-    document.addEventListener('keydown', handleKeyPress);
-    
-    document.body.appendChild(roadmapModal);
-};
+    areaRenderers[areaId]?.();
+}
 
-// Global project board browser functionality (separate from main project browser)
-let currentProjectBoardIndex = 0;
-
-window.nextProjectBoard = function() {
-    currentProjectBoardIndex = (currentProjectBoardIndex + 1) % projects.length;
+function nextProjectBoard() {
+    areaViewState.projectIndex = (areaViewState.projectIndex + 1) % projects.length;
     updateProjectBoardDisplay();
-};
+}
 
-window.previousProjectBoard = function() {
-    currentProjectBoardIndex = (currentProjectBoardIndex - 1 + projects.length) % projects.length;
+function previousProjectBoard() {
+    areaViewState.projectIndex = (areaViewState.projectIndex - 1 + projects.length) % projects.length;
     updateProjectBoardDisplay();
-};
+}
 
 function updateProjectBoardDisplay() {
-    const project = projects[currentProjectBoardIndex];
+    const project = projects[areaViewState.projectIndex];
     const projectElement = document.getElementById('current-project-board');
     const counterElement = document.getElementById('project-counter-board');
     const scrollThumb = document.getElementById('project-scroll-thumb-board');
@@ -748,39 +660,32 @@ function updateProjectBoardDisplay() {
                 ).join('') : ''}
             </div>
             <div style="margin: 12px 0; text-align: center;">
-                <button onclick="showProjectDetails(${currentProjectBoardIndex})" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">📋 DETAILS</button>
+                <button type="button" data-game-action="project-details" data-index="${areaViewState.projectIndex}" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">📋 DETAILS</button>
             </div>
         `;
     }
     
     if (counterElement) {
-        counterElement.textContent = `Project ${currentProjectBoardIndex + 1} of ${projects.length}`;
+        counterElement.textContent = `Project ${areaViewState.projectIndex + 1} of ${projects.length}`;
     }
     
     if (scrollThumb) {
-        const thumbPosition = (currentProjectBoardIndex / (projects.length - 1)) * (100 - parseFloat(scrollThumb.style.width));
-        scrollThumb.style.marginLeft = `${thumbPosition}%`;
+        updateScrollThumb(scrollThumb, areaViewState.projectIndex, projects.length);
     }
 }
 
-// Global publication browser functionality
-let currentPaperIndex = 0;
-
-// Import publications data (available via gameData imports)
-import { publications } from '../data/index.js';
-
-window.nextPaper = function() {
-    currentPaperIndex = (currentPaperIndex + 1) % publications.length;
+function nextPaper() {
+    areaViewState.paperIndex = (areaViewState.paperIndex + 1) % publications.length;
     updatePaperDisplay();
-};
+}
 
-window.previousPaper = function() {
-    currentPaperIndex = (currentPaperIndex - 1 + publications.length) % publications.length;
+function previousPaper() {
+    areaViewState.paperIndex = (areaViewState.paperIndex - 1 + publications.length) % publications.length;
     updatePaperDisplay();
-};
+}
 
 function updatePaperDisplay() {
-    const paper = publications[currentPaperIndex];
+    const paper = publications[areaViewState.paperIndex];
     const paperElement = document.getElementById('current-paper');
     const counterElement = document.getElementById('paper-counter');
     const scrollThumb = document.getElementById('paper-scroll-thumb');
@@ -790,23 +695,22 @@ function updatePaperDisplay() {
             <strong>${paper.title}</strong><br>
             <em style="color: var(--accent);">${paper.venue} (${paper.year})</em><br>
             <div style="margin: 12px 0; text-align: center;">
-                <button onclick="showPaperDetails(${currentPaperIndex})" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📋 DETAILS</button>
+                <button type="button" data-game-action="paper-details" data-index="${areaViewState.paperIndex}" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📋 DETAILS</button>
             </div>
         `;
     }
     
     if (counterElement) {
-        counterElement.textContent = `Paper ${currentPaperIndex + 1} of ${publications.length}`;
+        counterElement.textContent = `Paper ${areaViewState.paperIndex + 1} of ${publications.length}`;
     }
     
     if (scrollThumb) {
-        const thumbPosition = (currentPaperIndex / (publications.length - 1)) * (100 - parseFloat(scrollThumb.style.width));
-        scrollThumb.style.marginLeft = `${thumbPosition}%`;
+        updateScrollThumb(scrollThumb, areaViewState.paperIndex, publications.length);
     }
 }
 
 // Global function for paper details popup
-window.showPaperDetails = function(paperIndex) {
+function showPaperDetails(paperIndex) {
     // Trigger research achievement
     triggerAchievement('PAPER_READER');
     
@@ -819,6 +723,7 @@ window.showPaperDetails = function(paperIndex) {
     // Create paper details modal
     const paperModal = document.createElement('div');
     paperModal.id = 'paper-modal';
+    configureGameModal(paperModal, paper.title);
     paperModal.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: var(--primary); border: 3px solid var(--secondary);
@@ -850,53 +755,45 @@ window.showPaperDetails = function(paperIndex) {
             </div>
             
             <div style="text-align: center; margin-top: 25px;">
-                <button onclick="closePaperDetails()" 
+                <button type="button" data-game-action="close-dialog" data-dialog-id="paper-modal"
                         style="padding: 10px 20px; background: var(--highlight); 
                                border: 2px solid var(--secondary); color: var(--secondary); 
                                font-family: inherit; cursor: pointer; margin-right: 10px;">CLOSE</button>
-                <button onclick="window.open('${paper.link}', '_blank')" 
+                <a href="${paper.link}" target="_blank" rel="noopener noreferrer"
                         style="padding: 10px 20px; background: transparent; 
                                border: 2px solid var(--secondary); color: var(--secondary); 
-                               font-family: inherit; cursor: pointer;">📄 READ FULL PAPER</button>
+                               font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">📄 READ FULL PAPER</a>
             </div>
         </div>
     `;
     
-    document.body.appendChild(paperModal);
-    
-    // Add close function
-    window.closePaperDetails = function() {
-        const modal = document.getElementById('paper-modal');
-        if (modal) modal.remove();
-    };
+    presentGameModal(paperModal);
     
     // Close on click outside
     paperModal.addEventListener('click', (e) => {
         if (e.target === paperModal) {
-            window.closePaperDetails();
+            closeDialog(paperModal);
         }
     });
-};
+}
 
 // Photo Gallery Functions - Multi-photo Grid with Pagination
-let currentPhotoPage = 0;
 const photosPerPage = 4;
 
-window.previousPhotoPage = function() {
-    const maxPages = Math.ceil(personal.media.photos.length / photosPerPage);
-    if (currentPhotoPage > 0) {
-        currentPhotoPage--;
+function previousPhotoPage() {
+    if (areaViewState.photoPage > 0) {
+        areaViewState.photoPage--;
         updatePhotoGrid();
     }
-};
+}
 
-window.nextPhotoPage = function() {
+function nextPhotoPage() {
     const maxPages = Math.ceil(personal.media.photos.length / photosPerPage);
-    if (currentPhotoPage < maxPages - 1) {
-        currentPhotoPage++;
+    if (areaViewState.photoPage < maxPages - 1) {
+        areaViewState.photoPage++;
         updatePhotoGrid();
     }
-};
+}
 
 function updatePhotoGrid() {
     const maxPages = Math.ceil(personal.media.photos.length / photosPerPage);
@@ -905,31 +802,27 @@ function updatePhotoGrid() {
     const photoGrid = document.getElementById('photo-grid');
     
     if (photoPageCounter) {
-        photoPageCounter.textContent = `Page ${currentPhotoPage + 1} of ${maxPages}`;
+        photoPageCounter.textContent = `Page ${areaViewState.photoPage + 1} of ${maxPages}`;
     }
     
     if (photoPageScrollThumb && maxPages > 1) {
-        const percentage = (currentPhotoPage / (maxPages - 1)) * (100 - (100 / maxPages));
-        photoPageScrollThumb.style.marginLeft = `${percentage}%`;
+        updateScrollThumb(photoPageScrollThumb, areaViewState.photoPage, maxPages);
     }
     
     // Update photo grid with current page photos
     if (photoGrid) {
-        const startIndex = currentPhotoPage * photosPerPage;
+        const startIndex = areaViewState.photoPage * photosPerPage;
         const endIndex = Math.min(startIndex + photosPerPage, personal.media.photos.length);
         const currentPagePhotos = personal.media.photos.slice(startIndex, endIndex);
-        
-        // Update grid layout to single row
-        photoGrid.style.gridTemplateColumns = "1fr 1fr 1fr 1fr";
-        photoGrid.style.gap = "6px";
         
         photoGrid.innerHTML = currentPagePhotos.map((photo, pageIndex) => {
             const actualIndex = startIndex + pageIndex;
             return `
-                <div style="text-align: center; cursor: pointer;" onclick="showPhotoDetails(${actualIndex})">
+                <button class="game-photo-card" type="button" aria-label="View photo: ${photo.title}" data-game-action="photo-details" data-index="${actualIndex}">
                     <div style="background: white; padding: 14px 14px 27px 14px; margin: 0 auto; width: 122px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
                         <div style="width: 94px; height: 70px; background: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 14px; overflow: hidden;">
                             <img src="/images/${photo.filename}" 
+                                 alt="${photo.title}"
                                  style="width: 94px; height: 70px; object-fit: cover; border-radius: 4px;"
                                  onerror="this.style.display='none'; this.parentElement.innerHTML='📸';">
                         </div>
@@ -937,13 +830,39 @@ function updatePhotoGrid() {
                             ${photo.title.length > 12 ? photo.title.substring(0, 12) + '...' : photo.title}
                         </div>
                     </div>
-                </div>
+                </button>
             `;
         }).join('');
     }
 }
 
-window.showPhotoDetails = function(index) {
-    // Use the existing showPhoto function with 1-based index
-    window.showPhoto(index + 1);
+function showPhotoDetails(index) {
+    showPhoto(index + 1);
+}
+
+const gameActions = {
+    'show-stats': showStats,
+    'show-controls': showControls,
+    'research-detail': trigger => showResearchDetail(trigger.dataset.researchId),
+    'research-roadmap': showResearchRoadmap,
+    'select-track': trigger => selectTrack(Number(trigger.dataset.index)),
+    'play-track': trigger => playTrack(trigger.dataset.trackAction),
+    'copy-email': copyGameEmail,
+    'previous-project': previousProjectBoard,
+    'next-project': nextProjectBoard,
+    'project-details': trigger => showProjectDetails(Number(trigger.dataset.index)),
+    'previous-paper': previousPaper,
+    'next-paper': nextPaper,
+    'paper-details': trigger => showPaperDetails(Number(trigger.dataset.index)),
+    'previous-photo-page': previousPhotoPage,
+    'next-photo-page': nextPhotoPage,
+    'photo-details': trigger => showPhotoDetails(Number(trigger.dataset.index)),
+    'close-dialog': trigger => closeDialogById(trigger.dataset.dialogId),
 };
+
+document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-game-action]');
+    if (!trigger) return;
+    const action = gameActions[trigger.dataset.gameAction];
+    if (action) action(trigger);
+});

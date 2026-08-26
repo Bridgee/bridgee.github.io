@@ -1,5 +1,6 @@
 ---
 import Icon from '../components/Icon.astro';
+import { modeConfig } from '../data/index.js';
 
 interface Props {
   showGameLink?: boolean;
@@ -26,19 +27,19 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
     </div>
   )}
   <div class="back-to-top">
-    <button id="back-to-top-btn">⬆️ Top</button>
+    <button id="back-to-top-btn" type="button" aria-label="Back to top">⬆️ Top</button>
   </div>
   {showGameLink && (
     <div class="mode-switch">
-      <a href="/game"><Icon src="/images/icons/game_mode_icon.png" size="2.0em" /> Interactive Mode</a>
+      <a href={modeConfig.interactive.path}><Icon src={modeConfig.interactive.icon} size="2.0em" /> {modeConfig.interactive.label}</a>
     </div>
   )}
   {showBlogLink && (
     <div class="mode-switch">
-      <a href="/blog"><Icon src="/images/icons/portfolio_icon.png" size="2.0em" /> Portfolio Mode</a>
+      <a href={modeConfig.portfolio.path}><Icon src={modeConfig.portfolio.icon} size="2.0em" /> {modeConfig.portfolio.label}</a>
     </div>
   )}
-  <button class="theme-toggle" id="theme-toggle">🌙 Dark</button>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true">☀️ Light</button>
 </div>
 
 <style>
@@ -208,6 +209,10 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
     .theme-toggle {
       padding: 0.5rem 0.8rem;
       font-size: 0.75rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -228,11 +233,22 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 480px), (max-height: 520px) {
     .fixed-controls {
-      bottom: 0.35rem;
-      right: 0.35rem;
+      position: static;
+      width: calc(100% - 1rem);
+      margin: 0.5rem auto 0;
       gap: 0.25rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .back-to-top,
+    .back-button,
+    .mode-switch {
+      flex: 0 1 auto;
     }
     
     .back-to-top button,
@@ -242,6 +258,11 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       padding: 0.35rem 0.55rem;
       font-size: 0.65rem;
       border-radius: 13px;
+      width: auto;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 </style>
@@ -269,7 +290,7 @@ const backUrl = backButtonTarget ? `/blog#${backButtonTarget}` : '/blog';
       // Smart back button functionality
       const backBtn = document.getElementById('back-btn');
       if (backBtn) {
-        backBtn.addEventListener('click', (e) => {
+        backBtn.addEventListener('click', () => {
           const targetSection = backBtn.getAttribute('data-section');
           
           if (targetSection) {

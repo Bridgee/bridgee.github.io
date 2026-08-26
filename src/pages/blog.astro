@@ -7,50 +7,62 @@ import SubsectionModule from '../components/SubsectionModule.astro';
 import Card from '../components/Card.astro';
 import Icon from '../components/Icon.astro';
 import InfoTag from '../components/InfoTag.astro';
-import { projects, publications, personal } from "../data/index.js";
+import { projects, publications, personal, research, siteConfig } from "../data/index.js";
 import { getTagVariant } from '../utils/tags.js';
 ---
 
-<BlogHomeLayout title="Zhouqiao (Bridge) Zhao - MIT Postdoc Researcher">
+<BlogHomeLayout title={siteConfig.siteName}>
 
         <!-- About Section -->
         <PageSection id="about" title="About Me" variant="about">
             <div class="about-content">
                 <p>
-                  Welcome to my digital realm! My name is Zhouqiao Zhao (赵周桥), and I go by Bridge.
-                  I'm a postdoctoral researcher at <a href={personal.links.mit_agelab} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">MIT AgeLab</a>
-                  at<a href={personal.links.labWebsite} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> MIT's Center for Transportation & Logistics (CTL)</a>.
-                  My research is supported by the <a href={personal.links.mit_avt} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> MIT Advanced Vehicle Technology Consortium (AVT)</a>, 
-                  where I explore the fascinating intersection of human-centered artificial intelligence, vehicle automation, and transportation systems.
+                  Welcome to my digital realm! My name is {personal.identity.fullName}, and I go by {personal.identity.preferredName}.
+                  In {personal.currentRole.startDate}, I joined{' '}
+                  <a href={personal.links.lmuEce} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.currentRole.institution} ({personal.currentRole.institutionShort})</a>,
+                  as an {personal.currentRole.title}, where I lead the{' '}<a href="#haits" style="color: #3498db; text-decoration: none; font-weight: 500;">{research.lab.shortName}</a>—{research.lab.expandedName}.
                 </p>
-                
+
                 <p>
-                  Before joining MIT, I completed my Ph.D. in Electrical and Computer Engineering at
-                  <a href={personal.links.ucr_ece} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"> the University of California, Riverside (UCR)</a>, under supervised by
-                  <a href={personal.links.matthew_barth} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Matthew Barth</a> and
-                  <a href={personal.links.guoyuan_wu} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Dr. Guoyuan Wu</a>.
-                  I was also a part of the Transportation Systems Research Group at
-                  <a href={personal.links.ucr_cecert} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Center for Environmental Research and Technology (CE-CERT)</a>.
-                  My research at UCR focused on Connected and Automated Vehicles (CAV) in the mixed-traffic environment, cooperation in the inteligent transportation system at different scales, and Digital Twin
-                  <a href={personal.links.dissertation} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">[Dissertation]</a>.
+                  My research develops {research.summary} {research.methodology} {research.impact}
                 </p>
-                
+
                 <p>
-                  I also worked as a research intern at the
-                  <a href={personal.links.intotech} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Toyota Motor North America InfoTech Labs </a>
-                  under the <a href={personal.links.toyota_DT} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Digital Twin Roadmap</a>,
-                  and <a href={personal.links.hri} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">Honda Research Institute</a>
-                  in Driver Behavior Modeling.
-                  I am an author of 30+ refereed papers and patent applications. 
-                  I'm passionate about creating solutions that bridge the gap between cutting-edge technology and practical applications that benefit society with human in the center of the loop
-                  <a href={personal.links.cv} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">[CV]</a>.
+                  Before joining {personal.currentRole.institutionShort}, I was a {personal.career.mit.role} ({personal.career.mit.period}) working with the{' '}
+                  <a href={personal.links.mitAgeLabProfile} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.career.mit.units[0]}</a>{' '}and{' '}
+                  <a href={personal.links.mitCtlProfile} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.career.mit.units[1]}</a>.
+                  I received my {personal.career.ucr.degree} from{' '}
+                  <a href={personal.links.ucrEce} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.career.ucr.institutionShort}</a> ({personal.career.ucr.period}), where I worked with{' '}
+                  <a href={personal.links.matthewBarth} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.career.ucr.advisors[0]}</a>{' '}and{' '}
+                  <a href={personal.links.guoyuanWu} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">{personal.career.ucr.advisors[1]}</a> at CE-CERT.
+                  My dissertation, <em>{personal.career.ucr.dissertation}</em>, developed a cooperative management framework for mixed traffic{' '}
+                  <a href={personal.links.dissertation} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">[Dissertation]</a>.
+                  I previously earned an {personal.education.masters.degree} from {personal.education.masters.institution} and a {personal.education.bachelors.degree} from the {personal.education.bachelors.institution}.
                 </p>
-                
+
                 <p>
-                  Beyond academia, I'm a creative technologist who enjoys capturing the world through photography and expressing ideas through sound design and music composition.
-                  I'm intersted in synthesizer design in both software and hardware. With my Electrical Engineering background, I'm always looking for new ways to create sound that is dynamic and interactive.
+                  Earlier, I conducted industry research with Toyota Motor North America InfoTech Labs and Honda Research Institute. {personal.bio.creativeSummary}{' '}
+                  A current record of my work and experience is available in my{' '}<a href={personal.links.cv} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">CV</a>.
                 </p>
             </div>
+        </PageSection>
+
+        <!-- HAITS Lab Section -->
+        <PageSection id="haits" title={research.lab.shortName} variant="about">
+            <SectionSubsection variant="about">
+                <Card variant="research" iconSrc="/images/icons/robot_icon.png" title={research.lab.expandedName}>
+                    <p>
+                      <strong>{research.lab.abbreviation}</strong> (pronounced “{research.lab.pronunciation}”) is my research lab at {personal.currentRole.institutionShort}. {research.lab.description}
+                    </p>
+                    <p>
+                      {research.lab.domainStatement} {research.methodology.replace('I combine', 'The lab combines')}
+                    </p>
+                    <p style="margin-top: 1rem;"><strong>{research.lab.tagline}</strong></p>
+                    <p style="margin-top: 1rem;">
+                      <a href={personal.links.lmuEce} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">Visit {personal.currentRole.departmentShort} →</a>
+                    </p>
+                </Card>
+            </SectionSubsection>
         </PageSection>
 
         <!-- Research Section -->
@@ -59,24 +71,13 @@ import { getTagVariant } from '../utils/tags.js';
             <SectionSubsection variant="research">
                 <Card variant="research" iconSrc="/images/icons/vision_icon.png" title="Vision" class="vision-card">
                     <p>
-                        I believe the future of transportation lies in human-centered AI—automation that adapts to people, infrastructure, and diverse real-world contexts rather than replacing them. 
-                        Roads in the coming decades will remain mixed environments, with human drivers, connected and automated vehicles (CAVs), and advanced driver-assistance systems (ADAS) sharing space. 
+                        {research.vision}
                     </p>
-
                     <p>
-                        My research centers on ensuring automation works with humans by:
-                        <ul>
-                          <li>Embedding human behavior into automation design so systems anticipate and adapt to real-world driving patterns.</li>
-
-                          <li>AI models within infrastructure frameworks like cooperative driving automation (CDA) networks, digital twins, and adaptable intelligent transportation systems (ITS).</li>
-
-                          <li>Building bridges between data, models, and systems—turning real-world behavior into predictive insights, and predictive insights into safer, more efficient mobility.</li>
-                        </ul>
-                        
+                        The agenda spans multiple spatial and temporal scales: <strong>{research.agendaChain.join(' → ')}</strong>. Transportation is the primary domain in which I develop and test these ideas, rather than the boundary of the research.
                     </p>
-
-                    <p> 
-                      The goal: automation that’s safe, efficient, and sustainable, while being trusted and embraced by the people who use it.
+                    <p>
+                        {research.impact}
                     </p>
                 </Card>
             </SectionSubsection>
@@ -90,31 +91,28 @@ import { getTagVariant } from '../utils/tags.js';
                              alt="Human-Centered AI Research Framework" 
                              style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
                         <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; font-style: italic;">
-                            Human-Centered AI Framework for Intelligent Transportation Systems
+                            Human-Centered AI: from behavior and interaction to transportation system design
                         </p>
                     </div>
                     
-                    <p style="margin-bottom: 1.0rem; line-height: 1.0;">
-                        Transportation systems form the backbone of modern society, yet automation is often misconceived as minimizing human involvement. 
-                        In reality, automated systems alter rather than eliminate human roles. My research develops a <strong>human-centered AI system</strong> 
-                        that holistically integrates human behavior into automation design, ensuring Intelligent Transportation Systems are responsive 
-                        to real-time needs and resilient within mixed-traffic environments.
+                    <p style="margin-bottom: 1rem; line-height: 1.6;">
+                        The framework connects observations of people and context to models of behavior, trajectories, and choices; those models then support intelligent agents, coordinated fleets, transportation networks, and system-level operations. Simulation and digital twins provide a bridge between algorithm development and real-world evaluation.
                     </p>
                     
                     <!-- Core Modules Subsubsection -->
                     <SubsectionModule title="Core Modules:" variant="research">
                         <div class="core-modules-grid">
                             <div>
-                                <h5 class="module-title module-sensing">Sensing & Evaluation</h5>
-                                <p class="module-description">Context-aware and multi-modal data engine for collection, simulation, and scenario synthesis</p>
+                                <h5 class="module-title module-sensing">Behavior &amp; Context</h5>
+                                <p class="module-description">Naturalistic, multimodal, and experimental data for understanding people, environments, and interactions</p>
                             </div>
                             <div>
-                                <h5 class="module-title module-behavior">Behavior Modeling</h5>
-                                <p class="module-description">Machine learning and explainable AI methods for understanding human behavior</p>
+                                <h5 class="module-title module-behavior">Prediction, Planning &amp; Coordination</h5>
+                                <p class="module-description">Human-centered learning and decision methods for intelligent agents, vehicles, and fleets</p>
                             </div>
                             <div>
-                                <h5 class="module-title module-system">System Applications</h5>
-                                <p class="module-description">Optimized automation and mobility solutions for real-world deployment</p>
+                                <h5 class="module-title module-system">System Design &amp; Evaluation</h5>
+                                <p class="module-description">Network optimization, simulation, and digital twins for safety, sustainability, and mobility</p>
                             </div>
                         </div>
                     </SubsectionModule>
@@ -125,62 +123,15 @@ import { getTagVariant } from '../utils/tags.js';
             <SectionSubsection variant="research">
                 <h3 style="margin: 0.5rem 0 0.5rem 0; color: #2c3e50; font-size: 1.5rem;">Focus Areas</h3>
                 <div class="research-focus-grid">
-                    <Card variant="research" iconSrc="/images/icons/av_car_icon.png" title="Connected & Automated Vehicles">
-                        <p>
-                        I explore cooperation in ITS at all scales:
-                        <ul>  
-                            <li><strong>Macro</strong> – ride-sharing optimization, multi-vehicle routing, and coordinated dispatch for mixed fleets.</li>
-                            <li><strong>Meso</strong> – cooperative trajectory planning, eco-ramp merging, and formation control using CDA frameworks.</li>
-                            <li>
-                            <strong>Micro</strong> – driver intention prediction, personalized adaptive cruise control, and cooperative lane merging.
-                            I also integrate vehicle-to-infrastructure (V2I) communication and infrastructure-side perception using roadside perception units (RSPUs). 
-                            These systems enable real-time environment sensing, data sharing, and coordinated decision-making between vehicles and infrastructure.
-                            </li>
-                        </ul>
-                        </p>
-
-                        <div class="research-keywords">
-                            <InfoTag tag="Cooperative Driving Automation (CDA)" variant="subtle" />
-                            <InfoTag tag="V2I & Roadside Perception" variant="subtle" />
-                            <InfoTag tag="Multi-Scale Coordination (Macro/Meso/Micro)" variant="subtle" />
-                            <InfoTag tag="Mixed-Traffic Optimization" variant="subtle" />
-                        </div>
-                    </Card>
-                    <Card variant="research" iconSrc="/images/icons/robot_icon.png" title="Human-Centered AI">
-                        <p>
-                        I develop personalized and explainable AI models for transportation safety and automation. This includes:
-                        <ul>
-                            <li>Context-aware modeling of the driver–vehicle–environment triad using Graph Neural Networks (GNNs) and multi-modal large language models (MLLMs).</li>
-                            <li>Predicting and interpreting driver responses to safety systems like Forward Collision Warnings (FCW), ensuring systems align with driver expectations.</li>
-                            <li>Designing machine learning pipelines that balance performance with explainability, so stakeholders understand not just what the AI predicts, but why.</li>
-                        </ul>
-                        </p>
-
-                        <div class="research-keywords">
-                            <InfoTag tag="Driver–Vehicle–Environment Modeling" variant="subtle" />
-                            <InfoTag tag="Graph Neural Networks (GNN) & MLLM" variant="subtle" />
-                            <InfoTag tag="Explainable AI (XAI) in Transportation" variant="subtle" />
-                            <InfoTag tag="Personalized Safety Systems" variant="subtle" />
-                        </div>
-                    </Card>
-                    <Card variant="research" iconSrc="/images/icons/digital_twin_icon.png" title="Digital Twin Technologies">
-                        <p>
-                        Digital twins provide a virtual mirror of real-world transportation systems, enabling scenario testing, predictive analytics, and real-time decision support.
-                        My work focuses on:
-                        <ul>
-                            <li>Building high-fidelity digital twins for ITS and vehicle automation, integrating data from naturalistic driving studies, roadside sensing, and simulations.</li>
-                            <li>Using these twins to test safety systems, optimize traffic flow, and evaluate cooperative strategies before real-world deployment.</li>
-                            <li>Supporting resilient infrastructure planning by simulating the impact of new technologies, policies, and mobility patterns at city and regional scales.</li>
-                        </ul>
-                        </p>
-                        
-                        <div class="research-keywords">
-                            <InfoTag tag="High-Fidelity Transportation Simulations" variant="subtle" />
-                            <InfoTag tag="Real-Time ITS Optimization" variant="subtle" />
-                            <InfoTag tag="Scenario-Based Infrastructure Planning" variant="subtle" />
-                            <InfoTag tag="Data-Driven Policy Testing" variant="subtle" />
-                        </div>
-                    </Card>
+                    {research.interests.map(area => (
+                        <Card variant="research" iconSrc={area.iconSrc} title={area.title}>
+                            <p>{area.description}</p>
+                            <p><strong>Methods:</strong> {area.methods}</p>
+                            <div class="research-keywords">
+                                {area.tags.map(tag => <InfoTag tag={tag} variant="subtle" />)}
+                            </div>
+                        </Card>
+                    ))}
                 </div>
             </SectionSubsection>
         </PageSection>
@@ -201,8 +152,8 @@ import { getTagVariant } from '../utils/tags.js';
                             </div>
                         )}
                         <p style="margin-top: 1rem;">
-                            <a href={publication.link} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
-                                <Icon src="/images/icons/download_icon.png" size="2.0em" /> Download PDF →
+                            <a href={publication.link} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                                <Icon src="/images/icons/download_icon.png" size="2.0em" /> Read Publication →
                             </a>
                         </p>
                     </Card>
@@ -211,7 +162,7 @@ import { getTagVariant } from '../utils/tags.js';
 
             <!-- Always visible content (shows even when collapsed) -->
             <p slot="alwaysVisible" style="margin-top: 1rem; text-align: center;">
-                <a href={personal.links.googleScholar} target="_blank" 
+                <a href={personal.links.googleScholar} target="_blank" rel="noopener noreferrer"
                    style="color: #3498db; text-decoration: none; font-weight: 500;">
                    <Icon src="/images/icons/google_scholar_icon.svg" size="1.3em" />View All Publications on Google Scholar →
                 </a>
@@ -223,7 +174,7 @@ import { getTagVariant } from '../utils/tags.js';
             <div class="project-cards-grid">
                 {projects.map(project => (
                     <Card variant="project" title={project.title}>
-                        <p>{project.description || project.overview?.summary}</p>
+                        <p>{project.overview?.summary}</p>
                         <div class="project-meta">
                             {project.scope_tags && project.scope_tags.map(tag => (
                                 <InfoTag tag={tag} variant={getTagVariant(tag)} />
@@ -251,7 +202,7 @@ import { getTagVariant } from '../utils/tags.js';
                         </p>
                     </Card>
                     
-                    <Card variant="track" iconSrc="/images/icons/music_icon.png" title="Musics & Sound Design" href="/music">
+                    <Card variant="track" iconSrc="/images/icons/music_icon.png" title="Music & Sound Design" href="/music">
                         <p>I'm a composer, sound designer, and music synthesizer designer/experimenter who leverages my EE background in signal processing and circuit design. Sound design and synthesis fascinate me because they represent the perfect fusion of technical precision and creative expression.</p>
                         <p style="margin-top: 1rem;">
                             <strong style="color: #3498db;">Listen to Compositions →</strong>
@@ -270,9 +221,12 @@ import { getTagVariant } from '../utils/tags.js';
                     </div>
                     
                     <div class="contact-links" style="justify-content: flex-start; margin-top: 2rem;">
-                        <a href="#" onclick="copyEmailAddress()" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a> |
-                        <a href={personal.links.linkedin} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/linkedin_icon.svg" size="1.3em" /> LinkedIn</a> |
-                        <a href={personal.links.researchGate} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/research_gate_icon.png" size="1.3em" />Research Gate</a>
+                        <a href={`mailto:${personal.contact.email}`} style="color: #3498db; text-decoration: none; font-weight: 500;"><Icon src="/images/icons/email_icon.png" size="1.3em" />Email</a>
+                        {personal.academicProfiles.map(profile => (
+                          <a href={profile.url} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                            <Icon src={profile.iconSrc} emoji={profile.icon} fallback={profile.icon} size="1.3em" />{profile.label}
+                          </a>
+                        ))}
                     </div>
                 </Card>
             </SectionSubsection>

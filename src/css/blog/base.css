@@ -23,6 +23,15 @@ body.dark-mode {
   background: linear-gradient(135deg, #1e2833 0%, #0f0f0f 100%);
 }
 
+:where(a, button):focus-visible {
+  outline: 3px solid #3498db;
+  outline-offset: 3px;
+}
+
+body.dark-mode :where(a, button):focus-visible {
+  outline-color: #64b5f6;
+}
+
 /* Container and Layout */
 .container {
   max-width: 1000px;
@@ -85,6 +94,10 @@ body.dark-mode .title {
   border: 1px solid #3498db;
   border-radius: 4px;
   transition: all 0.3s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-links a:hover {

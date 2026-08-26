@@ -1,8 +1,44 @@
 // Game-specific data for Interactive Digital Twin mode only
 import { publications } from '../content/publications.js';
 import { projects } from '../content/projects.js';
-import { research } from '../content/research.js'; 
 import { personal } from '../content/personal.js';
+import { research } from '../content/research.js';
+import { modeConfig } from './modes.js';
+
+const researchPrinciples = research.interests.map(area => `
+  <p style="margin-bottom: 10px;">
+    <strong>${area.title}:</strong> ${area.description}
+  </p>
+`).join('');
+
+const researchButtons = research.interests.map(area => `
+  <button class="menu-button" type="button" data-game-action="research-detail" data-research-id="${area.id}" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
+    ${area.icon} ${area.title}
+  </button>
+`).join('');
+
+const musicTrackButtons = personal.media.music.tracks.map((track, index) => `
+  <button class="menu-button track-btn" type="button" data-track="${index}" data-game-action="select-track" data-index="${index}" style="display: block; margin: 10px auto; text-align: center; cursor: pointer;${index === 0 ? ' background: var(--highlight);' : ''}">
+    🎵 ${track.title}
+  </button>
+`).join('');
+
+const affiliationLinks = personal.affiliations.map(affiliation => `
+  <a href="${affiliation.url}" ${affiliation.url.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} style="color: var(--secondary); text-decoration: none;">${affiliation.label}</a>
+`).join(' • ');
+
+const researchSkills = research.interests.map((area, index) =>
+  `<li>${area.title} [${index === 1 ? '████████░░' : '█████████░'}]</li>`
+).join('');
+
+const academicProfileButtons = personal.academicProfiles.map(profile => `
+  <a class="menu-button" href="${profile.url}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+    ${profile.icon} ${profile.gameLabel}
+  </a>
+`).join('');
+
+const horizontalFence = (x, y) => ({ x, y, width: 120, height: 20, orientation: 'horizontal' });
+const verticalFence = (x, y) => ({ x, y, width: 20, height: 80, orientation: 'vertical' });
 
 export const gameData = {
   player: {
@@ -15,7 +51,30 @@ export const gameData = {
   world: {
     width: 2400,
     height: 1600,
+    minimap: {
+      width: 150,
+      height: 100,
+      markerSize: 4,
+    },
   },
+  entities: {
+    npc: { visualSize: 32, targetSize: 44 },
+    collectible: { visualSize: 24, targetSize: 44 },
+  },
+  fences: [
+    horizontalFence(400, 100),
+    horizontalFence(520, 100),
+    horizontalFence(640, 100),
+    verticalFence(200, 750),
+    verticalFence(200, 830),
+    horizontalFence(600, 1450),
+    horizontalFence(720, 1450),
+    horizontalFence(2000, 1500),
+    horizontalFence(2120, 1500),
+    verticalFence(2240, 1420),
+    verticalFence(2240, 1340),
+    verticalFence(2240, 1260),
+  ],
   npcs: [
     {
       name: "Dr. Chen",
@@ -23,8 +82,8 @@ export const gameData = {
         "Welcome to Bridge's research world!",
         "Did you know Bridge developed P-ACC using inverse reinforcement learning?",
         "The system learns individual driver preferences and adapts in real-time!",
-        "Check the Papers Board - there are 15+ publications on cooperative driving!",
-        "Bridge's work on digital twins is revolutionizing transportation safety.",
+        `Check the Papers Board—this site currently features ${publications.length} publications!`,
+        "Bridge's research connects human behavior to intelligent agents and transportation systems.",
       ],
       position: { top: "650px", left: "400px" },
       sprite: "scientist",
@@ -36,7 +95,7 @@ export const gameData = {
         "Bridge captures more than just research - check out the photography!",
         "Those vintage lens shots have such amazing character and warmth.",
         "I love how Bridge finds beauty between experiments and equations.",
-        "The Gallery shows work from MIT, Grand Teton, and Joshua Tree!",
+        "The Gallery includes scenes from research life, Grand Teton, and Joshua Tree!",
         "Each photo tells a story of curiosity and discovery.",
       ],
       position: { top: "450px", left: "1500px" },
@@ -48,7 +107,7 @@ export const gameData = {
       dialogue: [
         "Bridge's music production skills are incredible!",
         "Those electronic tracks blend science and creativity perfectly.",
-        "The Music Studio has 'Spring kids', 'Island grass', and more!",
+        `The Music Studio features ${personal.media.music.tracks.map(track => `'${track.title}'`).join(', ')}!`,
         "It's amazing how someone can model driver behavior AND create beats.",
         "Music and math both have patterns - Bridge sees them everywhere!",
       ],
@@ -59,12 +118,12 @@ export const gameData = {
     {
       name: "Pixel",
       dialogue: [
-        "Beep boop! I'm the lab's AI assistant... sort of.",
-        "Fun fact: Bridge's GNN models have 127,000+ parameters!",
+        `Beep boop! I'm the ${research.lab.shortName}'s AI assistant... sort of.`,
+        `${research.lab.abbreviation} stands for ${research.lab.expandedName}.`,
         "I tried to learn driver behavior but kept getting carsick...",
-        "Did you know cooperative driving requires 0.3ms response times?",
+        "Human-centered AI connects behavior, prediction, planning, and coordination.",
         "Error 404: Sarcasm module not found. Just kidding!",
-        "Bridge taught me that humans are just really complex neural networks.",
+        research.lab.domainStatement,
       ],
       position: { top: "800px", left: "1700px" },
       sprite: "scientist",
@@ -74,11 +133,11 @@ export const gameData = {
       name: "Luna",
       dialogue: [
         "I collect interesting data patterns like some people collect stamps.",
-        "Bridge once said 'Every driver has a unique behavioral fingerprint.'",
-        "I've been watching traffic for 3 years... cars are weird.",
-        "The most beautiful equation? Probably something about entropy.",
-        "Sometimes I wonder if autonomous cars dream of electric sheep...",
-        "Want to hear a joke about UDP? Never mind, you might not get it.",
+        `The research agenda starts with ${research.agendaChain[0].toLowerCase()} and connects it to ${research.agendaChain.at(-1).toLowerCase()}.`,
+        "Naturalistic, multimodal, and experimental data reveal different parts of human behavior.",
+        "A useful model should support prediction, planning, coordination, or system design—not just fit a dataset.",
+        "Digital twins help connect algorithm development to system-level evaluation.",
+        `The intended outcomes include ${research.outcomes.slice(0, 3).join(', ')}.`,
       ],
       position: { top: "300px", left: "1200px" },
       sprite: "photographer",
@@ -92,12 +151,12 @@ export const gameData = {
       position: { top: "750px", left: "1150px", width: "200px", height: "200px" },
       content: `
         <h2>WELCOME TO MY DIGITAL REALM</h2>
-        <p>Greetings, traveler! I'm Zhouqiao (Bridge) Zhao, a Postdoctoral Associate at MIT.</p>
+        <p>${personal.bio.homeIntroduction}</p>
         <p>This interactive portfolio showcases my research, creative projects, music, photography, and personal journey as a scientist and creator.</p>
         <div style="margin-top: 20px;">
-            <button class="menu-button" onclick="window.location.href='/blog'">📝 ACADEMIC PORTFOLIO</button>
-            <button class="menu-button" onclick="showStats()">VIEW STATS</button>
-            <button class="menu-button" onclick="showControls()">CONTROLS</button>
+            <a class="menu-button" href="${modeConfig.portfolio.path}">📝 ${modeConfig.portfolio.label.toUpperCase()}</a>
+            <button class="menu-button" type="button" data-game-action="show-stats">VIEW STATS</button>
+            <button class="menu-button" type="button" data-game-action="show-controls">CONTROLS</button>
         </div>
         <p style="margin-top: 20px; font-size: 8px;">Explore the world and talk to NPCs to gain XP!</p>
       `,
@@ -111,57 +170,38 @@ export const gameData = {
             <div style="text-align: center; margin: 15px 0;">
                 <div style="font-size: 32px; margin-bottom: 10px;">🧬</div>
                 <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
-                    Exploring cooperation in intelligent transportation systems through multi-scale coordination,
-                    human-centered AI, and digital twin technologies.
+                    Developing ${research.summary}
                 </p>
             </div>
             
             <h3>📋 Research Philosophy:</h3>
             <div style="background: var(--highlight); padding: 15px; margin: 15px 0; border-radius: 5px; font-size: 9px; line-height: 1.5;">
-                <p style="margin-bottom: 10px;">
-                    <strong>Multi-Scale Approach:</strong> From macro-level fleet coordination to micro-level driver modeling
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <strong>Context-Aware Modeling:</strong> Driver–Vehicle–Environment triad using Graph Neural Networks
-                </p>
-                <p>
-                    <strong>Human-Centered Design:</strong> Balancing automation capabilities with human agency and explainability
-                </p>
+                ${researchPrinciples}
             </div>
             
             <h3>🗺️ Research Roadmap:</h3>
             <div style="background: var(--highlight); padding: 15px; margin: 15px 0; border-radius: 5px; font-size: 9px; line-height: 1.5;">
                 <p style="margin-bottom: 10px;">
-                    <strong>Current Focus:</strong> Multi-scale cooperative driving systems integrating human factors, AI, and digital twin technologies
+                    <strong>Current Focus:</strong> ${research.currentFocus}
                 </p>
                 <p style="margin-bottom: 10px;">
-                    <strong>Methodology:</strong> Context-aware modeling using Driver–Vehicle–Environment triad with Graph Neural Networks and explainable AI
+                    <strong>Methodology:</strong> ${research.methods.join(', ')}
                 </p>
                 <p>
-                    <strong>Impact:</strong> Creating safer, more efficient transportation systems that preserve human agency while maximizing automation benefits
+                    <strong>Impact:</strong> ${research.impact}
                 </p>
             </div>
 
             <div style="margin: 15px 0; text-align: center;">
-                <button class="menu-button" onclick="showResearchRoadmap()" style="font-size: 9px; padding: 8px 12px; margin: 5px;">🗺️ VIEW FRAMEWORK</button>
+                <button class="menu-button" type="button" data-game-action="research-roadmap" style="font-size: 9px; padding: 8px 12px; margin: 5px;">🗺️ VIEW FRAMEWORK</button>
             </div>
             
             <h3>🎯 Research Focus Areas:</h3>
-            <div style="margin: 15px 0;">
-                <button class="menu-button" onclick="showResearchDetail('cooperative-driving')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
-                    🚗 Cooperative Driving Automation
-                </button>
-                <button class="menu-button" onclick="showResearchDetail('human-ai')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
-                    🧠 Human-Centered AI
-                </button>
-                <button class="menu-button" onclick="showResearchDetail('digital-twins')" style="margin: 5px 2px; font-size: 9px; padding: 8px 12px;">
-                    🤖 Digital Twin Technologies
-                </button>
-            </div>
+            <div style="margin: 15px 0;">${researchButtons}</div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <button class="menu-button" onclick="window.open('/blog#research', '_blank')">📖 FULL RESEARCH</button>
-                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')">🔬 RESEARCHGATE</button>
+                <a class="menu-button" href="${modeConfig.portfolio.path}#research">📖 FULL RESEARCH</a>
+                <a class="menu-button" href="${personal.links.researchGate}" target="_blank" rel="noopener noreferrer">🔬 RESEARCHGATE</a>
             </div>
         `,
     },
@@ -174,15 +214,15 @@ export const gameData = {
             <div style="text-align: center; margin: 15px 0;">
                 <div style="font-size: 32px; margin-bottom: 10px;">📄</div>
                 <p style="font-size: 10px; line-height: 1.4; margin-bottom: 20px;">
-                    Browse ${publications.length} peer-reviewed publications in autonomous driving, human-AI interaction, and transportation systems.
+                    Browse ${publications.length} selected publications in human-centered AI, vehicle automation, and transportation systems.
                 </p>
             </div>
             
             <div id="publication-browser" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 120px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                    <button onclick="previousPaper()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <button type="button" aria-label="Previous paper" data-game-action="previous-paper" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
                     <div id="paper-counter" style="font-size: 8px; color: var(--secondary);">Paper 1 of ${publications.length}</div>
-                    <button onclick="nextPaper()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                    <button type="button" aria-label="Next paper" data-game-action="next-paper" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
                 </div>
                 <div id="paper-scroll-bar" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
                     <div id="paper-scroll-thumb" style="background: var(--accent); height: 100%; width: ${Math.round(100/publications.length)}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
@@ -191,13 +231,13 @@ export const gameData = {
                     <strong>${publications[0].title}</strong><br>
                     <em style="color: var(--accent);">${publications[0].venue} (${publications[0].year})</em><br>
                     <div style="margin: 12px 0; text-align: center;">
-                        <button onclick="showPaperDetails(0)" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📄 DETAILS</button>
+                        <button type="button" data-game-action="paper-details" data-index="0" style="padding: 8px 16px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 10px; cursor: pointer;">📄 DETAILS</button>
                     </div>
                 </div>
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <button class="menu-button" onclick="window.open('${personal.links.googleScholar}', '_blank')">📚 ALL PUBLICATIONS</button>
+                <a class="menu-button" href="${personal.links.googleScholar}" target="_blank" rel="noopener noreferrer">📚 ALL PUBLICATIONS</a>
             </div>
         `,
     },
@@ -216,9 +256,9 @@ export const gameData = {
             
             <div id="project-browser-board" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 120px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                    <button onclick="previousProjectBoard()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <button type="button" aria-label="Previous project" data-game-action="previous-project" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
                     <div id="project-counter-board" style="font-size: 8px; color: var(--secondary);">Project 1 of ${projects.length}</div>
-                    <button onclick="nextProjectBoard()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                    <button type="button" aria-label="Next project" data-game-action="next-project" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
                 </div>
                 <div id="project-scroll-bar-board" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
                     <div id="project-scroll-thumb-board" style="background: var(--accent); height: 100%; width: ${Math.round(100/projects.length)}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
@@ -231,13 +271,13 @@ export const gameData = {
                         ).join('') : ''}
                     </div>
                     <div style="margin: 12px 0; text-align: center;">
-                        <button onclick="showProjectDetails(0)" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">🚀 DETAILS</button>
+                        <button type="button" data-game-action="project-details" data-index="0" style="padding: 6px 12px; background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); font-size: 9px; cursor: pointer;">🚀 DETAILS</button>
                     </div>
                 </div>
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <button class="menu-button" onclick="window.open('/blog#projects', '_blank')">📁 ALL PROJECTS</button>
+                <a class="menu-button" href="/blog#projects">📁 ALL PROJECTS</a>
             </div>
         `,
     },
@@ -256,21 +296,22 @@ export const gameData = {
             
             <div id="photo-browser" style="background: var(--highlight); border: 2px solid var(--secondary); padding: 15px; margin: 10px 0; border-radius: 5px; min-height: 140px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                    <button onclick="previousPhotoPage()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
+                    <button type="button" aria-label="Previous photo page" data-game-action="previous-photo-page" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">◀</button>
                     <div id="photo-page-counter" style="font-size: 8px; color: var(--secondary);">Page 1 of ${Math.ceil(personal.media.photos.length / 4)}</div>
-                    <button onclick="nextPhotoPage()" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
+                    <button type="button" aria-label="Next photo page" data-game-action="next-photo-page" style="background: var(--primary); border: 2px solid var(--secondary); color: var(--secondary); padding: 5px 10px; font-size: 12px; cursor: pointer;">▶</button>
                 </div>
                 <div id="photo-page-scroll-bar" style="background: var(--secondary); height: 4px; margin: 5px 0; border-radius: 2px;">
                     <div id="photo-page-scroll-thumb" style="background: var(--accent); height: 100%; width: ${Math.round(100/Math.ceil(personal.media.photos.length / 4))}%; border-radius: 2px; transition: margin-left 0.3s;"></div>
                 </div>
                 
                 <!-- Multi-photo grid layout -->
-                <div id="photo-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin: 10px 0;">
+                <div id="photo-grid" class="game-photo-grid" style="margin: 10px 0;">
                     ${personal.media.photos.slice(0, 4).map((photo, index) => `
-                        <div style="text-align: center; cursor: pointer;" onclick="showPhotoDetails(${index})">
+                        <button class="game-photo-card" type="button" aria-label="View photo: ${photo.title}" data-game-action="photo-details" data-index="${index}">
                             <div style="background: white; padding: 14px 14px 27px 14px; margin: 0 auto; width: 122px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
                                 <div style="width: 94px; height: 70px; background: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 14px; overflow: hidden;">
                                     <img src="/images/${photo.filename}" 
+                                         alt="${photo.title}"
                                          style="width: 94px; height: 70px; object-fit: cover; border-radius: 4px;"
                                          onerror="this.style.display='none'; this.parentElement.innerHTML='📸';">
                                 </div>
@@ -278,7 +319,7 @@ export const gameData = {
                                     ${photo.title.length > 12 ? photo.title.substring(0, 12) + '...' : photo.title}
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     `).join('')}
                 </div>
                 
@@ -288,7 +329,7 @@ export const gameData = {
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <button class="menu-button" onclick="window.open('https://www.flickr.com/photos/bridgezhao/', '_blank')">☁️ FLICKR GALLERY</button>
+                <a class="menu-button" href="${personal.links.flickr}" target="_blank" rel="noopener noreferrer">☁️ FLICKR GALLERY</a>
             </div>
         `,
     },
@@ -299,17 +340,13 @@ export const gameData = {
         content: `
             <h2>MUSIC STUDIO</h2>
             <div class="music-controls">
-                <button class="music-btn" onclick="playTrack('prev')">⏮</button>
-                <button class="music-btn" id="play-btn" onclick="playTrack('toggle')">▶</button>
-                <button class="music-btn" onclick="playTrack('next')">⏭</button>
+                <button class="music-btn" type="button" aria-label="Previous track" data-game-action="play-track" data-track-action="prev">⏮</button>
+                <button class="music-btn" type="button" id="play-btn" aria-label="Play or pause selected track" data-game-action="play-track" data-track-action="toggle">▶</button>
+                <button class="music-btn" type="button" aria-label="Next track" data-game-action="play-track" data-track-action="next">⏭</button>
             </div>
-            <div style="margin: 20px 0;" id="track-list">
-                <div class="menu-button track-btn" data-track="0" onclick="selectTrack(0)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer; background: var(--highlight);">🎵 Spring kids</div>
-                <div class="menu-button track-btn" data-track="1" onclick="selectTrack(1)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer;">🎹 Island grass </div>
-                <div class="menu-button track-btn" data-track="2" onclick="selectTrack(2)" style="display: block; margin: 10px auto; text-align: center; cursor: pointer;">🎼 A glass of ice </div>
-            </div>
+            <div style="margin: 20px 0;" id="track-list">${musicTrackButtons}</div>
             <div style="text-align: center;">
-                <button class="menu-button" onclick="window.open('https://soundcloud.com/zhouqiao-zhao', '_blank')">☁️ SOUNDCLOUD</button>
+                <a class="menu-button" href="${personal.links.soundcloud}" target="_blank" rel="noopener noreferrer">☁️ SOUNDCLOUD</a>
             </div>
         `,
     },
@@ -325,41 +362,30 @@ export const gameData = {
                     <ul style="line-height: 2;">
                         <li>Level: {player.level}</li>
                         <li>XP: {player.xp}/{player.xpToNextLevel}</li>
-                        <li>Class: Researcher/Creator</li>
+                        <li>Class: ${personal.currentRole.shortTitle}/Researcher/Creator</li>
                         <li>Location: ${personal.contact.location}</li>
                     </ul>
                 </div>
                 <div style="flex: 1;">
                     <h3>SKILLS:</h3>
-                    <ul style="line-height: 1.8; font-size: 9px;">
-                        <li>Cooperative Driving AI [████████░░] 85%</li>
-                        <li>Human-Centered Design [█████████░] 88%</li>
-                        <li>Music Production [███████░░░] 75%</li>
-                        <li>Photography [██████░░░░] 65%</li>
-                        <li>Digital Twin Tech [███████░░░] 70%</li>
-                    </ul>
+                    <ul style="line-height: 1.8; font-size: 9px;">${researchSkills}</ul>
                 </div>
             </div>
             <h3>JOURNEY:</h3>
             <p style="line-height: 1.8; font-size: 9px;">
-                Completed PhD at UC Riverside in connected and automated vehicle systems. 
-                Leveled up through research challenges and creative projects along the way. 
-                Now at MIT, exploring the intersection of AI, transportation, and human behavior 
-                while capturing the world through music and photography.
+                ${personal.bio.careerSummary} My research develops ${research.summary}
             </p>
             
             <h3 style="font-size: 9px; margin: 15px 0 8px 0;">🏛️ AFFILIATIONS:</h3>
             <div style="font-size: 8px; line-height: 1.5; margin-bottom: 15px;">
-                <a href="${personal.links.mit_ctl}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT CTL</a> • 
-                <a href="${personal.links.mit_agelab}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT AgeLab</a> • 
-                <a href="${personal.links.mit_avt}" target="_blank" style="color: var(--secondary); text-decoration: none;">MIT AVT</a> • 
-                <a href="${personal.links.ucr_ece}" target="_blank" style="color: var(--secondary); text-decoration: none;">UC Riverside</a>
+                ${affiliationLinks}
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <button class="menu-button" onclick="window.open('${personal.links.cv}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">📄 CV</button>
-                <button class="menu-button" onclick="window.open('${personal.links.linkedin}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">💼 LINKEDIN</button>
-                <button class="menu-button" onclick="window.open('${personal.links.labWebsite}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🏛️ MIT BIO</button>
+                <a class="menu-button" href="${personal.links.cv}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">📄 CV</a>
+                <a class="menu-button" href="${personal.links.linkedin}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">💼 LINKEDIN</a>
+                <a class="menu-button" href="${personal.links.lmuEce}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🏛️ LMU ECE</a>
+                <a class="menu-button" href="${personal.links.haitsLab}" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🧠 ${research.lab.shortName.toUpperCase()}</a>
             </div>
         `,
     },
@@ -377,18 +403,10 @@ export const gameData = {
             </div>
             
             <div style="text-align: center; margin: 20px 0;">
-                <button class="menu-button" onclick="copyGameEmail()" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
+                <button class="menu-button" type="button" data-game-action="copy-email" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
                     📋 COPY EMAIL
                 </button>
-                <button class="menu-button" onclick="window.open('${personal.links.linkedin}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
-                    💼 LINKEDIN
-                </button>
-                <button class="menu-button" onclick="window.open('${personal.links.researchGate}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
-                    🔬 RESEARCHGATE
-                </button>
-                <button class="menu-button" onclick="window.open('${personal.links.googleScholar}', '_blank')" style="margin: 3px; font-size: 8px; padding: 6px 10px;">
-                    📚 SCHOLAR
-                </button>
+                ${academicProfileButtons}
             </div>
             
             <div style="text-align: center; margin-top: 15px; font-size: 8px; color: var(--accent); opacity: 0.8;">

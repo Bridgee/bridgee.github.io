@@ -5,7 +5,7 @@
  * Get appropriate tag variant based on tag content
  * Maps core modules to colors matching the research roadmap framework
  * @param {string} tag - The tag text to analyze
- * @returns {string} - The variant name for styling
+ * @returns {'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'info' | 'subtle'} - The variant name for styling
  */
 export function getTagVariant(tag) {
   // Core Modules (matching roadmap colors)

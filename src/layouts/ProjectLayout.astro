@@ -21,14 +21,14 @@ if (!project) {
 }
 
 // Helper function to convert YouTube URL to embed format
-function getYouTubeEmbedUrl(url) {
+function getYouTubeEmbedUrl(url: string): string {
   try {
     const urlObj = new URL(url);
     
     // Extract video ID
     let videoId = '';
     if (urlObj.hostname.includes('youtube.com')) {
-      videoId = urlObj.searchParams.get('v');
+      videoId = urlObj.searchParams.get('v') ?? '';
     } else if (urlObj.hostname.includes('youtu.be')) {
       videoId = urlObj.pathname.slice(1);
     }
@@ -41,8 +41,8 @@ function getYouTubeEmbedUrl(url) {
     // Handle timestamp parameter
     const timestamp = urlObj.searchParams.get('t');
     if (timestamp) {
-      const seconds = timestamp.replace('s', ''); // Remove 's' suffix if present
-      if (seconds && !isNaN(seconds)) {
+      const seconds = Number.parseInt(timestamp.replace('s', ''), 10); // Remove 's' suffix if present
+      if (Number.isFinite(seconds)) {
         embedUrl += `?start=${seconds}`;
       }
     }
@@ -225,7 +225,7 @@ function getYouTubeEmbedUrl(url) {
                 <h4 class="section-header">External Links:</h4>
                 {project.links.map(link => (
                   <p style="margin-bottom: 0.5rem;">
-                    <a href={link.url} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">
                       🔗 {link.title}
                     </a>
                   </p>
@@ -238,7 +238,7 @@ function getYouTubeEmbedUrl(url) {
                 <h4 class="section-header">Publications:</h4>
                 {project.publications.map(pub => (
                   <p style="margin-bottom: 0.5rem;">
-                    <a href={pub.url} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href={pub.url} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">
                       <Icon src="/images/icons/download_icon.png" size="1.2em" /> {pub.title}
                     </a>
                   </p>
@@ -250,7 +250,7 @@ function getYouTubeEmbedUrl(url) {
               <div class="resource-section">
                 <h4 class="section-header">Code Repository:</h4>
                 <p>
-                  <a href={project.repository} target="_blank" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                  <a href={project.repository} target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none; font-weight: 500;">
                     <Icon src="/images/icons/github_icon.png" size="1.2em" /> View on GitHub
                   </a>
                 </p>

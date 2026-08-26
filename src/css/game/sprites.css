@@ -5,6 +5,7 @@
     height: 48px;
     z-index: 100;
     transition: none;
+    pointer-events: none;
 }
 
 .player-sprite {
@@ -24,24 +25,27 @@
 /* NPC Characters */
 .npc {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     z-index: 50;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .npc-sprite {
-    width: 100%;
-    height: 100%;
+    width: 32px;
+    height: 32px;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(8, 6px);
-    grid-template-rows: repeat(8, 6px);
+    grid-template-columns: repeat(8, 4px);
+    grid-template-rows: repeat(8, 4px);
 }
 
 .npc-sprite .pixel {
-    width: 6px !important;
-    height: 6px !important;
+    width: 4px !important;
+    height: 4px !important;
 }
 
 /* ---------- PLAYER ORIENTATIONS (from v3.html) ---------- */
@@ -243,14 +247,17 @@
 /* NPCs */
 .npc {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .npc-sprite {
-    width: 100%;
-    height: 100%;
+    width: 32px;
+    height: 32px;
     position: relative;
     display: grid;
     grid-template-columns: repeat(8, 4px);

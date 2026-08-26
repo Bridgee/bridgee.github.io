@@ -170,16 +170,16 @@ body.dark-mode .publication-details {
 }
 
 /* Dark mode roadmap styling */
-:global(body.dark-mode) .roadmap-phase {
+body.dark-mode .roadmap-phase {
   background: rgba(52, 152, 219, 0.1);
   border-left-color: #64b5f6;
 }
 
-:global(body.dark-mode) .phase-title {
+body.dark-mode .phase-title {
   color: #64b5f6;
 }
 
-:global(body.dark-mode) .phase-list {
+body.dark-mode .phase-list {
   color: #ccc;
 }
 

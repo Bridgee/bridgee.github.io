@@ -1,6 +1,25 @@
 ---
 import GameLayout from "../layouts/GameLayout.astro";
-import { gameData } from "../data/index.js";
+import { gameData, modeConfig } from "../data/index.js";
+
+interface WorldPoint { top: string; left: string; }
+interface WorldArea extends WorldPoint { width: string; height: string; }
+
+const pixels = (value: string | number) => Number.parseFloat(String(value));
+const targetOffset = (targetSize: number, visualSize: number) => (targetSize - visualSize) / 2;
+const npcOffset = targetOffset(gameData.entities.npc.targetSize, gameData.entities.npc.visualSize);
+const collectibleOffset = targetOffset(gameData.entities.collectible.targetSize, gameData.entities.collectible.visualSize);
+const minimapStyle = (position: WorldArea) => {
+  const scaleX = gameData.world.minimap.width / gameData.world.width;
+  const scaleY = gameData.world.minimap.height / gameData.world.height;
+  return `top: ${pixels(position.top) * scaleY}px; left: ${pixels(position.left) * scaleX}px; width: ${pixels(position.width) * scaleX}px; height: ${pixels(position.height) * scaleY}px;`;
+};
+const minimapMarkerStyle = (position: WorldPoint, color: string) => {
+  const scaleX = gameData.world.minimap.width / gameData.world.width;
+  const scaleY = gameData.world.minimap.height / gameData.world.height;
+  const markerSize = gameData.world.minimap.markerSize;
+  return `top: ${pixels(position.top) * scaleY}px; left: ${pixels(position.left) * scaleX}px; width: ${markerSize}px; height: ${markerSize}px; background-color: var(--npc-${color});`;
+};
 ---
 <GameLayout>
     <!-- Loading Screen -->
@@ -11,10 +30,10 @@ import { gameData } from "../data/index.js";
     <!-- Game Container -->
     <div id="game-container">
         <!-- Game World -->
-        <div id="game-world">
+        <div id="game-world" style={`width: ${gameData.world.width}px; height: ${gameData.world.height}px;`}>
             <!-- Dynamic Areas -->
             {Object.entries(gameData.areas).map(([id, area]) => (
-              <div id={id} class="game-area" style={`top: ${area.position.top}; left: ${area.position.left}; width: ${area.position.width}; height: ${area.position.height};`}>
+              <div id={id} class="game-area" role="button" tabindex="0" aria-label={`Open ${area.label}`} style={`top: ${area.position.top}; left: ${area.position.left}; width: ${area.position.width}; height: ${area.position.height};`}>
                 <div class="area-label">{area.label}</div>
                 <div class="area-icon" role="img" aria-label={area.label} set:html={area.icon} />
                 <!-- 8-bit pixel architecture -->
@@ -24,35 +43,18 @@ import { gameData } from "../data/index.js";
               </div>
             ))}
 
-            <!-- Decorative Elements -->
-            
-            <!-- Fences - positioned in clear areas away from all interactive elements -->
-            <!-- Top area clear zone -->
-            <div class="fence horizontal" style="top: 100px; left: 400px;"></div>
-            <div class="fence horizontal" style="top: 100px; left: 520px;"></div>
-            <div class="fence horizontal" style="top: 100px; left: 640px;"></div>
-            
-            <!-- Middle-left clear zone -->  
-            <div class="fence vertical" style="top: 750px; left: 200px;"></div>
-            <div class="fence vertical" style="top: 830px; left: 200px;"></div>
-            
-            <!-- Bottom clear zone -->
-            <div class="fence horizontal" style="top: 1450px; left: 600px;"></div>
-            <div class="fence horizontal" style="top: 1450px; left: 720px;"></div>
-            
-            <!-- Lower right corner _| shaped fence -->
-            <!-- Horizontal part extending LEFT -->
-            <div class="fence horizontal" style="top: 1500px; left: 2000px;"></div>
-            <div class="fence horizontal" style="top: 1500px; left: 2120px;"></div>
-            
-            <!-- Vertical part going UP -->
-            <div class="fence vertical" style="top: 1420px; left: 2240px;"></div>
-            <div class="fence vertical" style="top: 1340px; left: 2240px;"></div>
-            <div class="fence vertical" style="top: 1260px; left: 2240px;"></div>
+            <!-- Decorative collision geometry is rendered from the shared world configuration. -->
+            {gameData.fences.map(fence => (
+              <div
+                class={`fence ${fence.orientation}`}
+                aria-hidden="true"
+                style={`top: ${fence.y}px; left: ${fence.x}px; width: ${fence.width}px; height: ${fence.height}px;`}
+              />
+            ))}
 
             <!-- Dynamic NPCs -->
             {gameData.npcs.map(npc => (
-              <div class={`npc color-${npc.color}`} style={`top: ${npc.position.top}; left: ${npc.position.left};`} data-name={npc.name} data-dialogue={JSON.stringify(npc.dialogue)}>
+              <div class={`npc color-${npc.color}`} role="button" tabindex="0" aria-label={`Talk to ${npc.name}`} style={`top: ${pixels(npc.position.top) - npcOffset}px; left: ${pixels(npc.position.left) - npcOffset}px;`} data-name={npc.name} data-dialogue={JSON.stringify(npc.dialogue)}>
                 <div class={`npc-sprite ${npc.sprite}`}>
                   {Array.from({ length: 64 }).map(() => <div class="pixel"></div>)}
                 </div>
@@ -60,12 +62,12 @@ import { gameData } from "../data/index.js";
             ))}
 
             <!-- Dynamic Collectibles -->
-            {gameData.collectibles.map(item => (
-              <div class="collectible" style={`top: ${item.position.top}; left: ${item.position.left};`} data-type={item.type} set:html={item.icon} />
+            {gameData.collectibles.map((item, index) => (
+              <div class="collectible" role="button" tabindex="0" aria-label={`Collect ${item.type} item ${index + 1}`} style={`top: ${pixels(item.position.top) - collectibleOffset}px; left: ${pixels(item.position.left) - collectibleOffset}px;`} data-type={item.type} set:html={item.icon} />
             ))}
             
             <!-- Player -->
-            <div id="player">
+            <div id="player" style={`width: ${gameData.player.width}px; height: ${gameData.player.height}px;`}>
                 <div class="player-sprite facing-down">
                     <!-- 8x8 pixel grid for character -->
                     {Array.from({ length: 64 }).map(() => <div class="pixel"></div>)}
@@ -106,46 +108,38 @@ import { gameData } from "../data/index.js";
     </div>
     
     <!-- Minimap -->
-    <div id="minimap">
-        <div class="minimap-area" style="top: 25px; left: 18px; width: 18px; height: 15px;"></div>
-        <div class="minimap-area" style="top: 25px; left: 110px; width: 18px; height: 15px;"></div>
-        <div class="minimap-area" style="top: 55px; left: 35px; width: 15px; height: 12px;"></div>
-        <div class="minimap-area" style="top: 55px; left: 95px; width: 15px; height: 12px;"></div>
-        <div class="minimap-area" style="top: 75px; left: 65px; width: 18px; height: 10px;"></div>
-        <div class="minimap-area" style="top: 45px; left: 65px; width: 12px; height: 12px; background-color: var(--secondary);"></div>
-        <div class="minimap-area" style="top: 28px; left: 41px; width: 6px; height: 4px; background-color: #8B4513;"></div>
-        <div class="minimap-area" style="top: 34px; left: 41px; width: 6px; height: 4px; background-color: #8B4513;"></div>
-        <!-- NPCs on minimap -->
-        <div class="minimap-npc" style="top: 40px; left: 25px; width: 4px; height: 4px; background-color: #4A90E2; border-radius: 50%;"></div> <!-- Dr. Chen - Blue (650px, 400px) -->
-        <div class="minimap-npc" style="top: 28px; left: 94px; width: 4px; height: 4px; background-color: #8A2BE2; border-radius: 50%;"></div> <!-- Maya - Purple (450px, 1500px) -->
-        <div class="minimap-npc" style="top: 65px; left: 25px; width: 4px; height: 4px; background-color: #FF8C00; border-radius: 50%;"></div> <!-- Alex - Orange (1050px, 400px) -->
-        <div class="minimap-npc" style="top: 50px; left: 106px; width: 4px; height: 4px; background-color: #22C55E; border-radius: 50%;"></div> <!-- Pixel - Green (800px, 1700px) -->
-        <div class="minimap-npc" style="top: 18px; left: 75px; width: 4px; height: 4px; background-color: #EF4444; border-radius: 50%;"></div> <!-- Luna - Red (300px, 1200px) -->
+    <div id="minimap" role="img" aria-label="Map of interactive areas, characters, and the player" style={`width: ${gameData.world.minimap.width}px; height: ${gameData.world.minimap.height}px;`}>
+        {Object.values(gameData.areas).map(area => (
+          <div class="minimap-area" aria-hidden="true" style={minimapStyle(area.position)} />
+        ))}
+        {gameData.npcs.map(npc => (
+          <div class="minimap-npc" aria-hidden="true" style={minimapMarkerStyle(npc.position, npc.color)} />
+        ))}
         <div id="minimap-player"></div>
     </div>
     
     <!-- Mobile Controls -->
     <div id="mobile-controls">
         <div class="control-pad">
-            <div class="control-btn" id="btn-up" data-dir="up" role="button" aria-label="Move up" tabindex="0"></div>
-            <div class="control-btn" id="btn-down" data-dir="down" role="button" aria-label="Move down" tabindex="0"></div>
-            <div class="control-btn" id="btn-left" data-dir="left" role="button" aria-label="Move left" tabindex="0"></div>
-            <div class="control-btn" id="btn-right" data-dir="right" role="button" aria-label="Move right" tabindex="0"></div>
+            <button class="control-btn" id="btn-up" data-dir="up" type="button" aria-label="Move up"></button>
+            <button class="control-btn" id="btn-down" data-dir="down" type="button" aria-label="Move down"></button>
+            <button class="control-btn" id="btn-left" data-dir="left" type="button" aria-label="Move left"></button>
+            <button class="control-btn" id="btn-right" data-dir="right" type="button" aria-label="Move right"></button>
         </div>
-        <div class="control-btn" id="btn-action" role="button" aria-label="Interact / Action" tabindex="0">◎</div>
+        <button class="control-btn" id="btn-action" type="button" aria-label="Interact or continue">◎</button>
     </div>
     
     <!-- Achievement Notification -->
-    <div id="achievement" class="achievement">
+    <div id="achievement" class="achievement" role="status" aria-live="polite" aria-atomic="true" hidden>
         <div id="achievement-text">ACHIEVEMENT UNLOCKED!</div>
     </div>
     
     <!-- Switch Mode Button -->
-    <button id="switch-mode-btn" onclick="window.location.href='/blog'">📝 Portfolio Mode</button>
+    <a id="switch-mode-btn" href={modeConfig.portfolio.path}>📝 {modeConfig.portfolio.label}</a>
 
     <!-- Popups for different areas -->
-    <div id="popup" class="popup">
-        <span class="popup-close" role="button" aria-label="Close popup" tabindex="0">&times;</span>
+    <div id="popup" class="popup" role="dialog" aria-modal="true" aria-label="Game area details">
+        <button class="popup-close" type="button" aria-label="Close popup">&times;</button>
         <div id="popup-content" class="popup-content"></div>
     </div>
     

@@ -247,7 +247,7 @@ const { title } = Astro.props;
   <script>
     // Framework image theme switching
     function updateFrameworkImage() {
-      const frameworkImage = document.getElementById('framework-image');
+      const frameworkImage = document.getElementById('framework-image') as HTMLImageElement | null;
       if (frameworkImage) {
         const isDarkMode = document.body.classList.contains('dark-mode');
         frameworkImage.src = isDarkMode 
@@ -263,7 +263,8 @@ const { title } = Astro.props;
 
     // Listen for theme changes and update image
     document.addEventListener('click', (event) => {
-      if (event.target.id === 'theme-toggle' || event.target.closest('#theme-toggle')) {
+      const target = event.target;
+      if (target instanceof Element && target.closest('#theme-toggle')) {
         // Small delay to ensure theme class is updated
         setTimeout(updateFrameworkImage, 50);
       }

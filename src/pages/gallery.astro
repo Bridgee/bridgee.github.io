@@ -2,10 +2,10 @@
 import GalleryLayout from '../layouts/GalleryLayout.astro';
 import Card from '../components/Card.astro';
 import Icon from '../components/Icon.astro';
-import { personal } from "../data/index.js";
+import { personal, siteConfig } from "../data/index.js";
 ---
 
-<GalleryLayout title="Photography Gallery - Zhouqiao (Bridge) Zhao">
+<GalleryLayout title={`Photography Gallery | ${siteConfig.author}`}>
     
     <!-- Photography Gallery Section -->
     <section class="section">
@@ -27,7 +27,7 @@ import { personal } from "../data/index.js";
                     <p class="photo-description">{photo.description}</p>
                     
                     <p style="margin-top: 1rem;">
-                        <a href={`https://www.flickr.com/photos/bridgezhao/${photo.id}/`} target="_blank" class="flickr-link">
+                        <a href={`${personal.links.flickr}${photo.id}/`} target="_blank" rel="noopener noreferrer" class="flickr-link">
                             <strong>View Original on Flickr →</strong>
                         </a>
                     </p>
@@ -43,7 +43,7 @@ import { personal } from "../data/index.js";
                 <p>There's something magical about the way vintage glass renders light, the subtle imperfections, the character that comes from decades of engineering history. These lenses help me see the world with a different perspective, adding warmth and soul to moments worth preserving.</p>
                 
                 <p style="margin-top: 1rem;">
-                    <a href={personal.links.flickr} target="_blank" class="flickr-link">
+                    <a href={personal.links.flickr} target="_blank" rel="noopener noreferrer" class="flickr-link">
                         <strong><Icon src="/images/icons/flickr.svg"/> Explore Full Gallery on Flickr →</strong>
                     </a>
                 </p>

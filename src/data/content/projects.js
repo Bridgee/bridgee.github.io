@@ -94,18 +94,15 @@ export const projects = [
     links: [
       {
         title: "Eco-Friendly ITS-DT",
-        url: "https://www.cert.ucr.edu/transportation-systems-vehicle-infrastructure-interaction/eco-friendly-intelligent-transportation-systems#toyota-digital-twin"
+        url: "https://www.cert.ucr.edu/transportation-systems-vehicle-infrastructure-interaction/eco-friendly-intelligent-transportation-systems"
       },
     ]
   },
 
   // AVT Behavior Modeling
-  // key idea: context aware modeling: trids of vehicle-driver-environemnt modeling and XAI explainability
-  // paper about lane-change preidction at honda
-  // FCW paper at HFES
-  // other unpublished work: GNN+XAI for FCW and TOC (transfer of control modeling)
-  // other unpublished work: LLM for dirver pedestrian interaction modeling
-  // link to AVT website
+  // Key idea: context-aware modeling of vehicle-driver-environment triads and explainable AI.
+  // Related work includes lane-change prediction research at Honda.
+  // Driver behavior and human-automation interaction research at MIT.
   {
     // Meta data
     slug: "driver-behavior-modeling-and-use-of-automation",
@@ -150,13 +147,13 @@ export const projects = [
     },
 
     results: {
-      summary: "Comprehensive insights into driver behavior patterns across multiple automation scenarios, with published and ongoing research demonstrating improved understanding of human-automation interaction.",
+      summary: "Published and ongoing work across naturalistic driving, interviews, multimodal modeling, and explainable AI provides a connected view of human-automation interaction.",
       bullets: [
         "Lane Change Prediction: 87% F1-score using multi-modal spatio-temporal attention networks",
         "Forward Collision Warning Analysis: Context-dependent effectiveness across road types and traffic scenarios",
-        "Ongoing: GNN+XAI models for FCW effectiveness and Transfer of Control (TOC) modeling",
-        "Ongoing: LLM-based driver-pedestrian interaction modeling in automated driving scenarios",
-        "Ongoing: Electric vehicle usage patterns and large vehicle encounters during lateral assistance"
+        "Transfer of Control: Published a 2026 context-aware GNN and explainable AI framework for prediction and design",
+        "Driver Interviews: Published a 2026 LLM-agent workflow for comparing driver experience across partial automation systems",
+        "Current Directions: Multimodal driver-pedestrian negotiation, FCW response modeling, and anomaly detection for transfers of control"
       ]
     },
     
@@ -169,6 +166,14 @@ export const projects = [
       {
         title: "Driver Behavior in Response to Forward Collision Warnings Considering Driving Context",
         url: "/doc/fcw_warning.pdf"
+      },
+      {
+        title: "From Prediction to Design: Using Context-Aware Graph Neural Networks and Explainable AI to Anticipate Transfer-of-Control",
+        url: "https://doi.org/10.4271/2026-01-0049"
+      },
+      {
+        title: "Large-Language-Model-Agent-Enabled Analysis of Semi-Structured Interviews: Comparing Driver Experience Across Partial Automation Systems",
+        url: "https://doi.org/10.1177/10711813261475249"
       }
     ],
     links: [
@@ -514,7 +519,7 @@ export const projects = [
     title: "Miniature Connected & Automated Vehicle Fleets",
     scope_tags: ["Sensing & Evaluation", "System Applications"],
     keywords: [
-      "Connected andAutomated Vehicles",
+      "Connected and Automated Vehicles",
       "ROS2 (Robot Operating System 2)", 
       "Raspberry Pi 4",
       "Camera and Lidar Perception",
@@ -524,11 +529,11 @@ export const projects = [
 
     // Overview
     overview: {
-      summary: "Developed a fleet of miniature connected and automated vehicles to simulate cooperative driving automation in different traffic scenarios. The project designed and built the vehicles perception, decision making, control, and communication protocols from scratch, and the fleet was tested in various traffic scenarios.",
+      summary: "Developed a fleet of miniature connected and automated vehicles to simulate cooperative driving automation across varied traffic scenarios. The project designed and built the vehicle perception, decision-making, control, and communication systems from scratch, then tested the fleet in urban and highway scenarios.",
       bullets: [
         "Miniature testbed with multiple miniature connected and automated vehicles for cooperative driving automation proof-of-concept",
         "#-Shape track for urban scenario and J-shape track for highway scenario",
-        "1:18 scale RC cars with ackermann steering and differential drive robot car for better maneuverability",
+        "1:18 scale RC cars with Ackermann steering and a differential-drive robot car for enhanced maneuverability",
         "V2V communication protocol for small-scale fleet coordination",
       ],
     },
@@ -597,7 +602,7 @@ export const projects = [
       },
       {
         title: "Toyota Digital Twin",
-        url: "https://www.cert.ucr.edu/transportation-systems-vehicle-infrastructure-interaction/eco-friendly-intelligent-transportation-systems#toyota_digital_twin"
+        url: "https://www.cert.ucr.edu/transportation-systems-vehicle-infrastructure-interaction/eco-friendly-intelligent-transportation-systems"
       }
     ],
     publications: [

@@ -20,11 +20,11 @@ const {
 } = Astro.props;
 ---
 
-<section id={id} class={`page-section page-section-${variant} ${className} ${collapsible ? 'collapsible' : ''}`} data-collapsible={collapsible} data-initially-collapsed={initiallyCollapsed} data-collapsed-height={collapsedHeight}>
+<section id={id} class={`page-section page-section-${variant} ${className} ${collapsible ? 'collapsible' : ''} ${collapsible && initiallyCollapsed ? 'collapsed' : ''}`} data-collapsible={collapsible} data-initially-collapsed={initiallyCollapsed} data-collapsed-height={collapsedHeight}>
   <div class="section-header">
     <h2 class="section-title">{title}</h2>
   </div>
-  <div class="section-content" data-section-id={id}>
+  <div class="section-content" id={`${id}-content`} data-section-id={id}>
     <slot />
   </div>
   
@@ -35,7 +35,7 @@ const {
   
   {collapsible && (
     <div class="collapse-toggle-container">
-      <button class="collapse-toggle" aria-label={`Toggle ${title} section`} type="button">
+      <button class="collapse-toggle" aria-label={`Toggle ${title} section`} aria-controls={`${id}-content`} aria-expanded={!initiallyCollapsed} type="button">
         <span class="toggle-icon">▼</span>
         <span class="toggle-text"></span>
       </button>
@@ -88,6 +88,8 @@ const {
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-height: 44px;
     gap: 0.5rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
@@ -312,13 +314,54 @@ const {
 </style>
 
 <script>
+  const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]';
+  const missingAttribute = '__missing__';
+
+  function restoreCollapsedFocusable(element: HTMLElement) {
+    if (!('collapsedTabindex' in element.dataset)) return;
+
+    const previousTabindex = element.dataset.collapsedTabindex;
+    const previousAriaHidden = element.dataset.collapsedAriaHidden;
+    if (previousTabindex === missingAttribute) element.removeAttribute('tabindex');
+    else if (previousTabindex !== undefined) element.setAttribute('tabindex', previousTabindex);
+    if (previousAriaHidden === missingAttribute) element.removeAttribute('aria-hidden');
+    else if (previousAriaHidden !== undefined) element.setAttribute('aria-hidden', previousAriaHidden);
+
+    delete element.dataset.collapsedTabindex;
+    delete element.dataset.collapsedAriaHidden;
+  }
+
+  function updateCollapsedFocusability(section: HTMLElement, content: HTMLElement) {
+    const focusableElements = content.querySelectorAll<HTMLElement>(focusableSelector);
+    if (!section.classList.contains('collapsed')) {
+      focusableElements.forEach(restoreCollapsedFocusable);
+      return;
+    }
+
+    const visibleBottom = content.getBoundingClientRect().bottom;
+    focusableElements.forEach(element => {
+      const isClipped = element.getBoundingClientRect().bottom > visibleBottom + 1;
+      if (!isClipped) {
+        restoreCollapsedFocusable(element);
+        return;
+      }
+
+      if (!('collapsedTabindex' in element.dataset)) {
+        element.dataset.collapsedTabindex = element.getAttribute('tabindex') ?? missingAttribute;
+        element.dataset.collapsedAriaHidden = element.getAttribute('aria-hidden') ?? missingAttribute;
+      }
+      element.setAttribute('tabindex', '-1');
+      element.setAttribute('aria-hidden', 'true');
+    });
+  }
+
   // Initialize collapsible sections
   function initializeCollapsibleSections() {
-    const collapsibleSections = document.querySelectorAll('[data-collapsible="true"]');
+    const collapsibleSections = document.querySelectorAll<HTMLElement>('[data-collapsible="true"]');
     
     collapsibleSections.forEach(section => {
-      const toggle = section.querySelector('.collapse-toggle');
-      const content = section.querySelector('.section-content');
+      const toggle = section.querySelector<HTMLButtonElement>('.collapse-toggle');
+      const content = section.querySelector<HTMLElement>('.section-content');
       const initiallyCollapsed = section.dataset.initiallyCollapsed === 'true';
       const collapsedHeight = section.dataset.collapsedHeight || '200px';
       
@@ -331,6 +374,11 @@ const {
       if (initiallyCollapsed) {
         section.classList.add('collapsed');
       }
+
+      toggle.setAttribute('aria-expanded', String(!section.classList.contains('collapsed')));
+      updateCollapsedFocusability(section, content);
+      requestAnimationFrame(() => updateCollapsedFocusability(section, content));
+      window.addEventListener('resize', () => updateCollapsedFocusability(section, content));
       
       // Add click event listener with improved scroll positioning
       toggle.addEventListener('click', function() {
@@ -338,14 +386,14 @@ const {
         const currentScrollY = window.scrollY;
         const sectionRect = section.getBoundingClientRect();
         const sectionTop = sectionRect.top + currentScrollY;
-        const sectionBottom = sectionRect.bottom + currentScrollY;
-        
         if (isCollapsed) {
           // Expanding: Remember current position relative to section start
           const relativePosition = currentScrollY - sectionTop;
           
           // Expand the section
           section.classList.remove('collapsed');
+          toggle.setAttribute('aria-expanded', 'true');
+          updateCollapsedFocusability(section, content);
           
           // After expansion, maintain relative position within the section
           setTimeout(() => {
@@ -365,6 +413,9 @@ const {
           const collapsedHeightPx = parseInt(collapsedHeight) || 200;
           
           section.classList.add('collapsed');
+          toggle.setAttribute('aria-expanded', 'false');
+          requestAnimationFrame(() => updateCollapsedFocusability(section, content));
+          setTimeout(() => updateCollapsedFocusability(section, content), 550);
           
           setTimeout(() => {
             // Calculate where the collapsed content ends

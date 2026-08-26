@@ -25,23 +25,27 @@ const useImage = src && src.length > 0;
 ---
 
 {useImage ? (
-  <!-- Image icon with emoji fallback -->
-  <img 
-    src={src} 
-    alt={alt}
-    class={`icon icon-image ${className}`}
-    style={`width: ${size}; height: ${size}; vertical-align: middle;`}
-    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
-  />
-  <span class="icon-fallback" style={`display: none; font-size: ${size}; vertical-align: middle;`}>{fallback}</span>
+  <>
+    <!-- Image icon with emoji fallback -->
+    <img
+      src={src}
+      alt={alt}
+      class={`icon icon-image ${className}`}
+      style={`width: ${size}; height: ${size}; vertical-align: middle;`}
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+    />
+    <span class="icon-fallback" style={`display: none; font-size: ${size}; vertical-align: middle;`}>{fallback}</span>
+  </>
 ) : (
-  <!-- Emoji icon -->
-  <span 
-    class={`icon icon-emoji ${className}`}
-    style={`font-size: ${size}; vertical-align: middle;`}
-  >
-    {emoji || fallback}
-  </span>
+  <>
+    <!-- Emoji icon -->
+    <span
+      class={`icon icon-emoji ${className}`}
+      style={`font-size: ${size}; vertical-align: middle;`}
+    >
+      {emoji || fallback}
+    </span>
+  </>
 )}
 
 <style>

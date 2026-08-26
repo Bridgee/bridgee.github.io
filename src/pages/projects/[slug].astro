@@ -1,6 +1,6 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import { projects } from '../../data/index.js';
+import { projects, siteConfig } from '../../data/index.js';
 
 export async function getStaticPaths() {
   return projects.map((project) => ({
@@ -13,4 +13,4 @@ const { project } = Astro.props;
 const { slug } = Astro.params;
 ---
 
-<ProjectLayout title={`${project.title} - Zhouqiao Zhao`} projectSlug={slug} />
+<ProjectLayout title={`${project.title} | ${siteConfig.author}`} projectSlug={slug} />
