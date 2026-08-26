@@ -63,22 +63,34 @@
       display: grid;
       grid-template-columns: none;
       grid-auto-flow: column;
-      grid-auto-columns: max-content;
-      width: max-content;
+      grid-auto-columns: minmax(0, 1fr);
+      width: min(34rem, calc(100vw - 1rem));
       max-width: calc(100vw - 1rem);
       gap: var(--control-gap);
       margin: 0;
+    }
+
+    body .fixed-controls.fixed-controls:not(:has(.back-button)) {
+      width: min(27rem, calc(100vw - 1rem));
     }
 
     body .fixed-controls.fixed-controls .back-to-top button,
     body .fixed-controls.fixed-controls .back-button a,
     body .fixed-controls.fixed-controls .mode-switch a,
     body .fixed-controls.fixed-controls .theme-toggle {
-      width: auto;
+      width: 100%;
       min-width: 44px;
       min-height: 44px;
-      padding: 0.35rem 0.65rem;
+      padding: 0.35rem 0.4rem;
       font-size: var(--control-font-size);
+    }
+
+    body .fixed-controls.fixed-controls .mode-switch :is(.icon, .icon-fallback) {
+      display: none !important;
+    }
+
+    body .fixed-controls.fixed-controls .mode-switch a {
+      gap: 0;
     }
 
     body {
