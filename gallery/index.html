@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Photography Gallery | Zhouqiao (Bridge) Zhao</title><meta name="description" content="Assistant Professor of Electrical and Computer Engineering at Loyola Marymount University and lead of the HAITS Lab, developing human-centered AI for intelligent transportation systems."><link rel="icon" href="/website_icon.png"><link rel="stylesheet" href="/_astro/Card.C0brTtRv.css"><style>.gallery-grid{grid-template-columns:1fr;gap:2.5rem;margin:3rem 0;padding:0 .5rem;display:grid}.photo-container{box-sizing:border-box;background:#f8f9fa;border-radius:8px;width:100%;max-width:100%;height:auto;margin-bottom:1rem;display:block;overflow:hidden}.gallery-image{user-select:none;cursor:pointer;box-sizing:border-box;border-radius:8px;width:100%;max-width:100%;height:auto;transition:transform .3s;display:block}.gallery-image:hover{transform:scale(1.01)}.photo-description{color:#666;margin:0;font-size:.9rem;line-height:1.5}.flickr-link{font-weight:500;text-decoration:none;transition:color .3s;display:inline-block;color:#3498db!important}.flickr-link:hover{color:#2980b9!important}.about-photography{margin-top:3rem}body.dark-mode .photo-container{background:#2a2a2a;border:1px solid #444}body.dark-mode .photo-description{color:#aaa}body.dark-mode .flickr-link{color:#64b5f6!important}body.dark-mode .flickr-link:hover{color:#42a5f5!important}@media (width<=1024px){.gallery-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}.photo-container{width:100%;max-width:calc(100vw - 4rem)}}@media (width<=768px){.gallery-grid{grid-template-columns:1fr;gap:1.5rem}.photo-container{width:100%;max-width:calc(100vw - 2rem)}}@media (width<=480px){.gallery-grid{gap:1rem;padding:0}.photo-container{width:100%;max-width:calc(100vw - 1rem);margin:0 auto 1rem}.gallery-image{width:100%;max-width:100%;height:auto}}
 </style><link rel="stylesheet" href="/_astro/components.D_gV3aw1.css"></head><body class="dark-mode"><!-- Navigation --><nav class="nav" aria-label="Primary navigation" data-astro-cid-yxete6jp><div class="nav-container" data-astro-cid-yxete6jp><!-- Section links - always show, but modify links for non-blog pages --><a href="/blog#about" class data-astro-cid-yxete6jp>About</a><a href="/blog#haits" class data-astro-cid-yxete6jp>HAITS Lab</a><a href="/blog#research" class data-astro-cid-yxete6jp>Research</a><a href="/blog#publications" class data-astro-cid-yxete6jp>Publications</a><a href="/blog#projects" class data-astro-cid-yxete6jp>Projects</a><!-- External page links - always show all pages --><a href="/music" class data-astro-cid-yxete6jp>Music</a><a href="/gallery" class="active" aria-current="page" data-astro-cid-yxete6jp>Gallery</a><!-- Contact link - always at the end --><a href="/blog#contact" class data-astro-cid-yxete6jp>Contact</a></div></nav><script type="module">document.addEventListener(`DOMContentLoaded`,()=>{document.querySelectorAll(`a[href^="#"]`).forEach(e=>{e.addEventListener(`click`,t=>{t.preventDefault();let n=e.getAttribute(`href`);if(!n)return;let r=document.querySelector(n);if(r){let e=document.querySelector(`.nav`),t=e?e.offsetHeight:0,i=r.offsetTop-t-20;window.scrollTo({top:i,behavior:`smooth`}),history.replaceState(null,``,n)}})});let e=()=>{let e=document.querySelectorAll(`.page-section`);if(!e.length)return;let t=document.querySelectorAll(`.nav a[href^="#"]`),n=``;e.forEach(e=>{let t=e.offsetTop;window.scrollY>=t-200&&(n=e.id)}),t.forEach(e=>{e.classList.remove(`active`),e.removeAttribute(`aria-current`),e.getAttribute(`href`)===`#${n}`&&(e.classList.add(`active`),e.setAttribute(`aria-current`,`location`))})};window.addEventListener(`scroll`,e,{passive:!0}),e()});</script><!-- Fixed Controls --><div class="fixed-controls" role="group" aria-label="Page controls" data-astro-cid-34ccfcov><div class="back-button" data-astro-cid-34ccfcov><a href="/blog#creative" id="back-btn" data-section="creative" data-astro-cid-34ccfcov>⬅️ Back</a></div><div class="back-to-top" data-astro-cid-34ccfcov><button id="back-to-top-btn" type="button" aria-label="Back to top" data-astro-cid-34ccfcov>⬆️ Top</button></div><div class="mode-switch" data-astro-cid-34ccfcov><a href="/game" data-astro-cid-34ccfcov><!-- Image icon with emoji fallback --><img src="/images/icons/game_mode_icon.png" alt class="icon icon-image " style="width: 1.35em; height: 1.35em; vertical-align: middle;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" data-astro-cid-ccg5yoga><span class="icon-fallback" style="display: none; font-size: 1.35em; vertical-align: middle;" data-astro-cid-ccg5yoga>•</span> Interactive Mode</a></div><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true" data-astro-cid-34ccfcov>☀️ Light</button></div><!-- Keep this critical responsive rule inline so cached external CSS cannot move
      the global controls back into document flow after a deployment. --><style>
-  /* Narrow portrait and compact split-pane layouts: two balanced rows. */
-  @media (max-width: 600px) {
+  /* Compact layouts stay vertical to minimize content obstruction. */
+  @media (max-width: 600px), (max-height: 520px) {
     body .fixed-controls.fixed-controls {
       --control-gap: 0.3rem;
       --control-inset: 0.5rem;
@@ -11,13 +11,13 @@
       position: fixed;
       bottom: max(var(--control-inset), env(safe-area-inset-bottom));
       right: max(var(--control-inset), env(safe-area-inset-right));
-      width: min(18rem, calc(100vw - 0.7rem));
-      max-width: calc(100vw - 0.7rem);
+      width: min(8.75rem, calc(100vw - 1rem));
+      max-width: calc(100vw - 1rem);
       margin: 0;
       gap: var(--control-gap);
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      justify-content: end;
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-flow: row;
       align-items: stretch;
     }
 
@@ -41,48 +41,18 @@
       justify-content: center;
     }
 
-    body .fixed-controls.fixed-controls:not(:has(.back-button)) .theme-toggle {
-      grid-column: 1 / -1;
-    }
-
     body {
-      padding-bottom: max(6.5rem, calc(6rem + env(safe-area-inset-bottom)));
+      padding-bottom: max(12.5rem, calc(12rem + env(safe-area-inset-bottom)));
     }
   }
 
-  /* Short landscape windows: preserve vertical space with one horizontal row. */
-  @media (orientation: landscape) and (max-height: 520px) and (min-width: 420px) {
+  /* Short landscape windows use a slightly narrower vertical stack. */
+  @media (orientation: landscape) and (max-height: 520px) {
     body .fixed-controls.fixed-controls {
-      --control-gap: 0.3rem;
-      --control-inset: 0.5rem;
-      --control-font-size: clamp(0.66rem, 0.62rem + 0.2vw, 0.72rem);
-
-      position: fixed;
-      bottom: max(var(--control-inset), env(safe-area-inset-bottom));
-      right: max(var(--control-inset), env(safe-area-inset-right));
-      display: grid;
-      grid-template-columns: none;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(0, 1fr);
-      width: min(34rem, calc(100vw - 1rem));
+      --control-gap: 0.2rem;
+      --control-font-size: 0.64rem;
+      width: min(8.25rem, calc(100vw - 1rem));
       max-width: calc(100vw - 1rem);
-      gap: var(--control-gap);
-      margin: 0;
-    }
-
-    body .fixed-controls.fixed-controls:not(:has(.back-button)) {
-      width: min(27rem, calc(100vw - 1rem));
-    }
-
-    body .fixed-controls.fixed-controls .back-to-top button,
-    body .fixed-controls.fixed-controls .back-button a,
-    body .fixed-controls.fixed-controls .mode-switch a,
-    body .fixed-controls.fixed-controls .theme-toggle {
-      width: 100%;
-      min-width: 44px;
-      min-height: 44px;
-      padding: 0.35rem 0.4rem;
-      font-size: var(--control-font-size);
     }
 
     body .fixed-controls.fixed-controls .mode-switch :is(.icon, .icon-fallback) {
@@ -94,7 +64,7 @@
     }
 
     body {
-      padding-bottom: max(4rem, calc(3.5rem + env(safe-area-inset-bottom)));
+      padding-bottom: max(11.75rem, calc(11.25rem + env(safe-area-inset-bottom)));
     }
   }
 
@@ -102,7 +72,7 @@
     body .fixed-controls.fixed-controls {
       --control-gap: 0.2rem;
       --control-font-size: 0.64rem;
-      width: calc(100vw - 0.5rem);
+      width: min(7rem, calc(100vw - 0.5rem));
       max-width: calc(100vw - 0.5rem);
     }
 
