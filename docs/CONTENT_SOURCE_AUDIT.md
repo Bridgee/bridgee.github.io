@@ -1,6 +1,6 @@
 # Content Source Audit
 
-Reviewed: August 26, 2026
+Reviewed: August 27, 2026
 
 This audit records how the website's career, research, lab, publication, and external-profile content was reconciled during the transition from MIT to Loyola Marymount University. It separates website facts from third-party profiles that have not yet been updated.
 
@@ -10,6 +10,7 @@ This audit records how the website's career, research, lab, publication, and ext
 - **Current position:** Assistant Professor of Electrical and Computer Engineering at Loyola Marymount University, August 2026–present
 - **Lab role:** Lead, HAITS Lab
 - **Lab:** Human-Centered Artificial Intelligence for Intelligent Transportation Systems Lab
+- **Lab website:** [https://haits.lmu.build](https://haits.lmu.build)
 - **Current email:** bridge.zhao@lmu.edu
 - **Current location:** Los Angeles, California
 - **MIT appointment:** Postdoctoral Associate, MIT AgeLab and MIT Center for Transportation and Logistics, September 2023–July 2026
@@ -24,6 +25,7 @@ This audit records how the website's career, research, lab, publication, and ext
 | Source | Observed status | Website decision |
 | --- | --- | --- |
 | [Current website CV](../public/doc/Zhouqiao_Zhao_CV.pdf) | Updated August 26, 2026; contains LMU, the canonical HAITS expansion, corrected appointment dates, education, research interests, publications, funded projects, service, mentoring, talks, and awards | Primary factual reference for dates, degrees, titles, and the public CV download |
+| [HAITS Lab website](https://haits.lmu.build) | Live production site for the lab's research, projects and platforms, news, publications, people, and recruitment information | Canonical destination for lab-specific content; linked from both personal website modes |
 | [LMU ECE faculty profile](https://cse.lmu.edu/department/electricalandcomputerengineeringdepartment/faculty/?expert=bridge.zhao) | Current LMU faculty location; embeds the LMU-managed ExpertFile record | Primary institutional link shown by both website modes |
 | [LMU college faculty profile](https://cse.lmu.edu/faculty/?expert=bridge.zhao) | Current college-level faculty location; embeds the same ExpertFile record | Retained as an official alternate institutional URL |
 | [ExpertFile](https://expertfile.com/experts/bridge.zhao/bridge-zhao) | Current LMU title, HAITS biography, Los Angeles location, research agenda, education, expertise, and patents | Used as the current official public biography reference |
@@ -65,9 +67,9 @@ Recommended priority:
 - The ClustrMaps visitor-tracking page and widgets were removed because the provider could not be verified and the previous `No personal data collected` claim was not supportable.
 - Run a fresh production build and `npm run validate:external` after changing external URLs.
 
-## August 26, 2026 link audit result
+## August 27, 2026 link audit result
 
-- 48 unique external URLs were rendered by the final production build.
-- 45 returned a successful automated response.
+- 49 unique external URLs were rendered by the final production build, including the live HAITS Lab website.
+- 46 returned a successful automated response.
 - 0 returned a broken response.
 - The SAGE DOI destination, LinkedIn, and ResearchGate restricted automated requests. The publication record was corroborated through Google Scholar and bibliographic search; the LinkedIn URL was corroborated by the signed-in August 24 project capture; and the ResearchGate URL was corroborated through its public indexed page.

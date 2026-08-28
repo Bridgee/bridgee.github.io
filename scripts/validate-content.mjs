@@ -36,6 +36,7 @@ assert(siteConfig.description.includes(personal.currentRole.institution), 'Site 
 assert(siteConfig.description.includes(research.lab.shortName), 'Site description must use the canonical lab name.');
 assert(personal.currentRole.startDate === 'August 2026', 'Current LMU appointment start date must remain August 2026.');
 assert(personal.currentRole.labRole === 'Lead, HAITS Lab', 'The canonical HAITS role must remain Lead, HAITS Lab.');
+assert(personal.links.haitsLab === 'https://haits.lmu.build', 'The canonical HAITS Lab link must point to the live lab website.');
 assert(personal.career.mit.period === 'September 2023–July 2026', 'MIT appointment dates do not match the current CV.');
 assert(personal.career.ucr.period === '2018–2023', 'UC Riverside PhD dates do not match the current CV.');
 assert(personal.education.masters.period === '2015–2017', 'Ohio State MS dates do not match the current CV.');

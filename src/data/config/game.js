@@ -385,7 +385,7 @@ export const gameData = {
                 <a class="menu-button" href="${personal.links.cv}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">📄 CV</a>
                 <a class="menu-button" href="${personal.links.linkedin}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">💼 LINKEDIN</a>
                 <a class="menu-button" href="${personal.links.lmuEce}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🏛️ LMU ECE</a>
-                <a class="menu-button" href="${personal.links.haitsLab}" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🧠 ${research.lab.shortName.toUpperCase()}</a>
+                <a class="menu-button" href="${personal.links.haitsLab}" target="_blank" rel="noopener noreferrer" style="margin: 3px; font-size: 8px; padding: 6px 10px;">🧠 ${research.lab.shortName.toUpperCase()}</a>
             </div>
         `,
     },

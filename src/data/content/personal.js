@@ -25,7 +25,7 @@ const links = {
   researchGate: "https://www.researchgate.net/profile/Zhouqiao-Zhao",
   expertFile: "https://expertfile.com/experts/bridge.zhao/bridge-zhao",
   orcid: "https://orcid.org/0000-0002-5286-3807",
-  haitsLab: "/blog#haits",
+  haitsLab: "https://haits.lmu.build",
   lmu: "https://www.lmu.edu/",
   lmuEce: "https://cse.lmu.edu/department/electricalandcomputerengineeringdepartment/faculty/?expert=bridge.zhao",
   lmuCollegeFaculty: "https://cse.lmu.edu/faculty/?expert=bridge.zhao",

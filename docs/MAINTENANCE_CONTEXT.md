@@ -2,7 +2,7 @@
 
 Last consolidated: August 2026
 
-This document is the working source of truth for maintaining Zhouqiao (Bridge) Zhao's personal website and for preparing the future HAITS Lab website. Public-facing changes should still be checked against the latest CV before deployment.
+This document is the working source of truth for maintaining Zhouqiao (Bridge) Zhao's personal website and coordinating it with the live HAITS Lab website at [haits.lmu.build](https://haits.lmu.build). Public-facing changes should still be checked against the latest CV before deployment.
 
 ## Current identity
 
@@ -39,7 +39,7 @@ This document is the working source of truth for maintaining Zhouqiao (Bridge) Z
 
 - Assistant Professor of Electrical and Computer Engineering, August 2026–present
 - Current institutional identity for page titles, biographies, contact information, navigation, metadata, and the current CV
-- LMU is the home of the emerging HAITS Lab and the forward-looking research agenda.
+- LMU is the home of the HAITS Lab and the forward-looking research agenda.
 
 ## HAITS Lab identity
 
@@ -47,6 +47,7 @@ This document is the working source of truth for maintaining Zhouqiao (Bridge) Z
 - **Short name:** HAITS Lab
 - **Pronunciation:** “heights”
 - **Tagline:** “From human behavior to intelligent transportation systems.”
+- **Lab website:** [https://haits.lmu.build](https://haits.lmu.build)
 - The lab connects individual human behavior and interaction to intelligent agents, fleets, transportation networks, and system-level operations.
 - Transportation is the primary domain and proving ground, not an artificial boundary on the methods or broader impact of the research.
 
@@ -101,6 +102,6 @@ See `docs/CONTENT_SOURCE_AUDIT.md` for the latest cross-source review and outsta
 - Run `npm run validate:external` after a production build whenever external links change.
 - Do not deploy merely because a local build succeeds. Review wording and links, then deploy intentionally from the source branch.
 
-## Future HAITS Lab website boundary
+## Personal and lab website boundary
 
-The lab site should reuse the HAITS identity, research layers, tagline, and selected scholarly content, while developing its own people, news, opportunities, teaching, facilities, and lab-specific project structure. Personal photography, music, biographical detail, and the 8-bit world remain part of the personal site unless there is a deliberate reason to share them.
+The live lab site at [haits.lmu.build](https://haits.lmu.build) owns lab-specific people, news, opportunities, facilities, projects, platforms, publications, and recruitment content. The personal site retains a concise HAITS overview and links to the lab site, while personal photography, music, biographical detail, and the 8-bit world remain exclusive to the personal site unless there is a deliberate reason to share them. Shared identity, research layers, and tagline should remain consistent across both sites.
